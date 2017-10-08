@@ -34,21 +34,21 @@ public class MainActivity extends BaseActivity {
         HomeFragment homeFragment = new HomeFragment();
         DiscoverFragment disFragment = new DiscoverFragment();
         MineFragment mineFragment = new MineFragment();
-        ContactListFragment contactListFragment = new ContactListFragment();
+//        ContactListFragment contactListFragment = new ContactListFragment();
         MessageFragment messageFragment = new MessageFragment();
 
-        fragments = new Fragment[] {homeFragment,disFragment, messageFragment, contactListFragment, mineFragment};
+        fragments = new Fragment[] {homeFragment,disFragment, messageFragment, mineFragment};
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, homeFragment)
                 .add(R.id.fragment_container, disFragment)
                 .add(R.id.fragment_container, messageFragment)
-                .add(R.id.fragment_container, contactListFragment)
+//                .add(R.id.fragment_container, contactListFragment)
                 .add(R.id.fragment_container, mineFragment)
                 .hide(homeFragment)
                 .hide(disFragment)
                 .hide(messageFragment)
-                .hide(contactListFragment)
+//                .hide(contactListFragment)
                 .hide(mineFragment)
                 .show(homeFragment)
                 .commit();
@@ -60,12 +60,12 @@ public class MainActivity extends BaseActivity {
     private void initView() {
         unreadLabel = (TextView) findViewById(R.id.unread_msg_number);
         unreadAddressLable = (TextView) findViewById(R.id.unread_address_number);
-        mTabs = new Button[5];
+        mTabs = new Button[4];
         mTabs[0] = (Button) findViewById(R.id.btn_home);
         mTabs[1] = (Button) findViewById(R.id.btn_discover);
         mTabs[2] = (Button) findViewById(R.id.btn_conversation);
-        mTabs[3] = (Button) findViewById(R.id.btn_address_list);
-        mTabs[4] = (Button) findViewById(R.id.btn_mine);
+//        mTabs[3] = (Button) findViewById(R.id.btn_address_list);
+        mTabs[3] = (Button) findViewById(R.id.btn_mine);
         // select first tab
         mTabs[0].setSelected(true);
     }
@@ -86,11 +86,11 @@ public class MainActivity extends BaseActivity {
             case R.id.btn_conversation:
                 index = 2;
                 break;
-            case R.id.btn_address_list:
-                index = 3;
-                break;
+//            case R.id.btn_address_list:
+//                index = 3;
+//                break;
             case R.id.btn_mine:
-                index = 4;
+                index = 3;
                 break;
         }
         if (currentTabIndex != index) {
