@@ -188,6 +188,7 @@
             android:layout_above="@id/main_bottom" />
 
     </RelativeLayout>
+
     <ch.ielse.view.imagewatcher.ImageWatcher
         android:id="@+id/v_image_watcher"
         android:layout_width="match_parent"

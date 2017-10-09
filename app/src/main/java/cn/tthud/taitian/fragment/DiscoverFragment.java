@@ -28,7 +28,7 @@ public class DiscoverFragment extends FragmentBase {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(view == null){
             view = super.onCreateView(inflater,container,savedInstanceState);
-            appendMainBody(this, R.layout.mine_fragment);
+            appendMainBody(this, R.layout.discover_fragment);
             appendTopBody(R.layout.activity_top_icon);
             ((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
             setTopBarTitle("发现");
