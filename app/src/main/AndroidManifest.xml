@@ -35,6 +35,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!--友盟-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="59dc6751734be43e290001bf" >
+        </meta-data>
+
         <activity android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeSplash">>
@@ -52,7 +58,12 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
 
-
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
     </application>
 

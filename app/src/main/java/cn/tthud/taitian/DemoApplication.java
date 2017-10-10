@@ -6,6 +6,8 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.lzy.okhttputils.OkHttpUtils;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 import org.xutils.x;
 
@@ -35,11 +37,18 @@ public class DemoApplication extends Application {
         applicationContext = this;
         instance = this;
 
+        initUM();
+
         // 初始化
         OkHttpUtils.init(this);
 
         initTools();
         initExt();
+    }
+
+    private void initUM() {
+        UMShareAPI.get(this);
+        PlatformConfig.setWeixin("wxfbf6197881064650", "8d1f6650e7b9dbb1b2556f446466855d");
     }
 
     public static DemoApplication getInstance() {
