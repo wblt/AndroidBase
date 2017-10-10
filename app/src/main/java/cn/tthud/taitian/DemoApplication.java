@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.lzy.okhttputils.OkHttpUtils;
+import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
@@ -37,6 +38,7 @@ public class DemoApplication extends Application {
         applicationContext = this;
         instance = this;
 
+        Config.DEBUG = true;
         initUM();
 
         // 初始化

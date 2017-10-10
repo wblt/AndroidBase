@@ -13,6 +13,7 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.tthud.taitian.R;
+import cn.tthud.taitian.activity.LoginActivity;
 import cn.tthud.taitian.base.FragmentBase;
 
 /**
@@ -50,7 +51,7 @@ public class MineFragment extends FragmentBase {
         Intent intent;
         switch (id) {
             case R.id.login_btn:
-
+                LoginActivity.navToLogin(this.getContext());
                 break;
         }
     }
