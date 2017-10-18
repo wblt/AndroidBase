@@ -38,7 +38,7 @@
         <!-- 友盟 -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="59dc6751734be43e290001bf"></meta-data>
+            android:value="59dc6751734be43e290001bf" />
 
         <activity
             android:name=".SplashActivity"
@@ -63,9 +63,15 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".activity.LoginActivity"
+        <activity
+            android:name=".activity.login.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.login.RegisterActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.login.ForgetPwdActivity"></activity>
     </application>
 
 </manifest>

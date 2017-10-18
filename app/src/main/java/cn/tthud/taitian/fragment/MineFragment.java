@@ -13,7 +13,7 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.tthud.taitian.R;
-import cn.tthud.taitian.activity.LoginActivity;
+import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.base.FragmentBase;
 
 /**

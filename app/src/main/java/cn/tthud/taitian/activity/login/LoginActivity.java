@@ -1,8 +1,7 @@
-package cn.tthud.taitian.activity;
+package cn.tthud.taitian.activity.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -111,6 +110,14 @@ public class LoginActivity extends ActivityBase {
         switch (id){
             case R.id.login_btn:
                 UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, authListener);
+                break;
+            case R.id.register_btn:
+                intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.forget_pwd:
+                intent = new Intent(LoginActivity.this,ForgetPwdActivity.class);
+                startActivity(intent);
                 break;
         }
     }
