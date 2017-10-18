@@ -10,18 +10,27 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
 
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.ActivityBase;
+import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.Log;
+import cn.tthud.taitian.xutils.CommonCallbackImp;
+import cn.tthud.taitian.xutils.MXUtils;
 
 public class LoginActivity extends ActivityBase {
 
@@ -109,7 +118,8 @@ public class LoginActivity extends ActivityBase {
         Intent intent ;
         switch (id){
             case R.id.login_btn:
-                UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, authListener);
+                //UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, authListener);
+                personCenter();
                 break;
             case R.id.register_btn:
                 intent = new Intent(LoginActivity.this,RegisterActivity.class);
@@ -165,5 +175,21 @@ public class LoginActivity extends ActivityBase {
     protected void onDestroy() {
         super.onDestroy();
         UMShareAPI.get(this).release();
+    }
+
+    private void personCenter() {
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_CENTER);
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("个人中心获取",requestParams) {
+            @Override
+            public void onSuccess(String data) {
+                super.onSuccess(data);
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    Log.i("请求回调-------");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
