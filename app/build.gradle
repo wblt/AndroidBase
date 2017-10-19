@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
     defaultConfig {
-        applicationId "cn.tthud.taitian"
+        applicationId "com.yhcloud.thankyou"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1

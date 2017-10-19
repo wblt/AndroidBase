@@ -11,9 +11,8 @@ public class FlowAPI {
     //图片本地
     public static String YYW_FILE_PATH = Environment.getExternalStorageDirectory()
             + "/com.waxin.waxin/";
-    public static String SERVER_IP = "http://139.196.188.28:9002/zbManage_intf_test/";
-//    public static String SERVER_IP = "http://wx.maishenke.com/";
-
+//    public static String SERVER_IP = "http://139.196.188.28:9002/zbManage_intf_test/";
+    public static String SERVER_IP = "http://pay.hnltou.com/api.php";
     /** 最大图片数 */
     public static final int DIARY_IMGS_MAX = 9;
     /** 最大图片数 */
@@ -41,4 +40,8 @@ public class FlowAPI {
         // 000000:成功
     }
     public static final String RESULT_OK="01";
+
+    //个人主页中心
+    public static String PERSONAL_CENTER  = SERVER_IP + "/appIndex";
+
 }
