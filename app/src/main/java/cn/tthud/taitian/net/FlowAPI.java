@@ -12,7 +12,9 @@ public class FlowAPI {
     public static String YYW_FILE_PATH = Environment.getExternalStorageDirectory()
             + "/com.waxin.waxin/";
 //    public static String SERVER_IP = "http://139.196.188.28:9002/zbManage_intf_test/";
+
     public static String SERVER_IP = "http://pay.hnltou.com/api.php";
+
     /** 最大图片数 */
     public static final int DIARY_IMGS_MAX = 9;
     /** 最大图片数 */
@@ -32,7 +34,7 @@ public class FlowAPI {
      * 服务器返回
      */
     public class HttpResultCode{
-        public static final String SUCCEED="01";
+        public static final String SUCCEED="1";
         // 000001:参数为空,
         // 000002:用户不存在,
         // 000003,安全码验证失败,
@@ -43,5 +45,9 @@ public class FlowAPI {
 
     //个人主页中心
     public static String PERSONAL_CENTER  = SERVER_IP + "/appIndex";
+    // 注册
+    public static String PERSONAL_REGISTER = SERVER_IP + "/appReg";
+    // 获取验证码
+    public static String REGISTER_SEND_CODE = SERVER_IP + "appMsg";
 
 }
