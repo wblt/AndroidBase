@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -124,18 +125,16 @@ public class RegisterActivity extends ActivityBase {
             showMsg("手机号码格式错误");
             return;
         }
-
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.REGISTER_SEND_CODE);
         requestParams.addParameter("value", phone);
-        MXUtils.httpGet(requestParams, new CommonCallbackImp("注册验证码", requestParams, this){
+        MXUtils.httpGet(requestParams, new CommonCallbackImp("获取验证码",requestParams) {
             @Override
-            public void onSuccess(String data) {
-                super.onSuccess(data);
+            public void onSuccess(String result) {
+                super.onSuccess(result);
                 try {
-                    JSONObject jsonObject = new JSONObject(data);
+                    JSONObject jsonObject = new JSONObject(result);
                     String status = jsonObject.getString("status");
                     String info = jsonObject.getString("info");
-
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         showMsg("验证码发送成功");
                         myCount.start();
@@ -181,7 +180,7 @@ public class RegisterActivity extends ActivityBase {
         requestParams.addParameter("password",pwd);
         requestParams.addParameter("msg",codeNum);
 
-        MXUtils.httpPost(requestParams, new CommonCallbackImp("注册",requestParams,this) {
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("注册",requestParams) {
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
