@@ -48,6 +48,8 @@ public class FlowAPI {
     // 注册
     public static String PERSONAL_REGISTER = SERVER_IP + "/appReg";
     // 获取验证码
-    public static String REGISTER_SEND_CODE = SERVER_IP + "appMsg";
+    public static String REGISTER_SEND_CODE = SERVER_IP + "/appMsg";
+
+    
 
 }
