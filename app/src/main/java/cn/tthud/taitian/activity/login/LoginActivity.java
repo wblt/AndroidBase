@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -29,10 +30,13 @@ import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.Log;
+import cn.tthud.taitian.utils.RegExpValidator;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
 public class LoginActivity extends ActivityBase {
+
+    public static final int REGISTER_VIEW_CODE = 1002;
 
     @ViewInject(R.id.login_phone)
     private EditText login_phone;
@@ -66,7 +70,6 @@ public class LoginActivity extends ActivityBase {
         setTopBarTitle("登录");
         setTopLeftDefultListener();
         initListener();
-
     }
 
     /*
@@ -118,8 +121,14 @@ public class LoginActivity extends ActivityBase {
         Intent intent ;
         switch (id){
             case R.id.login_btn:
+                login();
                 //UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, authListener);
-                personCenter();
+                break;
+            case R.id.username_xx:
+                login_phone.setText("");
+                break;
+            case R.id.pwd_xx:
+                login_pwd.setText("");
                 break;
             case R.id.register_btn:
                 intent = new Intent(LoginActivity.this,RegisterActivity.class);
@@ -167,6 +176,14 @@ public class LoginActivity extends ActivityBase {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == REGISTER_VIEW_CODE){
+            phone = data.getStringExtra("phone");
+            pwd = data.getStringExtra("pwd");
+            login_phone.setText(phone);
+            login_pwd.setText(pwd);
+        }
+
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
@@ -177,16 +194,41 @@ public class LoginActivity extends ActivityBase {
         UMShareAPI.get(this).release();
     }
 
-    private void personCenter() {
-        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_CENTER);
-        MXUtils.httpPost(requestParams, new CommonCallbackImp("个人中心获取",requestParams) {
+    private void login() {
+        phone = login_phone.getText().toString();
+        pwd = login_pwd.getText().toString();
+        if (TextUtils.isEmpty(phone)){
+            showMsg("请输入手机号码");
+            return;
+        }
+        if (!RegExpValidator.IsHandset(phone)) {
+            showMsg("手机号格式错误");
+            return;
+        }
+        if (TextUtils.isEmpty(pwd)) {
+            showMsg("请输入密码");
+            return;
+        }
+
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_LOGIN);
+        requestParams.addParameter("username", phone);
+        requestParams.addParameter("password", pwd);
+
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("登录",requestParams) {
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
                 try {
                     JSONObject jsonObject = new JSONObject(data);
-                    Log.i("请求回调-------");
-                } catch (JSONException e) {
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        showMsg("登录成功");
+                    }else {
+                        showMsg(info);
+                    }
+                }catch (JSONException e){
                     e.printStackTrace();
                 }
             }

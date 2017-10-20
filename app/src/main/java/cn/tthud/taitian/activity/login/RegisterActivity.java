@@ -191,11 +191,11 @@ public class RegisterActivity extends ActivityBase {
 
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         showMsg("注册成功");
-//                        Intent intent = new Intent();
-//                        intent.putExtra("phone",phone);
-//                        intent.putExtra("pwd",pwd);
-//                        setResult(LoginActivity.REGISTER_VIEW_CODE,intent);
-//                        finish();
+                        Intent intent = new Intent();
+                        intent.putExtra("phone",phone);
+                        intent.putExtra("pwd",pwd);
+                        setResult(LoginActivity.REGISTER_VIEW_CODE,intent);
+                        finish();
                     }else {
                         showMsg(info);
                     }

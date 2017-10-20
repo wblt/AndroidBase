@@ -49,7 +49,9 @@ public class FlowAPI {
     public static String PERSONAL_REGISTER = SERVER_IP + "/appReg";
     // 获取验证码
     public static String REGISTER_SEND_CODE = SERVER_IP + "/appMsg";
+    // 登录
+    public static String PERSONAL_LOGIN = SERVER_IP + "/appLogin";
 
-    
+
 
 }
