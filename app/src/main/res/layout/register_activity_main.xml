@@ -195,42 +195,42 @@
             android:layout_height="1dp"
             android:background="@color/transparent_background_button"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="推荐码:"
-                android:textSize="18sp"
-                android:textColor="@color/gray_black" />
-            <EditText
-                android:id="@+id/pn"
-                android:layout_width="200dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:digits="1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                android:hint="填写推荐码[选填]"
-                android:textColorHint="@color/province_line_border"
-                android:lines="1"
-                android:maxLength="16"
-                android:textSize="18sp"
-                android:textColor="@color/gray_black"
-                android:minHeight="45dp" />
-            <ImageView
-                android:id="@+id/pn_xx"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:padding="8dp"
-                android:src="@mipmap/icon_input_clear"
-                android:visibility="invisible"/>
-        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp">-->
+            <!--<TextView-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textStyle="bold"-->
+                <!--android:text="推荐码:"-->
+                <!--android:textSize="18sp"-->
+                <!--android:textColor="@color/gray_black" />-->
+            <!--<EditText-->
+                <!--android:id="@+id/pn"-->
+                <!--android:layout_width="200dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@null"-->
+                <!--android:digits="1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"-->
+                <!--android:hint="填写推荐码[选填]"-->
+                <!--android:textColorHint="@color/province_line_border"-->
+                <!--android:lines="1"-->
+                <!--android:maxLength="16"-->
+                <!--android:textSize="18sp"-->
+                <!--android:textColor="@color/gray_black"-->
+                <!--android:minHeight="45dp" />-->
+            <!--<ImageView-->
+                <!--android:id="@+id/pn_xx"-->
+                <!--android:layout_width="35dp"-->
+                <!--android:layout_height="35dp"-->
+                <!--android:padding="8dp"-->
+                <!--android:src="@mipmap/icon_input_clear"-->
+                <!--android:visibility="invisible"/>-->
+        <!--</LinearLayout>-->
 
         <ImageView
             android:layout_width="match_parent"
@@ -257,6 +257,7 @@
         android:background="@drawable/radius_layout_blue_btn" />
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/lay_xieyi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -65,7 +65,7 @@ public class SplashActivity extends CheckPermissionsActivity {
 		super.onCreate(arg0);
 
 
-		doLogin();
+//		doLogin();
 	}
 
 	@Override
@@ -85,7 +85,25 @@ public class SplashActivity extends CheckPermissionsActivity {
 				ad.dismiss();
 			}
 		}
+
+		initRxBus();
+
 		super.onResume();
+	}
+
+	/**
+	 * 获取到权限之后进行得操作
+	 */
+	private void initRxBus() {
+		Log.i("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+		addSubscription(RxBus.getDefault().toObservable(RxCodeConstants.APP_GET_PERMISSION, RxBusBaseMessage.class)
+				.subscribe(new Action1<RxBusBaseMessage>() {
+					@Override
+					public void call(RxBusBaseMessage integer) {
+						doLogin();
+					}
+				})
+		);
 	}
 
 	DialogInterface.OnClickListener exitListener = new DialogInterface.OnClickListener() {
@@ -116,14 +134,29 @@ public class SplashActivity extends CheckPermissionsActivity {
 	}
 
 	public void doLogin(){
+		DemoApplication.getInstance().closeActivitys();
 		Intent intent = new Intent(SplashActivity.this, MainActivity.class);
 		startActivity(intent);
 		finish();
 	}
 
+	public void addSubscription(Subscription s) {
+		if (this.mCompositeSubscription == null) {
+			this.mCompositeSubscription = new CompositeSubscription();
+		}
+		this.mCompositeSubscription.add(s);
+	}
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		removeSubscription();
+	}
+
+	public void removeSubscription() {
+		if (this.mCompositeSubscription != null && mCompositeSubscription.hasSubscriptions()) {
+			this.mCompositeSubscription.unsubscribe();
+		}
 	}
 
 }
