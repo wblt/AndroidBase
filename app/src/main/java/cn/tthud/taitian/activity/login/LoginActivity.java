@@ -26,6 +26,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
+import cn.tthud.taitian.DemoApplication;
 import cn.tthud.taitian.MainActivity;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.ActivityBase;
@@ -226,6 +227,7 @@ public class LoginActivity extends ActivityBase {
 
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         showMsg("登录成功");
+                        DemoApplication.getInstance().closeActivitys();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();

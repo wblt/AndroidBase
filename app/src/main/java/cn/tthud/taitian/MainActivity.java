@@ -28,9 +28,8 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        DemoApplication.getInstance().addActivity(this);
         initView();
-
         HomeFragment homeFragment = new HomeFragment();
         DiscoverFragment disFragment = new DiscoverFragment();
         MineFragment mineFragment = new MineFragment();
