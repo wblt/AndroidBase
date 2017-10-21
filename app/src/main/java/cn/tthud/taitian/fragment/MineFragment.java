@@ -177,6 +177,7 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
                 startActivity(new Intent(this.getContext(), ModifyInfoActivity.class));
                 break;
             case R.id.lay_change_phone:     // 修改手机号码
+                startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
                 break;
             case R.id.lay_bind_phone:       // 绑定手机号码
                 startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
