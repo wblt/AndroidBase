@@ -46,7 +46,7 @@
 
 
             <LinearLayout
-                android:id="@+id/lay_fabu"
+                android:id="@+id/lay_qianbao"
                 android:layout_width="fill_parent"
                 android:layout_height="55dp"
                 android:gravity="center_vertical"

@@ -16,6 +16,8 @@ import org.xutils.view.annotation.ViewInject;
 
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.login.LoginActivity;
+import cn.tthud.taitian.activity.mine.BindPhoneActivity;
+import cn.tthud.taitian.activity.mine.ModifyInfoActivity;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.Log;
@@ -75,7 +77,7 @@ public class MineFragment extends FragmentBase {
         return view;
     }
 
-    @Event(value = {R.id.logout,R.id.lay_fabu,R.id.lay_advatar_upload,
+    @Event(value = {R.id.logout,R.id.lay_qianbao,R.id.lay_advatar_upload,
             R.id.lay_person_info,R.id.lay_change_phone,R.id.lay_bind_phone,
             R.id.login_btn},type = View.OnClickListener.class)
 
@@ -83,8 +85,22 @@ public class MineFragment extends FragmentBase {
         int id = view.getId();
         Intent intent;
         switch (id) {
-            case R.id.login_btn:
+            case R.id.login_btn:            // 登录
                 LoginActivity.navToLogin(this.getContext());
+                break;
+            case R.id.lay_qianbao:          // 我的钱包
+                break;
+            case R.id.lay_advatar_upload:   // 头像上传
+                break;
+            case R.id.lay_person_info:      // 完善个人信息
+                startActivity(new Intent(this.getContext(), ModifyInfoActivity.class));
+                break;
+            case R.id.lay_change_phone:     // 修改手机号码
+                break;
+            case R.id.lay_bind_phone:       // 绑定手机号码
+                startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
+                break;
+            case R.id.logout:               // 退出登录
                 break;
         }
     }

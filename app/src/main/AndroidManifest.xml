@@ -71,7 +71,9 @@
             android:name=".activity.login.RegisterActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.login.ForgetPwdActivity"></activity>
+        <activity android:name=".activity.login.ForgetPwdActivity" />
+        <activity android:name=".activity.mine.BindPhoneActivity" />
+        <activity android:name=".activity.mine.ModifyInfoActivity"></activity>
     </application>
 
 </manifest>
