@@ -300,11 +300,53 @@
                     android:src="@mipmap/arrow_right" />
             </LinearLayout>
 
+
+
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@color/line" />
 
+
+            <LinearLayout
+                android:id="@+id/lay_bind_wechat"
+                android:layout_width="fill_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/white" >
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentLeft="true"
+                    android:src="@mipmap/setting" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:includeFontPadding="false"
+                    android:text="绑定微信号码"
+                    android:textColor="@color/gray_black_text"
+                    android:textSize="14sp" />
+
+                <cn.tthud.taitian.widget.EaseSwitchButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/switch_notification"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true" />
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/line" />
 
             <!--<LinearLayout-->
                 <!--android:id="@+id/about_lay"-->
@@ -345,6 +387,8 @@
                 <!--android:background="@color/line" />-->
 
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="fill_parent"
