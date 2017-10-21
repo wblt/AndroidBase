@@ -3,7 +3,7 @@
     android:id="@+id/splash_root"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@mipmap/image_welcome" >
+    android:background="@mipmap/timg" >
 
     <ImageView
         android:id="@+id/iv_splash_logo"
