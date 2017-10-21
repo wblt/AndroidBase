@@ -51,22 +51,22 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
-    compile 'org.xutils:xutils:3.5.0'
-    compile 'io.reactivex:rxandroid:1.2.0'
-    compile 'io.reactivex:rxjava:1.1.5'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.google.code.gson:gson:2.8.2'
     compile files('libs/jdom.jar')
-    compile 'jp.wasabeef:glide-transformations:2.0.1'
-    compile 'com.android.support:multidex:1.0.1'
-    compile 'com.lzy.net:okhttputils:1.6.5'
-    compile 'ch.ielse:imagewatcher:1.0.1'
     compile project(':xrecyclerview')
     compile files('libs/umeng_social_api.jar')
     compile files('libs/umeng_social_net.jar')
     compile files('libs/umeng_social_tool.jar')
     compile files('libs/SocialSDK_WeiXin_Full.jar')
     compile files('libs/wechat-sdk-android-with-mta-1.1.6.jar')
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'org.xutils:xutils:3.5.0'
+    compile 'io.reactivex:rxandroid:1.2.0'
+    compile 'io.reactivex:rxjava:1.1.5'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.lzy.net:okhttputils:1.6.5'
+    compile 'ch.ielse:imagewatcher:1.0.1'
+    testCompile 'junit:junit:4.12'
 }
