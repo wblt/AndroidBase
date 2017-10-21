@@ -1,6 +1,7 @@
 package cn.tthud.taitian.activity.login;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -33,10 +34,12 @@ import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.RegExpValidator;
+import cn.tthud.taitian.widget.ActionSheet;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
 public class LoginActivity extends ActivityBase {
+
 
     public static final int REGISTER_VIEW_CODE = 1002;
 
@@ -231,6 +234,8 @@ public class LoginActivity extends ActivityBase {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
+
+
                     }else {
                         showMsg(info);
                     }
@@ -240,4 +245,5 @@ public class LoginActivity extends ActivityBase {
             }
         });
     }
+
 }

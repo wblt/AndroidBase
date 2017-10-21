@@ -10,7 +10,7 @@ import org.xutils.http.RequestParams;
 public class FlowAPI {
     //图片本地
     public static String YYW_FILE_PATH = Environment.getExternalStorageDirectory()
-            + "/com.waxin.waxin/";
+            + "/cn.tthud.taitian/";
 //    public static String SERVER_IP = "http://139.196.188.28:9002/zbManage_intf_test/";
 
     public static String SERVER_IP = "http://pay.hnltou.com/api.php";
