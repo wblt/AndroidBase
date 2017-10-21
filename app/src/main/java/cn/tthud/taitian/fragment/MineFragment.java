@@ -191,13 +191,7 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE && resultCode == RESULT_CODE){
-//            locations= SharedPreferencesUtils.getCityName(EditMsgActivity.this);
-//            location.setText(locations);
-        }else if(requestCode == REQUEST_CODE && resultCode == HY_RESULT_CODE){
-//            hangye = data.getStringExtra("selectHy");
-//            hy.setText(hangye);
-        }else if(requestCode == CAMERA_REQUEST_CODE  && resultCode != 0){
+        if(requestCode == CAMERA_REQUEST_CODE  && resultCode != 0){
             Uri uri = Uri.fromFile(new File(capturePath));
             System.out.println("uri:"+ uri);
             startImageZoom(uri);
@@ -217,7 +211,10 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
             }
             bm = extras.getParcelable("data");
             capturePath = saveBitmap(bm);
-            headpic.setImageBitmap(bm);
+
+            // 更新本地的图像地址
+            SPUtils.putString("headUrl",capturePath);
+            ImageLoader.loadCircle(capturePath,headpic);
             hasHeadpic = true;
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxx:" + capturePath);
         }
