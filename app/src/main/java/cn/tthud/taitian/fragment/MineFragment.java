@@ -43,6 +43,7 @@ import cn.tthud.taitian.activity.mine.ModifyInfoActivity;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.bean.UserBean;
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.utils.Base64Util;
 import cn.tthud.taitian.utils.ImageLoader;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.SPUtils;
@@ -286,8 +287,8 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
 
     private void uploadHeader() {
         byte[] bytes = Bitmap2Bytes(bm);
-        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_LOGIN);
-        requestParams.addParameter("img", Base64.encodeToString(bytes, Base64.DEFAULT));
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_UPDATE_HEDER);
+        requestParams.addParameter("img", Base64Util.encode(bytes));
         requestParams.addParameter("ub_id", SPUtils.getString("userId"));
         MXUtils.httpPost(requestParams, new CommonCallbackImp("头像上传",requestParams) {
             @Override
