@@ -1,363 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="cn.tthud.taitian.activity.mine.ModifyInfoActivity">
+    android:background="@color/content_bg"
+    android:orientation="vertical">
 
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/content_bg"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:background="@color/white"
-                android:orientation="vertical"
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/transparent_background_button" />
-                <!--昵称-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="昵称:"
-                        android:textColor="@color/gray_black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/et_username"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:hint="请输入昵称"
-                        android:lines="1"
-                        android:maxLength="20"
-                        android:minHeight="45dp"
-                        android:textColor="@color/gray_black"
-                        android:textColorHint="@color/province_line_border"
-                        android:textSize="18sp" />
-
-                    <ImageView
-                        android:id="@+id/username_xx"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:padding="8dp"
-                        android:src="@mipmap/icon_input_clear"
-                        android:visibility="invisible" />
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/transparent_background_button" />
-                <!--真实姓名-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="真实姓名:"
-                        android:textColor="@color/gray_black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/et_name"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:hint="请输入真实姓名"
-                        android:lines="1"
-                        android:maxLength="20"
-                        android:minHeight="45dp"
-                        android:textColor="@color/gray_black"
-                        android:textColorHint="@color/province_line_border"
-                        android:textSize="18sp" />
-
-                    <ImageView
-                        android:id="@+id/name_xx"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:padding="8dp"
-                        android:src="@mipmap/icon_input_clear"
-                        android:visibility="invisible" />
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/transparent_background_button" />
-                <!--身份证号码-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="身份证号码:"
-                        android:textColor="@color/gray_black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/et_number_card"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:hint="请输入身份证号码"
-                        android:lines="1"
-                        android:maxLength="20"
-                        android:minHeight="45dp"
-                        android:textColor="@color/gray_black"
-                        android:textColorHint="@color/province_line_border"
-                        android:textSize="18sp" />
-
-                    <ImageView
-                        android:id="@+id/number_card_xx"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:padding="8dp"
-                        android:src="@mipmap/icon_input_clear"
-                        android:visibility="invisible" />
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/transparent_background_button" />
-
-                <!--性别-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="性别:"
-                        android:textColor="@color/gray_black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <RadioGroup
-                        android:id="@+id/rg_sex"
-                        android:orientation="horizontal"
-                        android:contentDescription="性别"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <RadioButton
-                            android:id="@+id/radio_male"
-                            android:text="男"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-
-                        <RadioButton
-                            android:id="@+id/radio_female"
-                            android:layout_marginLeft="30dp"
-                            android:text="女"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </RadioGroup>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
+                android:layout_height="1dp"
+                android:background="@color/transparent_background_button" />
+            <!--昵称-->
             <LinearLayout
-                android:background="@color/white"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/transparent_background_button" />
-
-                <!--邮箱-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="邮箱:"
-                        android:textColor="@color/gray_black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/et_email"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:hint="请输入邮箱"
-                        android:lines="1"
-                        android:maxLength="16"
-                        android:minHeight="45dp"
-                        android:textColor="@color/gray_black"
-                        android:textColorHint="@color/province_line_border"
-                        android:textSize="18sp" />
-
-                    <ImageView
-                        android:id="@+id/pwd_xx2"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:padding="8dp"
-                        android:src="@mipmap/icon_input_clear"
-                        android:visibility="invisible" />
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/transparent_background_button" />
-
-                <!--个性签名-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="个性签名:"
-                        android:textColor="@color/gray_black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/et_sign"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:hint="请输入个性签名"
-                        android:lines="1"
-                        android:maxLength="16"
-                        android:minHeight="45dp"
-                        android:textColor="@color/gray_black"
-                        android:textColorHint="@color/province_line_border"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/transparent_background_button" />
-
-                <!--详细地址-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="详细地址:"
-                        android:textColor="@color/gray_black"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/et_address"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:hint="请输入详细地址"
-                        android:lines="1"
-                        android:maxLength="16"
-                        android:minHeight="45dp"
-                        android:textColor="@color/gray_black"
-                        android:textColorHint="@color/province_line_border"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/transparent_background_button" />
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/submit_btn"
-                android:layout_width="fill_parent"
-                android:layout_height="48dp"
+                android:layout_height="60dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="20dp"
-                android:layout_below="@id/login_msg"
-                android:text="修改资料"
-                android:textSize="15sp"
-                android:textColor="@color/white"
-                android:textAlignment="center"
-                android:background="@drawable/radius_layout_blue_btn" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="昵称:"
+                    android:textColor="@color/gray_black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_username"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入昵称"
+                    android:lines="1"
+                    android:maxLength="20"
+                    android:minHeight="45dp"
+                    android:textColor="@color/gray_black"
+                    android:textColorHint="@color/province_line_border"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/username_xx"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:padding="8dp"
+                    android:src="@mipmap/icon_input_clear"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transparent_background_button" />
+            <!--真实姓名-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="真实姓名:"
+                    android:textColor="@color/gray_black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入真实姓名"
+                    android:lines="1"
+                    android:maxLength="20"
+                    android:minHeight="45dp"
+                    android:textColor="@color/gray_black"
+                    android:textColorHint="@color/province_line_border"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/name_xx"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:padding="8dp"
+                    android:src="@mipmap/icon_input_clear"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transparent_background_button" />
+            <!--身份证号码-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="身份证号码:"
+                    android:textColor="@color/gray_black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_number_card"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入身份证号码"
+                    android:lines="1"
+                    android:maxLength="20"
+                    android:minHeight="45dp"
+                    android:textColor="@color/gray_black"
+                    android:textColorHint="@color/province_line_border"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/number_card_xx"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:padding="8dp"
+                    android:src="@mipmap/icon_input_clear"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transparent_background_button" />
+
+            <!--性别-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="性别:"
+                    android:textColor="@color/gray_black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/rg_sex"
+                    android:orientation="horizontal"
+                    android:contentDescription="性别"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/radio_male"
+                        android:text="男"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/radio_female"
+                        android:layout_marginLeft="30dp"
+                        android:text="女"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RadioGroup>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </ScrollView>
+        <LinearLayout
+            android:background="@color/white"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transparent_background_button" />
+
+            <!--邮箱-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="邮箱:"
+                    android:textColor="@color/gray_black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_email"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入邮箱"
+                    android:lines="1"
+                    android:maxLength="16"
+                    android:minHeight="45dp"
+                    android:textColor="@color/gray_black"
+                    android:textColorHint="@color/province_line_border"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/pwd_xx2"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:padding="8dp"
+                    android:src="@mipmap/icon_input_clear"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transparent_background_button" />
+
+            <!--个性签名-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="个性签名:"
+                    android:textColor="@color/gray_black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_sign"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入个性签名"
+                    android:lines="1"
+                    android:maxLength="16"
+                    android:minHeight="45dp"
+                    android:textColor="@color/gray_black"
+                    android:textColorHint="@color/province_line_border"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transparent_background_button" />
+
+            <!--详细地址-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="详细地址:"
+                    android:textColor="@color/gray_black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_address"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入详细地址"
+                    android:lines="1"
+                    android:maxLength="16"
+                    android:minHeight="45dp"
+                    android:textColor="@color/gray_black"
+                    android:textColorHint="@color/province_line_border"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transparent_background_button" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/login_msg"
+            android:text="修改资料"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:background="@drawable/radius_layout_blue_btn" />
+
+    </LinearLayout>
+
+</ScrollView>
 
 
-</LinearLayout>
