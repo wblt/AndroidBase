@@ -52,6 +52,8 @@ public class FlowAPI {
     // 登录
     public static String PERSONAL_LOGIN = SERVER_IP + "/appLogin";
 
+    // 修改个人头像
+    public static String PERSONAL_UPDATE_HEDER = SERVER_IP + "/appHeadpicSbt";
 
 
 }

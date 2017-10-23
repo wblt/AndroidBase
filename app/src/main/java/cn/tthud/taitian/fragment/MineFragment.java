@@ -21,6 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.Event;
@@ -32,16 +34,21 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import cn.tthud.taitian.DemoApplication;
+import cn.tthud.taitian.MainActivity;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.activity.mine.BindPhoneActivity;
 import cn.tthud.taitian.activity.mine.ModifyInfoActivity;
 import cn.tthud.taitian.base.FragmentBase;
+import cn.tthud.taitian.bean.UserBean;
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.utils.Base64Util;
 import cn.tthud.taitian.utils.ImageLoader;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.widget.ActionSheet;
+import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
 /**
@@ -98,30 +105,6 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
 
     }
 
-    private void initData(){
-        RequestParams params = new RequestParams(FlowAPI.PERSONAL_CENTER);
-        MXUtils.httpGet(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                Log.i(result);
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                Log.e("错误了");
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -218,6 +201,9 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
             ImageLoader.loadCircle(capturePath,headpic);
             hasHeadpic = true;
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxx:" + capturePath);
+
+            // 上传头像
+            uploadHeader();
         }
 
     }
@@ -297,4 +283,32 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
             startActivityForResult(intent, GALLERY_REQUEST_CODE);
         }
     }
+
+
+    private void uploadHeader() {
+        byte[] bytes = Bitmap2Bytes(bm);
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_UPDATE_HEDER);
+        requestParams.addParameter("img", Base64Util.encode(bytes));
+        requestParams.addParameter("ub_id", SPUtils.getString("userId"));
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("头像上传",requestParams) {
+            @Override
+            public void onSuccess(String data) {
+                super.onSuccess(data);
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        showMsg("头像上传成功");
+                    }else {
+                        showMsg(info);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
 }
