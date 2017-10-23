@@ -128,6 +128,7 @@ public class LoginActivity extends ActivityBase {
         Intent intent ;
         switch (id){
             case R.id.login_btn:
+                showLoading();
                 login();
                 //UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, authListener);
                 break;
@@ -220,11 +221,11 @@ public class LoginActivity extends ActivityBase {
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_LOGIN);
         requestParams.addParameter("username", phone);
         requestParams.addParameter("password", pwd);
-
         MXUtils.httpPost(requestParams, new CommonCallbackImp("登录",requestParams) {
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
+                cancelLoading();
                 try {
                     JSONObject jsonObject = new JSONObject(data);
                     String status = jsonObject.getString("status");
