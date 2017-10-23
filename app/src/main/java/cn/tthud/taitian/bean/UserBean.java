@@ -27,6 +27,26 @@ public class UserBean {
     // 总积分
     private int totaljifen;
 
+    private String mobile;
+
+    private String password;
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setUb_id(String ub_id) {
         this.ub_id = ub_id;
     }

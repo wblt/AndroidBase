@@ -50,6 +50,8 @@ public class SPUtils {
         SPUtils.putString(STYLESIG, "");
         SPUtils.putString(ADDRESS, "");
         SPUtils.putInt(TOTALJIFEN, 0);
+        SPUtils.putString(MOBILE, "");
+        SPUtils.putString(MOBILE, "");
     }
 
 
@@ -247,6 +249,8 @@ public class SPUtils {
         SPUtils.putString(STYLESIG, userBean.getStylesig());
         SPUtils.putString(ADDRESS, userBean.getAddress());
         SPUtils.putInt(TOTALJIFEN, userBean.getTotaljifen());
+        SPUtils.putString(MOBILE, userBean.getMobile());
+        SPUtils.putString(MOBILE, userBean.getPassword());
     }
 
     /**
