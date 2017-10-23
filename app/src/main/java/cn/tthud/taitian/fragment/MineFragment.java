@@ -44,6 +44,7 @@ import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.bean.UserBean;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.Base64Util;
+import cn.tthud.taitian.utils.CommonUtils;
 import cn.tthud.taitian.utils.ImageLoader;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.SPUtils;
@@ -151,19 +152,47 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
                 LoginActivity.navToLogin(this.getContext());
                 break;
             case R.id.lay_qianbao:          // 我的钱包
+                if (CommonUtils.checkLogin()) {
+
+                } else {
+                    LoginActivity.navToLogin(this.getContext());
+                    return;
+                }
                 break;
             case R.id.lay_advatar_upload:   // 头像上传
-                ActionSheet.showSheet(getActivity(),
-                        MineFragment.this, MineFragment.this, "1");
+                if (CommonUtils.checkLogin()) {
+                    ActionSheet.showSheet(getActivity(),
+                            MineFragment.this, MineFragment.this, "1");
+                } else {
+                    LoginActivity.navToLogin(this.getContext());
+                    return;
+                }
                 break;
             case R.id.lay_person_info:      // 完善个人信息
-                startActivity(new Intent(this.getContext(), ModifyInfoActivity.class));
+                if (CommonUtils.checkLogin()) {
+                    startActivity(new Intent(this.getContext(), ModifyInfoActivity.class));
+                } else {
+                    LoginActivity.navToLogin(this.getContext());
+                    return;
+                }
+
                 break;
             case R.id.lay_change_phone:     // 修改手机号码
-                startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
+                if (CommonUtils.checkLogin()) {
+                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
+                } else {
+                    LoginActivity.navToLogin(this.getContext());
+                    return;
+                }
+
                 break;
             case R.id.lay_bind_phone:       // 绑定手机号码
-                startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
+                if (CommonUtils.checkLogin()) {
+                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
+                } else {
+                    LoginActivity.navToLogin(this.getContext());
+                    return;
+                }
                 break;
             case R.id.logout:               // 退出登录
                 logout();
