@@ -129,7 +129,7 @@ public class ModifyInfoActivity extends ActivityBase {
         requestParams.addParameter("stylesig", et_sign.getText().toString());
         requestParams.addParameter("address", et_address.getText().toString());
 
-        MXUtils.httpPost(requestParams, new CommonCallbackImp("修改个人信息",requestParams){
+        MXUtils.httpGet(requestParams, new CommonCallbackImp("修改个人信息",requestParams){
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);

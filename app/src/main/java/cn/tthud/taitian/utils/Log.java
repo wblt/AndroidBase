@@ -8,7 +8,7 @@ package cn.tthud.taitian.utils;
  */
 public class Log {
 
-	private static final String TAG = "com.waxin.waxin";
+	private static final String TAG = "cn.tthud.taitian";
 
 	/** 是否打开Log日志输出 ，true打开，false关闭 **/
 	public static boolean logOn = true;
