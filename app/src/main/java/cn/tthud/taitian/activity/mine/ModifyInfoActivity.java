@@ -8,6 +8,8 @@ import cn.tthud.taitian.base.ActivityBase;
 
 public class ModifyInfoActivity extends ActivityBase {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
