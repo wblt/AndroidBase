@@ -186,7 +186,7 @@ public class ModifyInfoActivity extends ActivityBase {
                     String info = jsonObject.getString("info");
 
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
-                        showMsg("恭喜，修改成功");
+                        showMsg(info);
                     }else {
                         showMsg(info);
                     }
