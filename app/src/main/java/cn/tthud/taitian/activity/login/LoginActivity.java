@@ -237,7 +237,7 @@ public class LoginActivity extends ActivityBase {
                         String ub_id = jsonObject1.getString("ub_id");
                         UserBean ub = new UserBean();
                         ub.setUserId(ub_id);
-                        ub.setUser_remark(nickname);
+                        ub.setNickName(nickname);
                         SPUtils.setUserBean(ub);
 
                         SPUtils.putString("mobile",phone);
