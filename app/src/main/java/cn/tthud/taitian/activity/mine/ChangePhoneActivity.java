@@ -193,7 +193,56 @@ public class ChangePhoneActivity extends ActivityBase {
     }
 
     private void submit() {
+        phone = login_phone.getText().toString();
+        pwd = login_pwd.getText().toString();
+        codeNum = code.getText().toString();
+        if (TextUtils.isEmpty(phone)){
+            showMsg("请输入手机号码");
+            return;
+        }
+        if (!RegExpValidator.IsHandset(phone)){
+            showMsg("手机号码格式错误");
+            return;
+        }
 
+        if (TextUtils.isEmpty(phone)){
+            showMsg("请输入手机号码");
+            return;
+        }
+
+
+        if (TextUtils.isEmpty(pwd)){
+            showMsg("请输入密码");
+            return;
+        }
+
+        if (TextUtils.isEmpty(codeNum)){
+            showMsg("请输入手机验证码");
+            return;
+        }
+        RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.PERSONAL_CHANGE_TEL);
+        requestParams.addParameter("password", phone);
+        requestParams.addParameter("mobile", phone);
+        requestParams.addParameter("msg", phone);
+        requestParams.addParameter("Ub_id", phone);
+        MXUtils.httpGet(requestParams, new CommonCallbackImp("获取验证码",requestParams) {
+            @Override
+            public void onSuccess(String result) {
+                super.onSuccess(result);
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        showMsg("修改成功");
+                    }else {
+                        showMsg(info);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 
