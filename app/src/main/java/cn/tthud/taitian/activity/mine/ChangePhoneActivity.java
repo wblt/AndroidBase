@@ -24,6 +24,7 @@ import cn.tthud.taitian.activity.login.RegisterActivity;
 import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.RegExpValidator;
+import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
@@ -235,6 +236,8 @@ public class ChangePhoneActivity extends ActivityBase {
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         showMsg("修改成功");
+                        SPUtils.putString(SPUtils.MOBILE,phone);
+                        finish();
                     }else {
                         showMsg(info);
                     }
