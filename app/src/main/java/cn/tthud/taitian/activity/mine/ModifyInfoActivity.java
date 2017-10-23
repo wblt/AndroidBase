@@ -2,12 +2,14 @@ package cn.tthud.taitian.activity.mine;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -17,6 +19,7 @@ import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.bean.UserBean;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.GsonUtils;
+import cn.tthud.taitian.utils.RegExpValidator;
 import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
@@ -109,6 +112,49 @@ public class ModifyInfoActivity extends ActivityBase {
 
 
     private void modifyPersonInfo(){
+        String nickName = et_username.getText().toString();
+        if (TextUtils.isEmpty(nickName)){
+            showMsg("昵称不能为空");
+            return;
+        }
+        String realName = et_username.getText().toString();
+        if (TextUtils.isEmpty(realName)){
+            showMsg("真实姓名不能为空");
+            return;
+        }
+        String idCard = et_number_card.getText().toString();
+        if (TextUtils.isEmpty(idCard)){
+            showMsg("身份证号码不能为空");
+            return;
+        }
+        if (!RegExpValidator.IsIDcard(idCard)){
+            showMsg("身份证号码格式不正确");
+            return;
+        }
+        if (!radio_male.isChecked() && !radio_female.isChecked()){
+            showMsg("请选择性别");
+            return;
+        }
+        String email = et_email.getText().toString();
+        if (TextUtils.isEmpty(email)){
+            showMsg("邮箱不能为空");
+            return;
+        }
+        if (!RegExpValidator.isEmail(email)){
+            showMsg("邮箱格式不正确");
+            return;
+        }
+        String sign = et_sign.getText().toString();
+        if (TextUtils.isEmpty(sign)){
+            showMsg("个性签名不能为空");
+            return;
+        }
+        String address = et_address.getText().toString();
+        if (TextUtils.isEmpty(address)){
+            showMsg("地址不能为空");
+            return;
+        }
+
         showLoading();
 
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.PERSONAL_CHANGE_INFO);
