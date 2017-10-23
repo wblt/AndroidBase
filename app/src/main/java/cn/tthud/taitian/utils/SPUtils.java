@@ -19,32 +19,37 @@ public class SPUtils {
     private static final String CONFIG = "config";
     private static final String CONFIG_APP = "config_app";
 
+    public static final String MOBILE = "mobile";
+    public static final String PASSWORD = "password";
+    public static final String UB_ID = "ub_id";                 // 用户id
+    public static final String NICK_NAME = "nickname";          // 昵称
+    public static final String HEAD_PIC = "headpic";            // 头像地址
+    public static final String SEX = "sex";                     // 性别
+    public static final String UA_ID = "ua_id";                 // 账号id
+    public static final String REAL_NAME = "realname";          // 真实姓名
+    public static final String ID_CARD = "idcard";              // 身份证号码
+    public static final String EMAIL = "email";                 // 邮箱
+    public static final String STYLESIG = "stylesig";           // 个性签名
+    public static final String ADDRESS = "address";             // 地址
+    public static final String TOTALJIFEN = "totaljifen";       // 积分
+
+
     /**
      * 清空SharedPreferences实例对象
      *
      */
     public static void clearUser() {
-        SPUtils.putString("userId","");
-        SPUtils.putString("nickName","");
-        SPUtils.putString("sex","");
-        SPUtils.putString("mobile","");
-        SPUtils.putString("nowCity","");
-        SPUtils.putString("liveVeinNum","");
-        SPUtils.putString("headUrl","");
-        SPUtils.putString("goldNum","");
-        SPUtils.putString("promotionNum","");
-        SPUtils.putString("token","");
-        SPUtils.putString("incomeTotalMoney","");
-        SPUtils.putString("withdrawalTotalMoney","");
-        SPUtils.putString("state","");
-        SPUtils.putString("vipLevel","");
-        SPUtils.putString("vipStart","");
-        SPUtils.putString("vipEnd","");
-        SPUtils.putString("accountMoney","");
-        SPUtils.putString("effect","");
-        SPUtils.putString("rechargeTotalMoney","");
-        SPUtils.putString("promotionPeopleNum","");
-        SPUtils.putString("dreamMentor","");
+        SPUtils.putString(UB_ID, "");
+        SPUtils.putString(NICK_NAME, "");
+        SPUtils.putString(HEAD_PIC, "");
+        SPUtils.putInt(SEX, 0);
+        SPUtils.putString(UA_ID, "");
+        SPUtils.putString(REAL_NAME, "");
+        SPUtils.putString(ID_CARD, "");
+        SPUtils.putString(EMAIL, "");
+        SPUtils.putString(STYLESIG, "");
+        SPUtils.putString(ADDRESS, "");
+        SPUtils.putInt(TOTALJIFEN, 0);
     }
 
 
@@ -228,31 +233,20 @@ public class SPUtils {
     }
 
     /**
-     * 清空对应key数据
+     * 保存对应key数据
      */
     public static void setUserBean(UserBean userBean) {
-        SPUtils.putString("userId",userBean.getUserId());
-        SPUtils.putString("nickName",userBean.getNickName());
-        SPUtils.putString("sex",userBean.getSex());
-        SPUtils.putString("mobile",userBean.getMobile());
-        SPUtils.putString("nowCity",userBean.getNowCity());
-        SPUtils.putString("liveVeinNum",userBean.getLiveVeinNum());
-        SPUtils.putString("headUrl",userBean.getHeadUrl());
-        SPUtils.putString("goldNum",userBean.getGoldNum());
-        SPUtils.putString("promotionNum",userBean.getPromotionNum());
-        SPUtils.putString("individualSign",userBean.getIndividualSign());
-        SPUtils.putString("token",userBean.getToken());
-        SPUtils.putString("incomeTotalMoney",userBean.getIncomeTotalMoney());
-        SPUtils.putString("withdrawalTotalMoney",userBean.getWithdrawalTotalMoney());
-        SPUtils.putString("state",userBean.getState());
-        SPUtils.putString("vipLevel",userBean.getVipLevel());
-        SPUtils.putString("vipStart",userBean.getVipStart());
-        SPUtils.putString("vipEnd",userBean.getVipEnd());
-        SPUtils.putString("accountMoney",userBean.getAccountMoney());
-        SPUtils.putString("effect",userBean.getEffect());
-        SPUtils.putString("rechargeTotalMoney",userBean.getRechargeTotalMoney());
-        SPUtils.putString("promotionPeopleNum",userBean.getPromotionNum());
-        SPUtils.putString("dreamMentor",userBean.getDreamMentor());
+        SPUtils.putString(UB_ID, userBean.getUb_id());
+        SPUtils.putString(NICK_NAME, userBean.getNickname());
+        SPUtils.putString(HEAD_PIC, userBean.getHeadpic());
+        SPUtils.putInt(SEX, userBean.getSex());
+        SPUtils.putString(UA_ID, userBean.getUa_id());
+        SPUtils.putString(REAL_NAME, userBean.getRealname());
+        SPUtils.putString(ID_CARD, userBean.getIdcard());
+        SPUtils.putString(EMAIL, userBean.getEmail());
+        SPUtils.putString(STYLESIG, userBean.getStylesig());
+        SPUtils.putString(ADDRESS, userBean.getAddress());
+        SPUtils.putInt(TOTALJIFEN, userBean.getTotaljifen());
     }
 
     /**

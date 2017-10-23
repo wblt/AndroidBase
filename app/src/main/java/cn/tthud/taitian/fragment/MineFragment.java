@@ -126,15 +126,15 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
     }
 
     public void initView(){
-        if(TextUtils.isEmpty(SPUtils.getString("userId"))){
+        if(TextUtils.isEmpty(SPUtils.getString(SPUtils.UB_ID))){
             msg_layout.setVisibility(View.GONE);
             lay_login.setVisibility(View.VISIBLE);
             logout.setVisibility(View.GONE);
         }else {
             msg_layout.setVisibility(View.VISIBLE);
             lay_login.setVisibility(View.GONE);
-            ImageLoader.loadCircle(SPUtils.getString("headUrl"),headpic);
-            username.setText(SPUtils.getString("nickName"));
+            ImageLoader.loadCircle(SPUtils.getString(SPUtils.HEAD_PIC),headpic);
+            username.setText(SPUtils.getString(SPUtils.NICK_NAME));
             logout.setVisibility(View.VISIBLE);
         }
     }
@@ -197,7 +197,7 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
             capturePath = saveBitmap(bm);
 
             // 更新本地的图像地址
-            SPUtils.putString("headUrl",capturePath);
+            SPUtils.putString(SPUtils.HEAD_PIC,capturePath);
             ImageLoader.loadCircle(capturePath,headpic);
             hasHeadpic = true;
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxx:" + capturePath);
@@ -289,7 +289,7 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
         byte[] bytes = Bitmap2Bytes(bm);
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_UPDATE_HEDER);
         requestParams.addParameter("img", Base64Util.encode(bytes));
-        requestParams.addParameter("ub_id", SPUtils.getString("userId"));
+        requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
         MXUtils.httpPost(requestParams, new CommonCallbackImp("头像上传",requestParams) {
             @Override
             public void onSuccess(String data) {
