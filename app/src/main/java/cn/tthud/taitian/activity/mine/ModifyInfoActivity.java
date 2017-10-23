@@ -2,12 +2,14 @@ package cn.tthud.taitian.activity.mine;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -17,6 +19,7 @@ import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.bean.UserBean;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.GsonUtils;
+import cn.tthud.taitian.utils.RegExpValidator;
 import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
@@ -47,6 +50,7 @@ public class ModifyInfoActivity extends ActivityBase {
     @ViewInject(R.id.et_address)
     private EditText et_address;
 
+    private UserBean ub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +79,7 @@ public class ModifyInfoActivity extends ActivityBase {
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         String userData = jsonObject.getString("data");
-                        UserBean ub = GsonUtils.jsonToBean(userData, UserBean.class);
+                        ub = GsonUtils.jsonToBean(userData, UserBean.class);
 
                         et_username.setText(ub.getNickname());
                         et_name.setText(ub.getRealname());
@@ -109,14 +113,57 @@ public class ModifyInfoActivity extends ActivityBase {
 
 
     private void modifyPersonInfo(){
+        String nickName = et_username.getText().toString();
+        if (TextUtils.isEmpty(nickName)){
+            showMsg("昵称不能为空");
+            return;
+        }
+        String realName = et_username.getText().toString();
+        if (TextUtils.isEmpty(realName)){
+            showMsg("真实姓名不能为空");
+            return;
+        }
+        String idCard = et_number_card.getText().toString();
+        if (TextUtils.isEmpty(idCard)){
+            showMsg("身份证号码不能为空");
+            return;
+        }
+        if (!RegExpValidator.IsIDcard(idCard)){
+            showMsg("身份证号码格式不正确");
+            return;
+        }
+        if (!radio_male.isChecked() && !radio_female.isChecked()){
+            showMsg("请选择性别");
+            return;
+        }
+        String email = et_email.getText().toString();
+        if (TextUtils.isEmpty(email)){
+            showMsg("邮箱不能为空");
+            return;
+        }
+        if (!RegExpValidator.isEmail(email)){
+            showMsg("邮箱格式不正确");
+            return;
+        }
+        String sign = et_sign.getText().toString();
+        if (TextUtils.isEmpty(sign)){
+            showMsg("个性签名不能为空");
+            return;
+        }
+        String address = et_address.getText().toString();
+        if (TextUtils.isEmpty(address)){
+            showMsg("地址不能为空");
+            return;
+        }
+
         showLoading();
 
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.PERSONAL_CHANGE_INFO);
 
-        requestParams.addParameter("nickname",et_username.getText().toString());
+        requestParams.addParameter("nickname",nickName);
         requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
-        requestParams.addParameter("realname", et_name.getText().toString());
-        requestParams.addParameter("idcard", et_number_card.getText().toString());
+        requestParams.addParameter("realname", realName);
+        requestParams.addParameter("idcard", idCard);
 
         int sex_temp = 0;
         if (radio_male.isChecked()){
@@ -125,9 +172,17 @@ public class ModifyInfoActivity extends ActivityBase {
             sex_temp = 2;
         }
         requestParams.addParameter("sex", sex_temp);
-        requestParams.addParameter("email", et_email.getText().toString());
-        requestParams.addParameter("stylesig", et_sign.getText().toString());
-        requestParams.addParameter("address", et_address.getText().toString());
+        requestParams.addParameter("email", email);
+        requestParams.addParameter("stylesig", sign);
+        requestParams.addParameter("address", address);
+
+        ub.setNickname(nickName);
+        ub.setRealname(realName);
+        ub.setIdcard(idCard);
+        ub.setSex(sex_temp);
+        ub.setEmail(email);
+        ub.setStylesig(sign);
+        ub.setAddress(address);
 
         MXUtils.httpPost(requestParams, new CommonCallbackImp("修改个人信息",requestParams){
             @Override
@@ -141,6 +196,8 @@ public class ModifyInfoActivity extends ActivityBase {
 
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         showMsg(info);
+                        SPUtils.setUserBean(ub);
+                        finish();
                     }else {
                         showMsg(info);
                     }
