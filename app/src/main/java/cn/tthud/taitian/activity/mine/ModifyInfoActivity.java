@@ -47,6 +47,7 @@ public class ModifyInfoActivity extends ActivityBase {
     @ViewInject(R.id.et_address)
     private EditText et_address;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
