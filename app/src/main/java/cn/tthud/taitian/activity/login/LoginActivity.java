@@ -128,7 +128,6 @@ public class LoginActivity extends ActivityBase {
         Intent intent ;
         switch (id){
             case R.id.login_btn:
-                showLoading();
                 login();
                 //UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, authListener);
                 break;
@@ -218,6 +217,7 @@ public class LoginActivity extends ActivityBase {
             return;
         }
 
+        showLoading();
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_LOGIN);
         requestParams.addParameter("username", phone);
         requestParams.addParameter("password", pwd);
@@ -237,12 +237,12 @@ public class LoginActivity extends ActivityBase {
                         String nickname = jsonObject1.getString("nickname");
                         String ub_id = jsonObject1.getString("ub_id");
                         UserBean ub = new UserBean();
-                        ub.setUserId(ub_id);
-                        ub.setNickName(nickname);
+                        ub.setUb_id(ub_id);
+                        ub.setNickname(nickname);
                         SPUtils.setUserBean(ub);
 
-                        SPUtils.putString("mobile",phone);
-                        SPUtils.putString("password",pwd);
+                        SPUtils.putString(SPUtils.MOBILE,phone);
+                        SPUtils.putString(SPUtils.PASSWORD,pwd);
 
                         DemoApplication.getInstance().closeActivitys();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);

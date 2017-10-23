@@ -288,11 +288,10 @@ public class CommonUtils {
      * @return true 已登录 ，false 未登录
      */
     public static boolean checkLogin(){
-        if(TextUtils.isEmpty(SPUtils.getString("userId"))){
+        if(TextUtils.isEmpty(SPUtils.getString(SPUtils.UB_ID))){
             return false;
         }else {
             return true;
         }
     }
-
 }
