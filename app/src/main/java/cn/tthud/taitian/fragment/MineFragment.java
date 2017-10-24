@@ -91,6 +91,9 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
     @ViewInject(R.id.lay_login)
     private LinearLayout lay_login;
 
+    @ViewInject(R.id.img_sex)
+    private ImageView img_sex;
+
     //临时保存拍照照片保存路径
     private String capturePath = "";
     private Bitmap bm;
@@ -138,6 +141,12 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
             ImageLoader.loadCircle(SPUtils.getString(SPUtils.HEAD_PIC),headpic);
             username.setText(SPUtils.getString(SPUtils.REAL_NAME));
             logout.setVisibility(View.VISIBLE);
+            if (SPUtils.getInt(SPUtils.SEX,0) == 1) {
+                img_sex.setImageResource(R.mipmap.sex_m);
+            } else if (SPUtils.getInt(SPUtils.SEX,0) == 2){
+                img_sex.setImageResource(R.mipmap.sex_w);
+            }
+
         }
     }
 

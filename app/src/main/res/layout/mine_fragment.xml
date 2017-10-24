@@ -48,7 +48,7 @@
             <RelativeLayout
                 android:id="@+id/msg_layout"
                 android:layout_width="fill_parent"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_height="74dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -60,6 +60,14 @@
                     android:layout_centerInParent="true"
                     android:layout_alignParentLeft="true"
                     android:src="@mipmap/head_default" />
+
+                <ImageView
+                    android:id="@+id/img_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/sex_w"
+                    android:layout_toRightOf="@+id/headpic"
+                    android:layout_marginTop="5dp"/>
 
                 <TextView
                     android:id="@+id/username"
