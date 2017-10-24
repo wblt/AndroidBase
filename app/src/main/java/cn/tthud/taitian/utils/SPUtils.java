@@ -51,7 +51,7 @@ public class SPUtils {
         SPUtils.putString(ADDRESS, "");
         SPUtils.putInt(TOTALJIFEN, 0);
         SPUtils.putString(MOBILE, "");
-        SPUtils.putString(MOBILE, "");
+        SPUtils.putString(PASSWORD, "");
     }
 
 
@@ -250,7 +250,7 @@ public class SPUtils {
         SPUtils.putString(ADDRESS, userBean.getAddress());
         SPUtils.putInt(TOTALJIFEN, userBean.getTotaljifen());
         SPUtils.putString(MOBILE, userBean.getMobile());
-        SPUtils.putString(MOBILE, userBean.getPassword());
+        SPUtils.putString(PASSWORD, userBean.getPassword());
     }
 
     /**

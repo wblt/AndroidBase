@@ -206,11 +206,6 @@ public class ChangePhoneActivity extends ActivityBase {
             return;
         }
 
-        if (TextUtils.isEmpty(phone)){
-            showMsg("请输入手机号码");
-            return;
-        }
-
 
         if (TextUtils.isEmpty(pwd)){
             showMsg("请输入密码");
@@ -222,10 +217,10 @@ public class ChangePhoneActivity extends ActivityBase {
             return;
         }
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.PERSONAL_CHANGE_TEL);
-        requestParams.addParameter("password", phone);
+        requestParams.addParameter("password", pwd);
         requestParams.addParameter("mobile", phone);
-        requestParams.addParameter("msg", phone);
-        requestParams.addParameter("Ub_id", phone);
+        requestParams.addParameter("msg", codeNum);
+        requestParams.addParameter("Ub_id", SPUtils.getString(SPUtils.UB_ID));
         MXUtils.httpGet(requestParams, new CommonCallbackImp("获取验证码",requestParams) {
             @Override
             public void onSuccess(String result) {
