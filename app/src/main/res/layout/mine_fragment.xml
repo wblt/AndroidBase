@@ -48,7 +48,7 @@
             <RelativeLayout
                 android:id="@+id/msg_layout"
                 android:layout_width="fill_parent"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_height="74dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -67,7 +67,8 @@
                     android:layout_height="wrap_content"
                     android:src="@mipmap/sex_w"
                     android:layout_toRightOf="@+id/headpic"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="-10dp"/>
 
                 <TextView
                     android:id="@+id/username"
