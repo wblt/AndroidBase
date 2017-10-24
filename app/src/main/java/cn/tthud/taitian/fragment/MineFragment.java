@@ -45,6 +45,7 @@ import cn.tthud.taitian.bean.UserBean;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.Base64Util;
 import cn.tthud.taitian.utils.CommonUtils;
+import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.utils.ImageLoader;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.SPUtils;
@@ -106,7 +107,6 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(view == null){
@@ -135,7 +135,7 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
             msg_layout.setVisibility(View.VISIBLE);
             lay_login.setVisibility(View.GONE);
             ImageLoader.loadCircle(SPUtils.getString(SPUtils.HEAD_PIC),headpic);
-            username.setText(SPUtils.getString(SPUtils.NICK_NAME));
+            username.setText(SPUtils.getString(SPUtils.REAL_NAME));
             logout.setVisibility(View.VISIBLE);
         }
     }
@@ -340,4 +340,30 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
 
     }
 
+    // 个人中心
+    private void personCenter() {
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_CENTER);
+        requestParams.addParameter("islogin", "1"); // 已登录
+        requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("头像上传",requestParams) {
+            @Override
+            public void onSuccess(String data) {
+                super.onSuccess(data);
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        String userData = jsonObject.getString("data");
+                        UserBean ub = GsonUtils.jsonToBean(userData, UserBean.class);
+                        SPUtils.setUserBean(ub);
+                    }else {
+                        showMsg(info);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }

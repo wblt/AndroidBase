@@ -33,6 +33,7 @@ import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.bean.UserBean;
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.RegExpValidator;
 import cn.tthud.taitian.utils.SPUtils;
@@ -225,7 +226,7 @@ public class LoginActivity extends ActivityBase {
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
-                cancelLoading();
+
                 try {
                     JSONObject jsonObject = new JSONObject(data);
                     String status = jsonObject.getString("status");
@@ -244,6 +245,44 @@ public class LoginActivity extends ActivityBase {
                         SPUtils.putString(SPUtils.MOBILE,phone);
                         SPUtils.putString(SPUtils.PASSWORD,pwd);
 
+
+                        // 请求个人中心
+                        personCenter();
+
+//                        DemoApplication.getInstance().closeActivitys();
+//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                        startActivity(intent);
+//                        finish();
+                    }else {
+                        showMsg(info);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    // 个人中心
+    private void personCenter() {
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_CENTER);
+        requestParams.addParameter("islogin", "1"); // 已登录
+        requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("头像上传",requestParams) {
+            @Override
+            public void onSuccess(String data) {
+                super.onSuccess(data);
+                cancelLoading();
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        String userData = jsonObject.getString("data");
+                        UserBean ub = GsonUtils.jsonToBean(userData, UserBean.class);
+                        SPUtils.setUserBean(ub);
+
+                        // 进入主页
                         DemoApplication.getInstance().closeActivitys();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
