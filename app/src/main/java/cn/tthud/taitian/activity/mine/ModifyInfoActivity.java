@@ -118,7 +118,7 @@ public class ModifyInfoActivity extends ActivityBase {
             showMsg("昵称不能为空");
             return;
         }
-        String realName = et_username.getText().toString();
+        String realName = et_name.getText().toString();
         if (TextUtils.isEmpty(realName)){
             showMsg("真实姓名不能为空");
             return;
