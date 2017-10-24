@@ -39,6 +39,7 @@ import cn.tthud.taitian.MainActivity;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.activity.mine.BindPhoneActivity;
+import cn.tthud.taitian.activity.mine.ChangePhoneActivity;
 import cn.tthud.taitian.activity.mine.ModifyInfoActivity;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.bean.UserBean;
@@ -179,7 +180,7 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
                 break;
             case R.id.lay_change_phone:     // 修改手机号码
                 if (CommonUtils.checkLogin()) {
-                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
+                    startActivity(new Intent(this.getContext(), ChangePhoneActivity.class));
                 } else {
                     LoginActivity.navToLogin(this.getContext());
                     return;
