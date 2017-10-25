@@ -275,7 +275,7 @@ public class LoginActivity extends ActivityBase {
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_CENTER);
         requestParams.addParameter("islogin", "1"); // 已登录
         requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
-        MXUtils.httpPost(requestParams, new CommonCallbackImp("个人中心",requestParams) {
+        MXUtils.httpGet(requestParams, new CommonCallbackImp("个人中心",requestParams) {
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
