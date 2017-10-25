@@ -67,6 +67,9 @@ public class LoginActivity extends ActivityBase {
     @ViewInject(R.id.login_btn)
     private TextView login_btn;
 
+    @ViewInject(R.id.wechat_login_btn)
+    private ImageView wechat_login_btn;
+
     private String phone;
     private String pwd;
 
@@ -123,7 +126,7 @@ public class LoginActivity extends ActivityBase {
         }
     };
 
-    @Event(value = {R.id.register_btn,R.id.forget_pwd,R.id.login_btn,R.id.username_xx,R.id.pwd_xx},type = View.OnClickListener.class)
+    @Event(value = {R.id.register_btn,R.id.forget_pwd,R.id.login_btn,R.id.username_xx,R.id.pwd_xx,R.id.wechat_login_btn},type = View.OnClickListener.class)
     private void onEvenOnclick(View view){
         int id = view.getId();
         Intent intent ;
@@ -145,6 +148,9 @@ public class LoginActivity extends ActivityBase {
             case R.id.forget_pwd:
                 intent = new Intent(LoginActivity.this,ForgetPwdActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.wechat_login_btn:
+                Log.i("微信登录");
                 break;
         }
     }

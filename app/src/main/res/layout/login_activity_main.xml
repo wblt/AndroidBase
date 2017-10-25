@@ -159,4 +159,13 @@
         android:textAlignment="center"
         android:background="@drawable/radius_layout_blue_btn" />
 
+    <ImageView
+        android:id="@+id/wechat_login_btn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/wechat"
+        android:layout_gravity="center"
+        />
+
 </LinearLayout>
