@@ -133,7 +133,6 @@ public class LoginActivity extends ActivityBase {
         switch (id){
             case R.id.login_btn:
                 login();
-                //UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, authListener);
                 break;
             case R.id.username_xx:
                 login_phone.setText("");
@@ -151,6 +150,7 @@ public class LoginActivity extends ActivityBase {
                 break;
             case R.id.wechat_login_btn:
                 Log.i("微信登录");
+                UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, authListener);
                 break;
         }
     }
@@ -174,6 +174,7 @@ public class LoginActivity extends ActivityBase {
                 temp = temp + key + " : " + data.get(key) + "\n";
             }
             Log.i(temp);
+            showMsg("微信登录成功");
         }
 
         @Override
