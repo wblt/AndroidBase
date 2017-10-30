@@ -355,6 +355,12 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_CENTER);
         requestParams.addParameter("islogin", "1"); // 已登录
         requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
+        requestParams.addParameter("act_url", "");
+        requestParams.addParameter("openid", "");
+        requestParams.addParameter("headimgurl", SPUtils.getString(SPUtils.HEAD_PIC));
+        requestParams.addParameter("sex", String.valueOf(SPUtils.getInt(SPUtils.SEX, 0)));
+        requestParams.addParameter("nickname", SPUtils.getString(SPUtils.NICK_NAME));
+
         MXUtils.httpPost(requestParams, new CommonCallbackImp("个人中心",requestParams) {
             @Override
             public void onSuccess(String data) {
