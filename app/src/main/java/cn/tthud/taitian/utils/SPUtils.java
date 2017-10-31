@@ -33,6 +33,8 @@ public class SPUtils {
     public static final String ADDRESS = "address";             // 地址
     public static final String TOTALJIFEN = "totaljifen";       // 积分
 
+    public static final String WX_OPEN_ID = "wechatOpenID";     // 微信openid
+
 
     /**
      * 清空SharedPreferences实例对象

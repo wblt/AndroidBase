@@ -149,7 +149,6 @@ public class LoginActivity extends ActivityBase {
                 startActivity(intent);
                 break;
             case R.id.wechat_login_btn:
-                Log.i("微信登录");
                 UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, authListener);
                 break;
         }
@@ -169,12 +168,32 @@ public class LoginActivity extends ActivityBase {
 
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-            String temp = "";
             for (String key : data.keySet()) {
-                temp = temp + key + " : " + data.get(key) + "\n";
+                if (key.equals("openid")){
+                    String openID = data.get(key);
+                    SPUtils.putString(SPUtils.WX_OPEN_ID, openID);
+                }
+                if (key.equals("profile_image_url")){       // 头像地址
+                    String headImageUrl = data.get(key);
+                    SPUtils.putString(SPUtils.HEAD_PIC, headImageUrl);
+                }
+                if (key.equals("gender")){                  // 性别
+                    String gender = data.get(key);
+                    if (gender.equals("男")){
+                        SPUtils.putInt(SPUtils.SEX, 1);
+                    }else if(gender.equals("女")){
+                        SPUtils.putInt(SPUtils.SEX, 2);
+                    }else{
+                        SPUtils.putInt(SPUtils.SEX, 0);
+                    }
+                }
+                if (key.equals("name")){                    // 昵称
+                    String nickname = data.get(key);
+                    SPUtils.putString(SPUtils.NICK_NAME, nickname);
+                }
             }
-            Log.i(temp);
             showMsg("微信登录成功");
+            personCenter("");
         }
 
         @Override
@@ -254,7 +273,7 @@ public class LoginActivity extends ActivityBase {
 
 
                         // 请求个人中心
-                        personCenter();
+                        personCenter(ub_id);
 
 //                        DemoApplication.getInstance().closeActivitys();
 //                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -271,12 +290,17 @@ public class LoginActivity extends ActivityBase {
     }
 
     // 个人中心
-    private void personCenter() {
+    private void personCenter(String ub_id) {
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_CENTER);
-        requestParams.addParameter("islogin", "1"); // 已登录
-        requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
+        if (TextUtils.isEmpty(ub_id)){
+            requestParams.addParameter("islogin", "2");
+        }else{
+            requestParams.addParameter("islogin", "1"); // 已登录
+        }
+
+        requestParams.addParameter("ub_id", ub_id);
         requestParams.addParameter("act_url", "");
-        requestParams.addParameter("openid", "");
+        requestParams.addParameter("openid", SPUtils.getString(SPUtils.WX_OPEN_ID));
         requestParams.addParameter("headimgurl", SPUtils.getString(SPUtils.HEAD_PIC));
         requestParams.addParameter("sex", String.valueOf(SPUtils.getInt(SPUtils.SEX, 0)));
         requestParams.addParameter("nickname", SPUtils.getString(SPUtils.NICK_NAME));
