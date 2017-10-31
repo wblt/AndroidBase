@@ -209,8 +209,11 @@ public class LoginActivity extends ActivityBase {
             }
             String name = data.get("name");
             SPUtils.putString(SPUtils.NICK_NAME, name);
-            showMsg("微信登录成功");
-            personCenter();
+
+
+            wxlogin();
+            //showMsg("微信登录成功");
+            //personCenter();
         }
 
         @Override
@@ -349,6 +352,28 @@ public class LoginActivity extends ActivityBase {
         });
     }
 
+    private void wxlogin() {
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_WX_LOGIN);
+        requestParams.addParameter("openid", SPUtils.getString(SPUtils.WX_OPEN_ID));
+        MXUtils.httpGet(requestParams, new CommonCallbackImp("个人中心——微信登录",requestParams) {
+            @Override
+            public void onSuccess(String data) {
+                super.onSuccess(data);
+                cancelLoading();
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
 
+                    }else {
+                        showMsg(info);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
 }
