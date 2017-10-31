@@ -62,4 +62,7 @@ public class FlowAPI {
     public static String PERSONAL_INFO = SERVER_IP + "/appInfo";
     // 修改个人资料
     public static String PERSONAL_CHANGE_INFO = SERVER_IP + "/appInfoSbt";
+
+    // 微信登录
+    public static String PERSONAL_WX_LOGIN = SERVER_IP + "/appWxLogin";
 }
