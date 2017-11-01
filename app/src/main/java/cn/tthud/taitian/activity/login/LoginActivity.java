@@ -168,30 +168,6 @@ public class LoginActivity extends ActivityBase {
 
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-//            for (String key : data.keySet()) {
-//                if (key.equals("openid")){
-//                    String openID = data.get(key);
-//                    SPUtils.putString(SPUtils.WX_OPEN_ID, openID);
-//                }
-//                if (key.equals("profile_image_url")){       // 头像地址
-//                    String headImageUrl = data.get(key);
-//                    SPUtils.putString(SPUtils.HEAD_PIC, headImageUrl);
-//                }
-//                if (key.equals("gender")){                  // 性别
-//                    String gender = data.get(key);
-//                    if (gender.equals("男")){
-//                        SPUtils.putInt(SPUtils.SEX, 1);
-//                    }else if(gender.equals("女")){
-//                        SPUtils.putInt(SPUtils.SEX, 2);
-//                    }else{
-//                        SPUtils.putInt(SPUtils.SEX, 0);
-//                    }
-//                }
-//                if (key.equals("name")){                    // 昵称
-//                    String nickname = data.get(key);
-//                    SPUtils.putString(SPUtils.NICK_NAME, nickname);
-//                }
-//            }
             // map 直接获取字符串
             String openid = data.get("openid");
             SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
@@ -212,8 +188,6 @@ public class LoginActivity extends ActivityBase {
 
 
             wxlogin();
-            //showMsg("微信登录成功");
-            //personCenter();
         }
 
         @Override
@@ -354,8 +328,12 @@ public class LoginActivity extends ActivityBase {
 
     private void wxlogin() {
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_WX_LOGIN);
-        requestParams.addParameter("openid", SPUtils.getString(SPUtils.WX_OPEN_ID));
-        MXUtils.httpGet(requestParams, new CommonCallbackImp("个人中心——微信登录",requestParams) {
+        requestParams.addParameter("wx_openid", SPUtils.getString(SPUtils.WX_OPEN_ID));
+        requestParams.addParameter("headpic", SPUtils.getString(SPUtils.HEAD_PIC));
+        requestParams.addParameter("sex", SPUtils.getInt(SPUtils.SEX, 0));
+        requestParams.addParameter("nickname", SPUtils.getString(SPUtils.NICK_NAME));
+
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("个人中心——微信登录",requestParams) {
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
@@ -365,7 +343,31 @@ public class LoginActivity extends ActivityBase {
                     String status = jsonObject.getString("status");
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.getString("data"));
 
+                        boolean isvst = jsonObject1.getBoolean("isvst");
+
+                        String ub_id = jsonObject1.getString("ub_id");
+                        String nickname = jsonObject1.getString("nickname");
+                        String headpic = jsonObject1.getString("headpic");
+                        int sex = jsonObject1.getInt("sex");
+                        String wx_openid = jsonObject1.getString("wx_openid");
+
+                        SPUtils.putString(SPUtils.UB_ID, ub_id);
+                        SPUtils.putString(SPUtils.NICK_NAME, nickname);
+                        SPUtils.putString(SPUtils.HEAD_PIC, headpic);
+                        SPUtils.putInt(SPUtils.SEX, sex);
+                        SPUtils.putString(SPUtils.WX_OPEN_ID, wx_openid);
+
+                        if (!isvst){ // 用户
+                            String ua_id = jsonObject1.getString("ua_id");
+                            String realname = jsonObject1.getString("realname");
+
+                            SPUtils.putString(SPUtils.UA_ID, ua_id);
+                            SPUtils.putString(SPUtils.REAL_NAME, realname);
+                        }
+
+                        personCenter();
                     }else {
                         showMsg(info);
                     }
