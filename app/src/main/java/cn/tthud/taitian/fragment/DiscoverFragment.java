@@ -18,6 +18,9 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 
 import cn.tthud.taitian.R;
+import cn.tthud.taitian.activity.huodong.DoingFragment;
+import cn.tthud.taitian.activity.huodong.EndFragment;
+import cn.tthud.taitian.activity.huodong.UnDoFragment;
 import cn.tthud.taitian.adapter.FragmentAdapter;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.utils.Log;
@@ -33,9 +36,9 @@ public class DiscoverFragment extends FragmentBase implements RadioGroup.OnCheck
     private ImageButton top_right_button;
     private ImageButton top_left_button;
 
-    ActivityTypeFragment mDoingFragment;
-    ActivityTypeFragment mUnbeginFragment;
-    ActivityTypeFragment mEndFragment;
+    DoingFragment mDoingFragment;
+    UnDoFragment mUnbeginFragment;
+    EndFragment mEndFragment;
 
     @ViewInject(R.id.viewpager)
     private ViewPager mViewPager;
@@ -82,9 +85,9 @@ public class DiscoverFragment extends FragmentBase implements RadioGroup.OnCheck
     }
     public void initViews(){
         ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
-        mDoingFragment = ActivityTypeFragment.newInstance("start");         // 进行中
-        mUnbeginFragment = ActivityTypeFragment.newInstance("notstart");    // 未开始
-        mEndFragment = ActivityTypeFragment.newInstance("end");             // 已结束
+        mDoingFragment = new  DoingFragment();         // 进行中
+        mUnbeginFragment = new UnDoFragment();         // 未开始
+        mEndFragment = new EndFragment();              // 已结束
 
         fragmentList.add(mDoingFragment);
         fragmentList.add(mUnbeginFragment);
