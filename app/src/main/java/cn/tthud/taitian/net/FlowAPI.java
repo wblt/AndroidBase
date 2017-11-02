@@ -65,4 +65,7 @@ public class FlowAPI {
 
     // 微信登录
     public static String PERSONAL_WX_LOGIN = SERVER_IP + "/appWxLogin";
+
+    // 活动列表
+    public static String APP_ACTIVITY_LIST = SERVER_IP + "/appActList";
 }
