@@ -1,6 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
 
-</LinearLayout>
+            <com.example.xrecyclerview.XRecyclerView
+                android:id="@+id/xrv_custom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbarSize="4dp"
+                android:visibility="gone"
+                android:scrollbarThumbVertical="@color/grey_500"
+                android:scrollbars="vertical" />
+
+            <!--加载失败-->
+            <LinearLayout
+                android:id="@+id/page_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/page_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="暂无数据,点击重新加载"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>

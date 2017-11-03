@@ -107,7 +107,7 @@ public class EndFragment extends FragmentBase implements View.OnClickListener{
         requestParams.addParameter("type","end");
         requestParams.addParameter("p", mPage);
 
-        MXUtils.httpPost(requestParams, new CommonCallbackImp("活动列表--已结束",requestParams){
+        MXUtils.httpGet(requestParams, new CommonCallbackImp("活动列表--已结束",requestParams){
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);

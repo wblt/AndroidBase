@@ -106,7 +106,7 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
         requestParams.addParameter("type","start");
         requestParams.addParameter("p", mPage);
 
-        MXUtils.httpPost(requestParams, new CommonCallbackImp("活动列表--进行中",requestParams){
+        MXUtils.httpGet(requestParams, new CommonCallbackImp("活动列表--进行中",requestParams){
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);

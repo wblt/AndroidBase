@@ -107,7 +107,7 @@ public class UnDoFragment extends FragmentBase implements View.OnClickListener{
         requestParams.addParameter("type","notstart");
         requestParams.addParameter("p", mPage);
 
-        MXUtils.httpPost(requestParams, new CommonCallbackImp("活动列表--未开始",requestParams){
+        MXUtils.httpGet(requestParams, new CommonCallbackImp("活动列表--未开始",requestParams){
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
