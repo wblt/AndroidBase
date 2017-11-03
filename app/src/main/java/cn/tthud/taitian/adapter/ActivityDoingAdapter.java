@@ -15,7 +15,7 @@ import cn.tthud.taitian.utils.Log;
  * Created by bopeng on 2017/11/2.
  */
 
-public class ActivityAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
+public class ActivityDoingAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
 
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

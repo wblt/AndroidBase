@@ -15,18 +15,16 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.http.RequestParams;
-import org.xutils.view.annotation.ViewInject;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 import cn.tthud.taitian.R;
-import cn.tthud.taitian.adapter.ActivityAdapter;
+import cn.tthud.taitian.adapter.ActivityDoingAdapter;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.bean.ActivityBean;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.GsonUtils;
-import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
@@ -34,14 +32,14 @@ import cn.tthud.taitian.xutils.MXUtils;
  * Created by bopeng on 2017/11/2.
  */
 
-public class DoingFragment extends FragmentBase {
+public class DoingFragment extends FragmentBase implements View.OnClickListener {
     private View view;
 
     private XRecyclerView xrvCustom;
     private LinearLayout page_refresh;
     private int mPage;
     private int mMaxPage = -1;
-    private ActivityAdapter mAdapter;
+    private ActivityDoingAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,19 +84,19 @@ public class DoingFragment extends FragmentBase {
         xrvCustom.setHasFixedSize(false);
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new ActivityAdapter();
+        mAdapter = new ActivityDoingAdapter();
         xrvCustom.setAdapter(mAdapter);
     }
 
     private void setListener(){
-
+        page_refresh.setOnClickListener(this);
     }
 
 
     private void loadNewData(boolean isRefresh){
         if (isRefresh){
             mAdapter.clear();
-//            mAdapter.notifyDataSetChanged();
+            mAdapter.notifyDataSetChanged();
             mPage = 1;
         }else{
             mPage += 1;
@@ -108,7 +106,7 @@ public class DoingFragment extends FragmentBase {
         requestParams.addParameter("type","start");
         requestParams.addParameter("p", mPage);
 
-        MXUtils.httpPost(requestParams, new CommonCallbackImp("活动列表",requestParams){
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("活动列表--进行中",requestParams){
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
@@ -152,5 +150,15 @@ public class DoingFragment extends FragmentBase {
                 }
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.page_refresh:
+                loadNewData(true);
+                break;
+        }
     }
 }

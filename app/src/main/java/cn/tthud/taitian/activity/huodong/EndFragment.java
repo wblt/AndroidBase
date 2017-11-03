@@ -10,21 +10,37 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.xrecyclerview.XRecyclerView;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
 import cn.tthud.taitian.R;
+import cn.tthud.taitian.adapter.ActivityEndAdapter;
 import cn.tthud.taitian.base.FragmentBase;
+import cn.tthud.taitian.bean.ActivityBean;
+import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.utils.GsonUtils;
+import cn.tthud.taitian.xutils.CommonCallbackImp;
+import cn.tthud.taitian.xutils.MXUtils;
 
 /**
  * Created by bopeng on 2017/11/2.
  */
 
-public class EndFragment extends FragmentBase {
+public class EndFragment extends FragmentBase implements View.OnClickListener{
     private View view;
 
     private XRecyclerView xrvCustom;
     private LinearLayout page_refresh;
+    private int mPage;
+    private int mMaxPage = -1;
+    private ActivityEndAdapter mAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +55,9 @@ public class EndFragment extends FragmentBase {
             page_refresh = view.findViewById(R.id.page_refresh);
             initRecyclerView();
             setListener();
-            loadNewData();
+
+            mPage = 1;
+            loadNewData(true);
         }
 
         return view;
@@ -53,12 +71,12 @@ public class EndFragment extends FragmentBase {
         xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-//                loadNewData(mType);
+                loadNewData(true);
             }
 
             @Override
             public void onLoadMore() {
-//                loadMoreData(mType);
+                loadNewData(false);
             }
         });
 
@@ -68,13 +86,80 @@ public class EndFragment extends FragmentBase {
         xrvCustom.setHasFixedSize(false);
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
 
+        mAdapter = new ActivityEndAdapter();
+        xrvCustom.setAdapter(mAdapter);
     }
 
     private void setListener(){
-
+        page_refresh.setOnClickListener(this);
     }
 
-    private void loadNewData(){
+    private void loadNewData(boolean isRefresh){
+        if (isRefresh){
+            mAdapter.clear();
+            mAdapter.notifyDataSetChanged();
+            mPage = 1;
+        }else{
+            mPage += 1;
+        }
 
+        RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_ACTIVITY_LIST);
+        requestParams.addParameter("type","end");
+        requestParams.addParameter("p", mPage);
+
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("活动列表--已结束",requestParams){
+            @Override
+            public void onSuccess(String data) {
+                super.onSuccess(data);
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        xrvCustom.refreshComplete();
+                        String result = jsonObject.getString("data");
+                        JSONObject jsonObject1 = new JSONObject(result);
+
+                        String maxPage = jsonObject1.getString("maxPage");
+                        mMaxPage = Integer.parseInt(maxPage);
+
+                        String list = jsonObject1.getString("list");
+
+                        Type type=new TypeToken<List<ActivityBean>>(){}.getType();
+                        List<ActivityBean> beanList = GsonUtils.jsonToList(list,type);
+
+                        mAdapter.addAll(beanList);
+                        mAdapter.notifyDataSetChanged();
+                        if(mAdapter.getData().size() == 0){
+                            page_refresh.setVisibility(View.VISIBLE);
+                            xrvCustom.setVisibility(View.GONE);
+                        }else {
+                            page_refresh.setVisibility(View.GONE);
+                            xrvCustom.setVisibility(View.VISIBLE);
+                        }
+
+                        if(mPage >= mMaxPage){
+                            xrvCustom.noMoreLoading();
+                        }
+
+                    }else {
+                        showMsg(info);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.page_refresh:
+                loadNewData(true);
+                break;
+        }
     }
 }
