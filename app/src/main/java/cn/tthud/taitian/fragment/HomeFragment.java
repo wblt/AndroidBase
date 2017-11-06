@@ -1,7 +1,9 @@
 package cn.tthud.taitian.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,15 @@ import org.xutils.view.annotation.ViewInject;
 
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.FragmentBase;
+import cn.tthud.taitian.widget.banner.BannerItem;
 import cn.tthud.taitian.widget.banner.SimpleImageBanner;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.http.RequestParams;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.Log;
@@ -47,6 +53,7 @@ public class HomeFragment extends FragmentBase {
             ((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
             setTopBarTitle("首页");
             loadData();
+            setBanner();
         }
         return view;
     }
@@ -77,6 +84,35 @@ public class HomeFragment extends FragmentBase {
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
+            }
+        });
+    }
+
+
+    public static List<BannerItem> getBanner(List<String> alist) {
+        ArrayList<BannerItem> list = new ArrayList<BannerItem>();
+        for (int i = 0; i < alist.size(); i++) {
+            BannerItem item = new BannerItem();
+            item.imgUrl = alist.get(i);
+            list.add(item);
+        }
+        return list;
+    }
+
+    // 顶部广告
+    private void setBanner() {
+        String url1 = "http://waxin-1251679641.file.myqcloud.com/859425427f474da3b4e77c6ce48f7447.jpg";
+        String url2 = "http://waxin-1251679641.file.myqcloud.com/13d173a342484c6cbdaca32315f13412.jpg";
+        String url3 = "http://waxin-1251679641.file.myqcloud.com/0a265766bd91453882990c8da7889d8e.jpg";
+        List<String> urls = new ArrayList<>();
+        urls.add(url1);
+        urls.add(url2);
+        urls.add(url3);
+        sib_simple_usage.setSource(getBanner(urls)).startScroll();
+        sib_simple_usage.setOnItemClickL(new SimpleImageBanner.OnItemClickL() {
+            @Override
+            public void onItemClick(int position) {
+
             }
         });
     }
