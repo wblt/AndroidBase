@@ -1,6 +1,7 @@
 package cn.tthud.taitian.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by bopeng on 2017/11/2.
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 
 public class ActivityBean {
 
-    private String id;              // 活动ID
+    private String activity_id;     // 活动ID
     private String solevar;         // 活动唯一标识
     private String cp_id;           // 活动公司ID
     private String pid;             // 活动父ID
@@ -31,24 +32,20 @@ public class ActivityBean {
     private String isdel;           // 活动是否删除[1是，2否]
     private String area_title;      // 活动地址
     private String com_title;       // 公司标题
-    private String img;             // 活动Banner
+    private List<String> img;       // 活动Banner
+    private String thumb;           // 活动缩略图
     private String top;             // 排名
     private String description;     // 描述
     private String url;             // h5链接
 
-    public void setDescription(String description) {
-        this.description = description;
+
+    public List<String> getImg() {
+        return img;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public String getActivity_id() {
+        return activity_id;
     }
-
-    public void setThumb(String thumb) {
-        this.thumb = thumb;
-    }
-
-    private String thumb;           // 缩略图
 
     public String getDescription() {
         return description;
@@ -60,10 +57,6 @@ public class ActivityBean {
 
     public String getThumb() {
         return thumb;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getSolevar() {
@@ -154,16 +147,28 @@ public class ActivityBean {
         return com_title;
     }
 
-    public String getImg() {
-        return img;
-    }
-
     public String getTop() {
         return top;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
+    public void setActivity_id(String activity_id) {
+        this.activity_id = activity_id;
+    }
+
+    public void setImg(List<String> img) {
+        this.img = img;
     }
 
     public void setSolevar(String solevar) {
@@ -252,10 +257,6 @@ public class ActivityBean {
 
     public void setCom_title(String com_title) {
         this.com_title = com_title;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 
     public void setTop(String top) {

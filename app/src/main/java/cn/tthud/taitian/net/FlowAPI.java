@@ -68,4 +68,6 @@ public class FlowAPI {
 
     // 活动列表
     public static String APP_ACTIVITY_LIST = SERVER_IP + "/appActList";
+    // 首页
+    public static String APP_HOME_LIST = SERVER_IP + "/appIndexlist";
 }
