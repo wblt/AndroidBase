@@ -7,8 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import org.xutils.view.annotation.ViewInject;
+
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.FragmentBase;
+import cn.tthud.taitian.widget.banner.SimpleImageBanner;
 
 /**
  * Created by wb on 2017/10/8.
@@ -17,6 +20,10 @@ import cn.tthud.taitian.base.FragmentBase;
 public class HomeFragment extends FragmentBase {
 
     private View view;
+
+    @ViewInject(R.id.sib_simple_usage)
+    private SimpleImageBanner sib_simple_usage;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

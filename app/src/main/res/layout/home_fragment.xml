@@ -18,10 +18,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="180dp">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/red_900"/>
+                <cn.tthud.taitian.widget.banner.SimpleImageBanner
+                    android:id="@+id/sib_simple_usage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    banner:bb_scale="0.5" />
+
             </LinearLayout>
 
             <!--广告-->
