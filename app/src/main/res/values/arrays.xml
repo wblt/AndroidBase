@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="activity_array">
+        <item>进行中</item>
+        <item>未开始</item>
+        <item>已结束</item>
+    </string-array>
+
+    <string-array name="company_array">
+        <item>公司简介</item>
+        <item>公司活动</item>
+    </string-array>
+</resources>

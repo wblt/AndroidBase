@@ -59,6 +59,7 @@ dependencies {
     compile files('libs/SocialSDK_WeiXin_Full.jar')
     compile files('libs/wechat-sdk-android-with-mta-1.1.6.jar')
     //    compile 'com.android.support:design:25.3.1'
+    compile files('libs/nineoldandroids-2.4.0.jar')
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'org.xutils:xutils:3.5.0'
     compile 'io.reactivex:rxandroid:1.2.0'
@@ -68,8 +69,8 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.lzy.net:okhttputils:1.6.5'
     compile 'ch.ielse:imagewatcher:1.0.1'
-    compile 'info.hoang8f:android-segmented:1.0.6'
+//    compile 'info.hoang8f:android-segmented:1.0.6'
+    compile 'com.github.devlight.navigationtabstrip:navigationtabstrip:1.0.4'
     compile 'com.android.support:support-v4:26.+'
     testCompile 'junit:junit:4.12'
-    compile files('libs/nineoldandroids-2.4.0.jar')
 }

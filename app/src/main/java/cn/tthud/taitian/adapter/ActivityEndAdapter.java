@@ -1,13 +1,17 @@
 package cn.tthud.taitian.adapter;
 
+import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.BaseRecyclerViewAdapter;
 import cn.tthud.taitian.base.BaseRecyclerViewHolder;
+import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.ActivityBean;
 import cn.tthud.taitian.databinding.ItemActivityBinding;
+import cn.tthud.taitian.utils.DateUtil;
 import cn.tthud.taitian.utils.ImageLoader;
 import cn.tthud.taitian.utils.Log;
 
@@ -37,21 +41,22 @@ public class ActivityEndAdapter extends BaseRecyclerViewAdapter {
                 binding.ivBannerPic.setImageResource(R.mipmap.icon_default);
             }
 
+            binding.tvTitle.setText(object.getTitle());
+            binding.tvTime.setText(DateUtil.formatUnixTime(Long.valueOf(object.getStart())));
             binding.tvAddress.setText(object.getArea_title());
-            binding.tvZanNum.setText(object.getPrise());
-            binding.tvHongqiNum.setText(object.getArea());
-            binding.tvPrice.setText(object.getCost());
-            binding.tvLike.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.i("点击了喜欢");
-                }
-            });
+            binding.tvNumber.setText(object.getTotal() + "人报名");
 
-            binding.tvDetail.setOnClickListener(new View.OnClickListener() {
+            binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.i("点击了详情");
+                    String url = object.getUrl();
+                    if (TextUtils.isEmpty(url)){
+                        return;
+                    }
+                    Intent intent = new Intent(view.getContext(),WebViewActivity.class);
+                    intent.putExtra("title",object.getTitle());
+                    intent.putExtra("url", url);
+                    view.getContext().startActivity(intent);
                 }
             });
         }
