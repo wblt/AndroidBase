@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.lzy.okhttputils.OkHttpUtils;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -37,6 +38,9 @@ public class DemoApplication extends Application {
 
         applicationContext = this;
         instance = this;
+
+        // 腾讯bugly
+        CrashReport.initCrashReport(getApplicationContext(), "9690120717", false);
 
         Config.DEBUG = true;
         initUM();
