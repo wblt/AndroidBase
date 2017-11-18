@@ -40,7 +40,7 @@ public class DemoApplication extends Application {
         instance = this;
 
         // 腾讯bugly
-        CrashReport.initCrashReport(getApplicationContext(), "9690120717", false);
+        CrashReport.initCrashReport(getApplicationContext(), "9690120717", true);
 
         Config.DEBUG = true;
         initUM();
