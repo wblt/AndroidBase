@@ -13,7 +13,7 @@ public class FlowAPI {
             + "/cn.tthud.taitian/";
 //    public static String SERVER_IP = "http://139.196.188.28:9002/zbManage_intf_test/";
 
-    public static String SERVER_IP = "http://pay.hnltou.com/api.php";
+    public static String SERVER_IP = "https://res.hnltou.com/api.php";
 
     /** 最大图片数 */
     public static final int DIARY_IMGS_MAX = 9;
@@ -70,4 +70,6 @@ public class FlowAPI {
     public static String APP_ACTIVITY_LIST = SERVER_IP + "/appActList";
     // 首页
     public static String APP_HOME_LIST = SERVER_IP + "/appIndexlist";
+    // 公司详情
+    public static String APP_COMPANY_DETAIL = SERVER_IP + "/appComDetail";
 }

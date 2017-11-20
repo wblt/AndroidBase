@@ -1,5 +1,8 @@
 package cn.tthud.taitian.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +10,7 @@ import java.util.List;
  * Created by bopeng on 2017/11/2.
  */
 
-public class ActivityBean {
+public class ActivityBean implements Parcelable{
 
     private String activity_id;     // 活动ID
     private String solevar;         // 活动唯一标识
@@ -263,4 +266,86 @@ public class ActivityBean {
         this.top = top;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.activity_id);
+        dest.writeString(this.solevar);
+        dest.writeString(this.cp_id);
+        dest.writeString(this.pid);
+        dest.writeString(this.title);
+        dest.writeString(this.server);
+        dest.writeString(this.pre_domain);
+        dest.writeString(this.pre_activity);
+        dest.writeString(this.total);
+        dest.writeString(this.type);
+        dest.writeString(this.editor);
+        dest.writeString(this.cost);
+        dest.writeString(this.status);
+        dest.writeString(this.prise);
+        dest.writeString(this.isrecommend);
+        dest.writeString(this.area);
+        dest.writeString(this.start);
+        dest.writeString(this.end);
+        dest.writeString(this.sort);
+        dest.writeString(this.modtime);
+        dest.writeString(this.isdel);
+        dest.writeString(this.area_title);
+        dest.writeString(this.com_title);
+        dest.writeStringList(this.img);
+        dest.writeString(this.thumb);
+        dest.writeString(this.top);
+        dest.writeString(this.description);
+        dest.writeString(this.url);
+    }
+
+    public ActivityBean() {
+    }
+
+    protected ActivityBean(Parcel in) {
+        this.activity_id = in.readString();
+        this.solevar = in.readString();
+        this.cp_id = in.readString();
+        this.pid = in.readString();
+        this.title = in.readString();
+        this.server = in.readString();
+        this.pre_domain = in.readString();
+        this.pre_activity = in.readString();
+        this.total = in.readString();
+        this.type = in.readString();
+        this.editor = in.readString();
+        this.cost = in.readString();
+        this.status = in.readString();
+        this.prise = in.readString();
+        this.isrecommend = in.readString();
+        this.area = in.readString();
+        this.start = in.readString();
+        this.end = in.readString();
+        this.sort = in.readString();
+        this.modtime = in.readString();
+        this.isdel = in.readString();
+        this.area_title = in.readString();
+        this.com_title = in.readString();
+        this.img = in.createStringArrayList();
+        this.thumb = in.readString();
+        this.top = in.readString();
+        this.description = in.readString();
+        this.url = in.readString();
+    }
+
+    public static final Creator<ActivityBean> CREATOR = new Creator<ActivityBean>() {
+        @Override
+        public ActivityBean createFromParcel(Parcel source) {
+            return new ActivityBean(source);
+        }
+
+        @Override
+        public ActivityBean[] newArray(int size) {
+            return new ActivityBean[size];
+        }
+    };
 }
