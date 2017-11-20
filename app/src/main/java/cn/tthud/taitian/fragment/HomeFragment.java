@@ -13,6 +13,7 @@ import org.xutils.view.annotation.ViewInject;
 
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.home.CompanyDetailActivity;
+import cn.tthud.taitian.activity.home.CompanyListActivity;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.widget.banner.BannerItem;
 import cn.tthud.taitian.widget.banner.SimpleImageBanner;
@@ -113,7 +114,14 @@ public class HomeFragment extends FragmentBase {
         sib_simple_usage.setOnItemClickL(new SimpleImageBanner.OnItemClickL() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(HomeFragment.this.getActivity(), CompanyDetailActivity.class);
+
+                // 进入公司详情
+//                Intent intent = new Intent(HomeFragment.this.getActivity(), CompanyDetailActivity.class);
+//                startActivity(intent);
+
+
+                // 进入公司列表
+                Intent intent = new Intent(HomeFragment.this.getActivity(), CompanyListActivity.class);
                 startActivity(intent);
             }
         });

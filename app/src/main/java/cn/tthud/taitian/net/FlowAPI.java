@@ -72,4 +72,7 @@ public class FlowAPI {
     public static String APP_HOME_LIST = SERVER_IP + "/appIndexlist";
     // 公司详情
     public static String APP_COMPANY_DETAIL = SERVER_IP + "/appComDetail";
+    // 公司列表
+    public static String APP_COMPANY_LIST = SERVER_IP + "/appComMore";
+
 }

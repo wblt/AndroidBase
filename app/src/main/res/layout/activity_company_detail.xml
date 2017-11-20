@@ -20,7 +20,7 @@
 
             <ImageView
                 android:id="@+id/iv_bg"
-                android:background="@color/orange"
+                android:background="@color/main_app_color"
                 android:layout_width="match_parent"
                 android:layout_height="120dp" />
 
@@ -72,7 +72,7 @@
 
                 <TextView
                     android:id="@+id/tv_fork_number"
-                    android:textColor="@color/orange"
+                    android:textColor="@color/main_app_color"
                     android:text="11111222"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -94,7 +94,7 @@
                 <TextView
                     android:text="88999"
                     android:id="@+id/tv_activity_number"
-                    android:textColor="@color/orange"
+                    android:textColor="@color/main_app_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -118,8 +118,8 @@
             android:layout_marginRight="30dp"
             android:layout_gravity="center"
             android:background="@color/white"
-            app:nts_active_color="@color/orange"
-            app:nts_color="@color/orange"
+            app:nts_active_color="@color/main_app_color"
+            app:nts_color="@color/main_app_color"
             app:nts_corners_radius="1dp"
             app:nts_factor="1"
             app:nts_inactive_color="@color/black"
