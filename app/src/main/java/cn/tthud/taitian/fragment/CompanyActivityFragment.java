@@ -43,6 +43,7 @@ public class CompanyActivityFragment extends FragmentBase {
         if (view == null){
             view =  inflater.inflate(R.layout.fragment_company_activity, null);
             xrvCustom = view.findViewById(R.id.xrv_custom);
+            page_refresh = view.findViewById(R.id.page_refresh);
             initRecyclerView();
         }
         return view;
@@ -75,6 +76,11 @@ public class CompanyActivityFragment extends FragmentBase {
 
         mAdapter = new CompanyActivityAdapter();
         xrvCustom.setAdapter(mAdapter);
+    }
+
+
+    public void uploadUI() {
+        loadData();
     }
 
     public void loadData(){

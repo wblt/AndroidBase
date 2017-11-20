@@ -114,8 +114,7 @@ public class CompanyDetailActivity extends ActivityBase {
                         Bundle bundle = new Bundle();
                         bundle.putParcelableArrayList("activityList", (ArrayList<ActivityBean>)activityList);
                         mActivityFragment.setArguments(bundle);
-                        mActivityFragment.loadData();
-
+                        mActivityFragment.uploadUI();
                     }else {
                         showMsg(info);
                     }
