@@ -1,10 +1,14 @@
 package cn.tthud.taitian.adapter;
 
+import android.content.Intent;
+import android.text.TextUtils;
+import android.view.View;
 import android.view.ViewGroup;
 
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.BaseRecyclerViewAdapter;
 import cn.tthud.taitian.base.BaseRecyclerViewHolder;
+import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.ActivityBean;
 import cn.tthud.taitian.databinding.ItemGoodIpBinding;
 import cn.tthud.taitian.utils.DateUtil;
@@ -36,6 +40,19 @@ public class GoodIPAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
             binding.tvName.setText(object.getTitle());
             binding.tvTime.setText(DateUtil.formatUnixTime(Long.valueOf(object.getStart())));
             binding.tvLocation.setText(object.getArea_title());
+            binding.ivImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String url = object.getUrl();
+                    if (TextUtils.isEmpty(url)){
+                        return;
+                    }
+                    Intent intent = new Intent(view.getContext(),WebViewActivity.class);
+                    intent.putExtra("title",object.getTitle());
+                    intent.putExtra("url", url);
+                    view.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }
