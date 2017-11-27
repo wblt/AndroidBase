@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.text.TextUtils" />
+        <variable
+            name="resultsBean"
+            type="cn.tthud.taitian.bean.UserBean" />
+    </data>
+
+    <LinearLayout
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_rectangle_white">
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ccccc"/>
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/tv_name"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:text="乐投互娱"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/shijian"/>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017-09-08"/>
+
+
+            <ImageView
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/didian"/>
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="湖南长沙"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

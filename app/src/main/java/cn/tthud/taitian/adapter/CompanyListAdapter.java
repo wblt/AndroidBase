@@ -24,9 +24,7 @@ public class CompanyListAdapter extends BaseRecyclerViewAdapter {
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_company_list);
     }
-
     private class ViewHolder extends BaseRecyclerViewHolder<CompanyBean, ItemCompanyListBinding>{
-
         ViewHolder(ViewGroup parent, int item_android) {
             super(parent, item_android);
         }
@@ -34,23 +32,13 @@ public class CompanyListAdapter extends BaseRecyclerViewAdapter {
         @Override
         public void onBindViewHolder(final CompanyBean object, int position) {
             binding.executePendingBindings();
-
             if(object.getThumb() != null && object.getThumb().length() != 0){
-                ImageLoader.load(object.getThumb(), binding.ivCompanyImg);
+                //ImageLoader.load(object.getThumb(), binding.ivCompanyImg);
+                ImageLoader.loadRect(object.getThumb(),binding.ivCompanyImg);
             }else {
                 binding.ivCompanyImg.setImageResource(R.mipmap.icon_default);
             }
-
             binding.tvCompanyName.setText(object.getAbbtion());
-
-            binding.llAll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(),CompanyDetailActivity.class);
-                    intent.putExtra("id",object.getId());
-                    view.getContext().startActivity(intent);
-                }
-            });
         }
     }
 }

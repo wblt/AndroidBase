@@ -93,24 +93,17 @@ public class CompanyDetailActivity extends ActivityBase {
                     JSONObject jsonObject = new JSONObject(data);
                     String status = jsonObject.getString("status");
                     String info = jsonObject.getString("info");
-
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         String result = jsonObject.getString("data");
-
-
                         CompanyBean companyBean = GsonUtils.jsonToBean(result, CompanyBean.class);
-
                         JSONObject jsonObject1 = new JSONObject(result);
                         String activity = jsonObject1.getString("activity");
                         JSONObject activityObject = new JSONObject(activity);
                         String list = activityObject.getString("list");
                         Type type=new TypeToken<List<ActivityBean>>(){}.getType();
                         List<ActivityBean> activityList = GsonUtils.jsonToList(list,type);
-
                         setData(companyBean);
-
                         mIntroduceFragment.loadData(companyBean.getContent());
-
                         Bundle bundle = new Bundle();
                         bundle.putParcelableArrayList("activityList", (ArrayList<ActivityBean>)activityList);
                         mActivityFragment.setArguments(bundle);
