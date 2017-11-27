@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import cn.tthud.taitian.R;
-import cn.tthud.taitian.activity.home.CompanyDetailActivity;
+import cn.tthud.taitian.activity.home.CompanyActivity;
 import cn.tthud.taitian.base.BaseRecyclerViewAdapter;
 import cn.tthud.taitian.base.BaseRecyclerViewHolder;
 import cn.tthud.taitian.base.WebViewActivity;
@@ -39,6 +39,15 @@ public class CompanyListAdapter extends BaseRecyclerViewAdapter {
                 binding.ivCompanyImg.setImageResource(R.mipmap.icon_default);
             }
             binding.tvCompanyName.setText(object.getAbbtion());
+
+            binding.ivCompanyImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), CompanyActivity.class);
+                    intent.putExtra("cid",object.getCompany_id());
+                    view.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }
