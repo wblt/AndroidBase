@@ -88,9 +88,7 @@ public class CompanyActivityFragment extends FragmentBase {
         if(bundle == null){
             return;
         }
-
         ArrayList<ActivityBean> activityBeanList = bundle.getParcelableArrayList("activityList");
-
         mAdapter.addAll(activityBeanList);
         mAdapter.notifyDataSetChanged();
         if(mAdapter.getData().size() == 0){

@@ -27,7 +27,7 @@ android {
         multiDexEnabled true
         ndk {
             // 设置支持的SO库架构
-            abiFilters 'armeabi' , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
     }
     dexOptions {
@@ -64,6 +64,9 @@ dependencies {
     compile files('libs/wechat-sdk-android-with-mta-1.1.6.jar')
     //    compile 'com.android.support:design:25.3.1'
     compile files('libs/nineoldandroids-2.4.0.jar')
+    //    compile 'info.hoang8f:android-segmented:1.0.6'
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'org.xutils:xutils:3.5.0'
     compile 'io.reactivex:rxandroid:1.2.0'
@@ -73,10 +76,9 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.lzy.net:okhttputils:1.6.5'
     compile 'ch.ielse:imagewatcher:1.0.1'
-//    compile 'info.hoang8f:android-segmented:1.0.6'
     compile 'com.github.devlight.navigationtabstrip:navigationtabstrip:1.0.4'
     compile 'com.android.support:support-v4:26.+'
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    compile 'com.tencent.bugly:nativecrashreport:latest.release'
     testCompile 'junit:junit:4.12'
-    compile 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
-    compile 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
 }

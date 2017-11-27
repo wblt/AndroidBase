@@ -20,7 +20,6 @@ import org.json.JSONArray;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.tthud.taitian.R;
-import cn.tthud.taitian.activity.home.CompanyDetailActivity;
 import cn.tthud.taitian.adapter.CompanyListAdapter;
 import cn.tthud.taitian.adapter.GoodIPAdapter;
 import cn.tthud.taitian.adapter.StarXueyuanAdapter;
