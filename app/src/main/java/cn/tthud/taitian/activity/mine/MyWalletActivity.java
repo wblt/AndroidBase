@@ -1,14 +1,13 @@
-package cn.tthud.taitian.fragment;
+package cn.tthud.taitian.activity.mine;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.xrecyclerview.XRecyclerView;
 import com.google.gson.reflect.TypeToken;
@@ -16,14 +15,15 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.http.RequestParams;
+import org.xutils.view.annotation.ViewInject;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 import cn.tthud.taitian.R;
-import cn.tthud.taitian.adapter.MessageAdapter;
-import cn.tthud.taitian.base.FragmentBase;
-import cn.tthud.taitian.bean.MessageBean;
+import cn.tthud.taitian.adapter.ActivityMyWalletAdapter;
+import cn.tthud.taitian.base.ActivityBase;
+import cn.tthud.taitian.bean.WalletRecordBean;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.utils.SPUtils;
@@ -31,45 +31,65 @@ import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
 /**
- * Created by wb on 2017/10/8.
+ * Created by bopeng on 2017/11/28.
  */
 
-public class MessageFragment extends FragmentBase implements View.OnClickListener {
+public class MyWalletActivity extends ActivityBase {
 
-    private View view;
+    @ViewInject(R.id.top_left)
+    private ImageButton backBtn;
+
+    @ViewInject(R.id.tv_score_number)
+    private TextView tv_score_number;
+
+    @ViewInject(R.id.btn_recharge)
+    private Button btn_recharge;
+
+    @ViewInject(R.id.xrv_custom)
     private XRecyclerView xrvCustom;
+
+    @ViewInject(R.id.page_refresh)
     private LinearLayout page_refresh;
+
     private int mPage;
     private int mMaxPage = -1;
-    private MessageAdapter mAdapter;
+
+    private ActivityMyWalletAdapter mAdapter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        appendMainBody(this,R.layout.activity_my_wallet);
+
+        initListener();
+        initRecyclerView();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if(view == null){
-            view = super.onCreateView(inflater,container,savedInstanceState);
-            appendMainBody(this, R.layout.message_fragment);
-            appendTopBody(R.layout.activity_top_icon);
-            ((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
-            setTopBarTitle("消息");
+    private void initListener(){
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
-            xrvCustom = view.findViewById(R.id.xrv_custom);
-            page_refresh = view.findViewById(R.id.page_refresh);
-            initRecyclerView();
-            setListener();
+        page_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadNewData(true);
+            }
+        });
 
-            mPage = 1;
-            loadNewData(true);
-        }
-        return view;
+        btn_recharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void initRecyclerView(){
-        // 禁止下拉刷新
         xrvCustom.setPullRefreshEnabled(true);
         xrvCustom.setLoadingMoreEnabled(true);
 
@@ -85,18 +105,14 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
             }
         });
 
-        xrvCustom.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        xrvCustom.setLayoutManager(new LinearLayoutManager(this));
         // 需加，不然滑动不流畅
         xrvCustom.setNestedScrollingEnabled(false);
         xrvCustom.setHasFixedSize(false);
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
 
-        mAdapter = new MessageAdapter();
+        mAdapter = new ActivityMyWalletAdapter();
         xrvCustom.setAdapter(mAdapter);
-    }
-
-    private void setListener(){
-        page_refresh.setOnClickListener(this);
     }
 
     private void loadNewData(boolean isRefresh){
@@ -108,11 +124,11 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
             mPage += 1;
         }
 
-        RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_MESSAGE_LIST);
+        RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_MY_WALLET_RECORD);
         requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
         requestParams.addParameter("p", mPage);
 
-        MXUtils.httpGet(requestParams, new CommonCallbackImp("消息列表",requestParams){
+        MXUtils.httpGet(requestParams, new CommonCallbackImp("我的钱包记录",requestParams){
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
@@ -126,13 +142,16 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                         String result = jsonObject.getString("data");
                         JSONObject jsonObject1 = new JSONObject(result);
 
+                        String totalScore = jsonObject1.getString("totaljifen");
+                        tv_score_number.setText(Integer.parseInt(totalScore));
+
                         String maxPage = jsonObject1.getString("maxPage");
                         mMaxPage = Integer.parseInt(maxPage);
 
                         String list = jsonObject1.getString("list");
 
-                        Type type=new TypeToken<List<MessageBean>>(){}.getType();
-                        List<MessageBean> beanList = GsonUtils.jsonToList(list,type);
+                        Type type=new TypeToken<List<WalletRecordBean>>(){}.getType();
+                        List<WalletRecordBean> beanList = GsonUtils.jsonToList(list,type);
 
                         mAdapter.addAll(beanList);
                         mAdapter.notifyDataSetChanged();
@@ -156,15 +175,5 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                 }
             }
         });
-    }
-
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id){
-            case R.id.page_refresh:
-                loadNewData(true);
-                break;
-        }
     }
 }

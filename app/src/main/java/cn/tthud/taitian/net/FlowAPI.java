@@ -68,11 +68,19 @@ public class FlowAPI {
 
     // 活动列表
     public static String APP_ACTIVITY_LIST = SERVER_IP + "/appActList";
+
     // 首页
     public static String APP_HOME_LIST = SERVER_IP + "/appIndexlist";
+
     // 公司详情
     public static String APP_COMPANY_DETAIL = SERVER_IP + "/appComDetail";
+
     // 公司列表
     public static String APP_COMPANY_LIST = SERVER_IP + "/appComMore";
 
+    // 钱包记录
+    public static String APP_MY_WALLET_RECORD = SERVER_IP + "/appMyWallet";
+
+    // 消息列表
+    public static String APP_MESSAGE_LIST = SERVER_IP + "/appMsgList";
 }

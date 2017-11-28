@@ -41,6 +41,7 @@ import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.activity.mine.BindPhoneActivity;
 import cn.tthud.taitian.activity.mine.ChangePhoneActivity;
 import cn.tthud.taitian.activity.mine.ModifyInfoActivity;
+import cn.tthud.taitian.activity.mine.MyWalletActivity;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.bean.UserBean;
 import cn.tthud.taitian.net.FlowAPI;
@@ -163,7 +164,7 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
                 break;
             case R.id.lay_qianbao:          // 我的钱包
                 if (CommonUtils.checkLogin()) {
-
+                    startActivity(new Intent(this.getContext(), MyWalletActivity.class));
                 } else {
                     LoginActivity.navToLogin(this.getContext());
                     return;
