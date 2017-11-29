@@ -7,7 +7,7 @@
     <!--app主题色，应用于导航，按钮-->
     <color name="colorTheme">#3391F1</color>
     <!--app主题色，应用于导航，按钮-->
-    <color name="main_app_color">#3391F1</color>
+    <color name="main_app_color">#ffffff</color>
 
     <color name="primary">#999999</color>
     <color name="transparent">#00000000</color>
