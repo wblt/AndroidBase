@@ -48,7 +48,7 @@
                     android:id="@+id/tv_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@mipmap/arrow_right"
+                    android:drawableLeft="@mipmap/didian"
                     android:textSize="12dp"
                     android:maxLines="2"
                     android:text="湖南长沙"
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="12dp"
                     android:text="1234"
-                    android:textColor="@color/main_app_color"
+                    android:textColor="@color/colorSendName6"
                     />
 
                 <TextView
