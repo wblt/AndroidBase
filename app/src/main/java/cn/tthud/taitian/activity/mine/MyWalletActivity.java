@@ -59,9 +59,7 @@ public class MyWalletActivity extends ActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         appendMainBody(this,R.layout.activity_my_wallet);
-
         initListener();
         initRecyclerView();
         loadNewData(true);
@@ -144,7 +142,9 @@ public class MyWalletActivity extends ActivityBase {
                         JSONObject jsonObject1 = new JSONObject(result);
 
                         String totalScore = jsonObject1.getString("totaljifen");
-                        tv_score_number.setText(Integer.parseInt(totalScore));
+
+
+                        tv_score_number.setText(totalScore);
 
                         String maxPage = jsonObject1.getString("maxPage");
                         mMaxPage = Integer.parseInt(maxPage);
