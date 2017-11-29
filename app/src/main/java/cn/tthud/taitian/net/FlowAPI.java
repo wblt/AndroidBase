@@ -81,6 +81,9 @@ public class FlowAPI {
     // 钱包记录
     public static String APP_MY_WALLET_RECORD = SERVER_IP + "/appMyWallet";
 
+    // 充值界面
+    public static String APP_RECHARGE = SERVER_IP + "/appRecharge";
+
     // 消息列表
     public static String APP_MESSAGE_LIST = SERVER_IP + "/appMsgList";
 }

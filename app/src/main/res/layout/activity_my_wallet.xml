@@ -9,7 +9,7 @@
         android:layout_height="210dp"
         android:background="@color/colorSendName6">
         <ImageButton
-            android:src="@mipmap/fanhui_hei"
+            android:src="@mipmap/return_white"
             android:id="@+id/top_left"
             android:layout_width="44dp"
             android:layout_height="44dp"
