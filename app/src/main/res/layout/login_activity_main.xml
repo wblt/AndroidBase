@@ -158,6 +158,16 @@
                 android:padding="8dp"
                 android:src="@mipmap/icon_input_clear"
                 android:visibility="invisible"/>
+            <TextView
+                android:id="@+id/forget_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/gray_text_light"
+                android:text="忘记密码?"
+                android:textAlignment="center"/>
         </LinearLayout>
 
         <ImageView
@@ -187,16 +197,17 @@
             <!--android:textSize="16sp"-->
             <!--android:textColor="@color/gray_text_light"-->
             <!--android:textAlignment="center"/>-->
-        <TextView
-            android:id="@+id/forget_pwd"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"
-            android:layout_alignParentRight="true"
-            android:textColor="@color/gray_text_light"
-            android:text="忘记密码?"
-            android:textAlignment="center"/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/forget_pwd"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:textSize="16sp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:textColor="@color/gray_text_light"-->
+            <!--android:text="忘记密码?"-->
+            <!--android:textAlignment="center"/>-->
     </RelativeLayout>
 
     <Button
