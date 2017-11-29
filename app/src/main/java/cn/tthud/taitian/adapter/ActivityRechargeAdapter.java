@@ -9,6 +9,7 @@ import java.util.List;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.BaseRecyclerViewAdapter;
 import cn.tthud.taitian.base.BaseRecyclerViewHolder;
+import cn.tthud.taitian.base.OnItemClickListener;
 import cn.tthud.taitian.bean.RechargeBean;
 import cn.tthud.taitian.databinding.ItemRechargeBinding;
 
@@ -17,6 +18,7 @@ import cn.tthud.taitian.databinding.ItemRechargeBinding;
  */
 
 public class ActivityRechargeAdapter extends BaseRecyclerViewAdapter {
+
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_recharge);
@@ -29,7 +31,7 @@ public class ActivityRechargeAdapter extends BaseRecyclerViewAdapter {
         }
 
         @Override
-        public void onBindViewHolder(final RechargeBean object, int position) {
+        public void onBindViewHolder(final RechargeBean object, final int position) {
             binding.executePendingBindings();
 
             binding.tvScore.setText(object.getJifen() + " 积分");
@@ -49,6 +51,10 @@ public class ActivityRechargeAdapter extends BaseRecyclerViewAdapter {
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    if (listener != null) {
+                        listener.onClick(object,position);
+                    }
 
                     List<RechargeBean> models = getData();
                     for (RechargeBean model: models) {

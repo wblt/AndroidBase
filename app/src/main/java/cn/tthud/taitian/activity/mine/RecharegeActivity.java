@@ -23,6 +23,7 @@ import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.home.CompanyActivity;
 import cn.tthud.taitian.adapter.ActivityRechargeAdapter;
 import cn.tthud.taitian.base.ActivityBase;
+import cn.tthud.taitian.base.OnItemClickListener;
 import cn.tthud.taitian.bean.RechargeBean;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.GsonUtils;
@@ -99,6 +100,12 @@ public class RecharegeActivity extends ActivityBase {
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
 
         mAdapter = new ActivityRechargeAdapter();
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onClick(Object o, int position) {
+                // 这里就是回调,对象就为当前选中的
+            }
+        });
         xrvCustom.setAdapter(mAdapter);
     }
 
