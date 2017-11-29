@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -59,6 +60,12 @@ public class RegisterActivity extends ActivityBase {
     @ViewInject(R.id.pwd_xx2)
     private ImageView pwd_xx2;
 
+    @ViewInject(R.id.btn_mine)
+    private Button btn_mine;
+
+    boolean btn_select = true;
+
+
     private MyCount myCount;
     private String phone;       // 手机号码
     private String pwd;         // 密码
@@ -78,6 +85,7 @@ public class RegisterActivity extends ActivityBase {
 
     // 初始化视图
     public void initView() {
+        btn_mine.setSelected(true);
         myCount = new MyCount(60000, 1000);
     }
 
@@ -259,4 +267,14 @@ public class RegisterActivity extends ActivityBase {
             }
         }
     };
+
+    public void onTabClicked(View view) {
+        if (btn_select == false) {
+            btn_select = true;
+            btn_mine.setSelected(true);
+        } else {
+            btn_select = false;
+            btn_mine.setSelected(false);
+        }
+    }
 }
