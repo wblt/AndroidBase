@@ -75,9 +75,9 @@ public class RegisterActivity extends ActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         appendMainBody(this,R.layout.register_activity_main);
-        appendTopBody(R.layout.activity_top_text);
-        setTopBarTitle("注册");
-        setTopLeftListener(this);
+//        appendTopBody(R.layout.activity_top_text);
+//        setTopBarTitle("注册");
+//        setTopLeftListener(this);
 
         initView();
         initListener();
@@ -157,61 +157,66 @@ public class RegisterActivity extends ActivityBase {
     }
 
     private void registerBtnClick(){
-        phone = login_phone.getText().toString();
+        //phone = login_phone.getText().toString();
         pwd = login_pwd.getText().toString();
         String pwd2 = login_pwd2.getText().toString();
-        codeNum = code.getText().toString();
-        if (TextUtils.isEmpty(phone)) {
-            showMsg("请输入手机号码");
-            return;
-        }
-        if (!RegExpValidator.IsHandset(phone)) {
-            showMsg("手机号码格式错误");
-            return;
-        }
-        if (TextUtils.isEmpty(codeNum)) {
-            showMsg("请输入验证码");
-            return;
-        }
+        //codeNum = code.getText().toString();
+//        if (TextUtils.isEmpty(phone)) {
+//            showMsg("请输入手机号码");
+//            return;
+//        }
+//        if (!RegExpValidator.IsHandset(phone)) {
+//            showMsg("手机号码格式错误");
+//            return;
+//        }
+//        if (TextUtils.isEmpty(codeNum)) {
+//            showMsg("请输入验证码");
+//            return;
+//        }
+
         if (TextUtils.isEmpty(pwd)) {
             showMsg("请输入密码");
             return;
         }
-
         if (!pwd.equals(pwd2)) {
             showMsg("两次密码不一致");
             return;
         }
-
-        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_REGISTER);
-        requestParams.addParameter("mobile",phone);
-        requestParams.addParameter("password",pwd);
-        requestParams.addParameter("msg",codeNum);
-
-        MXUtils.httpPost(requestParams, new CommonCallbackImp("注册",requestParams) {
-            @Override
-            public void onSuccess(String data) {
-                super.onSuccess(data);
-                try {
-                    JSONObject jsonObject = new JSONObject(data);
-                    String status = jsonObject.getString("status");
-                    String info = jsonObject.getString("info");
-
-                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
-                        showMsg("注册成功");
-                        Intent intent = new Intent();
-                        intent.putExtra("phone",phone);
-                        intent.putExtra("pwd",pwd);
-                        setResult(LoginActivity.REGISTER_VIEW_CODE,intent);
-                        finish();
-                    }else {
-                        showMsg(info);
-                    }
-                }catch (JSONException e){
-                    e.printStackTrace();
-                }
-            }
-        });
+        Intent intent = new Intent(this,RegisterActivity2.class);
+        intent.putExtra("pwd",pwd);
+        intent.putExtra("pwd2",pwd2);
+        startActivity(intent);
+        finish();
+//
+//
+//        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_REGISTER);
+//        requestParams.addParameter("mobile",phone);
+//        requestParams.addParameter("password",pwd);
+//        requestParams.addParameter("msg",codeNum);
+//        MXUtils.httpPost(requestParams, new CommonCallbackImp("注册",requestParams) {
+//            @Override
+//            public void onSuccess(String data) {
+//                super.onSuccess(data);
+//                try {
+//                    JSONObject jsonObject = new JSONObject(data);
+//                    String status = jsonObject.getString("status");
+//                    String info = jsonObject.getString("info");
+//
+//                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+//                        showMsg("注册成功");
+//                        Intent intent = new Intent();
+//                        intent.putExtra("phone",phone);
+//                        intent.putExtra("pwd",pwd);
+//                        setResult(LoginActivity.REGISTER_VIEW_CODE,intent);
+//                        finish();
+//                    }else {
+//                        showMsg(info);
+//                    }
+//                }catch (JSONException e){
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
     }
 
