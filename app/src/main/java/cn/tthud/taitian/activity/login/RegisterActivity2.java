@@ -78,12 +78,12 @@ public class RegisterActivity2 extends ActivityBase {
         myCount = new MyCount(60000, 1000);
     }
 
-    @Event(value = {R.id.login_send_code,R.id.username_xx,
+    @Event(value = {R.id.register_send_code,R.id.username_xx,
             R.id.pwd_xx,R.id.contain_btn,R.id.login_btn},type = View.OnClickListener.class)
     private void onEvenOnclick(View view) {
         int viewId = view.getId();
         switch (viewId) {
-            case R.id.login_send_code:
+            case R.id.register_send_code:
                 getCode();
                 break;
             case R.id.contain_btn:

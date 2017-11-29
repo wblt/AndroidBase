@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.base.BaseActivity;
 import cn.tthud.taitian.fragment.ContactListFragment;
 import cn.tthud.taitian.fragment.DiscoverFragment;
@@ -83,7 +84,12 @@ public class MainActivity extends BaseActivity {
                 index = 1;
                 break;
             case R.id.btn_conversation:
-                index = 2;
+                if (CommonUtils.checkLogin()) {
+                    index = 2;
+                } else {
+                    LoginActivity.navToLogin(this);
+                    return;
+                }
                 break;
 //            case R.id.btn_address_list:
 //                index = 3;
