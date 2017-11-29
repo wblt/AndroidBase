@@ -234,7 +234,6 @@ public class RegisterActivity2 extends ActivityBase {
                     JSONObject jsonObject = new JSONObject(data);
                     String status = jsonObject.getString("status");
                     String info = jsonObject.getString("info");
-
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         showMsg("注册成功");
                     }else {
