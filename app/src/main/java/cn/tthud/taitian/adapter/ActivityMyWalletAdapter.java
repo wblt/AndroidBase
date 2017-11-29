@@ -29,6 +29,13 @@ public class ActivityMyWalletAdapter extends BaseRecyclerViewAdapter {
             binding.executePendingBindings();
 
             binding.tvTitle.setText(object.getTitle());
+            if (object.getType().equals("充值")){
+                binding.tvSubTitle.setBackgroundResource(R.drawable.radius_layout_blue_btn);
+            }else if(object.getType().equals("抽奖")){
+                binding.tvSubTitle.setBackgroundResource(R.drawable.radius_layout_orange_btn);
+            }else{
+                binding.tvSubTitle.setBackgroundResource(R.drawable.radius_layout_blue_btn);
+            }
             binding.tvSubTitle.setText(object.getType());
             binding.tvScore.setText("+" + object.getUsefee());
             binding.tvTime.setText(object.getAdddate());

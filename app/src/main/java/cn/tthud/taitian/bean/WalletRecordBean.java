@@ -18,8 +18,8 @@ public class WalletRecordBean {
     private int money;              // 总金额
     private int usefee;             // 获得积分
     private int num;                // 充值数量
-    private String addtime;         // 添加时间
-    private String modtime;         // 修改时间
+    private int addtime;            // 添加时间
+    private int modtime;            // 修改时间
     private String adddate;         // 日期
     private int pay_type;           // 支付方式[1微信，2QQ,3微博，4支付宝，5其他]
     private String title;           // 标题
@@ -129,19 +129,19 @@ public class WalletRecordBean {
         this.num = num;
     }
 
-    public String getAddtime() {
+    public int getAddtime() {
         return addtime;
     }
 
-    public void setAddtime(String addtime) {
+    public void setAddtime(int addtime) {
         this.addtime = addtime;
     }
 
-    public String getModtime() {
+    public int getModtime() {
         return modtime;
     }
 
-    public void setModtime(String modtime) {
+    public void setModtime(int modtime) {
         this.modtime = modtime;
     }
 
