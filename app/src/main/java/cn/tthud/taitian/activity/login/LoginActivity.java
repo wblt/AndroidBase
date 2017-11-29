@@ -77,9 +77,9 @@ public class LoginActivity extends ActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         appendMainBody(this,R.layout.login_activity_main);
-        appendTopBody(R.layout.activity_top_text);
-        setTopBarTitle("登录");
-        setTopLeftDefultListener();
+        //appendTopBody(R.layout.activity_top_text);
+        //setTopBarTitle("登录");
+        //setTopLeftDefultListener();
         initListener();
     }
 

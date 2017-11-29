@@ -10,6 +10,7 @@
         android:background="@color/content_bg">
 
         <ImageView
+            android:visibility="invisible"
             android:layout_width="fill_parent"
             android:layout_height="1px"
             android:background="@color/main_app_color_line" />
