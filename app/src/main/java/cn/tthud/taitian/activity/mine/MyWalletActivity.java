@@ -1,5 +1,6 @@
 package cn.tthud.taitian.activity.mine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -83,7 +84,7 @@ public class MyWalletActivity extends ActivityBase {
         btn_recharge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(MyWalletActivity.this, RecharegeActivity.class));
             }
         });
     }
@@ -156,6 +157,10 @@ public class MyWalletActivity extends ActivityBase {
 
                         mAdapter.addAll(beanList);
                         mAdapter.notifyDataSetChanged();
+
+                        // 防止加载更多动来动去
+                        xrvCustom.loadMoreComplete();
+
                         if(mAdapter.getData().size() == 0){
                             page_refresh.setVisibility(View.VISIBLE);
                             xrvCustom.setVisibility(View.GONE);
@@ -167,9 +172,6 @@ public class MyWalletActivity extends ActivityBase {
                         if(mPage >= mMaxPage){
                             xrvCustom.noMoreLoading();
                         }
-
-                        // 防止加载更多动来动去
-                        xrvCustom.loadMoreComplete();
                     }else {
                         showMsg(info);
                     }

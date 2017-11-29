@@ -31,7 +31,7 @@
         <TextView
             android:id="@+id/tv_score_number"
             android:layout_centerHorizontal="true"
-            android:text="235"
+            android:text="--"
             android:textColor="@color/colorWhite"
             android:textSize="50sp"
             android:layout_below="@+id/top_center_text"
