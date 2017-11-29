@@ -168,6 +168,8 @@ public class MyWalletActivity extends ActivityBase {
                             xrvCustom.noMoreLoading();
                         }
 
+                        // 防止加载更多动来动去
+                        xrvCustom.loadMoreComplete();
                     }else {
                         showMsg(info);
                     }

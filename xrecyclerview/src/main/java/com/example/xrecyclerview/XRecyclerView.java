@@ -94,7 +94,7 @@ public class XRecyclerView extends RecyclerView {
         mHeaderViews.put(mHeaderViews.size(), view);
     }
 
-    private void loadMoreComplete() {
+    public void loadMoreComplete() {
         isLoadingData = false;
         View footView = mFootViews.get(0);
         if (previousTotal <= getLayoutManager().getItemCount()) {
