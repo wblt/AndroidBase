@@ -64,6 +64,7 @@ public class MyWalletActivity extends ActivityBase {
 
         initListener();
         initRecyclerView();
+        loadNewData(true);
     }
 
     private void initListener(){

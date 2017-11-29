@@ -7,7 +7,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="210dp"
-        android:background="@color/main_app_color">
+        android:background="@color/colorSendName6">
         <ImageButton
             android:src="@mipmap/return_white"
             android:id="@+id/top_left"
@@ -51,7 +51,7 @@
             android:layout_marginBottom="27dp"
             android:layout_centerHorizontal="true"
             android:layout_alignBottom="@+id/tv_bottom_white"
-            android:textColor="@color/main_app_color"
+            android:textColor="@color/colorSendName6"
             android:background="@drawable/text_white_round_view"
             android:layout_width="140dp"
             android:layout_height="45dp" />
