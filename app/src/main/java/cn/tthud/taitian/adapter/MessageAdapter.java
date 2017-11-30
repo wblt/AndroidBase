@@ -1,54 +1,53 @@
 package cn.tthud.taitian.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.BaseRecyclerViewAdapter;
 import cn.tthud.taitian.base.BaseRecyclerViewHolder;
+import cn.tthud.taitian.bean.MessageBean;
+import cn.tthud.taitian.databinding.ItemMessageNormalBinding;
+import cn.tthud.taitian.utils.ImageLoader;
 
 /**
  * Created by bopeng on 2017/11/3.
  */
 
 public class MessageAdapter extends BaseRecyclerViewAdapter {
-    @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
-    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == 0){
-            return new ViewHolderNormalMsg(parent, R.layout.item_message_normal);
-        }else {
-            return new ViewHolderSystemMsg(parent, R.layout.item_message_system);
-        }
+        return new ViewHolder(parent, R.layout.item_message_normal);
     }
 
-    private class ViewHolderNormalMsg extends BaseRecyclerViewHolder {
+    private class ViewHolder extends BaseRecyclerViewHolder<MessageBean, ItemMessageNormalBinding> {
 
-        ViewHolderNormalMsg(ViewGroup parent, int item_android){
+        ViewHolder(ViewGroup parent, int item_android){
             super(parent, item_android);
-            this.setIsRecyclable(true);
         }
 
         @Override
-        public void onBindViewHolder(Object object, int position) {
+        public void onBindViewHolder(MessageBean object, int position) {
+            binding.executePendingBindings();
 
-        }
-    }
+            String msgType = object.getMc_id();
+            if (msgType.equals("系统消息")){  // 如果是系统消息
+                binding.llSystemMsgTitle.setVisibility(View.VISIBLE);
+            }else if(msgType.equals("广告通知")){
+                binding.llSystemMsgTitle.setVisibility(View.GONE);
+            }
 
-    private class ViewHolderSystemMsg extends BaseRecyclerViewHolder {
+            if(object.getIcon() != null && object.getIcon().length() != 0){
+                binding.ivMsgImv.setVisibility(View.VISIBLE);
+                ImageLoader.load(object.getIcon(), binding.ivMsgImv);
+            }else {
+                binding.ivMsgImv.setVisibility(View.GONE);
+                binding.ivMsgImv.setImageResource(R.mipmap.ccccc);
+            }
 
-        ViewHolderSystemMsg(ViewGroup parent, int item_android){
-            super(parent, item_android);
-            this.setIsRecyclable(true);
-        }
-
-        @Override
-        public void onBindViewHolder(Object object, int position) {
-
+            binding.tvMsgContent.setText(object.getTitle());
         }
     }
 }
