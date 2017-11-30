@@ -39,7 +39,6 @@ public class RegisterActivity extends ActivityBase {
     @ViewInject(R.id.lay_xieyi)
     private LinearLayout lay_xieyi;
 
-
     @ViewInject(R.id.pwd_xx)
     private ImageView pwd_xx;
 
@@ -48,8 +47,13 @@ public class RegisterActivity extends ActivityBase {
 
     @ViewInject(R.id.btn_mine)
     private Button btn_mine;
+
+    @ViewInject(R.id.next_btn)
+    private Button next_btn;
+
     boolean btn_select = true;
-    private String pwd;         // 密码
+    private String pwd = "";
+    private String pwd2 = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +80,7 @@ public class RegisterActivity extends ActivityBase {
         login_pwd2.addTextChangedListener(tw);
     }
 
-    @Event(value = {R.id.pwd_xx,R.id.pwd_xx2,R.id.lay_xieyi},type = View.OnClickListener.class)
+    @Event(value = {R.id.pwd_xx,R.id.pwd_xx2,R.id.lay_xieyi,R.id.next_btn},type = View.OnClickListener.class)
     private void onEvenOnclick(View view) {
         int viewId = view.getId();
         switch (viewId) {
@@ -89,7 +93,20 @@ public class RegisterActivity extends ActivityBase {
                 login_pwd2.setText("");
                 break;
             case R.id.next_btn: // 注册
-
+                pwd = login_pwd.getText().toString();
+                pwd2 = login_pwd2.getText().toString();
+                if (TextUtils.isEmpty(pwd)) {
+                    showMsg("密码输入为空");
+                    return;
+                }
+                if (!pwd.equals(pwd2)) {
+                    showMsg("密码输入不一致");
+                    return;
+                }
+                Intent intent = new Intent(this,RegisterActivity2.class);
+                intent.putExtra("pwd",pwd);
+                intent.putExtra("pwd2",pwd2);
+                startActivity(intent);
                 break;
         }
     }

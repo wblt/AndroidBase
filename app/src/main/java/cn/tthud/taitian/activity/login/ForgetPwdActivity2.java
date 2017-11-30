@@ -13,6 +13,7 @@ public class ForgetPwdActivity2 extends ActivityBase {
         super.onCreate(savedInstanceState);
         appendMainBody(this,R.layout.activity_forget_pwd2);
 
-        
+
+
     }
 }
