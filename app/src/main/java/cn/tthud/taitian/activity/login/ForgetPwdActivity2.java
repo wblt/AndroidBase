@@ -1,7 +1,6 @@
 package cn.tthud.taitian.activity.login;
 
 import android.content.Intent;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,11 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -24,11 +21,10 @@ import org.xutils.view.annotation.ViewInject;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.net.FlowAPI;
-import cn.tthud.taitian.utils.RegExpValidator;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
-public class RegisterActivity extends ActivityBase {
+public class ForgetPwdActivity2 extends ActivityBase {
 
     @ViewInject(R.id.login_pwd)
     private EditText login_pwd;
@@ -36,32 +32,33 @@ public class RegisterActivity extends ActivityBase {
     @ViewInject(R.id.login_pwd2)
     private EditText login_pwd2;
 
-    @ViewInject(R.id.lay_xieyi)
-    private LinearLayout lay_xieyi;
-
     @ViewInject(R.id.pwd_xx)
     private ImageView pwd_xx;
 
     @ViewInject(R.id.pwd_xx2)
     private ImageView pwd_xx2;
 
+    @ViewInject(R.id.commit_btn)
+    private Button commit_btn;
+
+    @ViewInject(R.id.lay_xieyi)
+    private LinearLayout lay_xieyi;
+
     @ViewInject(R.id.btn_mine)
     private Button btn_mine;
 
-    @ViewInject(R.id.next_btn)
-    private Button next_btn;
-
     boolean btn_select = true;
+    private String phone = "";
     private String pwd = "";
-    private String pwd2 = "";
+    private String codeNum = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        appendMainBody(this,R.layout.register_activity_main);
-//        appendTopBody(R.layout.activity_top_text);
-//        setTopBarTitle("注册");
-//        setTopLeftListener(this);
+        appendMainBody(this,R.layout.activity_forget_pwd2);
+
+        phone = getIntent().getStringExtra("phone");
+        codeNum = getIntent().getStringExtra("code");
 
         initView();
         initListener();
@@ -80,7 +77,7 @@ public class RegisterActivity extends ActivityBase {
         login_pwd2.addTextChangedListener(tw);
     }
 
-    @Event(value = {R.id.pwd_xx,R.id.pwd_xx2,R.id.lay_xieyi,R.id.next_btn},type = View.OnClickListener.class)
+    @Event(value = {R.id.pwd_xx,R.id.pwd_xx2,R.id.lay_xieyi,R.id.commit_btn},type = View.OnClickListener.class)
     private void onEvenOnclick(View view) {
         int viewId = view.getId();
         switch (viewId) {
@@ -92,26 +89,20 @@ public class RegisterActivity extends ActivityBase {
             case R.id.pwd_xx2:
                 login_pwd2.setText("");
                 break;
-            case R.id.next_btn: // 注册
+            case R.id.commit_btn: // 提交
                 pwd = login_pwd.getText().toString();
-                pwd2 = login_pwd2.getText().toString();
                 if (TextUtils.isEmpty(pwd)) {
                     showMsg("密码输入为空");
                     return;
                 }
-                if (!pwd.equals(pwd2)) {
+                if (!pwd.equals(login_pwd2.getText().toString())) {
                     showMsg("密码输入不一致");
                     return;
                 }
-                Intent intent = new Intent(this,RegisterActivity2.class);
-                intent.putExtra("pwd",pwd);
-                intent.putExtra("pwd2",pwd2);
-                startActivity(intent);
+                commit();
                 break;
         }
     }
-
-    
 
     // 输入框内容改变的监听器
     TextWatcher tw = new TextWatcher() {
@@ -133,15 +124,15 @@ public class RegisterActivity extends ActivityBase {
             }
             int current = getCurrentFocus().getId();
             if (content.equals("")) {
-                if (current == R.id.login_pwd) {
+                if (current == R.id.register_phone) {
                     pwd_xx.setVisibility(View.INVISIBLE);
-                } else if (current == R.id.login_pwd2) {
+                } else if (current == R.id.code) {
                     pwd_xx2.setVisibility(View.INVISIBLE);
                 }
             } else {
-                if (current == R.id.login_pwd) {
+                if (current == R.id.register_phone) {
                     pwd_xx.setVisibility(View.VISIBLE);
-                } else if (current == R.id.login_pwd2) {
+                } else if (current == R.id.code) {
                     pwd_xx2.setVisibility(View.VISIBLE);
                 }
             }
@@ -157,4 +148,29 @@ public class RegisterActivity extends ActivityBase {
             btn_mine.setSelected(false);
         }
     }
+
+    private void commit() {
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.APP_FORGET_PWD);
+        requestParams.addParameter("mobile",phone);
+        requestParams.addParameter("password",pwd);
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("注册",requestParams) {
+            @Override
+            public void onSuccess(String data) {
+                super.onSuccess(data);
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        showMsg("修改成功");
+                    }else {
+                        showMsg(info);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 }

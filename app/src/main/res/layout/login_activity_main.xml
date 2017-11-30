@@ -226,7 +226,7 @@
         android:background="@drawable/radius_layout_orange_btn" />
 
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -237,7 +237,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@color/gray_text_light"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:text="第三方登录"/>
 
         <ImageView
@@ -248,11 +248,12 @@
 
         <ImageView
             android:id="@+id/wechat_login_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:src="@mipmap/weixin" />
+            android:src="@mipmap/weixin"
+            android:scaleType="fitXY"/>
     </LinearLayout>
 
 

@@ -38,10 +38,12 @@ import cn.tthud.taitian.DemoApplication;
 import cn.tthud.taitian.MainActivity;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.login.LoginActivity;
+import cn.tthud.taitian.activity.mine.AboutActivity;
 import cn.tthud.taitian.activity.mine.BindPhoneActivity;
 import cn.tthud.taitian.activity.mine.ChangePhoneActivity;
 import cn.tthud.taitian.activity.mine.ModifyInfoActivity;
 import cn.tthud.taitian.activity.mine.MyWalletActivity;
+import cn.tthud.taitian.activity.mine.SettingActivity;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.bean.UserBean;
 import cn.tthud.taitian.net.FlowAPI;
@@ -88,7 +90,6 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
     @ViewInject(R.id.msg_layout)
     private RelativeLayout msg_layout;
 
-
     @ViewInject(R.id.lay_login)
     private LinearLayout lay_login;
 
@@ -117,9 +118,9 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
         if(view == null){
             view = super.onCreateView(inflater,container,savedInstanceState);
             appendMainBody(this,R.layout.mine_fragment);
-            appendTopBody(R.layout.activity_top_icon);
-            ((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
-            setTopBarTitle("我的");
+            //appendTopBody(R.layout.activity_top_icon);
+            //((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
+            //setTopBarTitle("我的");
             initView();
         }
         return view;
@@ -133,15 +134,17 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
 
     public void initView(){
         if(TextUtils.isEmpty(SPUtils.getString(SPUtils.UB_ID))){
-            msg_layout.setVisibility(View.GONE);
-            lay_login.setVisibility(View.VISIBLE);
+            //msg_layout.setVisibility(View.GONE);
+            //lay_login.setVisibility(View.VISIBLE);
             logout.setVisibility(View.GONE);
         }else {
-            msg_layout.setVisibility(View.VISIBLE);
-            lay_login.setVisibility(View.GONE);
+            //msg_layout.setVisibility(View.VISIBLE);
+            //lay_login.setVisibility(View.GONE);
+
             ImageLoader.loadCircle(SPUtils.getString(SPUtils.HEAD_PIC),headpic);
             username.setText(SPUtils.getString(SPUtils.REAL_NAME));
             logout.setVisibility(View.VISIBLE);
+
             if (SPUtils.getInt(SPUtils.SEX,0) == 1) {
                 img_sex.setImageResource(R.mipmap.sex_m);
             } else if (SPUtils.getInt(SPUtils.SEX,0) == 2){
@@ -153,8 +156,7 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
 
     @Event(value = {R.id.logout,R.id.lay_qianbao,R.id.lay_advatar_upload,
             R.id.lay_person_info,R.id.lay_change_phone,R.id.lay_bind_phone,
-            R.id.login_btn},type = View.OnClickListener.class)
-
+            R.id.login_btn,R.id.lay_renwu,R.id.setting_lay,R.id.about_lay},type = View.OnClickListener.class)
     private void onEvenOnclick(View view){
         int id = view.getId();
         Intent intent;
@@ -204,6 +206,17 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
                     LoginActivity.navToLogin(this.getContext());
                     return;
                 }
+                break;
+            case R.id.lay_renwu:  // 任务
+
+                break;
+            case R.id.setting_lay: // 设置
+                intent = new Intent(this.getContext(),SettingActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.about_lay:  // 关于
+                intent = new Intent(this.getContext(), AboutActivity.class);
+                startActivity(intent);
                 break;
             case R.id.logout:               // 退出登录
                 logout();
