@@ -9,7 +9,7 @@ public class MessageBean {
     private int isread;     // 是否阅读[1是，2否]
     private int readtime;   // 阅读时间
     private int istop;      // 是否置顶[1是，2否]
-    private int mc_id;      // 消息类别编号
+    private String mc_id;   // 消息类别编号(系统消息，广告通知)
     private String icon;    // 图标
     private String url;     // 链接
     private String title;   // 标题
@@ -30,7 +30,7 @@ public class MessageBean {
         return istop;
     }
 
-    public int getMc_id() {
+    public String getMc_id() {
         return mc_id;
     }
 
@@ -62,7 +62,7 @@ public class MessageBean {
         this.istop = istop;
     }
 
-    public void setMc_id(int mc_id) {
+    public void setMc_id(String mc_id) {
         this.mc_id = mc_id;
     }
 

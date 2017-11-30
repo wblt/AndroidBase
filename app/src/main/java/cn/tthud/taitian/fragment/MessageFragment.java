@@ -136,6 +136,9 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
 
                         mAdapter.addAll(beanList);
                         mAdapter.notifyDataSetChanged();
+
+                        xrvCustom.loadMoreComplete();
+
                         if(mAdapter.getData().size() == 0){
                             page_refresh.setVisibility(View.VISIBLE);
                             xrvCustom.setVisibility(View.GONE);
