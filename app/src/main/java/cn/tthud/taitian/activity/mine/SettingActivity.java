@@ -1,6 +1,7 @@
 package cn.tthud.taitian.activity.mine;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +10,11 @@ import org.xutils.view.annotation.Event;
 
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.ActivityBase;
+import cn.tthud.taitian.widget.CustomAlertDialog;
 
 public class SettingActivity extends ActivityBase {
 
+    private CustomAlertDialog customAlertDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +42,13 @@ public class SettingActivity extends ActivityBase {
 
                 break;
             case R.id.lay_remove:
+                customAlertDialog = new CustomAlertDialog(this, R.style.AlertDialog, new CustomAlertDialog.ViewClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
+                    }
+                });
+                customAlertDialog.show();
                 break;
 
         }
