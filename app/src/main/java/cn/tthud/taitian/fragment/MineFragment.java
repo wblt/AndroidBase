@@ -43,6 +43,7 @@ import cn.tthud.taitian.activity.mine.BindPhoneActivity;
 import cn.tthud.taitian.activity.mine.ChangePhoneActivity;
 import cn.tthud.taitian.activity.mine.ModifyInfoActivity;
 import cn.tthud.taitian.activity.mine.MyWalletActivity;
+import cn.tthud.taitian.activity.mine.SettingActivity;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.bean.UserBean;
 import cn.tthud.taitian.net.FlowAPI;
@@ -210,7 +211,8 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
 
                 break;
             case R.id.setting_lay: // 设置
-
+                intent = new Intent(this.getContext(),SettingActivity.class);
+                startActivity(intent);
                 break;
             case R.id.about_lay:  // 关于
                 intent = new Intent(this.getContext(), AboutActivity.class);
