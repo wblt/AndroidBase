@@ -264,11 +264,8 @@ public class LoginActivity extends ActivityBase {
 
                         SPUtils.putString(SPUtils.MOBILE,phone);
                         SPUtils.putString(SPUtils.PASSWORD,pwd);
-
-
                         // 请求个人中心
                         personCenter();
-
 //                        DemoApplication.getInstance().closeActivitys();
 //                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 //                        startActivity(intent);
