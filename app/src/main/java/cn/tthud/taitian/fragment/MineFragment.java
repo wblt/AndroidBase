@@ -117,9 +117,9 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
         if(view == null){
             view = super.onCreateView(inflater,container,savedInstanceState);
             appendMainBody(this,R.layout.mine_fragment);
-            appendTopBody(R.layout.activity_top_icon);
-            ((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
-            setTopBarTitle("我的");
+            //appendTopBody(R.layout.activity_top_icon);
+            //((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
+            //setTopBarTitle("我的");
             initView();
         }
         return view;
@@ -133,15 +133,17 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
 
     public void initView(){
         if(TextUtils.isEmpty(SPUtils.getString(SPUtils.UB_ID))){
-            msg_layout.setVisibility(View.GONE);
-            lay_login.setVisibility(View.VISIBLE);
+            //msg_layout.setVisibility(View.GONE);
+            //lay_login.setVisibility(View.VISIBLE);
             logout.setVisibility(View.GONE);
         }else {
-            msg_layout.setVisibility(View.VISIBLE);
-            lay_login.setVisibility(View.GONE);
+            //msg_layout.setVisibility(View.VISIBLE);
+            //lay_login.setVisibility(View.GONE);
+
             ImageLoader.loadCircle(SPUtils.getString(SPUtils.HEAD_PIC),headpic);
             username.setText(SPUtils.getString(SPUtils.REAL_NAME));
             logout.setVisibility(View.VISIBLE);
+
             if (SPUtils.getInt(SPUtils.SEX,0) == 1) {
                 img_sex.setImageResource(R.mipmap.sex_m);
             } else if (SPUtils.getInt(SPUtils.SEX,0) == 2){
