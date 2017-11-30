@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="@dimen/dialogWidth"
-    android:layout_height="@dimen/dialogHeight"
-    android:background="@color/white">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_message"
+            android:background="@color/white"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="90dp"
@@ -20,6 +21,7 @@
             android:textSize="17sp"/>
 
         <TextView
+            android:id="@+id/tv_contain"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/colorSendName8"
@@ -27,7 +29,26 @@
             android:text="确定"
             android:gravity="center"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:background="@color/white"/>
 
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/shanchu"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="10dp" />
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -27,7 +27,7 @@ public class SettingActivity extends ActivityBase {
 
     @Event(value = {R.id.edit_phone,R.id.edit_pwd,R.id.lay_bind,R.id.lay_remove},type = View.OnClickListener.class)
     private void onEvenOnclick(View view) {
-        int id = view.getId();
+        final int id = view.getId();
         Intent intent;
         switch (id) {
             case R.id.edit_phone:
@@ -42,10 +42,17 @@ public class SettingActivity extends ActivityBase {
 
                 break;
             case R.id.lay_remove:
-                customAlertDialog = new CustomAlertDialog(this, R.style.AlertDialog, new CustomAlertDialog.ViewClickListener() {
+                customAlertDialog = new CustomAlertDialog(this, R.style.dialog,"你确定要清除缓存？", new CustomAlertDialog.ViewClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        switch (view.getId()) {
+                            case R.id.iv_close:
+                                customAlertDialog.dismiss();
+                                break;
+                            case R.id.tv_contain:
+                                customAlertDialog.dismiss();
+                                break;
+                        }
                     }
                 });
                 customAlertDialog.show();
