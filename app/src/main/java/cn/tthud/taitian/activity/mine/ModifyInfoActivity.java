@@ -196,8 +196,8 @@ public class ModifyInfoActivity extends ActivityBase {
 
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         showMsg(info);
-                        SPUtils.setUserBean(ub);
-                        finish();
+//                        SPUtils.setUserBean(ub);
+//                        finish();
                     }else {
                         showMsg(info);
                     }

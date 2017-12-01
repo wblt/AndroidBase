@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import cn.tthud.taitian.adapter.MessageAdapter;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.bean.MessageBean;
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.utils.CommonUtils;
 import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
@@ -100,6 +102,12 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
     }
 
     private void loadNewData(boolean isRefresh){
+        if (!CommonUtils.checkLogin()) {
+            return;
+        }
+        if (TextUtils.isEmpty(SPUtils.getString(SPUtils.UB_ID))) {
+            return;
+        }
         if (isRefresh){
             mAdapter.clear();
             mAdapter.notifyDataSetChanged();

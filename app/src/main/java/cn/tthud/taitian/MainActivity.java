@@ -1,5 +1,6 @@
 package cn.tthud.taitian;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import cn.tthud.taitian.activity.login.LoginActivity;
+import cn.tthud.taitian.activity.mine.BindPhoneActivity;
 import cn.tthud.taitian.base.BaseActivity;
 import cn.tthud.taitian.fragment.ContactListFragment;
 import cn.tthud.taitian.fragment.DiscoverFragment;
@@ -15,6 +17,7 @@ import cn.tthud.taitian.fragment.HomeFragment;
 import cn.tthud.taitian.fragment.MessageFragment;
 import cn.tthud.taitian.fragment.MineFragment;
 import cn.tthud.taitian.utils.CommonUtils;
+import cn.tthud.taitian.utils.SPUtils;
 
 public class MainActivity extends BaseActivity {
     // textview for unread message count
@@ -85,17 +88,24 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.btn_conversation:
                 if (CommonUtils.checkLogin()) {
-                    index = 2;
+                    if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
+                        index = 2;
+                    } else {
+                        // 绑定手机号码
+                        startActivity(new Intent(this, BindPhoneActivity.class));
+                    }
                 } else {
                     LoginActivity.navToLogin(this);
                     return;
                 }
                 break;
-//            case R.id.btn_address_list:
-//                index = 3;
-//                break;
             case R.id.btn_mine:
-                index = 3;
+                if (CommonUtils.checkLogin()) {
+                    index = 3;
+                } else {
+                    LoginActivity.navToLogin(this);
+                    return;
+                }
                 break;
         }
         if (currentTabIndex != index) {

@@ -192,7 +192,6 @@ public class LoginActivity extends ActivityBase {
 
         @Override
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-//            result.setText("错误" + t.getMessage());
             Log.i("错误" + t.getMessage());
         }
 
@@ -204,7 +203,6 @@ public class LoginActivity extends ActivityBase {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (requestCode == REGISTER_VIEW_CODE){
             phone = data.getStringExtra("phone");
             pwd = data.getStringExtra("pwd");
@@ -222,6 +220,8 @@ public class LoginActivity extends ActivityBase {
         UMShareAPI.get(this).release();
     }
 
+
+    // 账号登录
     private void login() {
         phone = login_phone.getText().toString();
         pwd = login_pwd.getText().toString();
@@ -237,65 +237,11 @@ public class LoginActivity extends ActivityBase {
             showMsg("请输入密码");
             return;
         }
-
         showLoading();
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_LOGIN);
         requestParams.addParameter("username", phone);
         requestParams.addParameter("password", pwd);
         MXUtils.httpPost(requestParams, new CommonCallbackImp("登录",requestParams) {
-            @Override
-            public void onSuccess(String data) {
-                super.onSuccess(data);
-
-                try {
-                    JSONObject jsonObject = new JSONObject(data);
-                    String status = jsonObject.getString("status");
-                    String info = jsonObject.getString("info");
-
-                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
-                        showMsg("登录成功");
-                        JSONObject jsonObject1 = new JSONObject(jsonObject.getString("data"));
-                        String nickname = jsonObject1.getString("nickname");
-                        String ub_id = jsonObject1.getString("ub_id");
-                        UserBean ub = new UserBean();
-                        ub.setUb_id(ub_id);
-                        ub.setNickname(nickname);
-                        SPUtils.setUserBean(ub);
-
-                        SPUtils.putString(SPUtils.MOBILE,phone);
-                        SPUtils.putString(SPUtils.PASSWORD,pwd);
-                        // 请求个人中心
-                        personCenter();
-//                        DemoApplication.getInstance().closeActivitys();
-//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                        startActivity(intent);
-//                        finish();
-                    }else {
-                        showMsg(info);
-                    }
-                }catch (JSONException e){
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    // 个人中心
-    private void personCenter() {
-        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_CENTER);
-        if (TextUtils.isEmpty(SPUtils.getString(SPUtils.UB_ID))){
-            requestParams.addParameter("islogin", "2");
-        }else{
-            requestParams.addParameter("islogin", "1"); // 已登录
-        }
-        requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
-        requestParams.addParameter("act_url","");
-        requestParams.addParameter("openid", SPUtils.getString(SPUtils.WX_OPEN_ID));
-        requestParams.addParameter("headimgurl", SPUtils.getString(SPUtils.HEAD_PIC));
-        requestParams.addParameter("sex", String.valueOf(SPUtils.getInt(SPUtils.SEX, 0)));
-        requestParams.addParameter("nickname", SPUtils.getString(SPUtils.NICK_NAME));
-
-        MXUtils.httpPost(requestParams, new CommonCallbackImp("个人中心",requestParams) {
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
@@ -305,10 +251,19 @@ public class LoginActivity extends ActivityBase {
                     String status = jsonObject.getString("status");
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
-                        String userData = jsonObject.getString("data");
-                        UserBean ub = GsonUtils.jsonToBean(userData, UserBean.class);
-                        SPUtils.setUserBean(ub);
-                        // 进入主页
+                        showMsg("登录成功");
+                        JSONObject jsonObject1 = new JSONObject(jsonObject.getString("data"));
+                        String nickname = jsonObject1.getString("nickname");
+                        String ub_id = jsonObject1.getString("ub_id");
+
+                        // 缓存本地信息
+                        SPUtils.putString(SPUtils.UB_ID,ub_id);
+                        SPUtils.putString(SPUtils.NICK_NAME,nickname);
+                        SPUtils.putString(SPUtils.MOBILE,phone);
+                        SPUtils.putString(SPUtils.PASSWORD,pwd);
+                        SPUtils.putString(SPUtils.IS_LOGIN,"YES");
+
+                        // 进入APP
                         DemoApplication.getInstance().closeActivitys();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
@@ -323,13 +278,16 @@ public class LoginActivity extends ActivityBase {
         });
     }
 
+
+
+
+    // 微信登录
     private void wxlogin() {
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_WX_LOGIN);
         requestParams.addParameter("wx_openid", SPUtils.getString(SPUtils.WX_OPEN_ID));
         requestParams.addParameter("headpic", SPUtils.getString(SPUtils.HEAD_PIC));
         requestParams.addParameter("sex", SPUtils.getInt(SPUtils.SEX, 0));
         requestParams.addParameter("nickname", SPUtils.getString(SPUtils.NICK_NAME));
-
         MXUtils.httpPost(requestParams, new CommonCallbackImp("个人中心——微信登录",requestParams) {
             @Override
             public void onSuccess(String data) {
@@ -342,29 +300,27 @@ public class LoginActivity extends ActivityBase {
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         JSONObject jsonObject1 = new JSONObject(jsonObject.getString("data"));
 
-                        boolean isvst = jsonObject1.getBoolean("isvst");
-
                         String ub_id = jsonObject1.getString("ub_id");
                         String nickname = jsonObject1.getString("nickname");
                         String headpic = jsonObject1.getString("headpic");
                         int sex = jsonObject1.getInt("sex");
                         String wx_openid = jsonObject1.getString("wx_openid");
+                        boolean isvst = jsonObject1.getBoolean("isvst"); // 是否是游客
 
+                        // 缓存本地信息
                         SPUtils.putString(SPUtils.UB_ID, ub_id);
                         SPUtils.putString(SPUtils.NICK_NAME, nickname);
                         SPUtils.putString(SPUtils.HEAD_PIC, headpic);
                         SPUtils.putInt(SPUtils.SEX, sex);
                         SPUtils.putString(SPUtils.WX_OPEN_ID, wx_openid);
+                        SPUtils.putBoolean(SPUtils.ISVST,isvst);
+                        SPUtils.putString(SPUtils.IS_LOGIN,"YES");
 
-                        if (!isvst){ // 用户
-                            String ua_id = jsonObject1.getString("ua_id");
-                            String realname = jsonObject1.getString("realname");
-
-                            SPUtils.putString(SPUtils.UA_ID, ua_id);
-                            SPUtils.putString(SPUtils.REAL_NAME, realname);
-                        }
-
-                        personCenter();
+                        // 进入主页
+                        DemoApplication.getInstance().closeActivitys();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }else {
                         showMsg(info);
                     }

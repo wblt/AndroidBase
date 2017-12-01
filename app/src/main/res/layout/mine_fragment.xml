@@ -16,105 +16,6 @@
             android:background="@color/white">
 
             <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/lay_login"
-                android:layout_width="match_parent"
-                android:layout_height="96dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:layout_marginLeft="15dp"
-                    android:src="@mipmap/head_default" />
-
-                <TextView
-                    android:id="@+id/login_btn"
-                    android:layout_width="120dp"
-                    android:layout_height="45dp"
-                    android:background="@drawable/radius_layout_blue_btn"
-                    android:gravity="center"
-                    android:text="注册/登录"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/msg_layout"
-                android:layout_width="fill_parent"
-                android:visibility="gone"
-                android:layout_height="74dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:background="@color/main_app_color" >
-                <ImageView
-                    android:id="@+id/headpic"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentLeft="true"
-                    android:src="@mipmap/head_default" />
-
-                <ImageView
-                    android:id="@+id/img_sex"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/sex_w"
-                    android:layout_toRightOf="@+id/headpic"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginLeft="-10dp"/>
-
-                <TextView
-                    android:id="@+id/username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:padding="5dp"
-                    android:layout_toRightOf="@id/headpic"
-                    android:includeFontPadding="false"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/white"
-                    android:text="聊天的人"
-                    android:textSize="14sp" />
-                <TextView
-                    android:id="@+id/yingxiangli"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/username"
-                    android:layout_toRightOf="@id/headpic"
-                    android:includeFontPadding="false"
-                    android:layout_alignBottom="@id/headpic"
-                    android:layout_centerVertical="true"
-                    android:padding="5dp"
-                    android:visibility="gone"
-                    android:text="影响力：34"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/lay"
-                    android:includeFontPadding="false"
-                    android:layout_centerVertical="true"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="编辑资料"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-                <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/lay"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentRight="true"
-                    android:src="@mipmap/arrow_right"/>
-            </RelativeLayout>
-
-            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -127,10 +28,30 @@
                     android:scaleType="fitXY"/>
 
                 <ImageView
+                    android:id="@+id/headpic"
                     android:layout_marginTop="-30dp"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
                     android:src="@mipmap/head_default" />
+
+                <ImageView
+                    android:id="@+id/img_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/sex_w" />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_toRightOf="@id/headpic"
+                    android:includeFontPadding="false"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/gray_text_light"
+                    android:text="xxx"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 

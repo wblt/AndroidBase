@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -75,23 +76,12 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
     private static int CROP_REQUEST_CODE = 3;
 
     private View view;
-    @ViewInject(R.id.login_btn)
-    private TextView login_btn;
 
     @ViewInject(R.id.username)
     private TextView username;
 
-    @ViewInject(R.id.logout)
-    private TextView logout;
-
     @ViewInject(R.id.headpic)
     private ImageView headpic;
-
-    @ViewInject(R.id.msg_layout)
-    private RelativeLayout msg_layout;
-
-    @ViewInject(R.id.lay_login)
-    private LinearLayout lay_login;
 
     @ViewInject(R.id.img_sex)
     private ImageView img_sex;
@@ -110,7 +100,6 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -121,7 +110,8 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
             //appendTopBody(R.layout.activity_top_icon);
             //((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
             //setTopBarTitle("我的");
-            initView();
+            updateView();
+            personCenter();
         }
         return view;
     }
@@ -129,95 +119,79 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
     @Override
     public void onResume() {
         super.onResume();
-        initView();
+        updateView();
     }
 
-    public void initView(){
-        if(TextUtils.isEmpty(SPUtils.getString(SPUtils.UB_ID))){
-            //msg_layout.setVisibility(View.GONE);
-            //lay_login.setVisibility(View.VISIBLE);
-            //logout.setVisibility(View.GONE);
-        }else {
-            //msg_layout.setVisibility(View.VISIBLE);
-            //lay_login.setVisibility(View.GONE);
-
-            ImageLoader.loadCircle(SPUtils.getString(SPUtils.HEAD_PIC),headpic);
-            username.setText(SPUtils.getString(SPUtils.REAL_NAME));
-            //logout.setVisibility(View.VISIBLE);
-            if (SPUtils.getInt(SPUtils.SEX,0) == 1) {
-                img_sex.setImageResource(R.mipmap.sex_m);
-            } else if (SPUtils.getInt(SPUtils.SEX,0) == 2){
-                img_sex.setImageResource(R.mipmap.sex_w);
-            }
+    public void updateView(){
+        ImageLoader.loadCircle(SPUtils.getString(SPUtils.HEAD_PIC),headpic);
+        username.setText(SPUtils.getString(SPUtils.NICK_NAME));
+        if (SPUtils.getInt(SPUtils.SEX,0) == 1) {
+            img_sex.setImageResource(R.mipmap.sex_m);
+        } else if (SPUtils.getInt(SPUtils.SEX,0) == 2){
+            img_sex.setImageResource(R.mipmap.sex_w);
         }
     }
 
-    @Event(value = {R.id.logout,R.id.lay_qianbao,R.id.lay_advatar_upload,
+    @Event(value = {R.id.lay_qianbao,R.id.lay_advatar_upload,
             R.id.lay_person_info,R.id.lay_change_phone,R.id.lay_bind_phone,
-            R.id.login_btn,R.id.lay_renwu,R.id.setting_lay,R.id.about_lay},type = View.OnClickListener.class)
+            R.id.setting_lay,R.id.about_lay},type = View.OnClickListener.class)
     private void onEvenOnclick(View view){
         int id = view.getId();
         Intent intent;
         switch (id) {
-            case R.id.login_btn:            // 登录
-                LoginActivity.navToLogin(this.getContext());
-                break;
             case R.id.lay_qianbao:          // 我的钱包
-                if (CommonUtils.checkLogin()) {
+                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
                     startActivity(new Intent(this.getContext(), MyWalletActivity.class));
                 } else {
-                    LoginActivity.navToLogin(this.getContext());
+                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
                     return;
                 }
                 break;
             case R.id.lay_advatar_upload:   // 头像上传
-                if (CommonUtils.checkLogin()) {
+                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
                     ActionSheet.showSheet(getActivity(),
                             MineFragment.this, MineFragment.this, "1");
                 } else {
-                    LoginActivity.navToLogin(this.getContext());
+                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
                     return;
                 }
                 break;
             case R.id.lay_person_info:      // 完善个人信息
-                if (CommonUtils.checkLogin()) {
+                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
                     startActivity(new Intent(this.getContext(), ModifyInfoActivity.class));
                 } else {
-                    LoginActivity.navToLogin(this.getContext());
+                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
                     return;
                 }
-
                 break;
             case R.id.lay_change_phone:     // 修改手机号码
-                if (CommonUtils.checkLogin()) {
+                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
                     startActivity(new Intent(this.getContext(), ChangePhoneActivity.class));
                 } else {
-                    LoginActivity.navToLogin(this.getContext());
+                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
                     return;
                 }
-
                 break;
             case R.id.lay_bind_phone:       // 绑定手机号码
-                if (CommonUtils.checkLogin()) {
+                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
                     startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
-                } else {
-                    LoginActivity.navToLogin(this.getContext());
-                    return;
                 }
                 break;
             case R.id.lay_renwu:  // 任务
 
                 break;
             case R.id.setting_lay: // 设置
-                intent = new Intent(this.getContext(),SettingActivity.class);
-                startActivity(intent);
+                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
+                    intent = new Intent(this.getContext(),SettingActivity.class);
+                    startActivity(intent);
+                } else {
+                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
+                    return;
+                }
                 break;
             case R.id.about_lay:  // 关于
                 intent = new Intent(this.getContext(), AboutActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.logout:               // 退出登录
-                logout();
                 break;
         }
     }
@@ -298,11 +272,7 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
         }
     }
 
-    //登出
-    private void logout(){
-        SPUtils.clearUser();
-        LoginActivity.navToLogin(MineFragment.this.getContext());
-    }
+
 
     @Override
     public void onCancel(DialogInterface dialogInterface) {
@@ -364,15 +334,21 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
 
     // 个人中心
     private void personCenter() {
+        if (!CommonUtils.checkLogin()) {
+            return;
+        }
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_CENTER);
-        requestParams.addParameter("islogin", "1"); // 已登录
+        if (TextUtils.isEmpty(SPUtils.getString(SPUtils.UB_ID))){
+            requestParams.addParameter("islogin", "2");
+        }else{
+            requestParams.addParameter("islogin", "1"); // 已登录
+        }
         requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
-        requestParams.addParameter("act_url", "");
-        requestParams.addParameter("openid", "");
+        requestParams.addParameter("act_url","");
+        requestParams.addParameter("openid", SPUtils.getString(SPUtils.WX_OPEN_ID));
         requestParams.addParameter("headimgurl", SPUtils.getString(SPUtils.HEAD_PIC));
         requestParams.addParameter("sex", String.valueOf(SPUtils.getInt(SPUtils.SEX, 0)));
         requestParams.addParameter("nickname", SPUtils.getString(SPUtils.NICK_NAME));
-
         MXUtils.httpPost(requestParams, new CommonCallbackImp("个人中心",requestParams) {
             @Override
             public void onSuccess(String data) {
@@ -383,8 +359,55 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         String userData = jsonObject.getString("data");
-                        UserBean ub = GsonUtils.jsonToBean(userData, UserBean.class);
-                        SPUtils.setUserBean(ub);
+                        Log.i("AAAAAAAAAAAAAAAAAAAAAAAAAAa"+userData);
+                        JSONObject jsonObject1 = new JSONObject(userData);
+                        String ub_id = jsonObject1.getString("ub_id");
+                        String nickname = jsonObject1.getString("nickname");
+                        String headpic = jsonObject1.getString("headpic");
+                        int sex = jsonObject1.getInt("sex");
+                        boolean isvst = jsonObject1.getBoolean("isvst");
+                        boolean isbindwx = jsonObject1.getBoolean("isbindwx");
+                        String h5_url = jsonObject1.getString("h5_url");
+
+                        if (!isvst) {
+                            // 用户
+                            String ua_id = jsonObject1.getString("ua_id");
+                            String realname = jsonObject1.getString("realname");
+                            String idcard = jsonObject1.getString("idcard");
+                            String email = jsonObject1.getString("email");
+                            String stylesig = jsonObject1.getString("stylesig");
+                            String address = jsonObject1.getString("address");
+                            int totaljifen = jsonObject1.getInt("totaljifen");
+
+                            SPUtils.putString(SPUtils.UA_ID,ua_id);
+                            SPUtils.putString(SPUtils.REAL_NAME,realname);
+                            SPUtils.putString(SPUtils.ID_CARD,idcard);
+                            SPUtils.putString(SPUtils.STYLESIG,stylesig);
+                            SPUtils.putString(SPUtils.EMAIL,email);
+                            SPUtils.putString(SPUtils.ADDRESS,address);
+                            SPUtils.putInt(SPUtils.TOTALJIFEN,totaljifen);
+                        } else {
+                            String wx_openid = jsonObject1.getString("wx_openid");
+                            SPUtils.putString(SPUtils.WX_OPEN_ID,wx_openid);
+                        }
+                        // 缓存本地信息
+                        SPUtils.putString(SPUtils.UB_ID,ub_id);
+                        SPUtils.putString(SPUtils.NICK_NAME,nickname);
+                        SPUtils.putString(SPUtils.HEAD_PIC,headpic);
+                        SPUtils.putInt(SPUtils.SEX,sex);
+
+                        SPUtils.putBoolean(SPUtils.ISVST,isvst);
+                        SPUtils.putBoolean(SPUtils.IS_BINDWX,isbindwx);
+                        SPUtils.putString(SPUtils.H5_URL,h5_url);
+
+                        // 更新视图
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.i("BBBBBBBBBBBBBB"+SPUtils.getString(SPUtils.WX_OPEN_ID));
+                                updateView();
+                            }
+                        }, 500);
                     }else {
                         showMsg(info);
                     }

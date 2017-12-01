@@ -19,8 +19,9 @@ public class SPUtils {
     private static final String CONFIG = "config";
     private static final String CONFIG_APP = "config_app";
 
-    public static final String MOBILE = "mobile";
-    public static final String PASSWORD = "password";
+    // 判断是否登录
+    public static final String IS_LOGIN = "is_login";
+
     public static final String UB_ID = "ub_id";                 // 用户id
     public static final String NICK_NAME = "nickname";          // 昵称
     public static final String HEAD_PIC = "headpic";            // 头像地址
@@ -29,18 +30,22 @@ public class SPUtils {
     public static final String REAL_NAME = "realname";          // 真实姓名
     public static final String ID_CARD = "idcard";              // 身份证号码
     public static final String EMAIL = "email";                 // 邮箱
+    public static final String MOBILE = "mobile";               // 电话
+    public static final String PASSWORD = "password";           // 密码
     public static final String STYLESIG = "stylesig";           // 个性签名
     public static final String ADDRESS = "address";             // 地址
     public static final String TOTALJIFEN = "totaljifen";       // 积分
-
     public static final String WX_OPEN_ID = "wechatOpenID";     // 微信openid
-
+    public static final String ISVST = "isvst";                 // 游客or用户
+    public static final String IS_BINDWX  = "isbindwx";         // 是否绑定微信
+    public static final String H5_URL = "h5_url";               // h5地址
 
     /**
      * 清空SharedPreferences实例对象
      *
      */
     public static void clearUser() {
+        SPUtils.putString(IS_LOGIN,"");
         SPUtils.putString(UB_ID, "");
         SPUtils.putString(NICK_NAME, "");
         SPUtils.putString(HEAD_PIC, "");
@@ -54,6 +59,9 @@ public class SPUtils {
         SPUtils.putInt(TOTALJIFEN, 0);
         SPUtils.putString(MOBILE, "");
         SPUtils.putString(PASSWORD, "");
+        SPUtils.putString(ISVST,"");
+        SPUtils.putBoolean(IS_BINDWX,false);
+        SPUtils.putBoolean(H5_URL,false);
     }
 
 
@@ -239,21 +247,21 @@ public class SPUtils {
     /**
      * 保存对应key数据
      */
-    public static void setUserBean(UserBean userBean) {
-        SPUtils.putString(UB_ID, userBean.getUb_id());
-        SPUtils.putString(NICK_NAME, userBean.getNickname());
-        SPUtils.putString(HEAD_PIC, userBean.getHeadpic());
-        SPUtils.putInt(SEX, userBean.getSex());
-        SPUtils.putString(UA_ID, userBean.getUa_id());
-        SPUtils.putString(REAL_NAME, userBean.getRealname());
-        SPUtils.putString(ID_CARD, userBean.getIdcard());
-        SPUtils.putString(EMAIL, userBean.getEmail());
-        SPUtils.putString(STYLESIG, userBean.getStylesig());
-        SPUtils.putString(ADDRESS, userBean.getAddress());
-        SPUtils.putInt(TOTALJIFEN, userBean.getTotaljifen());
-        SPUtils.putString(MOBILE, userBean.getMobile());
-        SPUtils.putString(PASSWORD, userBean.getPassword());
-    }
+//    public static void setUserBean(UserBean userBean) {
+//        SPUtils.putString(UB_ID, userBean.getUb_id());
+//        SPUtils.putString(NICK_NAME, userBean.getNickname());
+//        SPUtils.putString(HEAD_PIC, userBean.getHeadpic());
+//        SPUtils.putInt(SEX, userBean.getSex());
+//        SPUtils.putString(UA_ID, userBean.getUa_id());
+//        SPUtils.putString(REAL_NAME, userBean.getRealname());
+//        SPUtils.putString(ID_CARD, userBean.getIdcard());
+//        SPUtils.putString(EMAIL, userBean.getEmail());
+//        SPUtils.putString(STYLESIG, userBean.getStylesig());
+//        SPUtils.putString(ADDRESS, userBean.getAddress());
+//        SPUtils.putInt(TOTALJIFEN, userBean.getTotaljifen());
+//        SPUtils.putString(MOBILE, userBean.getMobile());
+//        SPUtils.putString(PASSWORD, userBean.getPassword());
+//    }
 
     /**
      * 设置版本数据
@@ -269,7 +277,6 @@ public class SPUtils {
         SPUtils.putString("vState",userBean.getvState());
         SPUtils.putString("vTime",userBean.getvTime());
         SPUtils.putString("vType",userBean.getvType());
-
         SPUtils.putString("vVersionCode",userBean.getvVersionCode());
     }
 

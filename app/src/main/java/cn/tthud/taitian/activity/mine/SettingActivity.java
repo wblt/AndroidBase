@@ -9,7 +9,10 @@ import android.view.View;
 import org.xutils.view.annotation.Event;
 
 import cn.tthud.taitian.R;
+import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.base.ActivityBase;
+import cn.tthud.taitian.fragment.MineFragment;
+import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.widget.CustomAlertDialog;
 
 public class SettingActivity extends ActivityBase {
@@ -22,10 +25,9 @@ public class SettingActivity extends ActivityBase {
         appendTopBody(R.layout.activity_top_text);
         setTopBarTitle("设置");
         setTopLeftDefultListener();
-
     }
 
-    @Event(value = {R.id.edit_phone,R.id.edit_pwd,R.id.lay_bind,R.id.lay_remove},type = View.OnClickListener.class)
+    @Event(value = {R.id.logout,R.id.edit_phone,R.id.edit_pwd,R.id.lay_bind,R.id.lay_remove},type = View.OnClickListener.class)
     private void onEvenOnclick(View view) {
         final int id = view.getId();
         Intent intent;
@@ -57,7 +59,15 @@ public class SettingActivity extends ActivityBase {
                 });
                 customAlertDialog.show();
                 break;
-
+            case R.id.logout:
+                logout();
+                break;
         }
+    }
+
+    //登出
+    private void logout(){
+        SPUtils.clearUser();
+        LoginActivity.navToLogin(SettingActivity.this);
     }
 }
