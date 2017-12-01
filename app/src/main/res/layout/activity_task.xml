@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/content_bg">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/juxing"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/headpic"
+                android:layout_marginTop="-30dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@mipmap/head_default" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_toRightOf="@id/headpic"
+                android:includeFontPadding="false"
+                android:layout_centerVertical="true"
+                android:textColor="@color/gray_text_light"
+                android:text="大兵哥"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:src="@mipmap/return_white"
+            android:id="@+id/top_left"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:background="@null">
+        </ImageButton>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="10dp"
+            android:background="@color/line"  />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/setting_lay"
+            android:layout_width="fill_parent"
+            android:layout_height="55dp"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/white" >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentLeft="true"
+                android:src="@mipmap/setting" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:includeFontPadding="false"
+                android:text="我的任务"
+                android:textColor="@color/gray_black_text"
+                android:textSize="14sp" />
+
+            <TextView
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:includeFontPadding="false"
+                android:text="(共3个)"
+                android:textColor="@color/colorSendName6"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        style="@style/DividerStyle"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <com.example.xrecyclerview.XRecyclerView
+            android:id="@+id/xrv_custom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarSize="4dp"
+            android:visibility="gone"
+            android:scrollbarThumbVertical="@color/grey_500"
+            android:scrollbars="vertical" />
+
+        <!--加载失败-->
+        <LinearLayout
+            android:id="@+id/page_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="暂无数据"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

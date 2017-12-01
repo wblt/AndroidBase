@@ -300,4 +300,5 @@
     <color name="colorSendName6">#FFAE1F</color>
     <color name="colorSendName7">#FF437D</color>
     <color name="colorSendName8">#E87727</color>
+    <color name="rp_divider_color">#c7c7c7</color>
 </resources>

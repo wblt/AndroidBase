@@ -89,4 +89,8 @@ public class FlowAPI {
 
     // 忘记密码
     public static String APP_FORGET_PWD = SERVER_IP + "/api.php/appForget";
+
+    // 任务
+    public static String APP_TASK = SERVER_IP + "/api.php/appTask";
+
 }

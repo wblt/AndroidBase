@@ -68,6 +68,12 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <style name="DividerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/rp_divider_color</item>
+    </style>
+
     <declare-styleable name="BaseBanner">
         <!-- scale of Banner height and width,height/screenWidth.(0-1)
             scale is 0.5 default for LoopViewPager -->

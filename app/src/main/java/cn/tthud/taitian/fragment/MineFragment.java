@@ -45,6 +45,7 @@ import cn.tthud.taitian.activity.mine.ChangePhoneActivity;
 import cn.tthud.taitian.activity.mine.ModifyInfoActivity;
 import cn.tthud.taitian.activity.mine.MyWalletActivity;
 import cn.tthud.taitian.activity.mine.SettingActivity;
+import cn.tthud.taitian.activity.mine.TaskActivity;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.bean.UserBean;
 import cn.tthud.taitian.net.FlowAPI;
@@ -132,7 +133,7 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
         }
     }
 
-    @Event(value = {R.id.lay_qianbao,R.id.lay_advatar_upload,
+    @Event(value = {R.id.lay_renwu,R.id.lay_qianbao,R.id.lay_advatar_upload,
             R.id.lay_person_info,R.id.lay_change_phone,R.id.lay_bind_phone,
             R.id.setting_lay,R.id.about_lay},type = View.OnClickListener.class)
     private void onEvenOnclick(View view){
@@ -178,7 +179,8 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
                 }
                 break;
             case R.id.lay_renwu:  // 任务
-
+                intent = new Intent(this.getContext(), TaskActivity.class);
+                startActivity(intent);
                 break;
             case R.id.setting_lay: // 设置
                 if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
