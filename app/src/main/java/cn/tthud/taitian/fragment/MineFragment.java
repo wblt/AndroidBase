@@ -136,21 +136,19 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
         if(TextUtils.isEmpty(SPUtils.getString(SPUtils.UB_ID))){
             //msg_layout.setVisibility(View.GONE);
             //lay_login.setVisibility(View.VISIBLE);
-            logout.setVisibility(View.GONE);
+            //logout.setVisibility(View.GONE);
         }else {
             //msg_layout.setVisibility(View.VISIBLE);
             //lay_login.setVisibility(View.GONE);
 
             ImageLoader.loadCircle(SPUtils.getString(SPUtils.HEAD_PIC),headpic);
             username.setText(SPUtils.getString(SPUtils.REAL_NAME));
-            logout.setVisibility(View.VISIBLE);
-
+            //logout.setVisibility(View.VISIBLE);
             if (SPUtils.getInt(SPUtils.SEX,0) == 1) {
                 img_sex.setImageResource(R.mipmap.sex_m);
             } else if (SPUtils.getInt(SPUtils.SEX,0) == 2){
                 img_sex.setImageResource(R.mipmap.sex_w);
             }
-
         }
     }
 

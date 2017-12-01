@@ -47,7 +47,7 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener {
         tv_message = findViewById(R.id.tv_message);
         iv_close = findViewById(R.id.iv_close);
         tv_contain = findViewById(R.id.tv_contain);
-        tv_message.setOnClickListener(this);
+        iv_close.setOnClickListener(this);
         tv_contain.setOnClickListener(this);
         tv_message.setText(message);
     }
