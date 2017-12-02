@@ -93,4 +93,9 @@ public class FlowAPI {
     // 任务
     public static String APP_TASK = SERVER_IP + "/appTask";
 
+    // 绑定微信
+    public static String APP_BIND_WX = SERVER_IP + "/appBindWx";
+
+
+
 }

@@ -209,7 +209,6 @@ public class LoginActivity extends ActivityBase {
             login_phone.setText(phone);
             login_pwd.setText(pwd);
         }
-
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
