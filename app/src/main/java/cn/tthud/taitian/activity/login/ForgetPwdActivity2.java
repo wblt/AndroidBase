@@ -77,7 +77,7 @@ public class ForgetPwdActivity2 extends ActivityBase {
         login_pwd2.addTextChangedListener(tw);
     }
 
-    @Event(value = {R.id.pwd_xx,R.id.pwd_xx2,R.id.lay_xieyi,R.id.commit_btn},type = View.OnClickListener.class)
+    @Event(value = {R.id.top_left,R.id.pwd_xx,R.id.pwd_xx2,R.id.lay_xieyi,R.id.commit_btn},type = View.OnClickListener.class)
     private void onEvenOnclick(View view) {
         int viewId = view.getId();
         switch (viewId) {
@@ -100,6 +100,9 @@ public class ForgetPwdActivity2 extends ActivityBase {
                     return;
                 }
                 commit();
+                break;
+            case R.id.top_left:
+                finish();
                 break;
         }
     }

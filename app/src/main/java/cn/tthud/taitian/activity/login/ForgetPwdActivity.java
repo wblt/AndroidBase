@@ -28,6 +28,7 @@ import cn.tthud.taitian.xutils.MXUtils;
 
 public class ForgetPwdActivity extends ActivityBase {
 
+
     @ViewInject(R.id.forget_phone)
     private EditText forget_phone;
 
@@ -78,7 +79,7 @@ public class ForgetPwdActivity extends ActivityBase {
         myCount = new MyCount(60000, 1000);
     }
 
-    @Event(value = {R.id.forget_send_code,R.id.username_xx,R.id.pwd_xx,R.id.login_btn,R.id.contain_btn},type = View.OnClickListener.class)
+    @Event(value = {R.id.top_left,R.id.forget_send_code,R.id.username_xx,R.id.pwd_xx,R.id.login_btn,R.id.contain_btn},type = View.OnClickListener.class)
     private void onEvenOnclick(View view) {
         int viewId = view.getId();
         switch (viewId) {
@@ -116,6 +117,9 @@ public class ForgetPwdActivity extends ActivityBase {
                 intent.putExtra("phone",phone);
                 intent.putExtra("code",codeNum);
                 startActivity(intent);
+                break;
+            case R.id.top_left:
+                finish();
                 break;
 
         }
