@@ -60,7 +60,6 @@ public class SettingActivity extends ActivityBase {
             bingding_status.setText("未绑定");
         }
 
-
     }
 
     @Event(value = {R.id.logout,R.id.edit_phone,R.id.edit_pwd,R.id.lay_bind,R.id.lay_remove},type = View.OnClickListener.class)
@@ -195,7 +194,7 @@ public class SettingActivity extends ActivityBase {
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         String result = jsonObject.getString("data");
-
+                        showMsg("绑定成功");
                         Log.i("ddd");
                     }else {
                         showMsg(info);

@@ -93,7 +93,7 @@ public class ForgetPwdActivity extends ActivityBase {
                 break;
             case R.id.login_btn:
                 // 前往登录页面
-
+                finish();
                 break;
             case R.id.contain_btn:
                 if (TextUtils.isEmpty(phone)){

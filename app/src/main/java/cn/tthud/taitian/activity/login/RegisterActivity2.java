@@ -91,10 +91,6 @@ public class RegisterActivity2 extends ActivityBase {
                 break;
             case R.id.login_btn:
                 // 前往登录页面
-                Intent intent = new Intent();
-                intent.putExtra("phone",phone);
-                intent.putExtra("pwd",pwd);
-                setResult(LoginActivity.REGISTER_VIEW_CODE,intent);
                 finish();
                 break;
             case R.id.username_xx:

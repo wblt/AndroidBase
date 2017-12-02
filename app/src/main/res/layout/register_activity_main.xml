@@ -236,8 +236,8 @@
 
             <Button
                 android:id="@+id/btn_mine"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
                 android:background="@drawable/rectangle_icon_selector"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
