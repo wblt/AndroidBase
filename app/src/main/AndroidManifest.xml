@@ -67,26 +67,25 @@
         <activity
             android:name=".activity.login.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"  />
         <activity
             android:name=".activity.login.RegisterActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.login.ForgetPwdActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.mine.BindPhoneActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.mine.ModifyInfoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity
-            android:name=".activity.mine.ChangePhoneActivity"
+            android:name=".activity.login.ForgetPwdActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"  />
+        <activity
+            android:name=".activity.mine.BindPhoneActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"  />
+        <activity
+            android:name=".activity.mine.ModifyInfoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
@@ -125,10 +124,22 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
-        <activity android:name=".activity.mine.SettingActivity" />
-        <activity android:name=".activity.mine.ModifyPhoneActivity" />
-        <activity android:name=".activity.mine.ModifyPwdActivity" />
-        <activity android:name=".activity.mine.TaskActivity"></activity>
+        <activity android:name=".activity.mine.SettingActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" />
+        <activity android:name=".activity.mine.ModifyPhoneActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" />
+        <activity android:name=".activity.mine.ModifyPwdActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" />
+        <activity android:name=".activity.mine.TaskActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" ></activity>
     </application>
 
 </manifest>
