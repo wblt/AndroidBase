@@ -45,7 +45,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="搜索你想知道的内容"/>
+                    android:text="搜索你想知道的内容"
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <!--公司图标-->
@@ -177,7 +178,7 @@
                         android:layout_height="wrap_content"
                         android:text="明星学员"
                         android:textColor="@color/black"
-                        android:textSize="18sp"/>
+                        android:textSize="15sp"/>
 
 
                     <ImageView
@@ -197,7 +198,8 @@
                         android:layout_marginLeft="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="更多" />
+                        android:text="更多"
+                        android:textSize="14sp"/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -271,9 +273,9 @@
                         android:layout_marginLeft="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="精彩IP"
+                        android:text="精 彩 IP"
                         android:textColor="@color/black"
-                        android:textSize="18sp"/>
+                        android:textSize="15sp"/>
 
 
                     <ImageView
@@ -293,7 +295,8 @@
                         android:layout_marginLeft="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="更多" />
+                        android:text="更多"
+                        android:textSize="14sp"/>
                 </RelativeLayout>
 
                 <LinearLayout
