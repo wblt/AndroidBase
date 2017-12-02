@@ -41,7 +41,6 @@ import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.activity.mine.AboutActivity;
 import cn.tthud.taitian.activity.mine.BindPhoneActivity;
-import cn.tthud.taitian.activity.mine.ChangePhoneActivity;
 import cn.tthud.taitian.activity.mine.ModifyInfoActivity;
 import cn.tthud.taitian.activity.mine.MyWalletActivity;
 import cn.tthud.taitian.activity.mine.SettingActivity;
@@ -160,13 +159,8 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
                 startActivity(intent);
                 break;
             case R.id.setting_lay: // 设置
-                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
-                    intent = new Intent(this.getContext(),SettingActivity.class);
-                    startActivity(intent);
-                } else {
-                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
-                    return;
-                }
+                intent = new Intent(this.getContext(),SettingActivity.class);
+                startActivity(intent);
                 break;
             case R.id.about_lay:  // 关于
                 intent = new Intent(this.getContext(), AboutActivity.class);
