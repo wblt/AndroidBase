@@ -35,11 +35,6 @@ public class ModifyInfoActivity extends ActivityBase {
     @ViewInject(R.id.et_number_card)
     private EditText et_number_card;
 
-    @ViewInject(R.id.radio_male)
-    private RadioButton radio_male;
-
-    @ViewInject(R.id.radio_female)
-    private RadioButton radio_female;
 
     @ViewInject(R.id.et_email)
     private EditText et_email;
@@ -84,8 +79,8 @@ public class ModifyInfoActivity extends ActivityBase {
                         et_username.setText(ub.getNickname());
                         et_name.setText(ub.getRealname());
                         et_number_card.setText(ub.getIdcard());
-                        radio_male.setChecked(ub.getSex() == 1);        // 男
-                        radio_female.setChecked(ub.getSex() == 2);      // 女
+//                        radio_male.setChecked(ub.getSex() == 1);        // 男
+//                        radio_female.setChecked(ub.getSex() == 2);      // 女
                         et_email.setText(ub.getEmail());
                         et_sign.setText(ub.getStylesig());
                         et_address.setText(ub.getAddress());
@@ -132,10 +127,10 @@ public class ModifyInfoActivity extends ActivityBase {
             showMsg("身份证号码格式不正确");
             return;
         }
-        if (!radio_male.isChecked() && !radio_female.isChecked()){
-            showMsg("请选择性别");
-            return;
-        }
+//        if (!radio_male.isChecked() && !radio_female.isChecked()){
+//            showMsg("请选择性别");
+//            return;
+//        }
         String email = et_email.getText().toString();
         if (TextUtils.isEmpty(email)){
             showMsg("邮箱不能为空");
@@ -166,11 +161,11 @@ public class ModifyInfoActivity extends ActivityBase {
         requestParams.addParameter("idcard", idCard);
 
         int sex_temp = 0;
-        if (radio_male.isChecked()){
-            sex_temp = 1;
-        }else if(radio_female.isChecked()){
-            sex_temp = 2;
-        }
+//        if (radio_male.isChecked()){
+//            sex_temp = 1;
+//        }else if(radio_female.isChecked()){
+//            sex_temp = 2;
+//        }
         requestParams.addParameter("sex", sex_temp);
         requestParams.addParameter("email", email);
         requestParams.addParameter("stylesig", sign);
