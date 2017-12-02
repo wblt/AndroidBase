@@ -151,44 +151,7 @@
                     android:gravity="end"
                     android:textSize="14sp" />
             </RelativeLayout>
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="60dp"-->
-                <!--android:layout_marginLeft="15dp"-->
-                <!--android:layout_marginRight="15dp"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:orientation="horizontal">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="100dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="身份证号码:"-->
-                    <!--android:textColor="@color/gray_black"-->
-                    <!--android:textSize="18sp"-->
-                    <!--android:textStyle="bold" />-->
-
-                <!--<EditText-->
-                    <!--android:id="@+id/et_number_card"-->
-                    <!--android:layout_width="200dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@null"-->
-                    <!--android:hint="请输入身份证号码"-->
-                    <!--android:lines="1"-->
-                    <!--android:maxLength="20"-->
-                    <!--android:minHeight="45dp"-->
-                    <!--android:textColor="@color/gray_black"-->
-                    <!--android:textColorHint="@color/province_line_border"-->
-                    <!--android:textSize="18sp" />-->
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/number_card_xx"-->
-                    <!--android:layout_width="35dp"-->
-                    <!--android:layout_height="35dp"-->
-                    <!--android:padding="8dp"-->
-                    <!--android:src="@mipmap/icon_input_clear"-->
-                    <!--android:visibility="invisible" />-->
-            <!--</LinearLayout>-->
 
             <ImageView
                 android:layout_width="match_parent"
@@ -272,7 +235,7 @@
                     android:layout_alignParentRight="true"
                     android:includeFontPadding="false"
                     android:background="@null"
-                    android:maxLength="15"
+                    android:maxLength="20"
                     android:layout_centerVertical="true"
                     android:text=""
                     android:textColor="@color/gray_black_text"

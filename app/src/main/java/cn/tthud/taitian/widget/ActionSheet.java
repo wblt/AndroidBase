@@ -56,6 +56,8 @@ public class ActionSheet {
 				.findViewById(R.id.delete_pic);
 		final TextView forget_pwd_pic = (TextView) layout.findViewById(R.id.forget_pwd_pic);
 		final TextView eid_pwd_pic = (TextView) layout.findViewById(R.id.eid_pwd_pic);
+		TextView sex_man = layout.findViewById(R.id.sex_man);
+		TextView sex_woman = layout.findViewById(R.id.sex_woman);
 
 		final TextView mCancel = (TextView) layout.findViewById(R.id.cancel);
 		if (type.equals("1")) {
@@ -66,12 +68,16 @@ public class ActionSheet {
 			tv_preview.setVisibility(View.GONE);
 			forget_pwd_pic.setVisibility(View.GONE);
 			eid_pwd_pic.setVisibility(View.GONE);
+			sex_man.setVisibility(View.GONE);
+			sex_woman.setVisibility(View.GONE);
 		} else if (type.equals("2")) {
 			take_picture.setVisibility(View.GONE);
 			choose_local.setVisibility(View.GONE);
 			delete_pic.setVisibility(View.GONE);
 			forget_pwd_pic.setVisibility(View.GONE);
 			eid_pwd_pic.setVisibility(View.GONE);
+			sex_man.setVisibility(View.GONE);
+			sex_woman.setVisibility(View.GONE);
 			tv_download.setVisibility(View.VISIBLE);
 			tv_preview.setVisibility(View.VISIBLE);
 		} else if (type.equals("3")) {
@@ -81,8 +87,20 @@ public class ActionSheet {
 			delete_pic.setVisibility(View.GONE);
 			tv_download.setVisibility(View.GONE);
 			tv_preview.setVisibility(View.GONE);
+			sex_man.setVisibility(View.GONE);
+			sex_woman.setVisibility(View.GONE);
 			forget_pwd_pic.setVisibility(View.VISIBLE);
 			eid_pwd_pic.setVisibility(View.VISIBLE);
+		} else if (type.equals("4")) {
+			take_picture.setVisibility(View.GONE);
+			choose_local.setVisibility(View.GONE);
+			delete_pic.setVisibility(View.GONE);
+			tv_download.setVisibility(View.GONE);
+			tv_preview.setVisibility(View.GONE);
+			forget_pwd_pic.setVisibility(View.GONE);
+			eid_pwd_pic.setVisibility(View.GONE);
+			sex_man.setVisibility(View.VISIBLE);
+			sex_woman.setVisibility(View.VISIBLE);
 		}
 		take_picture.setOnClickListener(new OnClickListener() {
 
@@ -106,6 +124,18 @@ public class ActionSheet {
 			}
 		});
 
+
+		tv_preview.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				// 下载
+				actionSheetSelected.onClick(3);
+				dlg.dismiss();
+			}
+		});
+
 		tv_download.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -117,13 +147,12 @@ public class ActionSheet {
 			}
 		});
 
-		tv_preview.setOnClickListener(new OnClickListener() {
+		delete_pic.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				// 下载
-				actionSheetSelected.onClick(3);
+				actionSheetSelected.onClick(5);
 				dlg.dismiss();
 			}
 		});
@@ -148,21 +177,32 @@ public class ActionSheet {
 			}
 		});
 
-		mCancel.setOnClickListener(new OnClickListener() {
+		sex_man.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v) {
+			public void onClick(View view) {
 				// TODO Auto-generated method stub
+				// 男
 				actionSheetSelected.onClick(8);
 				dlg.dismiss();
 			}
 		});
 
-		delete_pic.setOnClickListener(new OnClickListener() {
+		sex_woman.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				// TODO Auto-generated method stub
+				// 女
+				actionSheetSelected.onClick(9);
+				dlg.dismiss();
+			}
+		});
 
+
+		mCancel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				actionSheetSelected.onClick(5);
+				actionSheetSelected.onClick(25);
 				dlg.dismiss();
 			}
 		});

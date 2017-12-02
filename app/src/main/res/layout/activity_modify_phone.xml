@@ -132,6 +132,8 @@
             android:id="@+id/login_send_code"
             android:layout_width="100dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textSize="16sp"
             android:layout_alignParentRight="true"
             android:textColor="@color/white"
@@ -140,7 +142,8 @@
             android:background="@color/colorSendName8"
             android:gravity="center"
             android:paddingLeft="3dp"
-            android:paddingRight="3dp"/>
+            android:paddingRight="3dp"
+            android:layout_marginRight="10dp"/>
     </LinearLayout>
 
     <ImageView

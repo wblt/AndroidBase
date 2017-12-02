@@ -162,13 +162,13 @@ public class ForgetPwdActivity extends ActivityBase {
                 if (current == R.id.forget_phone) {
                     username_xx.setVisibility(View.INVISIBLE);
                 } else if (current == R.id.code) {
-                    pwd_xx.setVisibility(View.INVISIBLE);
+                    //pwd_xx.setVisibility(View.INVISIBLE);
                 }
             } else {
                 if (current == R.id.forget_phone) {
                     username_xx.setVisibility(View.VISIBLE);
                 } else if (current == R.id.code) {
-                    pwd_xx.setVisibility(View.VISIBLE);
+                    //pwd_xx.setVisibility(View.VISIBLE);
                 }
             }
         }

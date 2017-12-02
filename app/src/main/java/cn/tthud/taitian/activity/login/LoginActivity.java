@@ -114,13 +114,13 @@ public class LoginActivity extends ActivityBase {
                 if (current == R.id.login_phone) {
                     username_xx.setVisibility(View.INVISIBLE);
                 } else if (current == R.id.login_pwd) {
-                    pwd_xx.setVisibility(View.INVISIBLE);
+                    //pwd_xx.setVisibility(View.INVISIBLE);
                 }
             } else {
                 if (current == R.id.login_phone) {
                     username_xx.setVisibility(View.VISIBLE);
                 } else if (current == R.id.login_pwd) {
-                    pwd_xx.setVisibility(View.VISIBLE);
+                    //pwd_xx.setVisibility(View.VISIBLE);
                 }
             }
         }

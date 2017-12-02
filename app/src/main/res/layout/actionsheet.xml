@@ -68,6 +68,26 @@
         android:textColor="@color/gray_black_text"
         android:text="修改密码" />
 
+
+    <TextView
+        android:id="@+id/sex_man"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/actionsheet_top_selector"
+        android:gravity="center"
+        android:textColor="@color/gray_black_text"
+        android:text="男"
+        />
+
+    <TextView
+        android:id="@+id/sex_woman"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/actionsheet_bottom_selector"
+        android:gravity="center"
+        android:textColor="@color/gray_black_text"
+        android:text="女" />
+
     <TextView
         android:id="@+id/cancel"
         android:layout_width="match_parent"
