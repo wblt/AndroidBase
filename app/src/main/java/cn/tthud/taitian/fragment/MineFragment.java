@@ -65,13 +65,6 @@ import cn.tthud.taitian.xutils.MXUtils;
 
 public class MineFragment extends FragmentBase implements ActionSheet.OnActionSheetSelected, DialogInterface.OnCancelListener{
 
-    //城市选择返回码
-    public static final int RESULT_CODE=100;
-    //城市选择返回码
-    public static final int HY_RESULT_CODE=102;
-    //选择请求码
-    public static final int REQUEST_CODE=101;
-
     private static int CAMERA_REQUEST_CODE = 1;
     private static int GALLERY_REQUEST_CODE = 2;
     private static int CROP_REQUEST_CODE = 3;
@@ -83,9 +76,6 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
 
     @ViewInject(R.id.headpic)
     private ImageView headpic;
-
-    @ViewInject(R.id.img_sex)
-    private ImageView img_sex;
 
     //临时保存拍照照片保存路径
     private String capturePath = "";
@@ -127,14 +117,14 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
         ImageLoader.loadCircle(SPUtils.getString(SPUtils.HEAD_PIC),headpic);
         username.setText(SPUtils.getString(SPUtils.NICK_NAME));
         if (SPUtils.getInt(SPUtils.SEX,0) == 1) {
-            img_sex.setImageResource(R.mipmap.sex_m);
+            // 男
         } else if (SPUtils.getInt(SPUtils.SEX,0) == 2){
-            img_sex.setImageResource(R.mipmap.sex_w);
+            // 女
         }
     }
 
     @Event(value = {R.id.lay_renwu,R.id.lay_qianbao,R.id.lay_advatar_upload,
-            R.id.lay_person_info,R.id.lay_change_phone,R.id.lay_bind_phone,
+            R.id.lay_person_info,
             R.id.setting_lay,R.id.about_lay},type = View.OnClickListener.class)
     private void onEvenOnclick(View view){
         int id = view.getId();
@@ -163,19 +153,6 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
                 } else {
                     startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
                     return;
-                }
-                break;
-            case R.id.lay_change_phone:     // 修改手机号码
-                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
-                    startActivity(new Intent(this.getContext(), ChangePhoneActivity.class));
-                } else {
-                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
-                    return;
-                }
-                break;
-            case R.id.lay_bind_phone:       // 绑定手机号码
-                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
-                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
                 }
                 break;
             case R.id.lay_renwu:  // 任务

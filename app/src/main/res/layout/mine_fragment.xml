@@ -33,13 +33,6 @@
                     android:layout_width="55dp"
                     android:layout_height="55dp"
                     android:src="@mipmap/head_default" />
-
-                <ImageView
-                    android:id="@+id/img_sex"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/sex_w" />
-
                 <TextView
                     android:layout_marginTop="5dp"
                     android:id="@+id/username"
@@ -82,7 +75,7 @@
                     android:id="@+id/lay01"
                     android:layout_centerInParent="true"
                     android:layout_alignParentLeft="true"
-                    android:src="@mipmap/wdfb" />
+                    android:src="@mipmap/qianbao" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -123,7 +116,7 @@
                     android:id="@+id/lay01_renwu"
                     android:layout_centerInParent="true"
                     android:layout_alignParentLeft="true"
-                    android:src="@mipmap/wdfb" />
+                    android:src="@mipmap/renwu" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -203,7 +196,7 @@
                     android:layout_height="20dp"
                     android:layout_centerInParent="true"
                     android:layout_alignParentLeft="true"
-                    android:src="@mipmap/push" />
+                    android:src="@mipmap/gerenxinxi" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -225,123 +218,6 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/line" />
-
-            <LinearLayout
-                android:id="@+id/lay_change_phone"
-                android:layout_width="fill_parent"
-                android:layout_height="55dp"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@color/white" >
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentLeft="true"
-                    android:src="@mipmap/clear" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:includeFontPadding="false"
-                    android:text="修改手机号码"
-                    android:textColor="@color/gray_black_text"
-                    android:textSize="14sp" />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentRight="true"
-                    android:src="@mipmap/arrow_right" />
-            </LinearLayout>
-
-            <ImageView
-                android:visibility="gone"
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/line" />
-
-            <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/lay_bind_phone"
-                android:layout_width="fill_parent"
-                android:layout_height="55dp"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@color/white" >
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentLeft="true"
-                    android:src="@mipmap/setting" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:includeFontPadding="false"
-                    android:text="绑定手机号码"
-                    android:textColor="@color/gray_black_text"
-                    android:textSize="14sp" />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentRight="true"
-                    android:src="@mipmap/arrow_right" />
-            </LinearLayout>
-
-
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/line" />
-            <LinearLayout
-                android:id="@+id/lay_bind_wechat"
-                android:layout_width="fill_parent"
-                android:layout_height="55dp"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@color/white" >
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentLeft="true"
-                    android:src="@mipmap/setting" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:includeFontPadding="false"
-                    android:text="绑定微信号码"
-                    android:textColor="@color/gray_black_text"
-                    android:textSize="14sp" />
-
-                <cn.tthud.taitian.widget.EaseSwitchButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/switch_notification"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="fill_parent"
                 android:layout_height="10dp"
                 android:background="@color/line" />
 
@@ -358,7 +234,7 @@
                     android:layout_height="20dp"
                     android:layout_centerInParent="true"
                     android:layout_alignParentLeft="true"
-                    android:src="@mipmap/setting" />
+                    android:src="@mipmap/shezhi" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -397,7 +273,7 @@
                     android:layout_height="20dp"
                     android:layout_centerInParent="true"
                     android:layout_alignParentLeft="true"
-                    android:src="@mipmap/about" />
+                    android:src="@mipmap/guanyu" />
 
                 <TextView
                     android:layout_width="0dp"

@@ -63,9 +63,6 @@ public class SplashActivity extends CheckPermissionsActivity {
 	protected void onCreate(Bundle arg0) {
 		setContentView(R.layout.em_activity_splash);
 		super.onCreate(arg0);
-
-
-//		doLogin();
 	}
 
 	@Override

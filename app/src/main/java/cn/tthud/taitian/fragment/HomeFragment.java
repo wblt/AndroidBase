@@ -91,7 +91,7 @@ public class HomeFragment extends FragmentBase {
             appendMainBody(this, R.layout.home_fragment);
             appendTopBody(R.layout.activity_top_icon);
             ((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
-            setTopBarTitle("首页");
+            setTopBarTitle("上位");
             initRecyclerView_qiyan();
             initRecyclerView_xueyuan();
             initRecyclerView_ip();
