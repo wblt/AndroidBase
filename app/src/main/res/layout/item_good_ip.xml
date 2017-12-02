@@ -24,17 +24,47 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ccccc"/>
 
-        <TextView
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/tv_name"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
-            android:text="乐投互娱"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="17sp"
-            android:textColor="@color/black"
-            />
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/tv_name"
+                android:layout_marginLeft="10dp"
+                android:text="乐投互娱"
+                android:layout_weight="1"/>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="342"
+                    android:textColor="@color/colorSendName6"/>
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="人报名"
+                    android:layout_marginRight="10dp"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
