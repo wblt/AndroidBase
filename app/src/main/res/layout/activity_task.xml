@@ -31,7 +31,7 @@
                 android:src="@mipmap/head_default" />
 
             <TextView
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,8 +41,8 @@
                 android:layout_centerVertical="true"
                 android:textColor="@color/gray_text_light"
                 android:text="大兵哥"
-                android:textSize="14sp" />
-
+                android:textSize="14sp"
+                android:layout_marginBottom="20dp"/>
         </LinearLayout>
 
         <ImageButton
@@ -87,7 +87,7 @@
                 android:layout_height="20dp"
                 android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
-                android:src="@mipmap/setting" />
+                android:src="@mipmap/woderenwu" />
 
             <TextView
                 android:gravity="center"
@@ -101,13 +101,14 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/num"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:includeFontPadding="false"
-                android:text="(共3个)"
+                android:text="(共0个)"
                 android:textColor="@color/colorSendName6"
                 android:textSize="14sp" />
 

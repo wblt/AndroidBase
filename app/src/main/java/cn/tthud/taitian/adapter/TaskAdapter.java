@@ -1,5 +1,6 @@
 package cn.tthud.taitian.adapter;
 
+import android.text.TextUtils;
 import android.view.ViewGroup;
 
 import cn.tthud.taitian.R;
@@ -27,8 +28,12 @@ public class TaskAdapter extends BaseRecyclerViewAdapter<TaskBean> {
         public void onBindViewHolder(final TaskBean object, int position) {
             binding.executePendingBindings();
 
-
-
+            binding.title.setText(object.getTk_title());
+            String tl_plan = object.getTl_plan();
+            if (TextUtils.isEmpty(tl_plan)) {
+                tl_plan = "0";
+            }
+            binding.tvJingdu.setText(tl_plan+"/"+object.getPlan());
         }
     }
 }

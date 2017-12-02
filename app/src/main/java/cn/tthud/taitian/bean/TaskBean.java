@@ -5,13 +5,103 @@ package cn.tthud.taitian.bean;
  */
 
 public class TaskBean {
-    private String title;
+    private String tk_title;
+    private String tk_des;
+    private String icon;
+    private int plan;
+    private int time_cycle;
+    private int sort;
+    private int award_type;
+    private String tl_id;
+    private String tl_plan;
+    private String tl_award;
+    private String status;
 
-    public String getTitle() {
-        return title;
+    public String getTk_title() {
+        return tk_title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTk_title(String tk_title) {
+        this.tk_title = tk_title;
+    }
+
+    public String getTk_des() {
+        return tk_des;
+    }
+
+    public void setTk_des(String tk_des) {
+        this.tk_des = tk_des;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public int getPlan() {
+        return plan;
+    }
+
+    public void setPlan(int plan) {
+        this.plan = plan;
+    }
+
+    public int getTime_cycle() {
+        return time_cycle;
+    }
+
+    public void setTime_cycle(int time_cycle) {
+        this.time_cycle = time_cycle;
+    }
+
+    public int getSort() {
+        return sort;
+    }
+
+    public void setSort(int sort) {
+        this.sort = sort;
+    }
+
+    public int getAward_type() {
+        return award_type;
+    }
+
+    public void setAward_type(int award_type) {
+        this.award_type = award_type;
+    }
+
+    public String getTl_id() {
+        return tl_id;
+    }
+
+    public void setTl_id(String tl_id) {
+        this.tl_id = tl_id;
+    }
+
+    public String getTl_plan() {
+        return tl_plan;
+    }
+
+    public void setTl_plan(String tl_plan) {
+        this.tl_plan = tl_plan;
+    }
+
+    public String getTl_award() {
+        return tl_award;
+    }
+
+    public void setTl_award(String tl_award) {
+        this.tl_award = tl_award;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

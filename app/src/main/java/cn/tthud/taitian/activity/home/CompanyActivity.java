@@ -97,9 +97,15 @@ public class CompanyActivity extends ActivityBase {
                         String list = jsonObject2.getString("list");
                         Type type=new TypeToken<List<ActivityBean>>(){}.getType();
                         List<ActivityBean> acttList = GsonUtils.jsonToList(list,type);
-                        xrvCustom.setVisibility(View.VISIBLE);
                         mAdapter.addAll(acttList);
                         mAdapter.notifyDataSetChanged();
+                        if(mAdapter.getData().size() == 0){
+                            page_refresh.setVisibility(View.VISIBLE);
+                            xrvCustom.setVisibility(View.GONE);
+                        }else {
+                            page_refresh.setVisibility(View.GONE);
+                            xrvCustom.setVisibility(View.VISIBLE);
+                        }
                         Log.i("ddd");
                     }else {
                         showMsg(info);

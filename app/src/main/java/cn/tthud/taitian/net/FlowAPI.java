@@ -88,9 +88,9 @@ public class FlowAPI {
     public static String APP_MESSAGE_LIST = SERVER_IP + "/appMsgList";
 
     // 忘记密码
-    public static String APP_FORGET_PWD = SERVER_IP + "/api.php/appForget";
+    public static String APP_FORGET_PWD = SERVER_IP + "/appForget";
 
     // 任务
-    public static String APP_TASK = SERVER_IP + "/api.php/appTask";
+    public static String APP_TASK = SERVER_IP + "/appTask";
 
 }
