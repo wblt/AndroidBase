@@ -121,6 +121,9 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
             // 男
         } else if (SPUtils.getInt(SPUtils.SEX,0) == 2){
             // 女
+        } else {
+            // 未知
+
         }
     }
 

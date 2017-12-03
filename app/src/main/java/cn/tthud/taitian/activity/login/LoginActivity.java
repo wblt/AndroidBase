@@ -261,6 +261,7 @@ public class LoginActivity extends ActivityBase {
                         SPUtils.putString(SPUtils.MOBILE,phone);
                         SPUtils.putString(SPUtils.PASSWORD,pwd);
                         SPUtils.putString(SPUtils.IS_LOGIN,"YES");
+                        SPUtils.putString(SPUtils.SOURCE,"tel");
 
                         // 进入APP
                         DemoApplication.getInstance().closeActivitys();
@@ -296,22 +297,41 @@ public class LoginActivity extends ActivityBase {
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         JSONObject jsonObject1 = new JSONObject(jsonObject.getString("data"));
 
-                        String ub_id = jsonObject1.getString("ub_id");
-                        String nickname = jsonObject1.getString("nickname");
-                        String headpic = jsonObject1.getString("headpic");
-                        int sex = jsonObject1.getInt("sex");
-                        String wx_openid = jsonObject1.getString("wx_openid");
                         boolean isvst = jsonObject1.getBoolean("isvst"); // 是否是游客
+                        if (isvst) {
+                            String ub_id = jsonObject1.getString("ub_id");
+                            String nickname = jsonObject1.getString("nickname");
+                            String headpic = jsonObject1.getString("headpic");
+                            int sex = jsonObject1.getInt("sex");
+                            String wx_openid = jsonObject1.getString("wx_openid");
 
-                        // 缓存本地信息
-                        SPUtils.putString(SPUtils.UB_ID, ub_id);
-                        SPUtils.putString(SPUtils.NICK_NAME, nickname);
-                        SPUtils.putString(SPUtils.HEAD_PIC, headpic);
-                        SPUtils.putInt(SPUtils.SEX, sex);
-                        SPUtils.putString(SPUtils.WX_OPEN_ID, wx_openid);
-                        SPUtils.putBoolean(SPUtils.ISVST,isvst);
-                        SPUtils.putString(SPUtils.IS_LOGIN,"YES");
+                            // 缓存本地信息
+                            SPUtils.putString(SPUtils.UB_ID, ub_id);
+                            SPUtils.putString(SPUtils.NICK_NAME, nickname);
+                            SPUtils.putString(SPUtils.HEAD_PIC, headpic);
+                            SPUtils.putInt(SPUtils.SEX, sex);
+                            SPUtils.putString(SPUtils.WX_OPEN_ID, wx_openid);
+                            SPUtils.putBoolean(SPUtils.ISVST,isvst);
+                            SPUtils.putString(SPUtils.IS_LOGIN,"YES");
+                            SPUtils.putString(SPUtils.SOURCE,"wx");
+                        } else {
+                            String ub_id = jsonObject1.getString("ub_id");
+                            String nickname = jsonObject1.getString("nickname");
+                            String headpic = jsonObject1.getString("headpic");
+                            String realname = jsonObject1.getString("realname");
+                            String ua_id = jsonObject1.getString("ua_id");
 
+                            // 缓存本地信息
+                            SPUtils.putBoolean(SPUtils.ISVST,isvst);
+                            SPUtils.putString(SPUtils.UB_ID, ub_id);
+                            SPUtils.putString(SPUtils.NICK_NAME, nickname);
+                            SPUtils.putString(SPUtils.REAL_NAME,realname);
+                            SPUtils.putString(SPUtils.UA_ID,ua_id);
+                            SPUtils.putString(SPUtils.HEAD_PIC, headpic);
+                            SPUtils.putBoolean(SPUtils.ISVST,isvst);
+                            SPUtils.putString(SPUtils.IS_LOGIN,"YES");
+                            SPUtils.putString(SPUtils.SOURCE,"wx");
+                        }
                         // 进入主页
                         DemoApplication.getInstance().closeActivitys();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);

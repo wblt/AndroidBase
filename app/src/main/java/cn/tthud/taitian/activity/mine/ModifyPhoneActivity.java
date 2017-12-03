@@ -176,6 +176,7 @@ public class ModifyPhoneActivity extends ActivityBase {
                     String status = jsonObject.getString("status");
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        codeNum = jsonObject.getString("data");
                         showMsg("验证码发送成功");
                         myCount.start();
                     }else {
@@ -191,7 +192,6 @@ public class ModifyPhoneActivity extends ActivityBase {
     private void submit() {
         phone = login_phone.getText().toString();
         pwd = login_pwd.getText().toString();
-        codeNum = code.getText().toString();
         if (TextUtils.isEmpty(phone)){
             showMsg("请输入手机号码");
             return;
@@ -201,20 +201,23 @@ public class ModifyPhoneActivity extends ActivityBase {
             return;
         }
 
-
         if (TextUtils.isEmpty(pwd)){
             showMsg("请输入密码");
             return;
         }
 
-        if (TextUtils.isEmpty(codeNum)){
+        if (TextUtils.isEmpty(code.getText().toString())){
             showMsg("请输入手机验证码");
             return;
         }
+        if (!codeNum.equals(code.getText().toString())) {
+            showMsg("验证码输入错误");
+            return;
+        }
+
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.PERSONAL_CHANGE_TEL);
         requestParams.addParameter("password", pwd);
         requestParams.addParameter("mobile", phone);
-        requestParams.addParameter("msg", codeNum);
         requestParams.addParameter("Ub_id", SPUtils.getString(SPUtils.UB_ID));
         MXUtils.httpGet(requestParams, new CommonCallbackImp("获取验证码",requestParams) {
             @Override

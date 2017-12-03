@@ -48,18 +48,31 @@ public class SettingActivity extends ActivityBase {
         setTopBarTitle("设置");
         setTopLeftDefultListener();
 
-        if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
+        updateView();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateView();
+    }
+
+    private void updateView () {
+
+        if (SPUtils.getString(SPUtils.SOURCE).equals("tel")) {
             bingding.setText("绑定微信");
+        } else if (SPUtils.getString(SPUtils.SOURCE).equals("wx")){
+            bingding.setText("绑定手机号");
+        }
+        if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
             if (SPUtils.getBoolean(SPUtils.IS_BINDWX,false)) {
                 bingding_status.setText("已绑定");
             } else {
                 bingding_status.setText("未绑定");
             }
         } else {
-            bingding.setText("绑定手机号");
             bingding_status.setText("未绑定");
         }
-
     }
 
     @Event(value = {R.id.logout,R.id.edit_phone,R.id.edit_pwd,R.id.lay_bind,R.id.lay_remove},type = View.OnClickListener.class)

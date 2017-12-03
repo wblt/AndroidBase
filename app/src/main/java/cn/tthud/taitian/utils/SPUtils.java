@@ -21,6 +21,7 @@ public class SPUtils {
 
     // 判断是否登录
     public static final String IS_LOGIN = "is_login";
+    public static final String SOURCE = "source";
 
     public static final String UB_ID = "ub_id";                 // 用户id
     public static final String NICK_NAME = "nickname";          // 昵称
@@ -45,6 +46,7 @@ public class SPUtils {
      *
      */
     public static void clearUser() {
+        SPUtils.putString(SOURCE,"");
         SPUtils.putString(IS_LOGIN,"");
         SPUtils.putString(UB_ID, "");
         SPUtils.putString(NICK_NAME, "");

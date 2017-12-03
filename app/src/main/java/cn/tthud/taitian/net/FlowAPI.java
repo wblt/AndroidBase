@@ -96,6 +96,10 @@ public class FlowAPI {
     // 绑定微信
     public static String APP_BIND_WX = SERVER_IP + "/appBindWx";
 
+    // 绑定号码
+    public static String APP_BIND_PHONE = SERVER_IP + "/appVstReUserSbt";
+
+
 
 
 }
