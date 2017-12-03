@@ -44,7 +44,7 @@ public class ActivityDoingAdapter extends BaseRecyclerViewAdapter<ActivityBean> 
             binding.tvTitle.setText(object.getTitle());
             binding.tvTime.setText(DateUtil.formatUnixTime(Long.valueOf(object.getStart())));
             binding.tvAddress.setText(object.getArea_title());
-            binding.tvNumber.setText(object.getTotal() + "人报名");
+            binding.tvNumber.setText(object.getTotal());
 
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override

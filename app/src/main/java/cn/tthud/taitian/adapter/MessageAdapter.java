@@ -1,12 +1,15 @@
 package cn.tthud.taitian.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.BaseRecyclerViewAdapter;
 import cn.tthud.taitian.base.BaseRecyclerViewHolder;
+import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.MessageBean;
 import cn.tthud.taitian.databinding.ItemMessageNormalBinding;
 import cn.tthud.taitian.utils.ImageLoader;
@@ -29,11 +32,11 @@ public class MessageAdapter extends BaseRecyclerViewAdapter {
         }
 
         @Override
-        public void onBindViewHolder(MessageBean object, int position) {
+        public void onBindViewHolder(final MessageBean object, int position) {
             binding.executePendingBindings();
 
             String msgType = object.getMc_id();
-            if (msgType.equals("系统消息")){  // 如果是系统消息
+            if (msgType.equals("系统消息")){
                 binding.llSystemMsgTitle.setVisibility(View.VISIBLE);
             }else if(msgType.equals("广告通知")){
                 binding.llSystemMsgTitle.setVisibility(View.GONE);
@@ -48,6 +51,20 @@ public class MessageAdapter extends BaseRecyclerViewAdapter {
             }
 
             binding.tvMsgContent.setText(object.getTitle());
+
+            binding.llAll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String url = object.getUrl();
+                    if (TextUtils.isEmpty(url)){
+                        return;
+                    }
+                    Intent intent = new Intent(view.getContext(),WebViewActivity.class);
+                    intent.putExtra("title",object.getTitle());
+                    intent.putExtra("url", url);
+                    view.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }

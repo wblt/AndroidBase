@@ -7,24 +7,24 @@ import java.util.List;
  */
 
 public class CompanyBean {
-    private int company_id;                 // 公司ID
-    private String solevar;         // 公司唯一标识
-    private String title;           // 公司标题
-    private String abbtion;         // 公司标题简称
-    private String mobile;          // 公司联系方式
-    private String content;         // 公司简介
-    private String trade;           // 公司所属行业
-    private String geohash;         // 公司CEO
-    private String area;            // 公司所属地区
-    private String address;         // 公司省市县名称
-    private String detail;          // 公司详细地址
-    private String collect;         // 公司关注人数
-    private String act_num;         // 公司活动数量
-    private String sort;            // 公司排序号
-    private String addtime;         // 公司添加时间
-    private String isdel;           // 公司是否删除[1是，2否]
-    private String thumb;           // 公司缩略图
-    private List<String> img;       // 公司Banner
+    private int company_id;
+    private String solevar;
+    private String title;
+    private String abbtion;
+    private String mobile;
+    private String content;
+    private String trade;
+    private String geohash;
+    private String area;
+    private String address;
+    private String detail;
+    private String collect;
+    private String act_num;
+    private String sort;
+    private String addtime;
+    private String isdel;
+    private String thumb;
+    private List<String> img;
 
     public int getCompany_id() {
         return company_id;

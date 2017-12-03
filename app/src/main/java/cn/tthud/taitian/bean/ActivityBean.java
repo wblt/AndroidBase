@@ -12,34 +12,34 @@ import java.util.List;
 
 public class ActivityBean {
 
-    private String activity_id;     // 活动ID
-    private String solevar;         // 活动唯一标识
-    private String cp_id;           // 活动公司ID
-    private String pid;             // 活动父ID
-    private String title;           // 活动标题
-    private String server;          // 活动服务器名称
-    private String pre_domain;      // 活动域名前缀
-    private String pre_activity;    // 活动前缀
-    private String total;           // 活动总人数
-    private String type;            // 活动类型[1 http,2 https]
-    private String editor;          // 活动赛制
-    private String cost;            // 活动费用
-    private String status;          // 活动状态[1进行中，2未开始，3已结束]
-    private String prise;           // 活动点赞数量
-    private String isrecommend;     // 活动是否推荐[1是，2否]
-    private String area;            // 活动地点
-    private String start;           // 活动开始时间
-    private String end;             // 活动结束时间
-    private String sort;            // 活动排序
-    private String modtime;         // 活动修改时间
-    private String isdel;           // 活动是否删除[1是，2否]
-    private String area_title;      // 活动地址
-    private String com_title;       // 公司标题
-    private List<String> img;       // 活动Banner
-    private String thumb;           // 活动缩略图
-    private String top;             // 排名
-    private String description;     // 描述
-    private String url;             // h5链接
+    private String activity_id;
+    private String solevar;
+    private String cp_id;
+    private String pid;
+    private String title;
+    private String server;
+    private String pre_domain;
+    private String pre_activity;
+    private String total;
+    private String type;
+    private String editor;
+    private String cost;
+    private String status;
+    private String prise;
+    private String isrecommend;
+    private String area;
+    private String start;
+    private String end;
+    private String sort;
+    private String modtime;
+    private String isdel;
+    private String area_title;
+    private String com_title;
+    private List<String> img;
+    private String thumb;
+    private String top;
+    private String description;
+    private String url;
 
     public String getActivity_id() {
         return activity_id;

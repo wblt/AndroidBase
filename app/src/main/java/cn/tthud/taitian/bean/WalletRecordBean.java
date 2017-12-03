@@ -5,25 +5,25 @@ package cn.tthud.taitian.bean;
  */
 
 public class WalletRecordBean {
-    private int id;                 // 充值ID
-    private String solevar;         // 充值标识
-    private String table;           // 数据名称
-    private int dataid;             // 数据ID
-    private String ub_id;           // 用户ID
-    private String nickname;        // 充值人名称
-    private String headpic;         // 充值人头像
-    private String mobile;          // 手机号码
-    private int status;             // 状态[1充值成功，2充值失败]
-    private int source;             // 来源[1现金充值|2抽奖获得]
-    private int money;              // 总金额
-    private int usefee;             // 获得积分
-    private int num;                // 充值数量
-    private int addtime;            // 添加时间
-    private int modtime;            // 修改时间
-    private String adddate;         // 日期
-    private int pay_type;           // 支付方式[1微信，2QQ,3微博，4支付宝，5其他]
-    private String title;           // 标题
-    private String type;               // 充值类型
+    private int id;
+    private String solevar;
+    private String table;
+    private int dataid;
+    private String ub_id;
+    private String nickname;
+    private String headpic;
+    private String mobile;
+    private int status;
+    private int source;
+    private int money;
+    private int usefee;
+    private int num;
+    private int addtime;
+    private int modtime;
+    private String adddate;
+    private int pay_type;
+    private String title;
+    private String type;
 
     public int getId() {
         return id;

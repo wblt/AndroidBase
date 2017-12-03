@@ -5,14 +5,14 @@ package cn.tthud.taitian.bean;
  */
 
 public class MessageBean {
-    private int msg_id;     // 消息编号
-    private int isread;     // 是否阅读[1是，2否]
-    private int readtime;   // 阅读时间
-    private int istop;      // 是否置顶[1是，2否]
-    private String mc_id;   // 消息类别编号(系统消息，广告通知)
-    private String icon;    // 图标
-    private String url;     // 链接
-    private String title;   // 标题
+    private int msg_id;
+    private int isread;
+    private int readtime;
+    private int istop;
+    private String mc_id;
+    private String icon;
+    private String url;
+    private String title;
 
     public int getMsg_id() {
         return msg_id;

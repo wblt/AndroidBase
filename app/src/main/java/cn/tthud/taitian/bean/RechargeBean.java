@@ -5,19 +5,19 @@ package cn.tthud.taitian.bean;
  */
 
 public class RechargeBean {
-    private int id;                 // 充值ID
-    private String solevar;         // 充值标识
-    private String title;           // 标题
-    private String remark;          // 充值备注
-    private String icon;            // 图标
-    private int money_total;        // 原价
-    private int money_real;         // 实际价格
-    private int jifen;              // 所兑换积分
+    private int id;
+    private String solevar;
+    private String title;
+    private String remark;
+    private String icon;
+    private int money_total;
+    private int money_real;
+    private int jifen;
     private int isdel;              // 是否显示[1开启，2关闭，3其他]
-    private int addtime;            // 添加时间
-    private int sort;               // 排序
+    private int addtime;
+    private int sort;
 
-    private boolean isSelect;       // 是否选中(客户端自定义)
+    private boolean isSelect;
 
     public void setSelect(boolean select) {
         isSelect = select;

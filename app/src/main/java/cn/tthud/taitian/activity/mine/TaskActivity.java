@@ -87,10 +87,12 @@ public class TaskActivity extends ActivityBase {
                         if (TextUtils.isEmpty(nickname)) {
                             nickname = SPUtils.getString(SPUtils.NICK_NAME);
                         }
-                        if (sex == 0) {
+                        if (sex == 1) {
                             username.setText(nickname+" · "+"男");
-                        } else {
+                        } else if (sex == 2){
                             username.setText(nickname+" · "+"女");
+                        }else{
+                            username.setText(nickname+" . "+"");
                         }
                         JSONArray taskArr = jsonObject1.getJSONArray("data");
                         if (taskArr.length() > 0) {
