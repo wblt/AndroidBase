@@ -61,6 +61,7 @@ public class TaskActivity extends ActivityBase {
         super.onCreate(savedInstanceState);
         appendMainBody(this, R.layout.activity_task);
         initRecyclerView();
+        showLoading();
         loadData();
     }
 
@@ -71,6 +72,7 @@ public class TaskActivity extends ActivityBase {
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
+                cancelLoading();
                 try {
                     JSONObject jsonObject = new JSONObject(data);
                     String status = jsonObject.getString("status");

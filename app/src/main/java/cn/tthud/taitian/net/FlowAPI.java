@@ -8,13 +8,10 @@ import org.xutils.http.RequestParams;
  * Created by wenshi on 2016/4/22.
  */
 public class FlowAPI {
-    //图片本地
+    // 文件存储位置
     public static String YYW_FILE_PATH = Environment.getExternalStorageDirectory()
             + "/cn.tthud.taitian/";
-//    public static String SERVER_IP = "http://139.196.188.28:9002/zbManage_intf_test/";
-
     public static String SERVER_IP = "https://res.hnltou.com/api.php";
-
     /** 最大图片数 */
     public static final int DIARY_IMGS_MAX = 9;
     /** 最大图片数 */

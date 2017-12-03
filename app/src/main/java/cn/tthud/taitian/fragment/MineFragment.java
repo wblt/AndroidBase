@@ -62,32 +62,29 @@ import cn.tthud.taitian.xutils.MXUtils;
  * Created by wb on 2017/10/8.
  */
 
-public class MineFragment extends FragmentBase implements ActionSheet.OnActionSheetSelected, DialogInterface.OnCancelListener{
+public class MineFragment extends FragmentBase{
 
-    private static int CAMERA_REQUEST_CODE = 1;
-    private static int GALLERY_REQUEST_CODE = 2;
-    private static int CROP_REQUEST_CODE = 3;
+    //private static int CAMERA_REQUEST_CODE = 1;
+    //private static int GALLERY_REQUEST_CODE = 2;
+    //private static int CROP_REQUEST_CODE = 3;
 
     private View view;
-
     @ViewInject(R.id.username)
     private TextView username;
 
     @ViewInject(R.id.headpic)
     private ImageView headpic;
-
-
-
-    //临时保存拍照照片保存路径
-    private String capturePath = "";
-    private Bitmap bm;
-    private String head_name;
-
-    //是否更新了昵称
-    private boolean hasNickname;
-    //是否更新了头像
-    private boolean hasHeadpic = false;
-    private String headStr;
+//
+//    //临时保存拍照照片保存路径
+//    private String capturePath = "";
+//    private Bitmap bm;
+//    private String head_name;
+//
+//    //是否更新了昵称
+//    private boolean hasNickname;
+//    //是否更新了头像
+//    private boolean hasHeadpic = false;
+//    private String headStr;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,14 +113,17 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
 
     public void updateView(){
         ImageLoader.loadCircle(SPUtils.getString(SPUtils.HEAD_PIC),headpic);
-        username.setText(SPUtils.getString(SPUtils.NICK_NAME));
+        String nickname = SPUtils.getString(SPUtils.NICK_NAME);;
         if (SPUtils.getInt(SPUtils.SEX,0) == 1) {
             // 男
+            username.setText(nickname+" · "+"男");
         } else if (SPUtils.getInt(SPUtils.SEX,0) == 2){
             // 女
+            username.setText(nickname+" · "+"女");
+
         } else {
             // 未知
-
+            username.setText(nickname+" . "+"");
         }
     }
 
@@ -142,26 +142,26 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
                     return;
                 }
                 break;
-            case R.id.lay_advatar_upload:   // 头像上传
-                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
-                    ActionSheet.showSheet(getActivity(),
-                            MineFragment.this, MineFragment.this, "1");
-                } else {
-                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
-                    return;
-                }
+//            case R.id.lay_advatar_upload:   // 头像上传
+//                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
+//                    ActionSheet.showSheet(getActivity(),
+//                            MineFragment.this, MineFragment.this, "1");
+//                } else {
+//                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
+//                    return;
+//                }
+//                break;
+            case R.id.lay_renwu:  // 我的任务
+                intent = new Intent(this.getContext(), TaskActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.lay_person_info:      // 完善个人信息
+            case R.id.lay_person_info: // 完善个人信息
                 if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
                     startActivity(new Intent(this.getContext(), ModifyInfoActivity.class));
                 } else {
                     startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
                     return;
                 }
-                break;
-            case R.id.lay_renwu:  // 任务
-                intent = new Intent(this.getContext(), TaskActivity.class);
-                startActivity(intent);
                 break;
             case R.id.setting_lay: // 设置
                 intent = new Intent(this.getContext(),SettingActivity.class);
@@ -175,140 +175,140 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == CAMERA_REQUEST_CODE  && resultCode != 0){
-            Uri uri = Uri.fromFile(new File(capturePath));
-            System.out.println("uri:"+ uri);
-            startImageZoom(uri);
-        }else if(requestCode == GALLERY_REQUEST_CODE  && resultCode != 0){
-            if (data == null) {
-                return;
-            }
-            Uri uri = data.getData();
-            startImageZoom(uri);
-        }else if(requestCode == CROP_REQUEST_CODE  && resultCode != 0){
-            if (data == null) {
-                return;
-            }
-            Bundle extras = data.getExtras();
-            if (extras == null) {
-                return;
-            }
-            bm = extras.getParcelable("data");
-            capturePath = saveBitmap(bm);
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode == CAMERA_REQUEST_CODE  && resultCode != 0){
+//            Uri uri = Uri.fromFile(new File(capturePath));
+//            System.out.println("uri:"+ uri);
+//            startImageZoom(uri);
+//        }else if(requestCode == GALLERY_REQUEST_CODE  && resultCode != 0){
+//            if (data == null) {
+//                return;
+//            }
+//            Uri uri = data.getData();
+//            startImageZoom(uri);
+//        }else if(requestCode == CROP_REQUEST_CODE  && resultCode != 0){
+//            if (data == null) {
+//                return;
+//            }
+//            Bundle extras = data.getExtras();
+//            if (extras == null) {
+//                return;
+//            }
+//            bm = extras.getParcelable("data");
+//            capturePath = saveBitmap(bm);
+//
+//            // 更新本地的图像地址
+//            SPUtils.putString(SPUtils.HEAD_PIC,capturePath);
+//            ImageLoader.loadCircle(capturePath,headpic);
+//            hasHeadpic = true;
+//            System.out.println("xxxxxxxxxxxxxxxxxxxxxxx:" + capturePath);
+//
+//            // 上传头像
+//            uploadHeader();
+//        }
+//
+//    }
 
-            // 更新本地的图像地址
-            SPUtils.putString(SPUtils.HEAD_PIC,capturePath);
-            ImageLoader.loadCircle(capturePath,headpic);
-            hasHeadpic = true;
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxx:" + capturePath);
-
-            // 上传头像
-            uploadHeader();
-        }
-
-    }
-
-    private void startImageZoom(Uri uri) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 150);
-        intent.putExtra("outputY", 150);
-        intent.putExtra("return-data", true);
-        startActivityForResult(intent, CROP_REQUEST_CODE);
-
-    }
-
-
-    public byte[] Bitmap2Bytes(Bitmap bm){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        return baos.toByteArray();
-    }
-
-    private String saveBitmap(Bitmap bm) {
-        head_name = System.currentTimeMillis() + "_head_small.jpg";
-        String path = FlowAPI.YYW_FILE_PATH + head_name;
-        File img = new File(path);
-        try {
-            FileOutputStream fos = new FileOutputStream(img);
-            bm.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-            return path;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-
-
-    @Override
-    public void onCancel(DialogInterface dialogInterface) {
-
-    }
-
-    @Override
-    public void onClick(int whichButton) {
-        if (whichButton == 1) {
-            String state = Environment.getExternalStorageState();
-            if (state.equals(Environment.MEDIA_MOUNTED)) {
-                Intent getImageByCamera = new Intent("android.media.action.IMAGE_CAPTURE");
-                String out_file_path = FlowAPI.YYW_FILE_PATH;
-                File dir = new File(out_file_path);
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                capturePath = FlowAPI.YYW_FILE_PATH + System.currentTimeMillis() + "_head.jpg";
-                getImageByCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(capturePath)));
-                getImageByCamera.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-                startActivityForResult(getImageByCamera, CAMERA_REQUEST_CODE);
-            }
-            else {
-                Toast.makeText(getActivity(), "请确认已经插入SD卡", Toast.LENGTH_LONG).show();
-            }
-        } else if (whichButton == 2) {
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");//相片类型
-            startActivityForResult(intent, GALLERY_REQUEST_CODE);
-        }
-    }
-
-
-    private void uploadHeader() {
-        byte[] bytes = Bitmap2Bytes(bm);
-        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_UPDATE_HEDER);
-        requestParams.addParameter("img", Base64Util.encode(bytes));
-        requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
-        MXUtils.httpPost(requestParams, new CommonCallbackImp("头像上传",requestParams) {
-            @Override
-            public void onSuccess(String data) {
-                super.onSuccess(data);
-                try {
-                    JSONObject jsonObject = new JSONObject(data);
-                    String status = jsonObject.getString("status");
-                    String info = jsonObject.getString("info");
-                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
-                        showMsg("头像上传成功");
-                    }else {
-                        showMsg(info);
-                    }
-                }catch (JSONException e){
-                    e.printStackTrace();
-                }
-            }
-        });
-
-    }
+//    private void startImageZoom(Uri uri) {
+//        Intent intent = new Intent("com.android.camera.action.CROP");
+//        intent.setDataAndType(uri, "image/*");
+//        intent.putExtra("crop", "true");
+//        intent.putExtra("aspectX", 1);
+//        intent.putExtra("aspectY", 1);
+//        intent.putExtra("outputX", 150);
+//        intent.putExtra("outputY", 150);
+//        intent.putExtra("return-data", true);
+//        startActivityForResult(intent, CROP_REQUEST_CODE);
+//
+//    }
+//
+//
+//    public byte[] Bitmap2Bytes(Bitmap bm){
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//        return baos.toByteArray();
+//    }
+//
+//    private String saveBitmap(Bitmap bm) {
+//        head_name = System.currentTimeMillis() + "_head_small.jpg";
+//        String path = FlowAPI.YYW_FILE_PATH + head_name;
+//        File img = new File(path);
+//        try {
+//            FileOutputStream fos = new FileOutputStream(img);
+//            bm.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//            fos.flush();
+//            fos.close();
+//            return path;
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//            return null;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+//
+//
+//
+//    @Override
+//    public void onCancel(DialogInterface dialogInterface) {
+//
+//    }
+//
+//    @Override
+//    public void onClick(int whichButton) {
+//        if (whichButton == 1) {
+//            String state = Environment.getExternalStorageState();
+//            if (state.equals(Environment.MEDIA_MOUNTED)) {
+//                Intent getImageByCamera = new Intent("android.media.action.IMAGE_CAPTURE");
+//                String out_file_path = FlowAPI.YYW_FILE_PATH;
+//                File dir = new File(out_file_path);
+//                if (!dir.exists()) {
+//                    dir.mkdirs();
+//                }
+//                capturePath = FlowAPI.YYW_FILE_PATH + System.currentTimeMillis() + "_head.jpg";
+//                getImageByCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(capturePath)));
+//                getImageByCamera.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+//                startActivityForResult(getImageByCamera, CAMERA_REQUEST_CODE);
+//            }
+//            else {
+//                Toast.makeText(getActivity(), "请确认已经插入SD卡", Toast.LENGTH_LONG).show();
+//            }
+//        } else if (whichButton == 2) {
+//            Intent intent = new Intent(Intent.ACTION_PICK);
+//            intent.setType("image/*");//相片类型
+//            startActivityForResult(intent, GALLERY_REQUEST_CODE);
+//        }
+//    }
+//
+//
+//    private void uploadHeader() {
+//        byte[] bytes = Bitmap2Bytes(bm);
+//        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_UPDATE_HEDER);
+//        requestParams.addParameter("img", Base64Util.encode(bytes));
+//        requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
+//        MXUtils.httpPost(requestParams, new CommonCallbackImp("头像上传",requestParams) {
+//            @Override
+//            public void onSuccess(String data) {
+//                super.onSuccess(data);
+//                try {
+//                    JSONObject jsonObject = new JSONObject(data);
+//                    String status = jsonObject.getString("status");
+//                    String info = jsonObject.getString("info");
+//                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+//                        showMsg("头像上传成功");
+//                    }else {
+//                        showMsg(info);
+//                    }
+//                }catch (JSONException e){
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//
+//    }
 
     // 个人中心
     private void personCenter() {
