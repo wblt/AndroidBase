@@ -178,7 +178,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:includeFontPadding="false"
-                android:text="清楚缓存"
+                android:text="清除缓存"
                 android:textColor="@color/gray_black_text"
                 android:textSize="14sp" />
             <ImageView

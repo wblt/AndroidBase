@@ -25,7 +25,9 @@ import cn.tthud.taitian.adapter.CompanyListAdapter;
 import cn.tthud.taitian.adapter.GoodIPAdapter;
 import cn.tthud.taitian.adapter.StarXueyuanAdapter;
 import cn.tthud.taitian.base.FragmentBase;
+import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.ActivityBean;
+import cn.tthud.taitian.bean.AdmarketBean;
 import cn.tthud.taitian.bean.CompanyBean;
 import cn.tthud.taitian.bean.StarXueyuanBean;
 import cn.tthud.taitian.utils.GsonUtils;
@@ -54,7 +56,6 @@ public class HomeFragment extends FragmentBase {
     private View view;
     @ViewInject(R.id.sib_simple_usage)
     private SimpleImageBanner sib_simple_usage;
-    private List<String> urls;
 
     @ViewInject(R.id.xrv_custom_qiyan)
     private XRecyclerView xrvCustom_qiyan;
@@ -132,14 +133,10 @@ public class HomeFragment extends FragmentBase {
                         String result = jsonObject.getString("data");
                         JSONObject jsonObject1 = new JSONObject(result);
 
-                        // 广告图
-                        JSONArray markarray = jsonObject1.getJSONArray("admarket");
-                        urls = new ArrayList<String>();
-                        for (int i = 0;i<markarray.length();i++) {
-                            JSONObject jsonObject2 = (JSONObject) markarray.get(i);
-                            urls.add(jsonObject2.getString("img"));
-                        }
-                        setBanner();
+                        String admarket = jsonObject1.getString("admarket");
+                        Type ad_type = new TypeToken<List<AdmarketBean>>(){}.getType();
+                        List<AdmarketBean> admarketList = GsonUtils.jsonToList(admarket, ad_type);
+                        setBanner(admarketList);
 
                         ll_sousuo_lay.setVisibility(View.VISIBLE);
 
@@ -199,22 +196,42 @@ public class HomeFragment extends FragmentBase {
     }
 
     // 顶部广告
-    private void setBanner() {
-//        String url1 = "http://waxin-1251679641.file.myqcloud.com/859425427f474da3b4e77c6ce48f7447.jpg";
-//        String url2 = "http://waxin-1251679641.file.myqcloud.com/13d173a342484c6cbdaca32315f13412.jpg";
-//        String url3 = "http://waxin-1251679641.file.myqcloud.com/0a265766bd91453882990c8da7889d8e.jpg";
-//        List<String> urls = new ArrayList<>();
-//        urls.add(url1);
-//        urls.add(url2);
-//        urls.add(url3);
+    private void setBanner(final List<AdmarketBean> model) {
+
+        if (model.size() == 0){
+            return;
+        }
+
+        List<String> urls = new ArrayList<String>();
+        for (int i = 0;i<model.size();i++) {
+            AdmarketBean bean = model.get(i);
+            urls.add(bean.getImg());
+        }
+
         sib_simple_usage.setSource(getBanner(urls)).startScroll();
         sib_simple_usage.setOnItemClickL(new SimpleImageBanner.OnItemClickL() {
             @Override
             public void onItemClick(int position) {
-                // 进入公司详情
-//                Intent intent = new Intent(HomeFragment.this.getActivity(), CompanyDetailActivity.class);
-//                startActivity(intent);
-                // 进入公司列表
+                AdmarketBean adBean = model.get(position);
+
+                if (adBean.getIshref().equals("2")) return;
+
+                if (TextUtils.isEmpty(adBean.getUrl())){
+                    if (TextUtils.isEmpty(adBean.getModule())) return;
+
+                    if (adBean.getModule().equals("artonce")){
+
+                    }else if (adBean.getModule().equals("admarket")){
+
+                    }else if (adBean.getModule().equals("article")){
+
+                    }
+                }else{
+                    Intent intent = new Intent(HomeFragment.this.getActivity(),WebViewActivity.class);
+                    intent.putExtra("title",adBean.getTitle());
+                    intent.putExtra("url", adBean.getUrl());
+                    startActivity(intent);
+                }
             }
         });
     }
