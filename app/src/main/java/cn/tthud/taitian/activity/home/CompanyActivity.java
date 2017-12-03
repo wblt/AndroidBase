@@ -56,7 +56,8 @@ public class CompanyActivity extends ActivityBase {
         // 禁止下拉刷新
         xrvCustom.setPullRefreshEnabled(false);
         xrvCustom.setLoadingMoreEnabled(false);
-
+        // 去掉刷新头
+        xrvCustom.clearHeader();
         xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {

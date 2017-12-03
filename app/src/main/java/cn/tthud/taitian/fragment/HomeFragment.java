@@ -331,7 +331,6 @@ public class HomeFragment extends FragmentBase {
         xrvCustom_ip.setLoadingMoreEnabled(false);
         // 去掉刷新头
         xrvCustom_ip.clearHeader();
-
         xrvCustom_ip.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {

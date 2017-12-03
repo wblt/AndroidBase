@@ -115,11 +115,9 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         }else{
             mPage += 1;
         }
-
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_MESSAGE_LIST);
         requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
         requestParams.addParameter("p", mPage);
-
         MXUtils.httpGet(requestParams, new CommonCallbackImp("消息列表",requestParams){
             @Override
             public void onSuccess(String data) {

@@ -99,8 +99,10 @@ public class FlowAPI {
     // 修改密码
     public static String APP_EDIT_PWD = SERVER_IP + "/appEditPwdSbt";
 
+    // 更多ip
+    public static String APP_ACT_MORE = SERVER_IP + "/appActMore";
 
-
-
+    // 更多学员
+    public static String APP_STAR_MORE = SERVER_IP + "/appStarMore";
 
 }
