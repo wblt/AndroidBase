@@ -99,6 +99,10 @@ public class FlowAPI {
     // 绑定号码
     public static String APP_BIND_PHONE = SERVER_IP + "/appVstReUserSbt";
 
+    // 修改密码
+    public static String APP_EDIT_PWD = SERVER_IP + "/appEditPwdSbt";
+
+
 
 
 
