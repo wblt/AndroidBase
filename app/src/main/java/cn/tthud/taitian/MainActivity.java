@@ -39,9 +39,7 @@ public class MainActivity extends BaseActivity {
         MineFragment mineFragment = new MineFragment();
 //        ContactListFragment contactListFragment = new ContactListFragment();
         MessageFragment messageFragment = new MessageFragment();
-
         fragments = new Fragment[] {homeFragment,disFragment, messageFragment, mineFragment};
-
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, homeFragment)
                 .add(R.id.fragment_container, disFragment)
@@ -55,6 +53,7 @@ public class MainActivity extends BaseActivity {
                 .hide(mineFragment)
                 .show(homeFragment)
                 .commit();
+        DemoApplication.getInstance().setMainActivity(this);
     }
 
     /**

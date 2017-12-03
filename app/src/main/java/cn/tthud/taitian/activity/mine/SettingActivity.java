@@ -20,6 +20,7 @@ import org.xutils.view.annotation.ViewInject;
 import java.io.File;
 import java.util.Map;
 
+import cn.tthud.taitian.DemoApplication;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.base.ActivityBase;
@@ -146,6 +147,8 @@ public class SettingActivity extends ActivityBase {
                             case R.id.tv_contain:
                                 customAlertDialog.dismiss();
                                 logout();
+                                DemoApplication.getInstance().closeActivitys();
+                                finish();
                                 break;
                         }
                     }

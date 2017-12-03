@@ -126,11 +126,14 @@ public class LoginActivity extends ActivityBase {
         }
     };
 
-    @Event(value = {R.id.register_btn,R.id.forget_pwd,R.id.login_btn,R.id.username_xx,R.id.pwd_xx,R.id.wechat_login_btn},type = View.OnClickListener.class)
+    @Event(value = {R.id.top_left,R.id.register_btn,R.id.forget_pwd,R.id.login_btn,R.id.username_xx,R.id.pwd_xx,R.id.wechat_login_btn},type = View.OnClickListener.class)
     private void onEvenOnclick(View view){
         int id = view.getId();
         Intent intent ;
         switch (id){
+            case R.id.top_left:
+                finish();
+                break;
             case R.id.login_btn:
                 login();
                 break;

@@ -10,10 +10,21 @@
         android:orientation="vertical"
         android:background="@color/white">
 
+        <ImageButton
+            android:id="@+id/top_left"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:background="@null"
+            android:src="@mipmap/fanhui_hei">
+        </ImageButton>
+
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:src="@mipmap/logo"/>
 
@@ -33,7 +44,7 @@
                     android:id="@+id/dengluzhuceanniu"
                     android:layout_marginRight="15dp"
                     android:layout_alignParentRight="true"
-                    android:layout_width="130dp"
+                    android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:scaleType="fitXY"
                     android:src="@mipmap/dengluzhuceanniu"/>
@@ -43,7 +54,7 @@
                     android:layout_toLeftOf="@+id/dengluzhuceanniu"
                     android:layout_alignParentRight="true"
                     android:id="@+id/register_btn"
-                    android:layout_width="130dp"
+                    android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginRight="15dp"
