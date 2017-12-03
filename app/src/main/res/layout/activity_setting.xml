@@ -140,7 +140,7 @@
                 android:includeFontPadding="false"
                 android:text="已绑定"
                 android:gravity="end"
-                android:textColor="@color/gray_black_text"
+                android:textColor="@color/gray_text_light"
                 android:textSize="14sp" />
             <ImageView
                 android:layout_width="20dp"

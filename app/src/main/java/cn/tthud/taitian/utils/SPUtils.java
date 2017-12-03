@@ -59,9 +59,9 @@ public class SPUtils {
         SPUtils.putInt(TOTALJIFEN, 0);
         SPUtils.putString(MOBILE, "");
         SPUtils.putString(PASSWORD, "");
-        SPUtils.putString(ISVST,"");
+        SPUtils.putBoolean(ISVST,false);
         SPUtils.putBoolean(IS_BINDWX,false);
-        SPUtils.putBoolean(H5_URL,false);
+        SPUtils.putString(H5_URL,"");
     }
 
 

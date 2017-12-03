@@ -277,9 +277,6 @@ public class LoginActivity extends ActivityBase {
         });
     }
 
-
-
-
     // 微信登录
     private void wxlogin() {
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_WX_LOGIN);

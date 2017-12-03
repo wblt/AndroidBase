@@ -76,6 +76,8 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
     @ViewInject(R.id.headpic)
     private ImageView headpic;
 
+
+
     //临时保存拍照照片保存路径
     private String capturePath = "";
     private Bitmap bm;
@@ -368,7 +370,6 @@ public class MineFragment extends FragmentBase implements ActionSheet.OnActionSh
                         SPUtils.putString(SPUtils.NICK_NAME,nickname);
                         SPUtils.putString(SPUtils.HEAD_PIC,headpic);
                         SPUtils.putInt(SPUtils.SEX,sex);
-
                         SPUtils.putBoolean(SPUtils.ISVST,isvst);
                         SPUtils.putBoolean(SPUtils.IS_BINDWX,isbindwx);
                         SPUtils.putString(SPUtils.H5_URL,h5_url);

@@ -34,16 +34,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="免费送道具"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"/>
+                    android:textSize="14sp"
+                    android:textColor="@color/gray_black"/>
 
                 <TextView
                     android:id="@+id/tv_jingdu"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textColor="@color/gray_text_light"
                     android:text="进度1/1"/>
             </LinearLayout>

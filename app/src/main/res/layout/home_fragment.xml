@@ -27,6 +27,7 @@
 
             <!--搜索-->
             <LinearLayout
+                android:id="@+id/ll_sousuo_lay"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
@@ -35,7 +36,8 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:background="@drawable/shape_rectangle_white"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:visibility="gone">
                 <ImageView
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
@@ -96,65 +98,23 @@
 
 
             <ImageView
+                android:id="@+id/iv_seg_line1"
                 android:layout_width="fill_parent"
                 android:layout_height="10dp"
-                android:background="@color/line" />
-
-            <!--资讯动态-->
-            <LinearLayout
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:layout_marginLeft="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
-                        android:text=""/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_marginRight="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                        android:text="查看更多"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="10dp"
-                android:background="@color/line" />
+                android:background="@color/line"
+                android:visibility="gone"/>
 
             <!--明星学员-->
             <LinearLayout
+                android:id="@+id/ll_xueyuan_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -177,7 +137,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="明星学员"
-                        android:textColor="@color/black"
+                        android:textColor="@color/gray_black"
                         android:textSize="15sp"/>
 
 
@@ -199,7 +159,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="更多"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        android:textColor="@color/gray_text_light"/>
                 </RelativeLayout>
 
                 <LinearLayout
@@ -239,19 +200,23 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/iv_seg_line2"
                 android:layout_width="fill_parent"
                 android:layout_height="10dp"
-                android:background="@color/line" />
+                android:background="@color/line"
+                android:visibility="gone"/>
 
             <!--精彩IP-->
             <LinearLayout
+                android:id="@+id/ll_ip_lay"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -274,7 +239,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="精 彩 IP"
-                        android:textColor="@color/black"
+                        android:textColor="@color/gray_black"
                         android:textSize="15sp"/>
 
 
@@ -296,7 +261,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="更多"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        android:textColor="@color/gray_text_light"/>
                 </RelativeLayout>
 
                 <LinearLayout

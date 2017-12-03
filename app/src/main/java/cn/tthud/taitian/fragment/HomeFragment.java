@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.xrecyclerview.XRecyclerView;
@@ -73,6 +74,23 @@ public class HomeFragment extends FragmentBase {
     @ViewInject(R.id.page_refresh_ip)
     private LinearLayout page_refresh_ip;
 
+    @ViewInject(R.id.iv_seg_line1)
+    private ImageView iv_seg_line1;
+
+    @ViewInject(R.id.iv_seg_line2)
+    private ImageView iv_seg_line2;
+
+    @ViewInject(R.id.ll_ip_lay)
+    private LinearLayout ll_ip_lay;
+
+    @ViewInject(R.id.ll_xueyuan_lay)
+    private LinearLayout ll_xueyuan_lay;
+
+    @ViewInject(R.id.ll_sousuo_lay)
+    private LinearLayout ll_sousuo_lay;
+
+
+
     private CompanyListAdapter adapter_qiyan;
     private StarXueyuanAdapter adapter_xueyuan;
     private GoodIPAdapter adapter_ip;
@@ -114,8 +132,6 @@ public class HomeFragment extends FragmentBase {
                         String result = jsonObject.getString("data");
                         JSONObject jsonObject1 = new JSONObject(result);
 
-
-
                         // 广告图
                         JSONArray markarray = jsonObject1.getJSONArray("admarket");
                         urls = new ArrayList<String>();
@@ -124,6 +140,8 @@ public class HomeFragment extends FragmentBase {
                             urls.add(jsonObject2.getString("img"));
                         }
                         setBanner();
+
+                        ll_sousuo_lay.setVisibility(View.VISIBLE);
 
                         // 企业
                         String company = jsonObject1.getString("company");
@@ -137,17 +155,28 @@ public class HomeFragment extends FragmentBase {
                         String star = jsonObject1.getString("star");
                         Type type_star =new TypeToken<List<StarXueyuanBean>>(){}.getType();
                         List<StarXueyuanBean> startList = GsonUtils.jsonToList(star,type_star);
-                        xrvCustom_xueyuan.setVisibility(View.VISIBLE);
                         adapter_xueyuan.addAll(startList);
                         adapter_xueyuan.notifyDataSetChanged();
+                        if (adapter_xueyuan.getData().size() != 0) {
+                            page_refresh_xueyuan.setVisibility(View.GONE);
+                            iv_seg_line1.setVisibility(View.VISIBLE);
+                            ll_xueyuan_lay.setVisibility(View.VISIBLE);
+                            xrvCustom_xueyuan.setVisibility(View.VISIBLE);
+                        }
 
                         // ip
                         String activity = jsonObject1.getString("activity");
                         Type type_act =new TypeToken<List<ActivityBean>>(){}.getType();
                         List<ActivityBean> acttList = GsonUtils.jsonToList(activity,type_act);
-                        xrvCustom_ip.setVisibility(View.VISIBLE);
                         adapter_ip.addAll(acttList);
                         adapter_ip.notifyDataSetChanged();
+                        if (adapter_ip.getData().size() != 0) {
+                            page_refresh_ip.setVisibility(View.GONE);
+                            iv_seg_line2.setVisibility(View.VISIBLE);
+                            ll_ip_lay.setVisibility(View.VISIBLE);
+                            xrvCustom_ip.setVisibility(View.VISIBLE);
+                        }
+
                     }else {
                         showMsg(info);
                     }
