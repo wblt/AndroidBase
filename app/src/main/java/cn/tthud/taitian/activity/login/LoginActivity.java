@@ -373,8 +373,8 @@ public class LoginActivity extends ActivityBase {
                         Log.i(integer.getObject().toString());
                         String status = integer.getObject().toString();
                         if (status.equals("logininfo")) {
-                            login_phone.setText(SPUtils.MOBILE);
-                            login_pwd.setText(SPUtils.PASSWORD);
+                            login_phone.setText(SPUtils.getString(SPUtils.MOBILE));
+                            login_pwd.setText(SPUtils.getString(SPUtils.PASSWORD));
                         }
                     }
                 });
