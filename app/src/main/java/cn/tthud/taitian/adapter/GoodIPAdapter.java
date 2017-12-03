@@ -37,6 +37,7 @@ public class GoodIPAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
             }else {
                 binding.ivImg.setImageResource(R.mipmap.icon_default);
             }
+            binding.tvNumber.setText(object.getTotal());
             binding.tvName.setText(object.getTitle());
             binding.tvTime.setText(DateUtil.formatUnixTime(Long.valueOf(object.getStart())));
             binding.tvLocation.setText(object.getArea_title());
