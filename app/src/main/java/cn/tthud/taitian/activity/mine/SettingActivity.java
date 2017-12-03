@@ -17,8 +17,10 @@ import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
+import java.io.File;
 import java.util.Map;
 
+import cn.tthud.taitian.DemoApplication;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.base.ActivityBase;
@@ -119,6 +121,15 @@ public class SettingActivity extends ActivityBase {
                                 break;
                             case R.id.tv_contain:
                                 customAlertDialog.dismiss();
+                                showProgressDialog();
+                                File directory = new File(FlowAPI.YYW_FILE_PATH);
+                                if (directory != null && directory.exists() && directory.isDirectory()) {
+                                    for (File item : directory.listFiles()) {
+                                        item.delete();
+                                    }
+                                }
+                                showMsg("清理完毕");
+                                dismissProgressDialog();
                                 break;
                         }
                     }
@@ -126,7 +137,23 @@ public class SettingActivity extends ActivityBase {
                 customAlertDialog.show();
                 break;
             case R.id.logout:
-                logout();
+                customAlertDialog = new CustomAlertDialog(this, R.style.dialog,"你确定要退出账号？", new CustomAlertDialog.ViewClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        switch (view.getId()) {
+                            case R.id.iv_close:
+                                customAlertDialog.dismiss();
+                                break;
+                            case R.id.tv_contain:
+                                customAlertDialog.dismiss();
+                                logout();
+                                DemoApplication.getInstance().closeActivitys();
+                                finish();
+                                break;
+                        }
+                    }
+                });
+                customAlertDialog.show();
                 break;
         }
     }

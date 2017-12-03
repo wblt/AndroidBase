@@ -1,5 +1,6 @@
 package cn.tthud.taitian.activity.mine;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.http.RequestParams;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.lang.reflect.Type;
@@ -61,8 +63,11 @@ public class TaskActivity extends ActivityBase {
         super.onCreate(savedInstanceState);
         appendMainBody(this, R.layout.activity_task);
         initRecyclerView();
+        showLoading();
         loadData();
     }
+
+
 
     private void loadData() {
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_TASK);
@@ -71,6 +76,7 @@ public class TaskActivity extends ActivityBase {
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
+                cancelLoading();
                 try {
                     JSONObject jsonObject = new JSONObject(data);
                     String status = jsonObject.getString("status");
@@ -119,6 +125,17 @@ public class TaskActivity extends ActivityBase {
                 }
             }
         });
+    }
+
+    @Event(value = {R.id.top_left},type = View.OnClickListener.class)
+    private void onEvenOnclick(View view){
+        int id = view.getId();
+        Intent intent ;
+        switch (id){
+            case R.id.top_left:
+                finish();
+                break;
+        }
     }
 
     private void initRecyclerView(){
