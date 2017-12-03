@@ -18,9 +18,12 @@ import com.example.xrecyclerview.XRecyclerView;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.tthud.taitian.R;
+import cn.tthud.taitian.activity.home.MoreIPActivity;
+import cn.tthud.taitian.activity.home.MoreStarActivity;
 import cn.tthud.taitian.adapter.CompanyListAdapter;
 import cn.tthud.taitian.adapter.GoodIPAdapter;
 import cn.tthud.taitian.adapter.StarXueyuanAdapter;
@@ -91,12 +94,9 @@ public class HomeFragment extends FragmentBase {
     private LinearLayout ll_sousuo_lay;
 
 
-
     private CompanyListAdapter adapter_qiyan;
     private StarXueyuanAdapter adapter_xueyuan;
     private GoodIPAdapter adapter_ip;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,6 +117,22 @@ public class HomeFragment extends FragmentBase {
             loadData();
         }
         return view;
+    }
+
+    @Event(value = {R.id.ll_more_ip,R.id.ll_more_star},type = View.OnClickListener.class)
+    private void onEvenOnclick(View view){
+        int id = view.getId();
+        Intent intent;
+        switch (id) {
+            case R.id.ll_more_ip:
+                intent = new Intent(getContext(), MoreIPActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll_more_star:
+                intent = new Intent(getContext(), MoreStarActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     private void loadData(){
