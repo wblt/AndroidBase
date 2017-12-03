@@ -12,5 +12,6 @@ public class RxCodeConstants {
 
     public static final int RegisterActivity2_finsh = 2;
 
+    public static final int RegisterActivity1_finsh = 3;
 
 }

@@ -24,6 +24,7 @@ import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.net.rxbus.RxBus;
 import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
 import cn.tthud.taitian.net.rxbus.RxCodeConstants;
+import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
@@ -169,6 +170,8 @@ public class ForgetPwdActivity2 extends ActivityBase {
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         showMsg("提交成功");
+                        SPUtils.putString(SPUtils.MOBILE,phone);
+                        SPUtils.putString(SPUtils.PASSWORD,pwd);
                         RxBus.getDefault().post(RxCodeConstants.ForgetPwdActivity2_finsh, new RxBusBaseMessage(1,"finsh"));
                         finish();
                     }else {

@@ -241,6 +241,7 @@ public class ForgetPwdActivity extends ActivityBase {
                         Log.i(integer.getObject().toString());
                         String status = integer.getObject().toString();
                         if (status.equals("finsh")) {
+                            RxBus.getDefault().post(RxCodeConstants.RegisterActivity1_finsh, new RxBusBaseMessage(1,"logininfo"));
                             finish();
                         }
                     }

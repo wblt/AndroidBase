@@ -33,6 +33,9 @@ import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.bean.UserBean;
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.net.rxbus.RxBus;
+import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
+import cn.tthud.taitian.net.rxbus.RxCodeConstants;
 import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.RegExpValidator;
@@ -40,6 +43,8 @@ import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.widget.ActionSheet;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
+import rx.Subscription;
+import rx.functions.Action1;
 
 public class LoginActivity extends ActivityBase {
 
@@ -73,6 +78,8 @@ public class LoginActivity extends ActivityBase {
     private String phone;
     private String pwd;
 
+    private Subscription subscription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +88,7 @@ public class LoginActivity extends ActivityBase {
         //setTopBarTitle("登录");
         //setTopLeftDefultListener();
         initListener();
+        initRxBus();
     }
 
     /*
@@ -220,6 +228,9 @@ public class LoginActivity extends ActivityBase {
     protected void onDestroy() {
         super.onDestroy();
         UMShareAPI.get(this).release();
+        if(!subscription .isUnsubscribed()) {
+            subscription .unsubscribe();
+        }
     }
 
 
@@ -348,6 +359,25 @@ public class LoginActivity extends ActivityBase {
                 }
             }
         });
+    }
+
+
+    /**
+     * 收到通知后，获取用户信息，存在内存
+     */
+    private void initRxBus() {
+        subscription = RxBus.getDefault().toObservable(RxCodeConstants.RegisterActivity1_finsh, RxBusBaseMessage.class)
+                .subscribe(new Action1<RxBusBaseMessage>() {
+                    @Override
+                    public void call(RxBusBaseMessage integer) {
+                        Log.i(integer.getObject().toString());
+                        String status = integer.getObject().toString();
+                        if (status.equals("logininfo")) {
+                            login_phone.setText(SPUtils.MOBILE);
+                            login_pwd.setText(SPUtils.PASSWORD);
+                        }
+                    }
+                });
     }
 
 }
