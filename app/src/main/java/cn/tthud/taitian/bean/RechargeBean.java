@@ -5,7 +5,7 @@ package cn.tthud.taitian.bean;
  */
 
 public class RechargeBean {
-    private int id;
+    private int rl_id;
     private String solevar;
     private String title;
     private String remark;
@@ -27,8 +27,8 @@ public class RechargeBean {
         return isSelect;
     }
 
-    public int getId() {
-        return id;
+    public int getRl_id() {
+        return rl_id;
     }
 
     public String getSolevar() {
@@ -71,8 +71,8 @@ public class RechargeBean {
         return sort;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRl_id(int rl_id) {
+        this.rl_id = rl_id;
     }
 
     public void setSolevar(String solevar) {
