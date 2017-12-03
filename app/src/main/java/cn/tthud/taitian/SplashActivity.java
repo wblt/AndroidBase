@@ -82,9 +82,7 @@ public class SplashActivity extends CheckPermissionsActivity {
 				ad.dismiss();
 			}
 		}
-
 		initRxBus();
-
 		super.onResume();
 	}
 

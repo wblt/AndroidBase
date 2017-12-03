@@ -22,9 +22,15 @@ import org.xutils.view.annotation.ViewInject;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.net.rxbus.RxBus;
+import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
+import cn.tthud.taitian.net.rxbus.RxCodeConstants;
+import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.RegExpValidator;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
+import rx.Subscription;
+import rx.functions.Action1;
 
 public class ForgetPwdActivity extends ActivityBase {
 
@@ -55,6 +61,8 @@ public class ForgetPwdActivity extends ActivityBase {
     private String phone;       // 手机号码
     private String codeNum;     // 验证码
 
+    private Subscription subscription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +72,7 @@ public class ForgetPwdActivity extends ActivityBase {
 //        setTopLeftListener(this);
         initView();
         initListener();
+        initRxBus();
     }
 
     // 初始化视图
@@ -211,5 +220,30 @@ public class ForgetPwdActivity extends ActivityBase {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(!subscription .isUnsubscribed()) {
+            subscription .unsubscribe();
+        }
+    }
+
+    /**
+     * 收到通知后，获取用户信息，存在内存
+     */
+    private void initRxBus() {
+        subscription = RxBus.getDefault().toObservable(RxCodeConstants.ForgetPwdActivity2_finsh, RxBusBaseMessage.class)
+                .subscribe(new Action1<RxBusBaseMessage>() {
+                    @Override
+                    public void call(RxBusBaseMessage integer) {
+                        Log.i(integer.getObject().toString());
+                        String status = integer.getObject().toString();
+                        if (status.equals("finsh")) {
+                            finish();
+                        }
+                    }
+                });
     }
 }

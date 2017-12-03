@@ -21,6 +21,9 @@ import org.xutils.view.annotation.ViewInject;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.net.rxbus.RxBus;
+import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
+import cn.tthud.taitian.net.rxbus.RxCodeConstants;
 import cn.tthud.taitian.utils.RegExpValidator;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
@@ -91,6 +94,7 @@ public class RegisterActivity2 extends ActivityBase {
                 break;
             case R.id.login_btn:
                 // 前往登录页面
+                RxBus.getDefault().post(RxCodeConstants.RegisterActivity2_finsh, new RxBusBaseMessage(1,"finsh"));
                 finish();
                 break;
             case R.id.username_xx:
@@ -235,6 +239,8 @@ public class RegisterActivity2 extends ActivityBase {
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         showMsg("注册成功");
+                        RxBus.getDefault().post(RxCodeConstants.RegisterActivity2_finsh, new RxBusBaseMessage(1,"finsh"));
+                        finish();
                     }else {
                         showMsg(info);
                     }

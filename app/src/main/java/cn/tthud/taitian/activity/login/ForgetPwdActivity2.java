@@ -21,6 +21,9 @@ import org.xutils.view.annotation.ViewInject;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.net.rxbus.RxBus;
+import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
+import cn.tthud.taitian.net.rxbus.RxCodeConstants;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
@@ -165,7 +168,9 @@ public class ForgetPwdActivity2 extends ActivityBase {
                     String status = jsonObject.getString("status");
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
-                        showMsg("修改成功");
+                        showMsg("提交成功");
+                        RxBus.getDefault().post(RxCodeConstants.ForgetPwdActivity2_finsh, new RxBusBaseMessage(1,"finsh"));
+                        finish();
                     }else {
                         showMsg(info);
                     }
