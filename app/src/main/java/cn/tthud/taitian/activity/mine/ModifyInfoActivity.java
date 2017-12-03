@@ -53,11 +53,6 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
     private Bitmap bm;
     private String head_name;
 
-    //是否更新了昵称
-    private boolean hasNickname;
-    //是否更新了头像
-    private boolean hasHeadpic = false;
-    private String headStr;
 
     @ViewInject(R.id.et_username)
     private EditText et_username;
@@ -82,6 +77,8 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
 
     @ViewInject(R.id.et_sign)
     private EditText et_sign;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,12 +169,12 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
             showMsg("昵称不能为空");
             return;
         }
-        String realName = et_name.getText().toString();
+        final String realName = et_name.getText().toString();
         if (TextUtils.isEmpty(realName)){
             showMsg("真实姓名不能为空");
             return;
         }
-        String idCard = et_number_card.getText().toString();
+        final String idCard = et_number_card.getText().toString();
         if (TextUtils.isEmpty(idCard)){
             showMsg("身份证号码不能为空");
             return;
@@ -186,12 +183,12 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
             showMsg("身份证号码格式不正确");
             return;
         }
-        String sexvalue = sex.getText().toString();
+        final String sexvalue = sex.getText().toString();
         if (TextUtils.isEmpty(sexvalue)){
             showMsg("请选择性别");
             return;
         }
-        String email = et_email.getText().toString();
+        final String email = et_email.getText().toString();
         if (TextUtils.isEmpty(email)){
             showMsg("邮箱不能为空");
             return;
@@ -200,12 +197,12 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
             showMsg("邮箱格式不正确");
             return;
         }
-        String address = et_address.getText().toString();
+        final String address = et_address.getText().toString();
         if (TextUtils.isEmpty(address)){
             showMsg("地址不能为空");
             return;
         }
-        String sign = et_sign.getText().toString();
+        final String sign = et_sign.getText().toString();
         if (TextUtils.isEmpty(sign)){
             showMsg("个性签名不能为空");
             return;
@@ -226,13 +223,8 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
         requestParams.addParameter("email", email);
         requestParams.addParameter("address", address);
         requestParams.addParameter("stylesig", sign);
-//        ub.setNickname(nickName);
-//        ub.setRealname(realName);
-//        ub.setIdcard(idCard);
-//        ub.setSex(sex_temp);
-//        ub.setEmail(email);
-//        ub.setStylesig(sign);
-//        ub.setAddress(address);
+
+        final int finalSex_temp = sex_temp;
         MXUtils.httpPost(requestParams, new CommonCallbackImp("修改个人信息",requestParams){
             @Override
             public void onSuccess(String data) {
@@ -245,13 +237,14 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
 
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         showMsg(info);
-//                        SPUtils.setUserBean(ub);
-
                         // 缓存本地信息
                         SPUtils.putString(SPUtils.NICK_NAME,nickName);
-
-
-
+                        SPUtils.putString(SPUtils.REAL_NAME,realName);
+                        SPUtils.putString(SPUtils.ID_CARD,idCard);
+                        SPUtils.putInt(SPUtils.SEX, finalSex_temp);
+                        SPUtils.putString(SPUtils.EMAIL,email);
+                        SPUtils.putString(SPUtils.ADDRESS,address);
+                        SPUtils.putString(SPUtils.STYLESIG,sign);
                         finish();
                     }else {
                         showMsg(info);
@@ -287,12 +280,7 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
             bm = extras.getParcelable("data");
             capturePath = saveBitmap(bm);
 
-            // 更新本地的图像地址
-            SPUtils.putString(SPUtils.HEAD_PIC,capturePath);
-            ImageLoader.loadCircle(capturePath,headpic);
-            hasHeadpic = true;
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxx:" + capturePath);
-
             // 上传头像
             uploadHeader();
         }
@@ -388,6 +376,9 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
                     String status = jsonObject.getString("status");
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        // 更新本地的图像地址
+                        SPUtils.putString(SPUtils.HEAD_PIC,capturePath);
+                        ImageLoader.loadCircle(capturePath,headpic);
                         showMsg("头像上传成功");
                     }else {
                         showMsg(info);
