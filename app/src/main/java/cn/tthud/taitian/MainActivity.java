@@ -28,6 +28,8 @@ public class MainActivity extends BaseActivity {
     private Fragment[] fragments;
     private int index;
     private int currentTabIndex;
+    private Intent websocketServiceIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +57,9 @@ public class MainActivity extends BaseActivity {
                 .commit();
         DemoApplication.getInstance().setMainActivity(this);
 
-
+        // 开启sevice
+        websocketServiceIntent = new Intent(this, WebSocketService.class);
+        startService(websocketServiceIntent);
     }
 
     /**
@@ -121,5 +125,12 @@ public class MainActivity extends BaseActivity {
         // set current tab selected
         mTabs[index].setSelected(true);
         currentTabIndex = index;
+    }
+
+    @Override
+    public void onBackPressed() {
+        WebSocketService.closeWebsocket(true);
+        stopService(websocketServiceIntent);
+        super.onBackPressed();
     }
 }

@@ -26,8 +26,10 @@ import java.net.URISyntaxException;
 public class WebSocketService extends Service {
     private static final String TAG = WebSocketService.class.getSimpleName();
     private BroadcastReceiver connectionReceiver;
+    private static boolean isClosed = true;
     private static String websocketHost = "wss://socket.tthud.cn:4431";
     private static WebSocketClient mClient;
+    private static boolean isExitApp = false;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (connectionReceiver == null) {
@@ -38,9 +40,15 @@ public class WebSocketService extends Service {
                     NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
                     if (networkInfo == null || !networkInfo.isAvailable()) {
                         Toast.makeText(getApplicationContext(), "网络已断开，请重新连接", Toast.LENGTH_SHORT).show();
+
                     } else {
                         // 监听网络，有网的时候
-
+                        if (mClient != null) {
+                            mClient.close();
+                        }
+                        if (isClosed) {
+                            webSocketConnect();
+                        }
                     }
                 }
             };
@@ -59,10 +67,11 @@ public class WebSocketService extends Service {
 
     public static void webSocketConnect(){
         try {
-            mClient = new WebSocketClient(new URI("wss://socket.tthud.cn:4431")) {
+            mClient = new WebSocketClient(new URI(websocketHost)) {
                 @Override
                 public void onOpen(ServerHandshake handshakedata) {
                     System.out.println( "开流--opened connection" );
+                    isClosed = false;
                 }
                 @Override
                 public void onMessage(String message) {
@@ -71,6 +80,7 @@ public class WebSocketService extends Service {
                 @Override
                 public void onClose(int code, String reason, boolean remote) {
                     System.out.println( "关流--Connection closed by " + ( remote ? "remote peer" : "us" ) );
+                    isClosed = true;
                 }
                 @Override
                 public void onError(Exception ex) {
@@ -86,8 +96,12 @@ public class WebSocketService extends Service {
         }
     }
 
-    public static void closeWebsocket() {
-
+    public static void closeWebsocket(boolean exitApp) {
+        isExitApp = exitApp;
+        if (mClient != null && mClient.isConnecting()) {
+            mClient.close();
+            mClient = null;
+        }
     }
     public static void sendMsg(String s) {
         Log.d(TAG, "sendMsg = " + s);
@@ -102,7 +116,6 @@ public class WebSocketService extends Service {
             unregisterReceiver(connectionReceiver);
         }
     }
-
 //    public static void main(String[] args) {
 //        webSocketConnect();
 //    }
