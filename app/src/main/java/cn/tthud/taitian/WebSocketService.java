@@ -103,7 +103,7 @@ public class WebSocketService extends Service {
         }
     }
 
-    public static void main(String[] args) {
-        webSocketConnect();
-    }
+//    public static void main(String[] args) {
+//        webSocketConnect();
+//    }
 }
