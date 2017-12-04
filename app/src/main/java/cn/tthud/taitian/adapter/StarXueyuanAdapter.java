@@ -34,6 +34,7 @@ public class StarXueyuanAdapter extends BaseRecyclerViewAdapter<StarXueyuanBean>
             }else {
                 binding.ivImg.setImageResource(R.mipmap.icon_default);
             }
+            binding.tvTitle.setText(object.getTitle());
             binding.tvName.setText(object.getRealname());
         }
     }
