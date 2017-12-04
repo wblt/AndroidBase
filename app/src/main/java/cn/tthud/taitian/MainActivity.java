@@ -54,6 +54,8 @@ public class MainActivity extends BaseActivity {
                 .show(homeFragment)
                 .commit();
         DemoApplication.getInstance().setMainActivity(this);
+
+
     }
 
     /**
