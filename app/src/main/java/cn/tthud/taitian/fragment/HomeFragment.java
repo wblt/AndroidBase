@@ -313,7 +313,7 @@ public class HomeFragment extends FragmentBase {
                 //loadData("2");
             }
         });
-        xrvCustom_xueyuan.setLayoutManager(new GridLayoutManager(getContext(),4));
+        xrvCustom_xueyuan.setLayoutManager(new GridLayoutManager(getContext(),2));
         // 需加，不然滑动不流畅
         xrvCustom_xueyuan.setNestedScrollingEnabled(false);
         xrvCustom_xueyuan.setHasFixedSize(false);

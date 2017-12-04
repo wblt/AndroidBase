@@ -36,15 +36,7 @@
                     android:adjustViewBounds="true"
                     android:maxHeight="200dp"
                     android:src="@mipmap/icon_default"/>
-                <TextView
-                    android:padding="5dp"
-                    android:text="舞蹈"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+
             </RelativeLayout>
 
             <!--标题-->

@@ -33,7 +33,6 @@ public class CompanyListAdapter extends BaseRecyclerViewAdapter {
         public void onBindViewHolder(final CompanyBean object, int position) {
             binding.executePendingBindings();
             if(object.getThumb() != null && object.getThumb().length() != 0){
-                //ImageLoader.load(object.getThumb(), binding.ivCompanyImg);
                 ImageLoader.loadRect(object.getThumb(),binding.ivCompanyImg);
             }else {
                 binding.ivCompanyImg.setImageResource(R.mipmap.icon_default);
