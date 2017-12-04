@@ -40,7 +40,6 @@ public class WebSocketService extends Service {
                     NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
                     if (networkInfo == null || !networkInfo.isAvailable()) {
                         Toast.makeText(getApplicationContext(), "网络已断开，请重新连接", Toast.LENGTH_SHORT).show();
-
                     } else {
                         // 监听网络，有网的时候
                         if (mClient != null) {
