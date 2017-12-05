@@ -10,6 +10,7 @@ import cn.tthud.taitian.base.BaseRecyclerViewAdapter;
 import cn.tthud.taitian.base.BaseRecyclerViewHolder;
 import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.ActivityBean;
+import cn.tthud.taitian.databinding.ItemActivityBinding;
 import cn.tthud.taitian.databinding.ItemCompanyActivityBinding;
 import cn.tthud.taitian.utils.ImageLoader;
 
@@ -20,10 +21,10 @@ import cn.tthud.taitian.utils.ImageLoader;
 public class CompanyActivityAdapter extends BaseRecyclerViewAdapter {
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(parent, R.layout.item_company_activity);
+        return new ViewHolder(parent, R.layout.item_activity);
     }
 
-    private class ViewHolder extends BaseRecyclerViewHolder<ActivityBean, ItemCompanyActivityBinding>{
+    private class ViewHolder extends BaseRecyclerViewHolder<ActivityBean, ItemActivityBinding>{
 
         ViewHolder(ViewGroup parent, int item_android) {
             super(parent, item_android);
@@ -34,9 +35,9 @@ public class CompanyActivityAdapter extends BaseRecyclerViewAdapter {
             binding.executePendingBindings();
 
             if(object.getImg() != null && object.getImg().size() != 0){
-                ImageLoader.load(object.getImg().get(0), binding.ivImage);
+                ImageLoader.load(object.getImg().get(0), binding.ivBannerPic);
             }else {
-                binding.ivImage.setImageResource(R.mipmap.icon_default);
+                binding.ivBannerPic.setImageResource(R.mipmap.icon_default);
             }
 
             binding.tvTitle.setText(object.getTitle());
