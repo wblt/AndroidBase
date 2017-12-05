@@ -218,7 +218,7 @@ public class ModifyPhoneActivity extends ActivityBase {
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.PERSONAL_CHANGE_TEL);
         requestParams.addParameter("password", pwd);
         requestParams.addParameter("mobile", phone);
-        requestParams.addParameter("Ub_id", SPUtils.getString(SPUtils.UB_ID));
+        requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
         MXUtils.httpGet(requestParams, new CommonCallbackImp("获取验证码",requestParams) {
             @Override
             public void onSuccess(String result) {

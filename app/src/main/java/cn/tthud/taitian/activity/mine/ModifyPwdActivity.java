@@ -153,7 +153,7 @@ public class ModifyPwdActivity extends ActivityBase {
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_EDIT_PWD);
         requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
         requestParams.addParameter("password", newpassword);
-        requestParams.addParameter("Ub_id", SPUtils.getString(SPUtils.UB_ID));
+        requestParams.addParameter("usedpwd", oldpassword);
         MXUtils.httpPost(requestParams, new CommonCallbackImp("修改密码",requestParams) {
             @Override
             public void onSuccess(String result) {

@@ -5,6 +5,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -52,6 +53,12 @@ public class RecharegeActivity extends ActivityBase {
 
     @ViewInject(R.id.btn_recharge)
     private Button btn_recharge;
+
+    @ViewInject(R.id.et_other)
+    private EditText et_other;
+
+    @ViewInject(R.id.ll_other)
+    private LinearLayout ll_other;
 
     private ActivityRechargeAdapter mAdapter;
 
@@ -141,10 +148,12 @@ public class RecharegeActivity extends ActivityBase {
                             page_refresh.setVisibility(View.VISIBLE);
                             xrvCustom.setVisibility(View.GONE);
                             btn_recharge.setVisibility(View.GONE);
+                            ll_other.setVisibility(View.GONE);
                         }else {
                             page_refresh.setVisibility(View.GONE);
                             xrvCustom.setVisibility(View.VISIBLE);
                             btn_recharge.setVisibility(View.VISIBLE);
+                            ll_other.setVisibility(View.VISIBLE);
                         }
                     }else {
                         showMsg(info);
