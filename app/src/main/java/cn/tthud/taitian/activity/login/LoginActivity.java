@@ -152,7 +152,7 @@ public class LoginActivity extends ActivityBase {
                 login_pwd.setText("");
                 break;
             case R.id.register_btn:
-                intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                intent = new Intent(LoginActivity.this,RegisterActivity2.class);
                 startActivity(intent);
                 break;
             case R.id.forget_pwd:
