@@ -53,9 +53,16 @@ public class MainActivity extends BaseActivity {
                 .hide(messageFragment)
 //                .hide(contactListFragment)
                 .hide(mineFragment)
-                .show(homeFragment)
+                .hide(homeFragment)
                 .commit();
         DemoApplication.getInstance().setMainActivity(this);
+
+        // select first tab
+        int put_extra_index = getIntent().getIntExtra("extra_index",0);
+        FragmentTransaction trx = getSupportFragmentManager().beginTransaction();
+        trx.show(fragments[put_extra_index]).commit();
+        mTabs[put_extra_index].setSelected(true);
+        currentTabIndex = put_extra_index;
 
         // 开启sevice
         websocketServiceIntent = new Intent(this, WebSocketService.class);
@@ -74,11 +81,8 @@ public class MainActivity extends BaseActivity {
         mTabs[2] = (Button) findViewById(R.id.btn_conversation);
 //        mTabs[3] = (Button) findViewById(R.id.btn_address_list);
         mTabs[3] = (Button) findViewById(R.id.btn_mine);
-
-        // select first tab
-        int put_extra_index = getIntent().getIntExtra("extra_index",0);
-        mTabs[put_extra_index].setSelected(true);
     }
+
 
     /**
      * on tab clicked
