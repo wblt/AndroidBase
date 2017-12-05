@@ -49,6 +49,8 @@ public class MoreStarActivity extends ActivityBase {
         setTopBarTitle("更多学员");
         setTopLeftDefultListener();
         initRecyclerView();
+
+        mPage = 1;
         loadData();
     }
 
@@ -74,6 +76,8 @@ public class MoreStarActivity extends ActivityBase {
                         List<StarXueyuanBean> beanList = GsonUtils.jsonToList(list,type);
                         adapter.addAll(beanList);
                         adapter.notifyDataSetChanged();
+
+                        xrvCustom.loadMoreComplete();
                         if(adapter.getData().size() == 0){
                             page_refresh.setVisibility(View.VISIBLE);
                             xrvCustom.setVisibility(View.GONE);
@@ -106,8 +110,9 @@ public class MoreStarActivity extends ActivityBase {
         xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                mPage = 1;
                 adapter.clear();
+                adapter.notifyDataSetChanged();
+                mPage = 1;
                 loadData();
             }
 
