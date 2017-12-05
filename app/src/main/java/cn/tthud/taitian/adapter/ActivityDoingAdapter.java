@@ -35,8 +35,8 @@ public class ActivityDoingAdapter extends BaseRecyclerViewAdapter<ActivityBean> 
         public void onBindViewHolder(final ActivityBean object, int position) {
             binding.executePendingBindings();
 
-            if(object.getThumb() != null && object.getThumb().length() != 0){
-                ImageLoader.load(object.getThumb(), binding.ivBannerPic);
+            if(object.getImg() != null && object.getImg().size() != 0){
+                ImageLoader.load(object.getImg().get(0), binding.ivBannerPic);
             }else {
                 binding.ivBannerPic.setImageResource(R.mipmap.icon_default);
             }

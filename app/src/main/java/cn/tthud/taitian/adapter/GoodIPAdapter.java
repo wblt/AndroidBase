@@ -32,8 +32,9 @@ public class GoodIPAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
         @Override
         public void onBindViewHolder(final ActivityBean object, int position) {
             binding.executePendingBindings();
-            if(object.getThumb() != null && object.getThumb().length() != 0){
-                ImageLoader.load(object.getThumb(), binding.ivImg);
+
+            if(object.getImg() != null && object.getImg().size() != 0){
+                ImageLoader.load(object.getImg().get(0), binding.ivImg);
             }else {
                 binding.ivImg.setImageResource(R.mipmap.icon_default);
             }

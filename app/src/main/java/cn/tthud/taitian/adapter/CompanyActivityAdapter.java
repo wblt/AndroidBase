@@ -33,8 +33,8 @@ public class CompanyActivityAdapter extends BaseRecyclerViewAdapter {
         public void onBindViewHolder(final ActivityBean object, int position) {
             binding.executePendingBindings();
 
-            if(object.getThumb() != null && object.getThumb().length() != 0){
-                ImageLoader.load(object.getThumb(), binding.ivImage);
+            if(object.getImg() != null && object.getImg().size() != 0){
+                ImageLoader.load(object.getImg().get(0), binding.ivImage);
             }else {
                 binding.ivImage.setImageResource(R.mipmap.icon_default);
             }
