@@ -105,4 +105,7 @@ public class FlowAPI {
     // 更多学员
     public static String APP_STAR_MORE = SERVER_IP + "/appStarMore";
 
+    // 搜索
+    public static String APP_SEARCH_ACT = SERVER_IP + "/appSearchAct";
+
 }

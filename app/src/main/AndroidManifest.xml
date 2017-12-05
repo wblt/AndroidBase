@@ -144,9 +144,18 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
-        <activity android:name=".activity.home.MoreIPActivity" />
-        <activity android:name=".activity.home.MoreStarActivity" />
-        <activity android:name=".activity.home.SearchActivity"></activity>
+        <activity android:name=".activity.home.MoreIPActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"/>
+        <activity android:name=".activity.home.MoreStarActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"/>
+        <activity android:name=".activity.home.SearchActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
     </application>
 
 </manifest>

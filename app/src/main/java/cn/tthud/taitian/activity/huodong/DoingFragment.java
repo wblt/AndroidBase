@@ -101,11 +101,9 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
         }else{
             mPage += 1;
         }
-
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_ACTIVITY_LIST);
         requestParams.addParameter("type","start");
         requestParams.addParameter("p", mPage);
-
         MXUtils.httpGet(requestParams, new CommonCallbackImp("活动列表--进行中",requestParams){
             @Override
             public void onSuccess(String data) {
@@ -119,15 +117,11 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
                         xrvCustom.refreshComplete();
                         String result = jsonObject.getString("data");
                         JSONObject jsonObject1 = new JSONObject(result);
-
                         String maxPage = jsonObject1.getString("maxPage");
                         mMaxPage = Integer.parseInt(maxPage);
-
                         String list = jsonObject1.getString("list");
-
                         Type type=new TypeToken<List<ActivityBean>>(){}.getType();
                         List<ActivityBean> beanList = GsonUtils.jsonToList(list,type);
-
                         mAdapter.addAll(beanList);
                         mAdapter.notifyDataSetChanged();
                         if(mAdapter.getData().size() == 0){

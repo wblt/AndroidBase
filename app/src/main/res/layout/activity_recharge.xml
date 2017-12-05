@@ -110,7 +110,19 @@
                 <EditText
                     android:id="@+id/et_other"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:digits="1234567890"
+                    android:hint=""
+                    android:textColorHint="@color/province_line_border"
+                    android:lines="1"
+                    android:maxLength="20"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray_black"
+                    android:minHeight="45dp"
+                    android:text=""
+                    android:layout_marginLeft="10dp"/>
             </LinearLayout>
 
 
