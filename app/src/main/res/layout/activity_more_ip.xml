@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:orientation="vertical">
-        
+
 
         <com.example.xrecyclerview.XRecyclerView
             android:id="@+id/xrv_custom"
