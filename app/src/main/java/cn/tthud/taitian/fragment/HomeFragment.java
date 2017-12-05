@@ -24,6 +24,7 @@ import org.xutils.view.annotation.ViewInject;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.home.MoreIPActivity;
 import cn.tthud.taitian.activity.home.MoreStarActivity;
+import cn.tthud.taitian.activity.home.SearchActivity;
 import cn.tthud.taitian.adapter.ActivityDoingAdapter;
 import cn.tthud.taitian.adapter.CompanyListAdapter;
 import cn.tthud.taitian.adapter.GoodIPAdapter;
@@ -120,7 +121,7 @@ public class HomeFragment extends FragmentBase {
         return view;
     }
 
-    @Event(value = {R.id.ll_more_ip,R.id.ll_more_star},type = View.OnClickListener.class)
+    @Event(value = {R.id.ll_more_ip,R.id.ll_more_star,R.id.ll_sousuo_lay},type = View.OnClickListener.class)
     private void onEvenOnclick(View view){
         int id = view.getId();
         Intent intent;
@@ -133,6 +134,11 @@ public class HomeFragment extends FragmentBase {
                 intent = new Intent(getContext(), MoreStarActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.ll_sousuo_lay:
+                intent = new Intent(getContext(),SearchActivity.class);
+                startActivity(intent);
+                break;
+
         }
     }
 

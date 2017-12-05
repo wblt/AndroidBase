@@ -45,11 +45,8 @@ public class CompanyActivity extends ActivityBase {
     private TextView tv_company_name;
     private TextView tv_fork_number;
     private TextView tv_activity_number;
-
     private CompanyActivityAdapter mAdapter;
-
     private int cid = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

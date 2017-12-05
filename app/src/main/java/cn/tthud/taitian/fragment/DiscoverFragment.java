@@ -1,5 +1,6 @@
 package cn.tthud.taitian.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,14 +8,17 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.gigamole.navigationtabstrip.NavigationTabStrip;
 
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 
 import cn.tthud.taitian.R;
+import cn.tthud.taitian.activity.home.SearchActivity;
 import cn.tthud.taitian.activity.huodong.DoingFragment;
 import cn.tthud.taitian.activity.huodong.EndFragment;
 import cn.tthud.taitian.activity.huodong.UnDoFragment;
@@ -49,7 +53,9 @@ public class DiscoverFragment extends FragmentBase {
         if(view == null){
             view = super.onCreateView(inflater,container,savedInstanceState);
             appendMainBody(this, R.layout.discover_fragment);
-
+            appendTopBody(R.layout.activity_top_icon);
+            ((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
+            setTopBarTitle("活动");
             initView();
         }
         return view;
@@ -69,4 +75,19 @@ public class DiscoverFragment extends FragmentBase {
         mViewPager.setOffscreenPageLimit(fragmentList.size());
         ntsBottom.setViewPager(mViewPager, 0);
     }
+
+    @Event(value = {R.id.ll_sousuo_lay},type = View.OnClickListener.class)
+    private void onEvenOnclick(View view) {
+        int id = view.getId();
+        Intent intent;
+        switch (id) {
+            case R.id.ll_sousuo_lay:
+                intent = new Intent(getContext(),SearchActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+
+
 }
