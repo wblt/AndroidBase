@@ -152,8 +152,13 @@ public class MineFragment extends FragmentBase{
 //                }
 //                break;
             case R.id.lay_renwu:  // 我的任务
-                intent = new Intent(this.getContext(), TaskActivity.class);
-                startActivity(intent);
+                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
+                    intent = new Intent(this.getContext(), TaskActivity.class);
+                    startActivity(intent);
+                } else {
+                    startActivity(new Intent(this.getContext(), BindPhoneActivity.class));
+                    return;
+                }
                 break;
             case R.id.lay_person_info: // 完善个人信息
                 if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {

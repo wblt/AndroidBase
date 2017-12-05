@@ -131,6 +131,7 @@ public class SplashActivity extends CheckPermissionsActivity {
 	public void doLogin(){
 		DemoApplication.getInstance().closeActivitys();
 		Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+		intent.putExtra("extra_index",0);
 		startActivity(intent);
 		finish();
 	}

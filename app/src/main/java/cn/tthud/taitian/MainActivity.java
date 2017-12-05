@@ -74,8 +74,10 @@ public class MainActivity extends BaseActivity {
         mTabs[2] = (Button) findViewById(R.id.btn_conversation);
 //        mTabs[3] = (Button) findViewById(R.id.btn_address_list);
         mTabs[3] = (Button) findViewById(R.id.btn_mine);
+
         // select first tab
-        mTabs[0].setSelected(true);
+        int put_extra_index = getIntent().getIntExtra("extra_index",0);
+        mTabs[put_extra_index].setSelected(true);
     }
 
     /**
