@@ -178,17 +178,17 @@ public class HomeFragment extends FragmentBase {
                         }
 
                         // ip
-                        String activity = jsonObject1.getString("activity");
-                        Type type_act =new TypeToken<List<ActivityBean>>(){}.getType();
-                        List<ActivityBean> acttList = GsonUtils.jsonToList(activity,type_act);
-                        adapter_ip.addAll(acttList);
-                        adapter_ip.notifyDataSetChanged();
-                        if (adapter_ip.getData().size() != 0) {
-                            page_refresh_ip.setVisibility(View.GONE);
-                            iv_seg_line2.setVisibility(View.VISIBLE);
-                            ll_ip_lay.setVisibility(View.VISIBLE);
-                            xrvCustom_ip.setVisibility(View.VISIBLE);
-                        }
+//                        String activity = jsonObject1.getString("activity");
+//                        Type type_act =new TypeToken<List<ActivityBean>>(){}.getType();
+//                        List<ActivityBean> acttList = GsonUtils.jsonToList(activity,type_act);
+//                        adapter_ip.addAll(acttList);
+//                        adapter_ip.notifyDataSetChanged();
+//                        if (adapter_ip.getData().size() != 0) {
+//                            page_refresh_ip.setVisibility(View.GONE);
+//                            iv_seg_line2.setVisibility(View.VISIBLE);
+//                            ll_ip_lay.setVisibility(View.VISIBLE);
+//                            xrvCustom_ip.setVisibility(View.VISIBLE);
+//                        }
 
                     }else {
                         showMsg(info);

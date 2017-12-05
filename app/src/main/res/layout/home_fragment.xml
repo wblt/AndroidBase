@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:banner="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:banner="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white">
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/white">
 
@@ -119,7 +122,6 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp">
-
                     <ImageView
                         android:id="@+id/img_xueyuanicon"
                         android:layout_marginLeft="5dp"
@@ -168,7 +170,7 @@
                             android:scaleType="centerInside"
                             android:layout_centerVertical="true"
                             android:layout_alignParentRight="true"/>
-                        </LinearLayout>
+                    </LinearLayout>
 
                 </RelativeLayout>
 
@@ -178,14 +180,26 @@
                     android:background="@color/colorWhite"
                     android:orientation="vertical">
 
-                    <com.example.xrecyclerview.XRecyclerView
-                        android:id="@+id/xrv_custom_xueyuan"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:scrollbarSize="4dp"
-                        android:visibility="gone"
-                        android:scrollbarThumbVertical="@color/grey_500"
-                        android:scrollbars="vertical" />
+                        android:descendantFocusability="blocksDescendants">
+
+                        <com.example.xrecyclerview.XRecyclerView
+                            android:id="@+id/xrv_custom_xueyuan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbarSize="4dp"
+                            android:visibility="gone"
+                            android:scrollbarThumbVertical="@color/grey_500"
+                            android:scrollbars="vertical" />
+
+                    </RelativeLayout>
+
+                    <!--作者：牟仯-->
+                    <!--链接：http://www.jianshu.com/p/5c6f9540f9f6-->
+                    <!--來源：简书-->
+                    <!--著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。-->
 
                     <!--加载失败-->
                     <LinearLayout
@@ -319,4 +333,5 @@
 
         </LinearLayout>
     </ScrollView>
-</layout>
+
+</LinearLayout>
