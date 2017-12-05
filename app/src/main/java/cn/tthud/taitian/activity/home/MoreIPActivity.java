@@ -72,8 +72,12 @@ public class MoreIPActivity extends ActivityBase {
                         String list = jsonObject1.getString("list");
                         Type type=new TypeToken<List<ActivityBean>>(){}.getType();
                         List<ActivityBean> beanList = GsonUtils.jsonToList(list,type);
+
                         adapter.addAll(beanList);
                         adapter.notifyDataSetChanged();
+
+                        // 防止加载更多动来动去
+                        xrvCustom.loadMoreComplete();
                         if(adapter.getData().size() == 0){
                             page_refresh.setVisibility(View.VISIBLE);
                             xrvCustom.setVisibility(View.GONE);

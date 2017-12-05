@@ -24,6 +24,7 @@ import org.xutils.view.annotation.ViewInject;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.home.MoreIPActivity;
 import cn.tthud.taitian.activity.home.MoreStarActivity;
+import cn.tthud.taitian.adapter.ActivityDoingAdapter;
 import cn.tthud.taitian.adapter.CompanyListAdapter;
 import cn.tthud.taitian.adapter.GoodIPAdapter;
 import cn.tthud.taitian.adapter.StarXueyuanAdapter;
@@ -96,7 +97,7 @@ public class HomeFragment extends FragmentBase {
 
     private CompanyListAdapter adapter_qiyan;
     private StarXueyuanAdapter adapter_xueyuan;
-    private GoodIPAdapter adapter_ip;
+    private ActivityDoingAdapter adapter_ip;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -178,17 +179,17 @@ public class HomeFragment extends FragmentBase {
                         }
 
                         // ip
-//                        String activity = jsonObject1.getString("activity");
-//                        Type type_act =new TypeToken<List<ActivityBean>>(){}.getType();
-//                        List<ActivityBean> acttList = GsonUtils.jsonToList(activity,type_act);
-//                        adapter_ip.addAll(acttList);
-//                        adapter_ip.notifyDataSetChanged();
-//                        if (adapter_ip.getData().size() != 0) {
-//                            page_refresh_ip.setVisibility(View.GONE);
-//                            iv_seg_line2.setVisibility(View.VISIBLE);
-//                            ll_ip_lay.setVisibility(View.VISIBLE);
-//                            xrvCustom_ip.setVisibility(View.VISIBLE);
-//                        }
+                        String activity = jsonObject1.getString("activity");
+                        Type type_act =new TypeToken<List<ActivityBean>>(){}.getType();
+                        List<ActivityBean> acttList = GsonUtils.jsonToList(activity,type_act);
+                        adapter_ip.addAll(acttList);
+                        adapter_ip.notifyDataSetChanged();
+                        if (adapter_ip.getData().size() != 0) {
+                            page_refresh_ip.setVisibility(View.GONE);
+                            iv_seg_line2.setVisibility(View.VISIBLE);
+                            ll_ip_lay.setVisibility(View.VISIBLE);
+                            xrvCustom_ip.setVisibility(View.VISIBLE);
+                        }
 
                     }else {
                         showMsg(info);
@@ -324,8 +325,6 @@ public class HomeFragment extends FragmentBase {
     }
 
     private void initRecyclerView_ip() {
-//        xRecyclerView = LayoutInflater.from(this).inflate(R.layout.default_xrecycle_view,null);
-//        xrvCustom = (XRecyclerView)xRecyclerView.findViewById(R.id.xrv_custom);
         // 禁止下拉刷新
         xrvCustom_ip.setPullRefreshEnabled(false);
         xrvCustom_ip.setLoadingMoreEnabled(false);
@@ -334,17 +333,10 @@ public class HomeFragment extends FragmentBase {
         xrvCustom_ip.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-//                adapter.clear();
-//                mPage = 1;
-//                loadCustomData();
-                //adapter.clear();
-                //queryId = "0";
-                //loadData("1");
             }
 
             @Override
             public void onLoadMore() {
-                //loadData("2");
             }
         });
         xrvCustom_ip.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -353,8 +345,7 @@ public class HomeFragment extends FragmentBase {
         xrvCustom_ip.setHasFixedSize(false);
         xrvCustom_ip.setItemAnimator(new DefaultItemAnimator());
 
-        adapter_ip = new GoodIPAdapter();
+        adapter_ip = new ActivityDoingAdapter();
         xrvCustom_ip.setAdapter(adapter_ip);
     }
-
 }
