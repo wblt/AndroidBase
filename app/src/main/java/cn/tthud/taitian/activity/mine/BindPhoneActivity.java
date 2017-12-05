@@ -3,6 +3,7 @@ package cn.tthud.taitian.activity.mine;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -21,6 +22,8 @@ import org.xutils.view.annotation.ViewInject;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.utils.CommonUtils;
+import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.RegExpValidator;
 import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
@@ -242,7 +245,9 @@ public class BindPhoneActivity extends ActivityBase {
                         String ub_id = jsonObject.getString("ub_id");
                         SPUtils.putString(SPUtils.NICK_NAME,nickname);
                         SPUtils.putString(SPUtils.UB_ID,ub_id);
-                        finish();
+
+                        // 个人中心
+                        personCenter();
                     }else {
                         showMsg(info);
                     }
@@ -252,5 +257,88 @@ public class BindPhoneActivity extends ActivityBase {
             }
         });
 
+    }
+
+    private void personCenter() {
+        if (!CommonUtils.checkLogin()) {
+            return;
+        }
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_CENTER);
+        if (TextUtils.isEmpty(SPUtils.getString(SPUtils.UB_ID))){
+            requestParams.addParameter("islogin", "2");
+        }else{
+            requestParams.addParameter("islogin", "1"); // 已登录
+        }
+        requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
+        requestParams.addParameter("act_url","");
+        requestParams.addParameter("openid", SPUtils.getString(SPUtils.WX_OPEN_ID));
+        requestParams.addParameter("headimgurl", SPUtils.getString(SPUtils.HEAD_PIC));
+        requestParams.addParameter("sex", String.valueOf(SPUtils.getInt(SPUtils.SEX, 0)));
+        requestParams.addParameter("nickname", SPUtils.getString(SPUtils.NICK_NAME));
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("个人中心",requestParams) {
+            @Override
+            public void onSuccess(String data) {
+                super.onSuccess(data);
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        String userData = jsonObject.getString("data");
+                        Log.i("AAAAAAAAAAAAAAAAAAAAAAAAAAa"+userData);
+                        JSONObject jsonObject1 = new JSONObject(userData);
+                        String ub_id = jsonObject1.getString("ub_id");
+                        String nickname = jsonObject1.getString("nickname");
+                        String headpic = jsonObject1.getString("headpic");
+                        int sex = jsonObject1.getInt("sex");
+                        boolean isvst = jsonObject1.getBoolean("isvst");
+                        boolean isbindwx = jsonObject1.getBoolean("isbindwx");
+                        String h5_url = jsonObject1.getString("h5_url");
+
+                        if (!isvst) {
+                            // 用户
+                            String ua_id = jsonObject1.getString("ua_id");
+                            String realname = jsonObject1.getString("realname");
+                            String idcard = jsonObject1.getString("idcard");
+                            String email = jsonObject1.getString("email");
+                            String stylesig = jsonObject1.getString("stylesig");
+                            String address = jsonObject1.getString("address");
+                            int totaljifen = jsonObject1.getInt("totaljifen");
+
+                            SPUtils.putString(SPUtils.UA_ID,ua_id);
+                            SPUtils.putString(SPUtils.REAL_NAME,realname);
+                            SPUtils.putString(SPUtils.ID_CARD,idcard);
+                            SPUtils.putString(SPUtils.STYLESIG,stylesig);
+                            SPUtils.putString(SPUtils.EMAIL,email);
+                            SPUtils.putString(SPUtils.ADDRESS,address);
+                            SPUtils.putInt(SPUtils.TOTALJIFEN,totaljifen);
+                        } else {
+                            String wx_openid = jsonObject1.getString("wx_openid");
+                            SPUtils.putString(SPUtils.WX_OPEN_ID,wx_openid);
+                        }
+                        // 缓存本地信息
+                        SPUtils.putString(SPUtils.UB_ID,ub_id);
+                        SPUtils.putString(SPUtils.NICK_NAME,nickname);
+                        SPUtils.putString(SPUtils.HEAD_PIC,headpic);
+                        SPUtils.putInt(SPUtils.SEX,sex);
+                        SPUtils.putBoolean(SPUtils.ISVST,isvst);
+                        SPUtils.putBoolean(SPUtils.IS_BINDWX,isbindwx);
+                        SPUtils.putString(SPUtils.H5_URL,h5_url);
+
+                        // 更新视图
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                finish();
+                            }
+                        }, 500);
+                    }else {
+                        showMsg(info);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

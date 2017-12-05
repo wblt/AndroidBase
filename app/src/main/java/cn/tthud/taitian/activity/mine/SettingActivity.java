@@ -1,6 +1,7 @@
 package cn.tthud.taitian.activity.mine;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -60,7 +61,6 @@ public class SettingActivity extends ActivityBase {
     }
 
     private void updateView () {
-
         if (SPUtils.getString(SPUtils.SOURCE).equals("tel")) {
             bingding.setText("绑定微信");
         } else if (SPUtils.getString(SPUtils.SOURCE).equals("wx")){
@@ -102,10 +102,30 @@ public class SettingActivity extends ActivityBase {
                 break;
             case R.id.lay_bind:
                 if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
-                    if (!SPUtils.getBoolean(SPUtils.IS_BINDWX,false)) {
-                        // 绑定微信
-                        UMShareAPI.get(SettingActivity.this).getPlatformInfo(SettingActivity.this, SHARE_MEDIA.WEIXIN, authListener);
+                    if(SPUtils.getString(SPUtils.SOURCE).equals("tel")) {
+                        if (!SPUtils.getBoolean(SPUtils.IS_BINDWX,false)) {
+                            // 绑定微信
+                            UMShareAPI.get(SettingActivity.this).getPlatformInfo(SettingActivity.this, SHARE_MEDIA.WEIXIN, authListener);
+                        } else {
+                            // 弹出框
+                            customAlertDialog = new CustomAlertDialog(this, R.style.dialog,"你确定要解除绑定微信？", new CustomAlertDialog.ViewClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    switch (view.getId()) {
+                                        case R.id.iv_close:
+                                            customAlertDialog.dismiss();
+                                            break;
+                                        case R.id.tv_contain:
+                                            customAlertDialog.dismiss();
+                                            unbingdingwx();
+                                            break;
+                                    }
+                                }
+                            });
+                            customAlertDialog.show();
+                        }
                     }
+
                 } else {
                     // 绑定号码
                     startActivity(new Intent(this, BindPhoneActivity.class));
@@ -224,7 +244,7 @@ public class SettingActivity extends ActivityBase {
         requestParams.addParameter("ua_id",SPUtils.getString(SPUtils.UA_ID));
         requestParams.addParameter("wx_openid",SPUtils.getString(SPUtils.WX_OPEN_ID));
 
-        MXUtils.httpGet(requestParams, new CommonCallbackImp("绑定微信",requestParams){
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("绑定微信",requestParams){
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
@@ -234,8 +254,53 @@ public class SettingActivity extends ActivityBase {
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         String result = jsonObject.getString("data");
+                        SPUtils.putBoolean(SPUtils.IS_BINDWX,true);
                         showMsg("绑定成功");
                         Log.i("ddd");
+                        // 更新视图
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateView();
+                            }
+                        }, 500);
+                    }else {
+                        showMsg(info);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void unbingdingwx() {
+        RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_BIND_WX);
+        requestParams.addParameter("isbindwx",1);
+        requestParams.addParameter("ub_id",SPUtils.getString(SPUtils.UB_ID));
+        requestParams.addParameter("ua_id",SPUtils.getString(SPUtils.UA_ID));
+        requestParams.addParameter("wx_openid",SPUtils.getString(SPUtils.WX_OPEN_ID));
+
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("绑定微信",requestParams){
+            @Override
+            public void onSuccess(String data) {
+                super.onSuccess(data);
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        String result = jsonObject.getString("data");
+                        SPUtils.putBoolean(SPUtils.IS_BINDWX,false);
+                        showMsg("解绑成功");
+                        Log.i("ddd");
+                        // 更新视图
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateView();
+                            }
+                        }, 500);
                     }else {
                         showMsg(info);
                     }
