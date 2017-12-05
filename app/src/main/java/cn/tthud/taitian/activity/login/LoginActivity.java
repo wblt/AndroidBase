@@ -350,6 +350,7 @@ public class LoginActivity extends ActivityBase {
                         // 进入主页
                         DemoApplication.getInstance().closeActivitys();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("extra_index",3);
                         startActivity(intent);
                         finish();
                     }else {
