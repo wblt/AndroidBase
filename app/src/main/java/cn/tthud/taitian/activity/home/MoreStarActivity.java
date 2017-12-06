@@ -122,7 +122,7 @@ public class MoreStarActivity extends ActivityBase {
                 loadData();
             }
         });
-        xrvCustom.setLayoutManager(new GridLayoutManager(this,4));
+        xrvCustom.setLayoutManager(new GridLayoutManager(this,2));
         // 需加，不然滑动不流畅
         xrvCustom.setNestedScrollingEnabled(false);
         xrvCustom.setHasFixedSize(false);
