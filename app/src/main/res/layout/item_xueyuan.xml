@@ -9,21 +9,22 @@
     </data>
 
     <LinearLayout
-        android:background="@drawable/shape_rectangle_white"
         android:orientation="vertical"
         android:layout_margin="10dp"
         android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:background="@drawable/shape_rectangle_white">
 
         <ImageView
             android:id="@+id/iv_img"
             android:layout_gravity="center_horizontal"
-            android:adjustViewBounds="true"
             android:layout_width="match_parent"
             android:layout_height="115dp"
+            android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@mipmap/shangweidefault_rect"/>
+            android:src="@mipmap/shangweidefault_rect"
+            />
 
         <TextView
             android:id="@+id/tv_title"

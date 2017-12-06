@@ -22,7 +22,6 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             >
-
             <!--banner图-->
             <RelativeLayout
                 android:layout_width="match_parent"
