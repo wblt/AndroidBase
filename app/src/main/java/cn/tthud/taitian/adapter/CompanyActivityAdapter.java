@@ -37,7 +37,7 @@ public class CompanyActivityAdapter extends BaseRecyclerViewAdapter {
             if(object.getImg() != null && object.getImg().size() != 0){
                 ImageLoader.load(object.getImg().get(0), binding.ivBannerPic);
             }else {
-                binding.ivBannerPic.setImageResource(R.mipmap.icon_default);
+                binding.ivBannerPic.setImageResource(R.mipmap.shangweidefault_rect);
             }
 
             binding.tvTitle.setText(object.getTitle());
