@@ -117,10 +117,6 @@
                 android:id="@+id/ll_xueyuan_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -185,10 +181,6 @@
                     android:background="@color/colorWhite"
                     android:orientation="vertical">
 
-                    <!--作者：牟仯-->
-                    <!--链接：http://www.jianshu.com/p/5c6f9540f9f6-->
-                    <!--來源：简书-->
-                    <!--著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。-->
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
