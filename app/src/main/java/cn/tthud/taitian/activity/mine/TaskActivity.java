@@ -29,6 +29,7 @@ import java.util.List;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.adapter.TaskAdapter;
 import cn.tthud.taitian.base.ActivityBase;
+import cn.tthud.taitian.base.OnItemClickListener;
 import cn.tthud.taitian.bean.ActivityBean;
 import cn.tthud.taitian.bean.TaskBean;
 import cn.tthud.taitian.net.FlowAPI;
@@ -66,8 +67,6 @@ public class TaskActivity extends ActivityBase {
         showLoading();
         loadData();
     }
-
-
 
     private void loadData() {
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_TASK);
@@ -159,7 +158,18 @@ public class TaskActivity extends ActivityBase {
         xrvCustom.setHasFixedSize(false);
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new TaskAdapter();
+        mAdapter.setOnItemClickListener(new OnItemClickListener<TaskBean>() {
+            @Override
+            public void onClick(TaskBean taskBean, int position) {
+                // 领取
+                lingqu(taskBean);
+            }
+        });
         xrvCustom.setAdapter(mAdapter);
+    }
+
+    private void lingqu(TaskBean taskBean) {
+        
     }
 
 }

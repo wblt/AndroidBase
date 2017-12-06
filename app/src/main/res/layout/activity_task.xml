@@ -40,7 +40,7 @@
                 android:includeFontPadding="false"
                 android:layout_centerVertical="true"
                 android:textColor="@color/gray_text_light"
-                android:text="大兵哥"
+                android:text=""
                 android:textSize="14sp"
                 android:layout_marginBottom="20dp"/>
         </LinearLayout>

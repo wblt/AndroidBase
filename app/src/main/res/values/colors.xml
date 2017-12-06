@@ -289,6 +289,9 @@
     <color name="colorGray5">#505050</color>
     <!--gray6-->
     <color name="colorGray6">#141414</color>
+    <color name="colorGray7">#dcdcdc</color>
+    <color name="colorGray8">#107D44</color>
+
 
 
     <color name="colorSendName">#9966cc</color>
