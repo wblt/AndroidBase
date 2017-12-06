@@ -30,7 +30,7 @@ public class StarXueyuanAdapter extends BaseRecyclerViewAdapter<StarXueyuanBean>
         public void onBindViewHolder(final StarXueyuanBean object, int position) {
             binding.executePendingBindings();
             if(object.getImg() != null && object.getImg().length() != 0){
-                ImageLoader.load(object.getImg(),binding.ivImg);
+                ImageLoader.loadRect(object.getImg(),binding.ivImg);
             }else {
                 binding.ivImg.setImageResource(R.mipmap.shangweidefault_square);
             }
