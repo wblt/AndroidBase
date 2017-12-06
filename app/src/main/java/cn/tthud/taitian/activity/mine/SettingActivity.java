@@ -192,6 +192,8 @@ public class SettingActivity extends ActivityBase {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
             // map 直接获取字符串
+            Log.i("BBBBBBBBBBBBBB获取微信信息成功返回：data:",data.toString());
+
             String openid = data.get("openid");
             SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
 
