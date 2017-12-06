@@ -233,19 +233,20 @@ public class BindPhoneActivity extends ActivityBase {
         requestParams.addParameter("nickname", SPUtils.getString(SPUtils.NICK_NAME));
         MXUtils.httpPost(requestParams, new CommonCallbackImp("绑定手机号码",requestParams) {
             @Override
-            public void onSuccess(String result) {
-                super.onSuccess(result);
+            public void onSuccess(String data) {
+                super.onSuccess(data);
                 try {
-                    JSONObject jsonObject = new JSONObject(result);
+                    JSONObject jsonObject = new JSONObject(data);
                     String status = jsonObject.getString("status");
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         showMsg("绑定成功");
-                        String nickname = jsonObject.getString("nickname");
-                        String ub_id = jsonObject.getString("ub_id");
+                        String result = jsonObject.getString("data");
+                        JSONObject jsonObject1 = new JSONObject(result);
+                        String nickname = jsonObject1.getString("nickname");
+                        String ub_id = jsonObject1.getString("ub_id");
                         SPUtils.putString(SPUtils.NICK_NAME,nickname);
                         SPUtils.putString(SPUtils.UB_ID,ub_id);
-
                         // 个人中心
                         personCenter();
                     }else {
