@@ -111,4 +111,7 @@ public class FlowAPI {
     // 领取奖励
     public static String APP_TASK_GEG = SERVER_IP + "/appTaskGeg";
 
+    // 消息绑定appBindUid
+
+
 }
