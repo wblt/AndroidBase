@@ -58,7 +58,6 @@ public class SplashActivity extends CheckPermissionsActivity {
 	private boolean isInit = false;
 	private UserBean userBean;
 
-
 	@Override
 	protected void onCreate(Bundle arg0) {
 		setContentView(R.layout.em_activity_splash);
