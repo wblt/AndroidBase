@@ -75,6 +75,7 @@ public class WebSocketService extends Service {
                 @Override
                 public void onMessage(String message) {
                     System.out.println( "接收--received: " + message );
+                    ChatManager.getInstance().messgeHandle(message);
                 }
                 @Override
                 public void onClose(int code, String reason, boolean remote) {
@@ -108,6 +109,7 @@ public class WebSocketService extends Service {
             mClient.send(s);
         }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

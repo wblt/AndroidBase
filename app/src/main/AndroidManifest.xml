@@ -41,6 +41,8 @@
             android:name="UMENG_APPKEY"
             android:value="59dc6751734be43e290001bf" />
 
+        <service android:name=".WebSocketService"/>
+
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"

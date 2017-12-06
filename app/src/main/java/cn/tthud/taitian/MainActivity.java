@@ -64,9 +64,8 @@ public class MainActivity extends BaseActivity {
         mTabs[put_extra_index].setSelected(true);
         currentTabIndex = put_extra_index;
 
-        // 开启sevice
-        websocketServiceIntent = new Intent(this, WebSocketService.class);
-        startService(websocketServiceIntent);
+        // 启动socket
+        initSocket();
     }
 
     /**
@@ -79,7 +78,7 @@ public class MainActivity extends BaseActivity {
         mTabs[0] = (Button) findViewById(R.id.btn_home);
         mTabs[1] = (Button) findViewById(R.id.btn_discover);
         mTabs[2] = (Button) findViewById(R.id.btn_conversation);
-//        mTabs[3] = (Button) findViewById(R.id.btn_address_list);
+//      mTabs[3] = (Button) findViewById(R.id.btn_address_list);
         mTabs[3] = (Button) findViewById(R.id.btn_mine);
     }
 
@@ -133,10 +132,16 @@ public class MainActivity extends BaseActivity {
         currentTabIndex = index;
     }
 
+    /**
+     * 初始化socket
+     */
+    private void initSocket() {
+        ChatManager.getInstance().initSocket(getApplicationContext());
+    }
+
     @Override
     public void onBackPressed() {
-        WebSocketService.closeWebsocket(true);
-        stopService(websocketServiceIntent);
+        ChatManager.getInstance().exitSocket(getApplicationContext());
         super.onBackPressed();
     }
 }
