@@ -88,7 +88,7 @@ public class ChatManager {
 
     private void bingding(String client_id) {
         String uuid = UUID.randomUUID().toString();
-        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_LOGIN);
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.APP_BIND_UID);
         requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
         requestParams.addParameter("client_id", client_id);
         requestParams.addParameter("device_id", uuid);
