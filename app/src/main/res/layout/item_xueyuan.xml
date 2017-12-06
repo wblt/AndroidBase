@@ -20,9 +20,9 @@
             android:id="@+id/iv_img"
             android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
-            android:layout_height="115dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
             android:src="@mipmap/shangweidefault_rect"
             />
 
