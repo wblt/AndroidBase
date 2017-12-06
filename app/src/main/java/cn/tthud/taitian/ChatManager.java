@@ -2,6 +2,7 @@ package cn.tthud.taitian;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,6 +78,10 @@ public class ChatManager {
             if (type.equals("onConnect")) {
                 // 连接 绑定
                 String client_id = jsonObject.getString("client_id");
+                if (TextUtils.isEmpty(client_id)) {
+                    Log.i("client_id" + "为空");
+                    return;
+                }
                 bingding(client_id);
             }
 
