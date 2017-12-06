@@ -34,24 +34,22 @@ public class MessageAdapter extends BaseRecyclerViewAdapter {
         @Override
         public void onBindViewHolder(final MessageBean object, int position) {
             binding.executePendingBindings();
-
             String msgType = object.getMc_id();
             if (msgType.equals("系统消息")){
                 binding.llSystemMsgTitle.setVisibility(View.VISIBLE);
+                binding.tvTitle.setText("系统消息");
             }else if(msgType.equals("广告通知")){
-                binding.llSystemMsgTitle.setVisibility(View.GONE);
+                binding.llSystemMsgTitle.setVisibility(View.VISIBLE);
+                binding.tvTitle.setText("广告通知");
             }
-
             if(object.getIcon() != null && object.getIcon().length() != 0){
-                binding.ivMsgImv.setVisibility(View.VISIBLE);
-                ImageLoader.load(object.getIcon(), binding.ivMsgImv);
+//                binding.ivMsgImv.setVisibility(View.VISIBLE);
+//                ImageLoader.load(object.getIcon(), binding.ivMsgImv);
             }else {
-                binding.ivMsgImv.setVisibility(View.GONE);
-                binding.ivMsgImv.setImageResource(R.mipmap.ccccc);
+//                binding.ivMsgImv.setVisibility(View.GONE);
+//                binding.ivMsgImv.setImageResource(R.mipmap.ccccc);
             }
-
             binding.tvMsgContent.setText(object.getTitle());
-
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
