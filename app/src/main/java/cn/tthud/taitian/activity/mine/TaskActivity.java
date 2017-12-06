@@ -26,6 +26,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.tthud.taitian.DemoApplication;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.adapter.TaskAdapter;
 import cn.tthud.taitian.base.ActivityBase;
@@ -37,6 +38,8 @@ import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.utils.ImageLoader;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.SPUtils;
+import cn.tthud.taitian.widget.CustomAlertDialog;
+import cn.tthud.taitian.widget.CustomAlertImgDialog;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
@@ -58,6 +61,8 @@ public class TaskActivity extends ActivityBase {
     private TextView num;
 
     private TaskAdapter mAdapter;
+
+    private CustomAlertImgDialog customAlertImgDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +111,8 @@ public class TaskActivity extends ActivityBase {
                             Type type=new TypeToken<List<TaskBean>>(){}.getType();
                             List<TaskBean> acttList = GsonUtils.jsonToList(task,type);
                             num.setText("( 共"+acttList.size()+"个 )");
+                            mAdapter.clear();
+                            xrvCustom.refreshComplete();
                             mAdapter.addAll(acttList);
                             mAdapter.notifyDataSetChanged();
                             if(mAdapter.getData().size() == 0){
@@ -169,7 +176,35 @@ public class TaskActivity extends ActivityBase {
     }
 
     private void lingqu(TaskBean taskBean) {
-        
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.APP_TASK_GEG);
+        requestParams.addParameter("tl_id", taskBean.getTl_id());
+        requestParams.addParameter("award_type", taskBean.getAward_type());
+        requestParams.addParameter("award_worth", taskBean.getTl_award());
+        requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
+        requestParams.addParameter("task_id", taskBean.getTask_id());
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("任务领取",requestParams) {
+            @Override
+            public void onSuccess(String data) {
+                super.onSuccess(data);
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        String result = jsonObject.getString("data");
+                        //showMsg("领取成功");
+                        customAlertImgDialog = new CustomAlertImgDialog(TaskActivity.this, R.style.dialog,"恭喜你，获得上位送出的话筒一个");
+                        customAlertImgDialog.show();
+                        // 刷新数据
+                        loadData();
+                    }else {
+                        showMsg(info);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 }

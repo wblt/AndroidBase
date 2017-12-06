@@ -3,8 +3,22 @@ package cn.tthud.taitian.bean;
 /**
  * Created by wb on 2017/12/2.
  */
-
+/*
+"task_id":2,
+"tk_title":"送免费道具",
+"tk_des":"第一次送免费道具",
+"icon":"appreciatefill",
+"plan":1,
+"time_cycle":0,
+"sort":1,
+"award_type":1,
+"tl_id":"",
+"tl_plan":"",
+"tl_award":"",
+"status":""
+ */
 public class TaskBean {
+    private String task_id;
     private String tk_title;
     private String tk_des;
     private String icon;
@@ -16,6 +30,14 @@ public class TaskBean {
     private String tl_plan;
     private String tl_award;
     private String status;
+
+    public String getTask_id() {
+        return task_id;
+    }
+
+    public void setTask_id(String task_id) {
+        this.task_id = task_id;
+    }
 
     public String getTk_title() {
         return tk_title;

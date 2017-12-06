@@ -108,4 +108,7 @@ public class FlowAPI {
     // 搜索
     public static String APP_SEARCH_ACT = SERVER_IP + "/appSearchAct";
 
+    // 领取奖励
+    public static String APP_TASK_GEG = SERVER_IP + "/appTaskGeg";
+
 }
