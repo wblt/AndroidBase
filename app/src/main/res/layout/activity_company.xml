@@ -4,122 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.tthud.taitian.activity.home.CompanyActivity">
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/top_left"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:background="@null"
+            android:src="@mipmap/fanhui_hei">
+        </ImageButton>
+
+        <TextView
+            android:id="@+id/top_center_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="公司详情"
+            android:padding="10dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/juxing"
+            android:scaleType="fitXY"/>
+
+        <ImageView
+            android:id="@+id/headpic"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/head_default"
+            android:scaleType="fitXY"/>
+
+
+        <TextView
+            android:id="@+id/tv_company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/headpic"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="哈哈哈哈"
+            android:textSize="14sp"
+            />
+
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@+id/tv_company_name"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:paddingRight="15dp"
+                android:gravity="end"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="关注人数:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_fork_number"
+                    android:textColor="@color/colorSendName6"
+                    android:text="0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingLeft="15dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="活动数量:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_activity_number"
+                    android:textColor="@color/colorSendName6"
+                    android:text="0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageButton
-                android:id="@+id/top_left"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:gravity="center"
-                android:background="@null"
-                android:src="@mipmap/fanhui_hei">
-            </ImageButton>
-
-            <TextView
-                android:id="@+id/top_center_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="公司详情"
-                android:padding="10dp"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/colorBlack"
-                android:textSize="20sp"/>
-
-            <ImageView
-                android:id="@+id/iv_bg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/juxing"
-                android:scaleType="fitXY"/>
-
-            <ImageView
-                android:id="@+id/headpic"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="70dp"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@mipmap/head_default"
-                android:scaleType="fitXY"/>
-
-
-            <TextView
-                android:id="@+id/tv_company_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/headpic"
-                android:layout_marginTop="10dp"
-                android:layout_centerHorizontal="true"
-                android:text="哈哈哈哈"
-                android:textSize="14sp"
-                />
-
-            <LinearLayout
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_below="@+id/tv_company_name"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:paddingRight="15dp"
-                    android:gravity="end"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:text="关注人数:"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/tv_fork_number"
-                        android:textColor="@color/colorSendName6"
-                        android:text="0"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:paddingLeft="15dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:text="活动数量:"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/tv_activity_number"
-                        android:textColor="@color/colorSendName6"
-                        android:text="0"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-
 
         <com.example.xrecyclerview.XRecyclerView
             android:id="@+id/xrv_custom"

@@ -111,7 +111,9 @@
                     android:textColor="@color/gray_black"
                     android:minHeight="45dp"
                     android:text=""
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="10dp"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@null"/>
                 <ImageView
                     android:id="@+id/username_xx"
                     android:layout_width="35dp"
@@ -165,7 +167,9 @@
                     android:textColor="@color/gray_black"
                     android:minHeight="45dp"
                     android:text=""
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="10dp"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@null"/>
                 <ImageView
                     android:id="@+id/pwd_xx"
                     android:layout_width="35dp"

@@ -65,7 +65,9 @@
                 android:maxLength="20"
                 android:textSize="18sp"
                 android:textColor="@color/gray_black"
-                android:minHeight="45dp" />
+                android:minHeight="45dp"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@null"/>
             <ImageView
                 android:id="@+id/username_xx"
                 android:layout_width="35dp"
@@ -116,7 +118,9 @@
                 android:textSize="14sp"
                 android:textColor="@color/gray_black"
                 android:minHeight="45dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@null"/>
             <ImageView
                 android:id="@+id/pwd_xx"
                 android:layout_width="35dp"
@@ -168,7 +172,9 @@
                 android:textSize="14sp"
                 android:textColor="@color/gray_black"
                 android:minHeight="45dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@null"/>
             <ImageView
                 android:id="@+id/pwd_xx2"
                 android:layout_width="35dp"
@@ -214,7 +220,9 @@
                 android:maxLength="16"
                 android:textSize="14sp"
                 android:textColor="@color/gray_black"
-                android:minHeight="45dp" />
+                android:minHeight="45dp"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@null"/>
             <TextView
                 android:id="@+id/login_send_code"
                 android:layout_width="wrap_content"

@@ -149,13 +149,14 @@
                         android:orientation="horizontal"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:id="@+id/ll_more_star">
+                        android:id="@+id/ll_more_star"
+                        android:gravity="center_vertical"
+                        android:layout_marginRight="5dp">
 
                         <TextView
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/img_gengduo"
                             android:id="@+id/tv_more_star"
-                            android:layout_marginLeft="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="更多"
@@ -164,7 +165,6 @@
 
                         <ImageView
                             android:id="@+id/img_gengduo"
-                            android:layout_marginLeft="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@mipmap/genduo"
@@ -265,12 +265,13 @@
                         android:orientation="horizontal"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:id="@+id/ll_more_ip">
+                        android:id="@+id/ll_more_ip"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center_vertical">
                         <TextView
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/img_gengduo_ip"
                             android:id="@+id/tv_more_ip"
-                            android:layout_marginLeft="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="更多"
@@ -278,7 +279,6 @@
                             android:textColor="@color/gray_text_light"/>
                         <ImageView
                             android:id="@+id/img_gengduo_ip"
-                            android:layout_marginLeft="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@mipmap/genduo"
