@@ -188,6 +188,13 @@ public class HomeFragment extends FragmentBase {
                         String activity = jsonObject1.getString("activity");
                         Type type_act =new TypeToken<List<ActivityBean>>(){}.getType();
                         List<ActivityBean> acttList = GsonUtils.jsonToList(activity,type_act);
+                        for (ActivityBean activityBean : acttList) {
+                            if (activityBean.getImg().size() > 1) {
+                                activityBean.setLoo_Type("1");
+                            } else {
+                                activityBean.setLoo_Type("2");
+                            }
+                        }
                         adapter_ip.addAll(acttList);
                         adapter_ip.notifyDataSetChanged();
                         if (adapter_ip.getData().size() != 0) {

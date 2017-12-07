@@ -123,6 +123,13 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
                         String list = jsonObject1.getString("list");
                         Type type=new TypeToken<List<ActivityBean>>(){}.getType();
                         List<ActivityBean> beanList = GsonUtils.jsonToList(list,type);
+                        for (ActivityBean activityBean : beanList) {
+                            if (activityBean.getImg().size() > 1) {
+                                activityBean.setLoo_Type("1");
+                            } else {
+                                activityBean.setLoo_Type("2");
+                            }
+                        }
                         mAdapter.addAll(beanList);
                         mAdapter.notifyDataSetChanged();
 

@@ -24,6 +24,7 @@ public class CompanyListAdapter extends BaseRecyclerViewAdapter {
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_company_list);
     }
+
     private class ViewHolder extends BaseRecyclerViewHolder<CompanyBean, ItemCompanyListBinding>{
         ViewHolder(ViewGroup parent, int item_android) {
             super(parent, item_android);

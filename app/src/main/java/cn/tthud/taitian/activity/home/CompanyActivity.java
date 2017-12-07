@@ -130,6 +130,13 @@ public class CompanyActivity extends ActivityBase {
                         String list = jsonObject2.getString("list");
                         Type type=new TypeToken<List<ActivityBean>>(){}.getType();
                         List<ActivityBean> acttList = GsonUtils.jsonToList(list,type);
+                        for (ActivityBean activityBean : acttList) {
+                            if (activityBean.getImg().size() > 1) {
+                                activityBean.setLoo_Type("1");
+                            } else {
+                                activityBean.setLoo_Type("2");
+                            }
+                        }
                         mAdapter.addAll(acttList);
                         mAdapter.notifyDataSetChanged();
                         if(mAdapter.getData().size() == 0){

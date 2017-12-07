@@ -129,7 +129,13 @@ public class UnDoFragment extends FragmentBase implements View.OnClickListener{
 
                         Type type=new TypeToken<List<ActivityBean>>(){}.getType();
                         List<ActivityBean> beanList = GsonUtils.jsonToList(list,type);
-
+                        for (ActivityBean activityBean : beanList) {
+                            if (activityBean.getImg().size() > 1) {
+                                activityBean.setLoo_Type("1");
+                            } else {
+                                activityBean.setLoo_Type("2");
+                            }
+                        }
                         mAdapter.addAll(beanList);
                         mAdapter.notifyDataSetChanged();
                         xrvCustom.loadMoreComplete();

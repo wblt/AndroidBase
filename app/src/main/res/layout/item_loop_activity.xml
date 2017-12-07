@@ -33,7 +33,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     banner:bb_scale="0.5"
-                    banner:bb_isLoopEnable="false"/>
+                    banner:bb_isLoopEnable="true"/>
             </LinearLayout>
 
             <!--标题-->
@@ -62,7 +62,7 @@
                 android:orientation="horizontal"
                 android:layout_weight="1"
                 android:visibility="gone">
-                
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
