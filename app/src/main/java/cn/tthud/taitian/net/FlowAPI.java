@@ -114,5 +114,8 @@ public class FlowAPI {
     // 消息绑定
     public static String APP_BIND_UID = SERVER_IP + "/appBindUid";
 
+    // 单页接口
+    public static String APP_ART_ONCE = SERVER_IP + "/appGetArtonce";
+
 
 }

@@ -14,7 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.net.URLEncoder;
+import java.util.UUID;
+
 import cn.tthud.taitian.R;
+import cn.tthud.taitian.utils.SPUtils;
 
 
 @SuppressLint("JavascriptInterface")
@@ -123,6 +127,41 @@ public class WebViewActivity extends ActivityBase {
 				super.onReceivedTitle(view, title);
 			}
 		});
+
+
+		String nickname = SPUtils.getString(SPUtils.NICK_NAME);
+		String headimgurl = SPUtils.getString(SPUtils.HEAD_PIC);
+		String openid = SPUtils.getString(SPUtils.WX_OPEN_ID);
+		int sex = SPUtils.getInt(SPUtils.SEX, 1);
+		String ub_id = SPUtils.getString(SPUtils.UB_ID);
+		String source = "app";
+		String deviceid = UUID.randomUUID().toString();
+
+		int index = url.indexOf("?");
+		if (index == -1){		// 不存在
+			url = url + "?source=" + source;
+		}else{
+			url = url + "&source=" + source;
+		}
+
+		url = url + "&deviceid=" + deviceid;
+		url = url + "&sex=" + sex;
+
+		if (nickname != null){
+			url = url + "&nickname=" + URLEncoder.encode(nickname);
+		}
+
+		if (headimgurl != null){
+			url = url + "&headimgurl=" + headimgurl;
+		}
+		if (openid != null){
+			url = url + "&openid=" + openid;
+		}
+
+		if (ub_id != null){
+			url = url + "&ub_id=" + ub_id;
+		}
+
 		webView.loadUrl(url);
 	}
 	

@@ -22,6 +22,7 @@ import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import cn.tthud.taitian.R;
+import cn.tthud.taitian.activity.home.ArtonceActivity;
 import cn.tthud.taitian.activity.home.MoreIPActivity;
 import cn.tthud.taitian.activity.home.MoreStarActivity;
 import cn.tthud.taitian.activity.home.SearchActivity;
@@ -250,7 +251,10 @@ public class HomeFragment extends FragmentBase {
                     if (TextUtils.isEmpty(adBean.getModule())) return;
 
                     if (adBean.getModule().equals("artonce")){
-
+                        Intent intent = new Intent(HomeFragment.this.getActivity(), ArtonceActivity.class);
+                        intent.putExtra("cid", adBean.getModule_id());
+                        intent.putExtra("title", adBean.getTitle());
+                        startActivity(intent);
                     }else if (adBean.getModule().equals("admarket")){
 
                     }else if (adBean.getModule().equals("article")){
