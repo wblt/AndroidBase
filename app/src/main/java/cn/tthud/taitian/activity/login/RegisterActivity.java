@@ -171,10 +171,10 @@ public class RegisterActivity extends ActivityBase {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         if(!subscription .isUnsubscribed()) {
             subscription .unsubscribe();
         }
+        super.onDestroy();
     }
 
     /**

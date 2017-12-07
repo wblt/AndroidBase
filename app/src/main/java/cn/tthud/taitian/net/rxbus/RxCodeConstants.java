@@ -14,4 +14,7 @@ public class RxCodeConstants {
 
     public static final int RegisterActivity1_finsh = 3;
 
+    // 主页获取系统消息
+    public static final int MainActivity_MSG = 4;
+
 }

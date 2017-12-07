@@ -1,5 +1,6 @@
 package cn.tthud.taitian.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,6 +21,7 @@ import cn.tthud.taitian.utils.ImageLoader;
  */
 
 public class GoodIPAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
+
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_activity);

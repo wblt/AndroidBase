@@ -21,6 +21,7 @@ import org.xutils.view.annotation.ViewInject;
 import java.io.File;
 import java.util.Map;
 
+import cn.tthud.taitian.ChatManager;
 import cn.tthud.taitian.DemoApplication;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.login.LoginActivity;
@@ -180,6 +181,7 @@ public class SettingActivity extends ActivityBase {
 
     //登出
     private void logout(){
+        ChatManager.getInstance().exitSocket(getApplicationContext());
         SPUtils.clearUser();
         LoginActivity.navToLogin(SettingActivity.this);
     }

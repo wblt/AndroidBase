@@ -16,8 +16,14 @@ import cn.tthud.taitian.fragment.DiscoverFragment;
 import cn.tthud.taitian.fragment.HomeFragment;
 import cn.tthud.taitian.fragment.MessageFragment;
 import cn.tthud.taitian.fragment.MineFragment;
+import cn.tthud.taitian.net.rxbus.RxBus;
+import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
+import cn.tthud.taitian.net.rxbus.RxCodeConstants;
 import cn.tthud.taitian.utils.CommonUtils;
+import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.SPUtils;
+import rx.Subscription;
+import rx.functions.Action1;
 
 public class MainActivity extends BaseActivity {
     // textview for unread message count
@@ -28,7 +34,7 @@ public class MainActivity extends BaseActivity {
     private Fragment[] fragments;
     private int index;
     private int currentTabIndex;
-    private Intent websocketServiceIntent;
+    private Subscription subscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +72,8 @@ public class MainActivity extends BaseActivity {
 
         // 启动socket
         initSocket();
+
+        initRxBus();
     }
 
     /**
@@ -100,6 +108,7 @@ public class MainActivity extends BaseActivity {
                 if (CommonUtils.checkLogin()) {
                     if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
                         index = 2;
+                        updateUnreadMsgLable(false);
                     } else {
                         // 绑定手机号码
                         startActivity(new Intent(this, BindPhoneActivity.class));
@@ -143,5 +152,45 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         ChatManager.getInstance().exitSocket(getApplicationContext());
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(!subscription .isUnsubscribed()) {
+            subscription .unsubscribe();
+        }
+        super.onDestroy();
+    }
+
+    /**
+     * update the total unread count
+     */
+    private void updateUnreadMsgLable(final boolean flag) {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                if (flag) {
+                    unreadLabel.setVisibility(View.VISIBLE);
+                } else {
+                    unreadLabel.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+    }
+
+    /**
+     * 收到通知后，获取用户信息，存在内存
+     */
+    private void initRxBus() {
+        subscription = RxBus.getDefault().toObservable(RxCodeConstants.MainActivity_MSG, RxBusBaseMessage.class)
+                .subscribe(new Action1<RxBusBaseMessage>() {
+                    @Override
+                    public void call(RxBusBaseMessage integer) {
+                        Log.i(integer.getObject().toString());
+                        String status = integer.getObject().toString();
+                        // 收到消息之后设置为true
+                        updateUnreadMsgLable(true);
+                    }
+                });
     }
 }

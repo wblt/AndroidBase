@@ -231,6 +231,7 @@ public class LoginActivity extends ActivityBase {
         if(!subscription .isUnsubscribed()) {
             subscription .unsubscribe();
         }
+
     }
 
 

@@ -1,14 +1,19 @@
 package cn.tthud.taitian;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v7.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -30,9 +35,11 @@ public class WebSocketService extends Service {
     private static String websocketHost = "wss://socket.tthud.cn:4431";
     private static WebSocketClient mClient;
     private static boolean isExitApp = false;
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (connectionReceiver == null) {
+
             connectionReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
@@ -120,4 +127,6 @@ public class WebSocketService extends Service {
 //    public static void main(String[] args) {
 //        webSocketConnect();
 //    }
+
+
 }
