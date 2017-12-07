@@ -131,6 +131,7 @@ public class UnDoFragment extends FragmentBase implements View.OnClickListener{
 
                         mAdapter.addAll(beanList);
                         mAdapter.notifyDataSetChanged();
+                        xrvCustom.loadMoreComplete();
                         if(mAdapter.getData().size() == 0){
                             page_refresh.setVisibility(View.VISIBLE);
                             xrvCustom.setVisibility(View.GONE);
