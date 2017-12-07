@@ -97,6 +97,7 @@ public class CompanyActivity extends ActivityBase {
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
 
         mAdapter = new CompanyActivityAdapter();
+        mAdapter.setContext(this);
         xrvCustom.setAdapter(mAdapter);
     }
 

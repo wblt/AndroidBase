@@ -125,6 +125,7 @@ public class MoreIPActivity extends ActivityBase {
         xrvCustom.setHasFixedSize(false);
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
         adapter = new GoodIPAdapter();
+        adapter.setContext(this);
         xrvCustom.setAdapter(adapter);
     }
 

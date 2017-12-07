@@ -352,6 +352,7 @@ public class HomeFragment extends FragmentBase {
         xrvCustom_ip.setItemAnimator(new DefaultItemAnimator());
 
         adapter_ip = new ActivityDoingAdapter();
+        adapter_ip.setContext(getContext());
         xrvCustom_ip.setAdapter(adapter_ip);
     }
 }

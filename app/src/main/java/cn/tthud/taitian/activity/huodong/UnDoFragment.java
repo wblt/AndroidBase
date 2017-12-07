@@ -87,6 +87,7 @@ public class UnDoFragment extends FragmentBase implements View.OnClickListener{
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
 
         mAdapter = new ActivityUndoAdapter();
+        mAdapter.setContext(getContext());
         xrvCustom.setAdapter(mAdapter);
     }
 

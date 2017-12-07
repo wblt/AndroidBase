@@ -1,5 +1,6 @@
 package cn.tthud.taitian.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -27,6 +28,13 @@ import static cn.tthud.taitian.R.id.sib_simple_usage;
  */
 
 public class ActivityDoingAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
+
+    private Context mContext;
+
+    public void setContext(Context context){
+        this.mContext = context;
+    }
+
 
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -73,10 +81,10 @@ public class ActivityDoingAdapter extends BaseRecyclerViewAdapter<ActivityBean> 
                             return;
                         }
 
-//                        Intent intent = new Intent(getContext(),WebViewActivity.class);
-//                        intent.putExtra("title",object.getTitle());
-//                        intent.putExtra("url", url);
-//                        view.getContext().startActivity(intent);
+                        Intent intent = new Intent(mContext,WebViewActivity.class);
+                        intent.putExtra("title",object.getTitle());
+                        intent.putExtra("url", url);
+                        mContext.startActivity(intent);
                     }
                 });
             }

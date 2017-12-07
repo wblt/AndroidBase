@@ -85,6 +85,7 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
 
         mAdapter = new ActivityDoingAdapter();
+        mAdapter.setContext(getContext());
         xrvCustom.setAdapter(mAdapter);
     }
 

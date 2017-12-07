@@ -1,5 +1,6 @@
 package cn.tthud.taitian.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,6 +25,12 @@ import cn.tthud.taitian.widget.banner.SimpleImageBanner;
  */
 
 public class CompanyActivityAdapter extends BaseRecyclerViewAdapter {
+
+    private Context mContext;
+    public void setContext(Context context){
+        this.mContext = context;
+    }
+
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_activity);
@@ -66,10 +73,10 @@ public class CompanyActivityAdapter extends BaseRecyclerViewAdapter {
                         if (TextUtils.isEmpty(url)) {
                             return;
                         }
-//                        Intent intent = new Intent(getContext(),WebViewActivity.class);
-//                        intent.putExtra("title",object.getTitle());
-//                        intent.putExtra("url", url);
-//                        view.getContext().startActivity(intent);
+                        Intent intent = new Intent(mContext,WebViewActivity.class);
+                        intent.putExtra("title",object.getTitle());
+                        intent.putExtra("url", url);
+                        mContext.startActivity(intent);
                     }
                 });
             }

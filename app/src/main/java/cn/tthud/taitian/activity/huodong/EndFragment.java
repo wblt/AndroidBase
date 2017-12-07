@@ -87,6 +87,7 @@ public class EndFragment extends FragmentBase implements View.OnClickListener{
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
 
         mAdapter = new ActivityEndAdapter();
+        mAdapter.setContext(getContext());
         xrvCustom.setAdapter(mAdapter);
     }
 
