@@ -67,10 +67,12 @@ public class ActivityUndoAdapter extends BaseRecyclerViewAdapter {
             });
 
             if (object.getImg() != null && object.getImg().size() != 0){
-                if (object.getImg().size() ==1) {
+                if (object.getImg().size() == 1) {
                     binding.sibSimpleUsage.setAutoScrollEnable(false);
+                    binding.sibSimpleUsage.setIndicatorShow(false);
                 } else {
                     binding.sibSimpleUsage.setAutoScrollEnable(true);
+                    binding.sibSimpleUsage.setIndicatorShow(true);
                 }
                 binding.sibSimpleUsage.setSource(getBanner(object.getImg())).startScroll();
                 binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){

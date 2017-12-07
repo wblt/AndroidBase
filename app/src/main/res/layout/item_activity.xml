@@ -32,7 +32,8 @@
                     android:id="@+id/sib_simple_usage"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    banner:bb_scale="0.5" />
+                    banner:bb_scale="0.5"
+                    banner:bb_isLoopEnable="false" />
             </LinearLayout>
 
             <!--标题-->

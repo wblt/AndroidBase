@@ -314,7 +314,6 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
             e.printStackTrace();
         }
 
-
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
