@@ -9,6 +9,7 @@
     </data>
 
     <LinearLayout
+        xmlns:banner="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ll_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -22,19 +23,17 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             >
-            <!--banner图-->
-            <RelativeLayout
+
+            <!--banner轮播图-->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="148dp">
-                <ImageView
-                    android:id="@+id/iv_banner_pic"
-                    android:layout_width="match_parent"
-                    android:layout_height="148dp"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"
-                    android:src="@mipmap/shangweidefault_rect"/>
-
-            </RelativeLayout>
+                <cn.tthud.taitian.widget.banner.SimpleImageBanner
+                    android:id="@+id/sib_simple_usage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    banner:bb_scale="0.5" />
+            </LinearLayout>
 
             <!--标题-->
             <LinearLayout
