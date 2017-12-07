@@ -82,7 +82,7 @@ public class MoreIPActivity extends ActivityBase {
                         adapter.addAll(beanList);
                         adapter.notifyDataSetChanged();
                         // 防止加载更多动来动去
-                        xrvCustom.loadMoreComplete();
+                        //xrvCustom.loadMoreComplete();
                         if(adapter.getData().size() == 0){
                             page_refresh.setVisibility(View.VISIBLE);
                             xrvCustom.setVisibility(View.GONE);

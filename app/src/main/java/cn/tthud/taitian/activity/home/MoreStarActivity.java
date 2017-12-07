@@ -77,7 +77,7 @@ public class MoreStarActivity extends ActivityBase {
                         adapter.addAll(beanList);
                         adapter.notifyDataSetChanged();
 
-                        xrvCustom.loadMoreComplete();
+                        //xrvCustom.loadMoreComplete();
                         if(adapter.getData().size() == 0){
                             page_refresh.setVisibility(View.VISIBLE);
                             xrvCustom.setVisibility(View.GONE);

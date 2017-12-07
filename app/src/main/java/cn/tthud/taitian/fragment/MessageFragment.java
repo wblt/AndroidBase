@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.xrecyclerview.XRecyclerView;
 import com.google.gson.reflect.TypeToken;
@@ -17,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.http.RequestParams;
+import org.xutils.view.annotation.ViewInject;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -39,11 +41,18 @@ import cn.tthud.taitian.xutils.MXUtils;
 public class MessageFragment extends FragmentBase implements View.OnClickListener {
 
     private View view;
+
+    @ViewInject(R.id.xrv_custom)
     private XRecyclerView xrvCustom;
+
+    @ViewInject(R.id.page_refresh)
     private LinearLayout page_refresh;
     private int mPage;
     private int mMaxPage = -1;
     private MessageAdapter mAdapter;
+
+    //@ViewInject(R.id.up_tip)
+    //private TextView up_tip;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,8 +68,6 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
             ((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
             setTopBarTitle("消息");
 
-            xrvCustom = view.findViewById(R.id.xrv_custom);
-            page_refresh = view.findViewById(R.id.page_refresh);
             initRecyclerView();
             setListener();
 
@@ -74,15 +81,15 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         // 禁止下拉刷新
         xrvCustom.setPullRefreshEnabled(true);
         xrvCustom.setLoadingMoreEnabled(true);
-
+        //xrvCustom.clearHeader();
         xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
                 loadNewData(true);
             }
-
             @Override
             public void onLoadMore() {
+                //up_tip.setVisibility(View.GONE);
                 loadNewData(false);
             }
         });
@@ -143,7 +150,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                         mAdapter.addAll(beanList);
                         mAdapter.notifyDataSetChanged();
 
-                        xrvCustom.loadMoreComplete();
+                        //xrvCustom.loadMoreComplete();
 
                         if(mAdapter.getData().size() == 0){
                             page_refresh.setVisibility(View.VISIBLE);
@@ -154,7 +161,10 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                         }
 
                         if(mPage >= mMaxPage){
+                            //up_tip.setVisibility(View.GONE);
                             xrvCustom.noMoreLoading();
+                        } else {
+                            //up_tip.setVisibility(View.VISIBLE);
                         }
 
                     }else {

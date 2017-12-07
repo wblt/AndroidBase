@@ -159,7 +159,7 @@ public class MyWalletActivity extends ActivityBase {
                         mAdapter.notifyDataSetChanged();
 
                         // 防止加载更多动来动去
-                        xrvCustom.loadMoreComplete();
+                        //xrvCustom.loadMoreComplete();
 
                         if(mAdapter.getData().size() == 0){
                             page_refresh.setVisibility(View.VISIBLE);

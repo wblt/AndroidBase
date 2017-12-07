@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.xrecyclerview.XRecyclerView;
 import com.google.gson.reflect.TypeToken;
@@ -15,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.http.RequestParams;
+import org.xutils.view.annotation.ViewInject;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -25,6 +27,7 @@ import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.bean.ActivityBean;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.GsonUtils;
+import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
@@ -37,6 +40,7 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
 
     private XRecyclerView xrvCustom;
     private LinearLayout page_refresh;
+    //private TextView up_tip;
     private int mPage;
     private int mMaxPage = -1;
     private ActivityDoingAdapter mAdapter;
@@ -52,9 +56,10 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
             view =  inflater.inflate(R.layout.fragment_activity_doing, null);
             xrvCustom = view.findViewById(R.id.xrv_custom);
             page_refresh = view.findViewById(R.id.page_refresh);
+            //up_tip = view.findViewById(R.id.up_tip);
+
             initRecyclerView();
             setListener();
-
             mPage = 1;
             loadNewData(true);
         }
@@ -65,7 +70,7 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
         // 禁止下拉刷新
         xrvCustom.setPullRefreshEnabled(true);
         xrvCustom.setLoadingMoreEnabled(true);
-
+        //xrvCustom.clearHeader();
         xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -74,6 +79,7 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
 
             @Override
             public void onLoadMore() {
+                //up_tip.setVisibility(View.GONE);
                 loadNewData(false);
             }
         });
@@ -133,7 +139,7 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
                         mAdapter.addAll(beanList);
                         mAdapter.notifyDataSetChanged();
 
-                        xrvCustom.loadMoreComplete();
+                        //xrvCustom.loadMoreComplete();
                         if(mAdapter.getData().size() == 0){
                             page_refresh.setVisibility(View.VISIBLE);
                             xrvCustom.setVisibility(View.GONE);
@@ -141,9 +147,12 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
                             page_refresh.setVisibility(View.GONE);
                             xrvCustom.setVisibility(View.VISIBLE);
                         }
-
+                        Log.i("dddd"+xrvCustom.getHeight());
                         if(mPage >= mMaxPage){
+                            //up_tip.setVisibility(View.GONE);
                             xrvCustom.noMoreLoading();
+                        } else {
+                            //up_tip.setVisibility(View.VISIBLE);
                         }
 
                     }else {
