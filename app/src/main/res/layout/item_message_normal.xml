@@ -13,9 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
-
         <LinearLayout
             android:id="@+id/ll_all"
             android:orientation="vertical"
@@ -49,6 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/msg_time"
                     android:layout_marginTop="15dp"
                     android:gravity="center_vertical"
                     android:text="2017-10-23 09:00"
@@ -85,10 +83,7 @@
                     android:lineSpacingExtra="5dp"/>
             </LinearLayout>
 
-
-
         </LinearLayout>
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"

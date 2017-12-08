@@ -47,6 +47,7 @@ public class MessageAdapter extends BaseRecyclerViewAdapter {
             }else {
                 binding.headIcon.setImageResource(R.mipmap.logowenzi);
             }
+            binding.msgTime.setText(object.getReadtime());
             binding.tvMsgContent.setText(object.getTitle());
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
