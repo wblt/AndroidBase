@@ -12,6 +12,7 @@ import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.MessageBean;
 import cn.tthud.taitian.bean.WebViewBean;
 import cn.tthud.taitian.databinding.ItemMessageNormalBinding;
+import cn.tthud.taitian.utils.ImageLoader;
 
 /**
  * Created by bopeng on 2017/11/3.
@@ -42,11 +43,9 @@ public class MessageAdapter extends BaseRecyclerViewAdapter {
                 binding.tvTitle.setText("广告通知");
             }
             if(object.getIcon() != null && object.getIcon().length() != 0){
-//                binding.ivMsgImv.setVisibility(View.VISIBLE);
-//                ImageLoader.load(object.getIcon(), binding.ivMsgImv);
+                ImageLoader.loadCircle(object.getIcon(),binding.headIcon);
             }else {
-//                binding.ivMsgImv.setVisibility(View.GONE);
-//                binding.ivMsgImv.setImageResource(R.mipmap.ccccc);
+                binding.headIcon.setImageResource(R.mipmap.logowenzi);
             }
             binding.tvMsgContent.setText(object.getTitle());
             binding.llAll.setOnClickListener(new View.OnClickListener() {
