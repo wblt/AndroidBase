@@ -41,10 +41,6 @@ public class ActivityBean {
     private String description;
     private String url;
 
-
-
-    private String loo_Type;
-
     public String getActivity_id() {
         return activity_id;
     }
@@ -269,11 +265,4 @@ public class ActivityBean {
         this.url = url;
     }
 
-    public String getLoo_Type() {
-        return loo_Type;
-    }
-
-    public void setLoo_Type(String loo_Type) {
-        this.loo_Type = loo_Type;
-    }
 }

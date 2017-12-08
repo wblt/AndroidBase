@@ -72,13 +72,6 @@ public class MoreIPActivity extends ActivityBase {
                         String list = jsonObject1.getString("list");
                         Type type=new TypeToken<List<ActivityBean>>(){}.getType();
                         List<ActivityBean> beanList = GsonUtils.jsonToList(list,type);
-                        for (ActivityBean activityBean : beanList) {
-                            if (activityBean.getImg().size() > 1) {
-                                activityBean.setLoo_Type("1");
-                            } else {
-                                activityBean.setLoo_Type("2");
-                            }
-                        }
                         adapter.addAll(beanList);
                         adapter.notifyDataSetChanged();
                         // 防止加载更多动来动去

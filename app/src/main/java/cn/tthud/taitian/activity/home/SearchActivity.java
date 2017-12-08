@@ -101,7 +101,7 @@ public class SearchActivity extends ActivityBase {
         });
         query.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//               adapter.getFilter().filter(s);
+                // adapter.getFilter().filter(s);
                 if (s.length() > 0) {
                     search_clear.setVisibility(View.VISIBLE);
                 } else {

@@ -72,7 +72,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
             setListener();
 
             mPage = 1;
-            loadNewData(true);
+            loadNewData();
         }
         return view;
     }
@@ -85,12 +85,16 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                loadNewData(true);
+                mAdapter.clear();
+                mAdapter.notifyDataSetChanged();
+                mPage = 1;
+                loadNewData();
             }
             @Override
             public void onLoadMore() {
                 //up_tip.setVisibility(View.GONE);
-                loadNewData(false);
+                mPage += 1;
+                loadNewData();
             }
         });
 
@@ -108,19 +112,12 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         page_refresh.setOnClickListener(this);
     }
 
-    private void loadNewData(boolean isRefresh){
+    private void loadNewData(){
         if (!CommonUtils.checkLogin()) {
             return;
         }
         if (TextUtils.isEmpty(SPUtils.getString(SPUtils.UB_ID))) {
             return;
-        }
-        if (isRefresh){
-            mAdapter.clear();
-            mAdapter.notifyDataSetChanged();
-            mPage = 1;
-        }else{
-            mPage += 1;
         }
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_MESSAGE_LIST);
         requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
@@ -182,7 +179,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         int id = v.getId();
         switch (id){
             case R.id.page_refresh:
-                loadNewData(true);
+                loadNewData();
                 break;
         }
     }

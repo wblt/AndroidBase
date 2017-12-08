@@ -80,6 +80,14 @@ public class ChatManager {
     }
 
     public void exitSocket(Context context) {
+        // 开启sevice
+        if (!CommonUtils.checkLogin()) {
+            return;
+        }
+        if (SPUtils.getBoolean(SPUtils.ISVST,false)) {
+            // 游客返回
+            return;
+        }
         WebSocketService.closeWebsocket(true);
         context.stopService(websocketServiceIntent);
     }

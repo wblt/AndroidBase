@@ -47,8 +47,12 @@ public class GoodIPAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
 
     @Override
     public int getItemViewType(int position) {
-        Log.i("BBBBBBBBBBBBBBBBBBView_type"+getData().get(position).getLoo_Type());
-        return Integer.valueOf(getData().get(position).getLoo_Type());
+        ActivityBean bean = getData().get(position);
+        if (bean.getImg() !=null && bean.getImg().size() > 1) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 
     private class ViewHolder1 extends BaseRecyclerViewHolder<ActivityBean, ItemLoopActivityBinding>{
