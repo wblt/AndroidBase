@@ -77,7 +77,8 @@
                     android:text=""
                     android:textColor="@color/gray_black_text"
                     android:gravity="end"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textColorHint="@color/grey_400"/>
             </RelativeLayout>
 
             <ImageView
@@ -113,7 +114,8 @@
                     android:text=""
                     android:textColor="@color/gray_black_text"
                     android:gravity="end"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textColorHint="@color/grey_400"/>
             </RelativeLayout>
 
             <ImageView
@@ -149,7 +151,8 @@
                     android:text=""
                     android:textColor="@color/gray_black_text"
                     android:gravity="end"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textColorHint="@color/grey_400"/>
             </RelativeLayout>
 
 
@@ -240,7 +243,8 @@
                     android:text=""
                     android:textColor="@color/gray_black_text"
                     android:gravity="end"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textColorHint="@color/grey_400"/>
             </RelativeLayout>
 
             <ImageView
@@ -277,7 +281,8 @@
                     android:text=""
                     android:textColor="@color/gray_black_text"
                     android:gravity="end"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textColorHint="@color/grey_400"/>
             </RelativeLayout>
 
             <ImageView
@@ -316,7 +321,8 @@
                     android:text=""
                     android:textColor="@color/gray_black_text"
                     android:gravity="start"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textColorHint="@color/grey_400"/>
             </RelativeLayout>
 
             <ImageView
