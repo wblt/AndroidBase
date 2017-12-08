@@ -97,12 +97,13 @@
                         android:layout_height="10dp"
                         android:layout_marginTop="2dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="25dp"
                         android:background="@mipmap/yuandian"
                         android:gravity="center"
                         android:textColor="@android:color/white"
                         android:textSize="12sp"
-                        android:visibility="invisible" />
+                        android:visibility="visible"
+                        />
                 </RelativeLayout>
 
                 <RelativeLayout
