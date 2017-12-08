@@ -1,6 +1,7 @@
 package cn.tthud.taitian.base;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -61,7 +62,7 @@ public class WebViewActivity extends ActivityBase {
 	ValueCallback<Uri> mUploadMessage;
 	public static final int FILECHOOSER_RESULTCODE = 3;
 
-	private static Context mContext;
+//	private static Context mContext;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -258,9 +259,9 @@ public class WebViewActivity extends ActivityBase {
 					if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
 						String result = jsonObject.getString("data");
 						SPUtils.putBoolean(SPUtils.IS_BINDWX,true);
-						Toast.makeText(mContext, "绑定成功", Toast.LENGTH_LONG);
+						//Toast.makeText(mContext, "绑定成功", Toast.LENGTH_LONG);
 					}else {
-						Toast.makeText(mContext, info, Toast.LENGTH_LONG);
+						//Toast.makeText(mContext, info, Toast.LENGTH_LONG);
 					}
 				}catch (JSONException e){
 					e.printStackTrace();
@@ -270,7 +271,6 @@ public class WebViewActivity extends ActivityBase {
 	}
 
 	public static void navToWebView(Context context, WebViewBean object){
-		mContext = context;
 		if (CommonUtils.checkLogin()) {  // 已登录
 			if (!SPUtils.getBoolean(SPUtils.ISVST, false)) { // 非游客
 				if (SPUtils.getBoolean(SPUtils.IS_BINDWX, false)){  // 绑定微信
@@ -283,7 +283,7 @@ public class WebViewActivity extends ActivityBase {
 					intent.putExtra("url", url);
 					context.startActivity(intent);
 				}else{
-//					UMShareAPI.get(context).getPlatformInfo(context, SHARE_MEDIA.WEIXIN, authListener);
+					UMShareAPI.get(context).getPlatformInfo((Activity) context, SHARE_MEDIA.WEIXIN, authListener);
 				}
 			} else {
 				context.startActivity(new Intent(context, BindPhoneActivity.class));
