@@ -122,19 +122,19 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
 
                         ImageLoader.loadCircle(headpicurl,headpic);
 
-                        if (nickname == null || TextUtils.isEmpty(nickname)) {
+                        if (nickname == null || TextUtils.isEmpty(nickname) || nickname.equals("null")) {
                             et_username.setText("");
                         } else {
                             et_username.setText(nickname);
                         }
 
-                        if (realname == null || TextUtils.isEmpty(realname)) {
+                        if (realname == null || TextUtils.isEmpty(realname) || realname.equals("null")) {
                             et_name.setText("");
                         } else {
                             et_name.setText(realname);
                         }
 
-                        if (idcard == null || TextUtils.isEmpty(idcard)) {
+                        if (idcard == null || TextUtils.isEmpty(idcard) || idcard.equals("null")) {
                             et_number_card.setText("");
                         } else {
                             et_number_card.setText(idcard);
@@ -148,19 +148,19 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
                             sex.setText("");
                         }
 
-                        if (email == null || TextUtils.isEmpty(email)) {
+                        if (email == null || TextUtils.isEmpty(email) || email.equals("null")) {
                             et_email.setText("");
                         } else {
                             et_email.setText(email);
                         }
 
-                        if (address == null || TextUtils.isEmpty(address)) {
+                        if (address == null || TextUtils.isEmpty(address) || address.equals("null")) {
                             et_address.setText("");
                         } else {
                             et_address.setText(address);
                         }
 
-                        if (stylesig == null || TextUtils.isEmpty(stylesig)) {
+                        if (stylesig == null || TextUtils.isEmpty(stylesig) || stylesig.equals("null")) {
                             et_sign.setText("");
                         } else {
                             et_sign.setText(stylesig);

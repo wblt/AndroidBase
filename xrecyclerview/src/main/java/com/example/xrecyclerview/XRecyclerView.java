@@ -136,6 +136,15 @@ public class XRecyclerView extends RecyclerView {
             loadMoreComplete();
         } else {
             mRefreshHeader.refreshComplate();
+            final View footView = mFootViews.get(0);
+            if (footView instanceof LoadingMoreFooter) {
+                if (footView.getVisibility() != View.GONE) {
+                    ((LoadingMoreFooter) footView).setState(LoadingMoreFooter.STATE_LOADING);
+                } else {
+                    footView.setVisibility(VISIBLE);
+                    ((LoadingMoreFooter) footView).setState(LoadingMoreFooter.STATE_LOADING);
+                }
+            }
         }
     }
 
@@ -216,8 +225,7 @@ public class XRecyclerView extends RecyclerView {
                             final View footView = mFootViews.get(0);
                             if (footView instanceof LoadingMoreFooter) {
                                 if (footView.getVisibility() != View.GONE) {
-                                    //footView.setVisibility(View.GONE);
-                                    ((LoadingMoreFooter) footView).setState(LoadingMoreFooter.STATE_LOADING);
+                                    footView.setVisibility(View.GONE);
                                 }
                             }
                         }
