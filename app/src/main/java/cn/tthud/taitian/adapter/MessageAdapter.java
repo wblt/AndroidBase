@@ -1,8 +1,7 @@
 package cn.tthud.taitian.adapter;
 
-import android.content.Intent;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -11,8 +10,8 @@ import cn.tthud.taitian.base.BaseRecyclerViewAdapter;
 import cn.tthud.taitian.base.BaseRecyclerViewHolder;
 import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.MessageBean;
+import cn.tthud.taitian.bean.WebViewBean;
 import cn.tthud.taitian.databinding.ItemMessageNormalBinding;
-import cn.tthud.taitian.utils.ImageLoader;
 
 /**
  * Created by bopeng on 2017/11/3.
@@ -53,17 +52,18 @@ public class MessageAdapter extends BaseRecyclerViewAdapter {
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String url = object.getUrl();
-                    if (TextUtils.isEmpty(url)){
-                        return;
-                    }
-                    Intent intent = new Intent(view.getContext(),WebViewActivity.class);
-                    intent.putExtra("title",object.getTitle());
-                    intent.putExtra("url", url);
-                    view.getContext().startActivity(intent);
+                    jumpToWebViewActivity(object, view.getContext());
                 }
             });
         }
+    }
+
+    private void jumpToWebViewActivity(MessageBean object, Context localContext){
+
+        WebViewBean bean = new WebViewBean();
+        bean.setTitle(object.getTitle());
+        bean.setUrl(object.getUrl());
+        WebViewActivity.navToWebView(localContext, bean);
     }
 }
 

@@ -1,8 +1,6 @@
 package cn.tthud.taitian.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,12 +12,10 @@ import cn.tthud.taitian.base.BaseRecyclerViewAdapter;
 import cn.tthud.taitian.base.BaseRecyclerViewHolder;
 import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.ActivityBean;
+import cn.tthud.taitian.bean.WebViewBean;
 import cn.tthud.taitian.databinding.ItemActivityBinding;
-import cn.tthud.taitian.databinding.ItemCompanyActivityBinding;
 import cn.tthud.taitian.databinding.ItemLoopActivityBinding;
 import cn.tthud.taitian.utils.DateUtil;
-import cn.tthud.taitian.utils.ImageLoader;
-import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.widget.banner.BannerItem;
 import cn.tthud.taitian.widget.banner.SimpleImageBanner;
 
@@ -71,14 +67,7 @@ public class CompanyActivityAdapter extends BaseRecyclerViewAdapter<ActivityBean
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String url = object.getUrl();
-                    if (TextUtils.isEmpty(url)){
-                        return;
-                    }
-                    Intent intent = new Intent(view.getContext(),WebViewActivity.class);
-                    intent.putExtra("title",object.getTitle());
-                    intent.putExtra("url", url);
-                    view.getContext().startActivity(intent);
+                    jumpToWebViewActivity(object, view.getContext());
                 }
             });
 
@@ -89,14 +78,7 @@ public class CompanyActivityAdapter extends BaseRecyclerViewAdapter<ActivityBean
                 binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){
                     @Override
                     public void onItemClick(int position) {
-                        String url = object.getUrl();
-                        if (TextUtils.isEmpty(url)){
-                            return;
-                        }
-                        Intent intent = new Intent(mContext,WebViewActivity.class);
-                        intent.putExtra("title",object.getTitle());
-                        intent.putExtra("url", url);
-                        mContext.startActivity(intent);
+                        jumpToWebViewActivity(object, mContext);
                     }
                 });
 
@@ -120,14 +102,7 @@ public class CompanyActivityAdapter extends BaseRecyclerViewAdapter<ActivityBean
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String url = object.getUrl();
-                    if (TextUtils.isEmpty(url)){
-                        return;
-                    }
-                    Intent intent = new Intent(view.getContext(),WebViewActivity.class);
-                    intent.putExtra("title",object.getTitle());
-                    intent.putExtra("url", url);
-                    view.getContext().startActivity(intent);
+                    jumpToWebViewActivity(object, view.getContext());
                 }
             });
 
@@ -138,19 +113,21 @@ public class CompanyActivityAdapter extends BaseRecyclerViewAdapter<ActivityBean
                 binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){
                     @Override
                     public void onItemClick(int position) {
-                        String url = object.getUrl();
-                        if (TextUtils.isEmpty(url)){
-                            return;
-                        }
-                        Intent intent = new Intent(mContext,WebViewActivity.class);
-                        intent.putExtra("title",object.getTitle());
-                        intent.putExtra("url", url);
-                        mContext.startActivity(intent);
+                        jumpToWebViewActivity(object, mContext);
                     }
                 });
 
             }
         }
+    }
+
+    private void jumpToWebViewActivity(ActivityBean object, Context localContext){
+
+        WebViewBean bean = new WebViewBean();
+        bean.setUrl(object.getUrl());
+        bean.setTitle(object.getTitle());
+
+        WebViewActivity.navToWebView(localContext, bean);
     }
 
     public static List<BannerItem> getBanner(List<String> alist) {

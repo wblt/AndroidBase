@@ -1,7 +1,6 @@
 package cn.tthud.taitian.adapter;
 
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -9,8 +8,6 @@ import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.home.CompanyActivity;
 import cn.tthud.taitian.base.BaseRecyclerViewAdapter;
 import cn.tthud.taitian.base.BaseRecyclerViewHolder;
-import cn.tthud.taitian.base.WebViewActivity;
-import cn.tthud.taitian.bean.ActivityBean;
 import cn.tthud.taitian.bean.CompanyBean;
 import cn.tthud.taitian.databinding.ItemCompanyListBinding;
 import cn.tthud.taitian.utils.ImageLoader;
