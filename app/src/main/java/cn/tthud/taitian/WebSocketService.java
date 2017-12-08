@@ -105,7 +105,7 @@ public class WebSocketService extends Service {
 
     public static void closeWebsocket(boolean exitApp) {
         isExitApp = exitApp;
-        if (mClient != null && mClient.isConnecting()) {
+        if (mClient != null && !mClient.isClosed()) {
             mClient.close();
             mClient = null;
         }

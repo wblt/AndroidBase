@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -122,20 +123,26 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
 
                         ImageLoader.loadCircle(headpicurl,headpic);
 
-                        if (nickname == null || TextUtils.isEmpty(nickname)) {
+                        if (nickname == null || TextUtils.isEmpty(nickname) || nickname.equals("null")) {
                             et_username.setText("");
+                            SpannableString s = new SpannableString("设置昵称");//这里输入自己想要的提示文字
+                            et_username.setHint(s);
                         } else {
                             et_username.setText(nickname);
                         }
 
-                        if (realname == null || TextUtils.isEmpty(realname)) {
+                        if (realname == null || TextUtils.isEmpty(realname) || realname.equals("null")) {
                             et_name.setText("");
+                            SpannableString s = new SpannableString("设置真实姓名");//这里输入自己想要的提示文字
+                            et_name.setHint(s);
                         } else {
                             et_name.setText(realname);
                         }
 
-                        if (idcard == null || TextUtils.isEmpty(idcard)) {
+                        if (idcard == null || TextUtils.isEmpty(idcard) || idcard.equals("null")) {
                             et_number_card.setText("");
+                            SpannableString s = new SpannableString("设置身份证号码");//这里输入自己想要的提示文字
+                            et_number_card.setHint(s);
                         } else {
                             et_number_card.setText(idcard);
                         }
@@ -146,22 +153,30 @@ public class ModifyInfoActivity extends ActivityBase implements  ActionSheet.OnA
                             sex.setText("女");
                         } else {
                             sex.setText("");
+                            SpannableString s = new SpannableString("设置性别");//这里输入自己想要的提示文字
+                            sex.setHint(s);
                         }
 
-                        if (email == null || TextUtils.isEmpty(email)) {
+                        if (email == null || TextUtils.isEmpty(email) || email.equals("null")) {
                             et_email.setText("");
+                            SpannableString s = new SpannableString("设置邮箱");//这里输入自己想要的提示文字
+                            et_email.setHint(s);
                         } else {
                             et_email.setText(email);
                         }
 
-                        if (address == null || TextUtils.isEmpty(address)) {
+                        if (address == null || TextUtils.isEmpty(address) || address.equals("null")) {
                             et_address.setText("");
+                            SpannableString s = new SpannableString("设置地址");//这里输入自己想要的提示文字
+                            et_address.setHint(s);
                         } else {
                             et_address.setText(address);
                         }
 
-                        if (stylesig == null || TextUtils.isEmpty(stylesig)) {
+                        if (stylesig == null || TextUtils.isEmpty(stylesig) || stylesig.equals("null")) {
                             et_sign.setText("");
+                            SpannableString s = new SpannableString("设置个性签名");//这里输入自己想要的提示文字
+                            et_sign.setHint(s);
                         } else {
                             et_sign.setText(stylesig);
                         }
