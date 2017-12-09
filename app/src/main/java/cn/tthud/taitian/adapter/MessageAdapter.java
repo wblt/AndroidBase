@@ -18,21 +18,19 @@ import cn.tthud.taitian.utils.ImageLoader;
  * Created by bopeng on 2017/11/3.
  */
 
-public class MessageAdapter extends BaseRecyclerViewAdapter {
-
+public class MessageAdapter extends BaseRecyclerViewAdapter<MessageBean> {
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_message_normal);
     }
 
     private class ViewHolder extends BaseRecyclerViewHolder<MessageBean, ItemMessageNormalBinding> {
-
         ViewHolder(ViewGroup parent, int item_android){
             super(parent, item_android);
         }
 
         @Override
-        public void onBindViewHolder(final MessageBean object, int position) {
+        public void onBindViewHolder(final MessageBean object, final int position) {
             binding.executePendingBindings();
             String msgType = object.getMc_id();
             if (msgType.equals("系统消息")){
@@ -52,18 +50,14 @@ public class MessageAdapter extends BaseRecyclerViewAdapter {
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    jumpToWebViewActivity(object, view.getContext());
+                    if (listener != null) {
+                        listener.onClick(object,position);
+                    }
                 }
             });
         }
     }
 
-    private void jumpToWebViewActivity(MessageBean object, Context localContext){
 
-        WebViewBean bean = new WebViewBean();
-        bean.setTitle(object.getTitle());
-        bean.setUrl(object.getUrl());
-        WebViewActivity.navToWebView(localContext, bean);
-    }
 }
 

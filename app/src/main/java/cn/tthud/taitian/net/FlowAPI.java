@@ -117,5 +117,7 @@ public class FlowAPI {
     // 单页接口
     public static String APP_ART_ONCE = SERVER_IP + "/appGetArtonce";
 
+    // 消息操作
+    public static String APP_OPERATIONMSG = SERVER_IP + "/appOperationMsg";
 
 }
