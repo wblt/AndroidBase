@@ -22,6 +22,7 @@ import cn.tthud.taitian.net.rxbus.RxCodeConstants;
 import cn.tthud.taitian.utils.CommonUtils;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.SPUtils;
+import me.leolin.shortcutbadger.ShortcutBadger;
 import rx.Subscription;
 import rx.functions.Action1;
 
@@ -109,6 +110,8 @@ public class MainActivity extends BaseActivity {
                     if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
                         index = 2;
                         updateUnreadMsgLable(false);
+                        SPUtils.putInt(SPUtils.BADGER_NUM,0);
+                        ShortcutBadger.removeCount(MainActivity.this);
                     } else {
                         // 绑定手机号码
                         startActivity(new Intent(this, BindPhoneActivity.class));
@@ -190,6 +193,12 @@ public class MainActivity extends BaseActivity {
                         String status = integer.getObject().toString();
                         // 收到消息之后设置为true
                         updateUnreadMsgLable(true);
+
+                        // 更新桌面图标
+                        int num = SPUtils.getInt(SPUtils.BADGER_NUM,0);
+                        num = num + 1;
+                        SPUtils.putInt(SPUtils.BADGER_NUM,num);
+                        ShortcutBadger.applyCount(MainActivity.this, num);
                     }
                 });
     }

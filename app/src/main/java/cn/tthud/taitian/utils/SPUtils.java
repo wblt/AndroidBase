@@ -40,7 +40,7 @@ public class SPUtils {
     public static final String ISVST = "isvst";                 // 游客or用户
     public static final String IS_BINDWX  = "isbindwx";         // 是否绑定微信
     public static final String H5_URL = "h5_url";               // h5地址
-
+    public static final String BADGER_NUM = "badger_num";       // bager_num
     /**
      * 清空SharedPreferences实例对象
      *
@@ -64,6 +64,7 @@ public class SPUtils {
         SPUtils.putBoolean(ISVST,false);
         SPUtils.putBoolean(IS_BINDWX,false);
         SPUtils.putString(H5_URL,"");
+        SPUtils.putInt(BADGER_NUM,0);
     }
 
 
