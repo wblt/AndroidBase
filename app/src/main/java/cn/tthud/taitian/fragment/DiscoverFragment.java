@@ -24,6 +24,7 @@ import cn.tthud.taitian.activity.huodong.EndFragment;
 import cn.tthud.taitian.activity.huodong.UnDoFragment;
 import cn.tthud.taitian.adapter.FragmentAdapter;
 import cn.tthud.taitian.base.FragmentBase;
+import cn.tthud.taitian.utils.Log;
 
 /**
  * Created by wb on 2017/10/8.
@@ -42,6 +43,8 @@ public class DiscoverFragment extends FragmentBase {
     DoingFragment mDoingFragment;
     UnDoFragment mUnbeginFragment;
     EndFragment mEndFragment;
+
+    private int tab_index = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,19 @@ public class DiscoverFragment extends FragmentBase {
         mViewPager.setAdapter(new FragmentAdapter(getActivity().getSupportFragmentManager(), fragmentList));
         mViewPager.setOffscreenPageLimit(fragmentList.size());
         ntsBottom.setViewPager(mViewPager, 0);
+        ntsBottom.setOnTabStripSelectedIndexListener(new NavigationTabStrip.OnTabStripSelectedIndexListener() {
+            @Override
+            public void onStartTabSelected(String title, int index) {
+                //Log.i("index==="+index);
+            }
+
+            @Override
+            public void onEndTabSelected(String title, int index) {
+                Log.i("index==="+index);
+                tab_index = index;
+            }
+        });
+
     }
 
     @Event(value = {R.id.ll_sousuo_lay},type = View.OnClickListener.class)
@@ -83,6 +99,13 @@ public class DiscoverFragment extends FragmentBase {
         switch (id) {
             case R.id.ll_sousuo_lay:
                 intent = new Intent(getContext(),SearchActivity.class);
+                if (tab_index == 0) {
+                    intent.putExtra("type","start");
+                } else if (tab_index == 1) {
+                    intent.putExtra("type","notstart");
+                } else if (tab_index == 2) {
+                    intent.putExtra("type","end");
+                }
                 startActivity(intent);
                 break;
         }

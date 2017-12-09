@@ -67,9 +67,7 @@ public class SearchActivity extends ActivityBase {
         appendTopBody(R.layout.activity_top_text);
         setTopBarTitle("搜索");
         setTopLeftDefultListener();
-
         initRecyclerView();
-
         setListener();
     }
 
@@ -168,6 +166,10 @@ public class SearchActivity extends ActivityBase {
         }
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_SEARCH_ACT);
         requestParams.addParameter("keywords",keywords);
+        String type = getIntent().getStringExtra("type");
+        if (!type.equals("home")) {
+            requestParams.addParameter("type",type);
+        }
         requestParams.addParameter("p", mPage);
         MXUtils.httpGet(requestParams, new CommonCallbackImp("活动搜索",requestParams){
             @Override
