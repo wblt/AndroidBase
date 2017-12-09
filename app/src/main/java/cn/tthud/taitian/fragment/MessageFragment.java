@@ -209,7 +209,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.APP_OPERATIONMSG);
         requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
         requestParams.addParameter("msg_id", messageBean.getMsg_id());
-        requestParams.addParameter("type", messageBean.getIsread());
+        requestParams.addParameter("type", "isread");
         MXUtils.httpPost(requestParams, new CommonCallbackImp("消息操作",requestParams) {
             @Override
             public void onSuccess(String data) {
