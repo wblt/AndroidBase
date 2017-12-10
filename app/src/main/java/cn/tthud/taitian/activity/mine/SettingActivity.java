@@ -32,6 +32,7 @@ import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.widget.ActionSheet;
 import cn.tthud.taitian.widget.CustomAlertDialog;
+import cn.tthud.taitian.widget.EaseSwitchButton;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
@@ -42,6 +43,9 @@ public class SettingActivity extends ActivityBase {
 
     @ViewInject(R.id.bingding_status)
     private TextView bingding_status;
+
+    @ViewInject(R.id.switch_bingding)
+    private EaseSwitchButton switch_bingding;
 
     private CustomAlertDialog customAlertDialog;
     @Override
@@ -62,23 +66,26 @@ public class SettingActivity extends ActivityBase {
     }
 
     private void updateView () {
-        if (SPUtils.getString(SPUtils.SOURCE).equals("tel")) {
-            bingding.setText("绑定微信");
-        } else if (SPUtils.getString(SPUtils.SOURCE).equals("wx")){
-            bingding.setText("绑定手机号");
-        }
+//        if (SPUtils.getString(SPUtils.SOURCE).equals("tel")) {
+//            bingding.setText("绑定微信");
+//        } else if (SPUtils.getString(SPUtils.SOURCE).equals("wx")){
+//            bingding.setText("绑定手机号");
+//        }
         if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
             if (SPUtils.getBoolean(SPUtils.IS_BINDWX,false)) {
-                bingding_status.setText("已绑定");
+                //bingding_status.setText("已绑定");
+                switch_bingding.openSwitch();
             } else {
-                bingding_status.setText("未绑定");
+                //bingding_status.setText("未绑定");
+                switch_bingding.closeSwitch();
             }
         } else {
-            bingding_status.setText("未绑定");
+            //bingding_status.setText("未绑定");
+            switch_bingding.closeSwitch();
         }
     }
 
-    @Event(value = {R.id.logout,R.id.edit_phone,R.id.edit_pwd,R.id.lay_bind,R.id.lay_remove},type = View.OnClickListener.class)
+    @Event(value = {R.id.logout,R.id.edit_phone,R.id.edit_pwd,R.id.lay_bind,R.id.lay_remove,R.id.switch_bingding},type = View.OnClickListener.class)
     private void onEvenOnclick(View view) {
         final int id = view.getId();
         Intent intent;
@@ -126,7 +133,6 @@ public class SettingActivity extends ActivityBase {
                             customAlertDialog.show();
                         }
                     }
-
                 } else {
                     // 绑定号码
                     startActivity(new Intent(this, BindPhoneActivity.class));
@@ -175,6 +181,58 @@ public class SettingActivity extends ActivityBase {
                     }
                 });
                 customAlertDialog.show();
+                break;
+            case R.id.switch_bingding:
+                if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
+                    if(SPUtils.getString(SPUtils.SOURCE).equals("tel")) {
+                        if (!SPUtils.getBoolean(SPUtils.IS_BINDWX,false)) {
+                            // 绑定微信
+                            UMShareAPI.get(SettingActivity.this).getPlatformInfo(SettingActivity.this, SHARE_MEDIA.WEIXIN, authListener);
+                        } else {
+                            // 弹出框
+                            customAlertDialog = new CustomAlertDialog(this, R.style.dialog,"你确定要解除绑定微信？", new CustomAlertDialog.ViewClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    switch (view.getId()) {
+                                        case R.id.iv_close:
+                                            customAlertDialog.dismiss();
+                                            break;
+                                        case R.id.tv_contain:
+                                            customAlertDialog.dismiss();
+                                            unbingdingwx();
+                                            break;
+                                    }
+                                }
+                            });
+                            customAlertDialog.show();
+                        }
+                    } else if (SPUtils.getString(SPUtils.SOURCE).equals("wx")){
+                        if (!SPUtils.getBoolean(SPUtils.IS_BINDWX,false)) {
+                            // 绑定微信
+                            UMShareAPI.get(SettingActivity.this).getPlatformInfo(SettingActivity.this, SHARE_MEDIA.WEIXIN, authListener);
+                        } else {
+                            // 弹出框
+                            customAlertDialog = new CustomAlertDialog(this, R.style.dialog,"你确定要解除绑定微信？", new CustomAlertDialog.ViewClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    switch (view.getId()) {
+                                        case R.id.iv_close:
+                                            customAlertDialog.dismiss();
+                                            break;
+                                        case R.id.tv_contain:
+                                            customAlertDialog.dismiss();
+                                            unbingdingwx();
+                                            break;
+                                    }
+                                }
+                            });
+                            customAlertDialog.show();
+                        }
+                    }
+                } else {
+                    // 绑定号码
+                    startActivity(new Intent(this, BindPhoneActivity.class));
+                }
                 break;
         }
     }
