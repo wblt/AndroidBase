@@ -58,6 +58,8 @@ public class ActionSheet {
 		final TextView eid_pwd_pic = (TextView) layout.findViewById(R.id.eid_pwd_pic);
 		TextView sex_man = layout.findViewById(R.id.sex_man);
 		TextView sex_woman = layout.findViewById(R.id.sex_woman);
+		TextView tag_read = layout.findViewById(R.id.tag_read);
+		TextView tv_msg_delete = layout.findViewById(R.id.tv_msg_delete);
 
 		final TextView mCancel = (TextView) layout.findViewById(R.id.cancel);
 		if (type.equals("1")) {
@@ -70,6 +72,8 @@ public class ActionSheet {
 			eid_pwd_pic.setVisibility(View.GONE);
 			sex_man.setVisibility(View.GONE);
 			sex_woman.setVisibility(View.GONE);
+			tag_read.setVisibility(View.GONE);
+			tv_msg_delete.setVisibility(View.GONE);
 		} else if (type.equals("2")) {
 			take_picture.setVisibility(View.GONE);
 			choose_local.setVisibility(View.GONE);
@@ -78,6 +82,8 @@ public class ActionSheet {
 			eid_pwd_pic.setVisibility(View.GONE);
 			sex_man.setVisibility(View.GONE);
 			sex_woman.setVisibility(View.GONE);
+			tag_read.setVisibility(View.GONE);
+			tv_msg_delete.setVisibility(View.GONE);
 			tv_download.setVisibility(View.VISIBLE);
 			tv_preview.setVisibility(View.VISIBLE);
 		} else if (type.equals("3")) {
@@ -89,6 +95,8 @@ public class ActionSheet {
 			tv_preview.setVisibility(View.GONE);
 			sex_man.setVisibility(View.GONE);
 			sex_woman.setVisibility(View.GONE);
+			tag_read.setVisibility(View.GONE);
+			tv_msg_delete.setVisibility(View.GONE);
 			forget_pwd_pic.setVisibility(View.VISIBLE);
 			eid_pwd_pic.setVisibility(View.VISIBLE);
 		} else if (type.equals("4")) {
@@ -99,8 +107,22 @@ public class ActionSheet {
 			tv_preview.setVisibility(View.GONE);
 			forget_pwd_pic.setVisibility(View.GONE);
 			eid_pwd_pic.setVisibility(View.GONE);
+			tag_read.setVisibility(View.GONE);
+			tv_msg_delete.setVisibility(View.GONE);
 			sex_man.setVisibility(View.VISIBLE);
 			sex_woman.setVisibility(View.VISIBLE);
+		} else if (type.equals("5")) {
+			take_picture.setVisibility(View.GONE);
+			choose_local.setVisibility(View.GONE);
+			delete_pic.setVisibility(View.GONE);
+			tv_download.setVisibility(View.GONE);
+			tv_preview.setVisibility(View.GONE);
+			forget_pwd_pic.setVisibility(View.GONE);
+			eid_pwd_pic.setVisibility(View.GONE);
+			sex_man.setVisibility(View.GONE);
+			sex_woman.setVisibility(View.GONE);
+			tag_read.setVisibility(View.VISIBLE);
+			tv_msg_delete.setVisibility(View.VISIBLE);
 		}
 		take_picture.setOnClickListener(new OnClickListener() {
 
@@ -193,6 +215,26 @@ public class ActionSheet {
 				// TODO Auto-generated method stub
 				// 女
 				actionSheetSelected.onClick(9);
+				dlg.dismiss();
+			}
+		});
+
+		tag_read.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				// TODO Auto-generated method stub
+				// 标记已读
+				actionSheetSelected.onClick(10);
+				dlg.dismiss();
+			}
+		});
+
+		tv_msg_delete.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				// TODO Auto-generated method stub
+				// 删除消息
+				actionSheetSelected.onClick(11);
 				dlg.dismiss();
 			}
 		});

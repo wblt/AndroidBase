@@ -1,6 +1,7 @@
 package cn.tthud.taitian.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,6 +31,7 @@ import cn.tthud.taitian.activity.home.ArtonceActivity;
 import cn.tthud.taitian.adapter.MessageAdapter;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.base.OnItemClickListener;
+import cn.tthud.taitian.base.OnItemLongClickListener;
 import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.MessageBean;
 import cn.tthud.taitian.bean.WebViewBean;
@@ -37,6 +39,7 @@ import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.CommonUtils;
 import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.utils.SPUtils;
+import cn.tthud.taitian.widget.ActionSheet;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
@@ -44,7 +47,7 @@ import cn.tthud.taitian.xutils.MXUtils;
  * Created by wb on 2017/10/8.
  */
 
-public class MessageFragment extends FragmentBase implements View.OnClickListener {
+public class MessageFragment extends FragmentBase implements View.OnClickListener,ActionSheet.OnActionSheetSelected, DialogInterface.OnCancelListener {
 
     private View view;
 
@@ -53,9 +56,11 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
 
     @ViewInject(R.id.page_refresh)
     private LinearLayout page_refresh;
-    private int mPage;
+    private int mPage = 1;
     private int mMaxPage = -1;
     private MessageAdapter mAdapter;
+    private MessageBean clickBean;
+
 
     //@ViewInject(R.id.up_tip)
     //private TextView up_tip;
@@ -114,14 +119,18 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         mAdapter.setOnItemClickListener(new OnItemClickListener<MessageBean>() {
             @Override
             public void onClick(MessageBean messageBean, int position) {
-                // 操作消息
-                operationMsg(messageBean);
-
-                if (messageBean.getIshref().equals("2")) return;
-
+                clickBean = messageBean;
+                if (messageBean.getIsread() == 2) {
+                    // 操作消息
+                    operationMsg("isread");
+                }
+                if (messageBean.getIshref().equals("2")) {
+                    return;
+                }
                 if (TextUtils.isEmpty(messageBean.getUrl())){
-                    if (TextUtils.isEmpty(messageBean.getModule())) return;
-
+                    if (TextUtils.isEmpty(messageBean.getModule())) {
+                        return;
+                    }
                     if (messageBean.getModule().equals("artonce")){
                         Intent intent = new Intent(getActivity(), ArtonceActivity.class);
                         intent.putExtra("cid", messageBean.getModule_id());
@@ -138,6 +147,15 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                     intent.putExtra("url", messageBean.getUrl());
                     startActivity(intent);
                 }
+            }
+        });
+        mAdapter.setOnItemLongClickListener(new OnItemLongClickListener<MessageBean>() {
+            @Override
+            public void onLongClick(MessageBean messageBean, int position) {
+                clickBean = messageBean;
+                // 长按操作
+                ActionSheet.showSheet(getActivity(),
+                        MessageFragment.this, MessageFragment.this, "5");
             }
         });
         xrvCustom.setAdapter(mAdapter);
@@ -220,21 +238,33 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
     }
 
 
-    private void operationMsg(MessageBean messageBean) {
+    private void operationMsg(String type) {
+        showProgressDialog();
+        if (clickBean == null) {
+            return;
+        }
         RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.APP_OPERATIONMSG);
         requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
-        requestParams.addParameter("msg_id", messageBean.getMsg_id());
-        requestParams.addParameter("type", "isread");
+        requestParams.addParameter("msg_id", clickBean.getMsg_id());
+        requestParams.addParameter("type", type);
         MXUtils.httpPost(requestParams, new CommonCallbackImp("消息操作",requestParams) {
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
+                dismissProgressDialog();
                 try {
                     JSONObject jsonObject = new JSONObject(data);
                     String status = jsonObject.getString("status");
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         String result = jsonObject.getString("data");
+
+                        // 重新请求接口
+                        mAdapter.clear();
+                        mAdapter.notifyDataSetChanged();
+                        mPage = 1;
+                        loadNewData();
+                        
                     }else {
                         showMsg(info);
                     }
@@ -243,6 +273,24 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                 }
             }
         });
+
+    }
+
+    @Override
+    public void onClick(int whichButton) {
+        if (whichButton == 10) {
+            // 标记已读
+            if (clickBean.getIsread() == 2) {
+                operationMsg("isread");
+            }
+        } else if (whichButton == 11) {
+            // 删除
+            operationMsg("isdel");
+        }
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialogInterface) {
 
     }
 }

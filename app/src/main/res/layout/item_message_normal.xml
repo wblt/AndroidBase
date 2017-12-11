@@ -9,85 +9,97 @@
     </data>
 
     <LinearLayout
-        android:background="@color/white"
+        android:background="#F4F4F4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
-            android:id="@+id/ll_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:background="@drawable/shape_rectangle_white">
 
             <LinearLayout
-                android:id="@+id/ll_system_msg_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/head_icon"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@mipmap/logowenzi"/>
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_marginTop="15dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="10dp"
-                    android:text="系统消息"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/msg_time"
-                    android:layout_marginTop="15dp"
-                    android:gravity="center_vertical"
-                    android:text="2017-10-23 09:00"
-                    android:textColor="@color/gray_black"
-                    android:textSize="14sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <!--<ImageView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:background="@color/line"/>-->
-            </LinearLayout>
-
-            <LinearLayout
+                android:id="@+id/ll_all"
                 android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/iv_msg_imv"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@mipmap/ccccc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:id="@+id/tv_msg_content"
-                    android:text="消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:lineSpacingExtra="5dp"/>
-            </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/ll_system_msg_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingRight="10dp"
+                        android:text="系统消息"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/msg_time"
+                        android:gravity="center_vertical"
+                        android:text="2017-10-23 09:00"
+                        android:textColor="@color/gray_black"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line"
+                    android:layout_marginTop="10dp"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:visibility="visible"
+                            android:id="@+id/head_icon"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/logowenzi"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/tv_msg_content"
+                        android:text="消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:lineSpacingExtra="5dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line"/>
         </LinearLayout>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/line"/>
 
     </LinearLayout>
 </layout>

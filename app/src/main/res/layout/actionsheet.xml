@@ -88,6 +88,27 @@
         android:textColor="@color/gray_black_text"
         android:text="女" />
 
+
+    <TextView
+        android:id="@+id/tag_read"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/actionsheet_top_selector"
+        android:gravity="center"
+        android:textColor="@color/gray_black_text"
+        android:text="标记已读"
+        />
+
+    <TextView
+        android:id="@+id/tv_msg_delete"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/actionsheet_bottom_selector"
+        android:gravity="center"
+        android:textColor="@color/gray_black_text"
+        android:text="删除消息" />
+
+
     <TextView
         android:id="@+id/cancel"
         android:layout_width="match_parent"

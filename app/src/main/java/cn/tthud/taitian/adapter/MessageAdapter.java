@@ -55,6 +55,15 @@ public class MessageAdapter extends BaseRecyclerViewAdapter<MessageBean> {
                     }
                 }
             });
+            binding.llAll.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (onItemLongClickListener != null) {
+                        onItemLongClickListener.onLongClick(object,position);
+                    }
+                    return true;
+                }
+            });
         }
     }
 
