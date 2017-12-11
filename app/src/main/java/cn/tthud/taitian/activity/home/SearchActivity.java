@@ -67,9 +67,7 @@ public class SearchActivity extends ActivityBase {
         appendTopBody(R.layout.activity_top_text);
         setTopBarTitle("搜索");
         setTopLeftDefultListener();
-
         initRecyclerView();
-
         setListener();
     }
 
@@ -130,10 +128,10 @@ public class SearchActivity extends ActivityBase {
 
     private void initRecyclerView(){
         // 禁止下拉刷新
-        xrvCustom.setPullRefreshEnabled(false);
-        xrvCustom.setLoadingMoreEnabled(false);
+        xrvCustom.setPullRefreshEnabled(true);
+        xrvCustom.setLoadingMoreEnabled(true);
         // 去掉刷新头
-        xrvCustom.clearHeader();
+        //xrvCustom.clearHeader();
         xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -168,6 +166,10 @@ public class SearchActivity extends ActivityBase {
         }
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_SEARCH_ACT);
         requestParams.addParameter("keywords",keywords);
+        String type = getIntent().getStringExtra("type");
+        if (!type.equals("home")) {
+            requestParams.addParameter("type",type);
+        }
         requestParams.addParameter("p", mPage);
         MXUtils.httpGet(requestParams, new CommonCallbackImp("活动搜索",requestParams){
             @Override

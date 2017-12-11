@@ -1,5 +1,6 @@
 package cn.tthud.taitian.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -26,7 +27,10 @@ import java.util.List;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.adapter.MessageAdapter;
 import cn.tthud.taitian.base.FragmentBase;
+import cn.tthud.taitian.base.OnItemClickListener;
+import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.MessageBean;
+import cn.tthud.taitian.bean.WebViewBean;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.CommonUtils;
 import cn.tthud.taitian.utils.GsonUtils;
@@ -105,6 +109,15 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
 
         mAdapter = new MessageAdapter();
+        mAdapter.setOnItemClickListener(new OnItemClickListener<MessageBean>() {
+            @Override
+            public void onClick(MessageBean messageBean, int position) {
+                // 操作消息
+                operationMsg(messageBean);
+                // 跳
+                jumpToWebViewActivity(messageBean, view.getContext());
+            }
+        });
         xrvCustom.setAdapter(mAdapter);
     }
 
@@ -182,5 +195,39 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                 loadNewData();
                 break;
         }
+    }
+
+    private void jumpToWebViewActivity(MessageBean object, Context localContext){
+        WebViewBean bean = new WebViewBean();
+        bean.setTitle(object.getTitle());
+        bean.setUrl(object.getUrl());
+        WebViewActivity.navToWebView(localContext, bean);
+    }
+
+
+    private void operationMsg(MessageBean messageBean) {
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.APP_OPERATIONMSG);
+        requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
+        requestParams.addParameter("msg_id", messageBean.getMsg_id());
+        requestParams.addParameter("type", "isread");
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("消息操作",requestParams) {
+            @Override
+            public void onSuccess(String data) {
+                super.onSuccess(data);
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        String result = jsonObject.getString("data");
+                    }else {
+                        showMsg(info);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 }

@@ -137,6 +137,7 @@ public class HomeFragment extends FragmentBase {
                 break;
             case R.id.ll_sousuo_lay:
                 intent = new Intent(getContext(),SearchActivity.class);
+                intent.putExtra("type","home");
                 startActivity(intent);
                 break;
 
