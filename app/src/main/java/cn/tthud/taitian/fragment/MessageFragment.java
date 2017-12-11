@@ -1,6 +1,7 @@
 package cn.tthud.taitian.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -25,6 +26,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import cn.tthud.taitian.R;
+import cn.tthud.taitian.activity.home.ArtonceActivity;
 import cn.tthud.taitian.adapter.MessageAdapter;
 import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.base.OnItemClickListener;
@@ -114,8 +116,28 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
             public void onClick(MessageBean messageBean, int position) {
                 // 操作消息
                 operationMsg(messageBean);
-                // 跳
-                jumpToWebViewActivity(messageBean, view.getContext());
+
+                if (messageBean.getIshref().equals("2")) return;
+
+                if (TextUtils.isEmpty(messageBean.getUrl())){
+                    if (TextUtils.isEmpty(messageBean.getModule())) return;
+
+                    if (messageBean.getModule().equals("artonce")){
+                        Intent intent = new Intent(getActivity(), ArtonceActivity.class);
+                        intent.putExtra("cid", messageBean.getModule_id());
+                        intent.putExtra("title", messageBean.getTitle());
+                        startActivity(intent);
+                    }else if (messageBean.getModule().equals("admarket")){
+
+                    }else if (messageBean.getModule().equals("article")){
+
+                    }
+                }else{
+                    Intent intent = new Intent(getActivity(),WebViewActivity.class);
+                    intent.putExtra("title",messageBean.getTitle());
+                    intent.putExtra("url", messageBean.getUrl());
+                    startActivity(intent);
+                }
             }
         });
         xrvCustom.setAdapter(mAdapter);
@@ -195,13 +217,6 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                 loadNewData();
                 break;
         }
-    }
-
-    private void jumpToWebViewActivity(MessageBean object, Context localContext){
-        WebViewBean bean = new WebViewBean();
-        bean.setTitle(object.getTitle());
-        bean.setUrl(object.getUrl());
-        WebViewActivity.navToWebView(localContext, bean);
     }
 
 

@@ -25,7 +25,9 @@ public class MessageBean {
     private String icon;
     private String url;
     private String title;
-    private int ishref;
+    private String ishref;
+    private String module;
+    private String module_id;
     private String suetime;
 
     public int getMsg_id() {
@@ -92,11 +94,11 @@ public class MessageBean {
         this.title = title;
     }
 
-    public int getIshref() {
+    public String getIshref() {
         return ishref;
     }
 
-    public void setIshref(int ishref) {
+    public void setIshref(String  ishref) {
         this.ishref = ishref;
     }
 
@@ -106,5 +108,21 @@ public class MessageBean {
 
     public void setSuetime(String suetime) {
         this.suetime = suetime;
+    }
+
+    public String getModule() {
+        return module;
+    }
+
+    public String getModule_id() {
+        return module_id;
+    }
+
+    public void setModule(String module) {
+        this.module = module;
+    }
+
+    public void setModule_id(String module_id) {
+        this.module_id = module_id;
     }
 }
