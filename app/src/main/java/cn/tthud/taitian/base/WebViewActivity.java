@@ -152,40 +152,6 @@ public class WebViewActivity extends ActivityBase {
 			}
 		});
 
-
-		String nickname = SPUtils.getString(SPUtils.NICK_NAME);
-		String headimgurl = SPUtils.getString(SPUtils.HEAD_PIC);
-		String openid = SPUtils.getString(SPUtils.WX_OPEN_ID);
-		int sex = SPUtils.getInt(SPUtils.SEX, 1);
-		String ub_id = SPUtils.getString(SPUtils.UB_ID);
-		String source = "app";
-		String deviceid = UUID.randomUUID().toString();
-
-		int index = url.indexOf("?");
-		if (index == -1){		// 不存在
-			url = url + "?source=" + source;
-		}else{
-			url = url + "&source=" + source;
-		}
-
-		url = url + "&deviceid=" + deviceid;
-		url = url + "&sex=" + sex;
-
-		if (nickname != null){
-			url = url + "&nickname=" + URLEncoder.encode(nickname);
-		}
-
-		if (headimgurl != null){
-			url = url + "&headimgurl=" + headimgurl;
-		}
-		if (openid != null){
-			url = url + "&openid=" + openid;
-		}
-
-		if (ub_id != null){
-			url = url + "&ub_id=" + ub_id;
-		}
-
 		webView.loadUrl(url);
 	}
 	
@@ -280,6 +246,9 @@ public class WebViewActivity extends ActivityBase {
 					}
 					Intent intent = new Intent(context,WebViewActivity.class);
 					intent.putExtra("title",object.getTitle());
+
+					addWXInfo(url);
+
 					intent.putExtra("url", url);
 					context.startActivity(intent);
 				}else{
@@ -290,6 +259,41 @@ public class WebViewActivity extends ActivityBase {
 			}
 		} else {
 			LoginActivity.navToLogin(context);
+		}
+	}
+
+	private static void addWXInfo(String url){
+		String nickname = SPUtils.getString(SPUtils.NICK_NAME);
+		String headimgurl = SPUtils.getString(SPUtils.HEAD_PIC);
+		String openid = SPUtils.getString(SPUtils.WX_OPEN_ID);
+		int sex = SPUtils.getInt(SPUtils.SEX, 1);
+		String ub_id = SPUtils.getString(SPUtils.UB_ID);
+		String source = "app";
+		String deviceid = UUID.randomUUID().toString();
+
+		int index = url.indexOf("?");
+		if (index == -1){		// 不存在
+			url = url + "?source=" + source;
+		}else{
+			url = url + "&source=" + source;
+		}
+
+		url = url + "&deviceid=" + deviceid;
+		url = url + "&sex=" + sex;
+
+		if (nickname != null){
+			url = url + "&nickname=" + URLEncoder.encode(nickname);
+		}
+
+		if (headimgurl != null){
+			url = url + "&headimgurl=" + headimgurl;
+		}
+		if (openid != null){
+			url = url + "&openid=" + openid;
+		}
+
+		if (ub_id != null){
+			url = url + "&ub_id=" + ub_id;
 		}
 	}
 
