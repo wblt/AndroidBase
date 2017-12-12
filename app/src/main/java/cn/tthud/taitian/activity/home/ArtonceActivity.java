@@ -38,6 +38,9 @@ public class ArtonceActivity extends ActivityBase {
 
         cid = getIntent().getExtras().getString("cid");
         title = getIntent().getExtras().getString("title");
+        if (title.length() > 4){
+            title = title.substring(0, 4);
+        }
 
         setTopBarTitle(title);
         setTopLeftDefultListener();
