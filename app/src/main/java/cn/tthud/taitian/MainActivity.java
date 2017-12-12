@@ -172,8 +172,14 @@ public class MainActivity extends BaseActivity {
         runOnUiThread(new Runnable() {
             public void run() {
                 if (flag) {
+                    if (SPUtils.getInt(SPUtils.BADGER_NUM,0)>99) {
+                        unreadLabel.setText("..");
+                    } else {
+                        unreadLabel.setText(SPUtils.getInt(SPUtils.BADGER_NUM,0)+"");
+                    }
                     unreadLabel.setVisibility(View.VISIBLE);
                 } else {
+                    unreadLabel.setText("");
                     unreadLabel.setVisibility(View.INVISIBLE);
                 }
             }
@@ -191,15 +197,27 @@ public class MainActivity extends BaseActivity {
                     public void call(RxBusBaseMessage integer) {
                         Log.i(integer.getObject().toString());
                         String status = integer.getObject().toString();
-                        // 收到消息之后设置为true
-                        updateUnreadMsgLable(true);
-
+                        int num = 0;
+                        if (status.equals("socket")) {
+                            num = SPUtils.getInt(SPUtils.BADGER_NUM,0);
+                            num = num + 1;
+                        } else {
+                            num = SPUtils.getInt(SPUtils.BADGER_NUM,0);
+                        }
                         // 更新桌面图标
-                        int num = SPUtils.getInt(SPUtils.BADGER_NUM,0);
-                        num = num + 1;
                         SPUtils.putInt(SPUtils.BADGER_NUM,num);
-                        ShortcutBadger.applyCount(MainActivity.this, num);
+                        if (num == 0) {
+                            // 收到消息之后设置为true
+                            updateUnreadMsgLable(false);
+                        } else {
+                            // 收到消息之后设置为true
+                            updateUnreadMsgLable(true);
+                            ShortcutBadger.applyCount(MainActivity.this, num);
+                        }
+
                     }
                 });
     }
+
+
 }

@@ -102,16 +102,17 @@
 
                     <TextView
                         android:id="@+id/unread_msg_number"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_toRightOf="@+id/mask_red"
                         android:background="@mipmap/yuandian"
                         android:gravity="center"
                         android:textColor="@android:color/white"
                         android:textSize="12sp"
                         android:visibility="invisible"
-                        />
+                        android:text=""
+                        android:textAlignment="center"
+                        android:layout_marginLeft="-10dp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
