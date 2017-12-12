@@ -46,8 +46,8 @@ public class SimpleImageBanner extends BaseIndicaorBanner<BannerItem, SimpleImag
         final BannerItem item = list.get(position);
         int itemWidth = dm.widthPixels;
         int itemHeight = (int) (itemWidth * 2 * 1.0f / 4);
-        iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        iv.setLayoutParams(new LinearLayout.LayoutParams(itemWidth, itemHeight));
+        //iv.setScaleType(ImageView.ScaleType.FIT_XY);
+        //iv.setLayoutParams(new LinearLayout.LayoutParams(itemWidth, itemHeight));
 
         String imgUrl = item.imgUrl;
         if (!TextUtils.isEmpty(imgUrl)) {
@@ -56,15 +56,14 @@ public class SimpleImageBanner extends BaseIndicaorBanner<BannerItem, SimpleImag
 //        	f.display(iv, imgUrl);
             Glide.with(context)
                     .load(imgUrl)
-                    .override(itemWidth, itemHeight)
-                    .centerCrop()
+                    //.override(itemWidth, itemHeight)
+                    //.centerCrop()
                     .dontAnimate()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(iv);
         } else {
             iv.setImageDrawable(colorDrawable);
         }
-
         return inflate;
     }
 }

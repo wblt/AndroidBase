@@ -109,7 +109,7 @@ public class ChatManager {
             } else if (type.equals("message")){
                 String list = jsonObject.getString("list");
                 // 发送消息去主页
-                RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,message));
+                RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"socket"));
                 // 弹出通知栏
                 simpleNotify(list);
             }

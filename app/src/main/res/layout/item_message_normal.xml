@@ -80,6 +80,19 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@mipmap/logowenzi"/>
+
+                        <TextView
+                            android:id="@+id/unread_msg"
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
+                            android:layout_toRightOf="@+id/head_icon"
+                            android:background="@mipmap/yuandian"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="12sp"
+                            android:visibility="invisible"
+                            android:layout_marginLeft="-10dp"/>
+
                     </RelativeLayout>
 
                     <TextView

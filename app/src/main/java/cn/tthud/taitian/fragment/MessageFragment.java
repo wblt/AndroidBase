@@ -36,6 +36,9 @@ import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.MessageBean;
 import cn.tthud.taitian.bean.WebViewBean;
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.net.rxbus.RxBus;
+import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
+import cn.tthud.taitian.net.rxbus.RxCodeConstants;
 import cn.tthud.taitian.utils.CommonUtils;
 import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.utils.SPUtils;
@@ -60,6 +63,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
     private int mMaxPage = -1;
     private MessageAdapter mAdapter;
     private MessageBean clickBean;
+    private int readnum = 0;
 
 
     //@ViewInject(R.id.up_tip)
@@ -192,8 +196,12 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                         String maxPage = jsonObject1.getString("maxPage");
                         mMaxPage = Integer.parseInt(maxPage);
 
-                        String list = jsonObject1.getString("list");
+                        // 未读消息总数
+                        readnum = jsonObject1.getInt("readnum");
+                        SPUtils.putInt(SPUtils.BADGER_NUM,readnum);
+                        RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"http"));
 
+                        String list = jsonObject1.getString("list");
                         Type type=new TypeToken<List<MessageBean>>(){}.getType();
                         List<MessageBean> beanList = GsonUtils.jsonToList(list,type);
 
