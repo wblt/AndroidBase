@@ -264,7 +264,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                         mAdapter.notifyDataSetChanged();
                         mPage = 1;
                         loadNewData();
-                        
+
                     }else {
                         showMsg(info);
                     }
