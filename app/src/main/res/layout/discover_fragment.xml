@@ -7,28 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/content_bg">
 
-    <!--搜索-->
-    <LinearLayout
-        android:id="@+id/ll_sousuo_lay"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="@drawable/shape_rectangle_white"
-        android:layout_height="50dp"
-        android:visibility="visible">
-        <ImageView
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/sousuo" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="搜索你想知道的内容"
-            android:textSize="14sp"/>
-    </LinearLayout>
-
     <LinearLayout
         android:id="@+id/nav_tab"
         android:layout_width="match_parent"
@@ -50,6 +28,29 @@
             app:nts_inactive_color="@color/black"
             app:nts_titles="@array/activity_array"
             app:nts_weight="3dp" />
+    </LinearLayout>
+
+
+    <!--搜索-->
+    <LinearLayout
+        android:id="@+id/ll_sousuo_lay_xx"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/shape_rectangle_white"
+        android:layout_height="50dp"
+        android:visibility="gone">
+        <ImageView
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/sousuo" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="搜索你想知道的内容"
+            android:textSize="14sp"/>
     </LinearLayout>
 
     <View

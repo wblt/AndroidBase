@@ -64,16 +64,14 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
     private MessageAdapter mAdapter;
     private MessageBean clickBean;
     private int readnum = 0;
-
+    private boolean first_tab_msg = false;
 
     //@ViewInject(R.id.up_tip)
     //private TextView up_tip;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(view == null){
@@ -82,12 +80,9 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
             appendTopBody(R.layout.activity_top_icon);
             ((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
             setTopBarTitle("消息");
-
             initRecyclerView();
             setListener();
-
-            mPage = 1;
-            loadNewData();
+            //loadNewData();
         }
         return view;
     }
@@ -101,24 +96,20 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
             @Override
             public void onRefresh() {
                 mAdapter.clear();
-                mAdapter.notifyDataSetChanged();
                 mPage = 1;
                 loadNewData();
             }
             @Override
             public void onLoadMore() {
-                //up_tip.setVisibility(View.GONE);
                 mPage += 1;
                 loadNewData();
             }
         });
-
         xrvCustom.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         // 需加，不然滑动不流畅
         xrvCustom.setNestedScrollingEnabled(false);
         xrvCustom.setHasFixedSize(false);
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
-
         mAdapter = new MessageAdapter();
         mAdapter.setOnItemClickListener(new OnItemClickListener<MessageBean>() {
             @Override
@@ -208,8 +199,6 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                         mAdapter.addAll(beanList);
                         mAdapter.notifyDataSetChanged();
 
-                        //xrvCustom.loadMoreComplete();
-
                         if(mAdapter.getData().size() == 0){
                             page_refresh.setVisibility(View.VISIBLE);
                             xrvCustom.setVisibility(View.GONE);
@@ -219,10 +208,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                         }
 
                         if(mPage >= mMaxPage){
-                            //up_tip.setVisibility(View.GONE);
                             xrvCustom.noMoreLoading();
-                        } else {
-                            //up_tip.setVisibility(View.VISIBLE);
                         }
 
                     }else {
@@ -240,11 +226,10 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         int id = v.getId();
         switch (id){
             case R.id.page_refresh:
-                loadNewData();
+                //loadNewData();
                 break;
         }
     }
-
 
     private void operationMsg(String type) {
         showProgressDialog();
@@ -272,7 +257,6 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                         mAdapter.notifyDataSetChanged();
                         mPage = 1;
                         loadNewData();
-
                     }else {
                         showMsg(info);
                     }
@@ -301,4 +285,11 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
     public void onCancel(DialogInterface dialogInterface) {
 
     }
+    public void tab_msg() {
+        if (first_tab_msg == false) {
+            first_tab_msg = true;
+            loadNewData();
+        }
+    }
+
 }

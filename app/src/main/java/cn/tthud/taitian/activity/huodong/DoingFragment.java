@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,12 +39,15 @@ import cn.tthud.taitian.xutils.MXUtils;
 public class DoingFragment extends FragmentBase implements View.OnClickListener {
     private View view;
 
+    private TextView sousuo_btn;
     private XRecyclerView xrvCustom;
     private LinearLayout page_refresh;
     //private TextView up_tip;
-    private int mPage;
+    private int mPage = 1;
     private int mMaxPage = -1;
     private ActivityDoingAdapter mAdapter;
+    private String keywords = "";
+    private EditText query;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,18 +58,16 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (view == null){
             view =  inflater.inflate(R.layout.fragment_activity_doing, null);
+            sousuo_btn = view.findViewById(R.id.sousuo_btn);
             xrvCustom = view.findViewById(R.id.xrv_custom);
             page_refresh = view.findViewById(R.id.page_refresh);
-            //up_tip = view.findViewById(R.id.up_tip);
-
+            query = view.findViewById(R.id.query);
             initRecyclerView();
             setListener();
-            mPage = 1;
-            loadNewData(true);
+            //loadNewData();
         }
         return view;
     }
-
     private void initRecyclerView(){
         // 禁止下拉刷新
         xrvCustom.setPullRefreshEnabled(true);
@@ -74,13 +76,14 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
         xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                loadNewData(true);
+                mAdapter.clear();
+                mPage = 1;
+                loadNewData();
             }
-
             @Override
             public void onLoadMore() {
-                //up_tip.setVisibility(View.GONE);
-                loadNewData(false);
+                mPage += 1;
+                loadNewData();
             }
         });
 
@@ -97,20 +100,14 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
 
     private void setListener(){
         page_refresh.setOnClickListener(this);
+        sousuo_btn.setOnClickListener(this);
     }
 
-
-    private void loadNewData(boolean isRefresh){
-        if (isRefresh){
-            mAdapter.clear();
-            mAdapter.notifyDataSetChanged();
-            mPage = 1;
-        }else{
-            mPage += 1;
-        }
+    public void loadNewData(){
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_ACTIVITY_LIST);
         requestParams.addParameter("type","start");
         requestParams.addParameter("p", mPage);
+        requestParams.addParameter("keywords",keywords);
         MXUtils.httpGet(requestParams, new CommonCallbackImp("活动列表--进行中",requestParams){
             @Override
             public void onSuccess(String data) {
@@ -119,7 +116,6 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
                     JSONObject jsonObject = new JSONObject(data);
                     String status = jsonObject.getString("status");
                     String info = jsonObject.getString("info");
-
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         xrvCustom.refreshComplete();
                         String result = jsonObject.getString("data");
@@ -140,12 +136,8 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
                             page_refresh.setVisibility(View.GONE);
                             xrvCustom.setVisibility(View.VISIBLE);
                         }
-                        Log.i("dddd"+xrvCustom.getHeight());
                         if(mPage >= mMaxPage){
-                            //up_tip.setVisibility(View.GONE);
                             xrvCustom.noMoreLoading();
-                        } else {
-                            //up_tip.setVisibility(View.VISIBLE);
                         }
 
                     }else {
@@ -163,7 +155,15 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
         int id = v.getId();
         switch (id){
             case R.id.page_refresh:
-                loadNewData(true);
+//                mAdapter.clear();
+//                mPage = 1;
+//                loadNewData();
+                break;
+            case R.id.sousuo_btn:
+                keywords = query.getText().toString();
+                mPage = 1;
+                mAdapter.clear();
+                loadNewData();
                 break;
         }
     }

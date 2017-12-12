@@ -7,7 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.xrecyclerview.XRecyclerView;
 import com.google.gson.reflect.TypeToken;
@@ -38,9 +40,12 @@ public class EndFragment extends FragmentBase implements View.OnClickListener{
 
     private XRecyclerView xrvCustom;
     private LinearLayout page_refresh;
-    private int mPage;
+    private int mPage = 1;
     private int mMaxPage = -1;
     private ActivityEndAdapter mAdapter;
+    private String keywords = "";
+    private EditText query;
+    private TextView sousuo_btn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,13 +58,12 @@ public class EndFragment extends FragmentBase implements View.OnClickListener{
             view =  inflater.inflate(R.layout.fragment_activity_end, null);
             xrvCustom = view.findViewById(R.id.xrv_custom);
             page_refresh = view.findViewById(R.id.page_refresh);
+            query = view.findViewById(R.id.query);
+            sousuo_btn = view.findViewById(R.id.sousuo_btn);
             initRecyclerView();
             setListener();
-
-            mPage = 1;
-            loadNewData(true);
+//            loadNewData();
         }
-
         return view;
     }
 
@@ -67,16 +71,18 @@ public class EndFragment extends FragmentBase implements View.OnClickListener{
         // 禁止下拉刷新
         xrvCustom.setPullRefreshEnabled(true);
         xrvCustom.setLoadingMoreEnabled(true);
-
         xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                loadNewData(true);
+                mAdapter.clear();
+                mPage = 1;
+                loadNewData();
             }
 
             @Override
             public void onLoadMore() {
-                loadNewData(false);
+                mPage += 1;
+                loadNewData();
             }
         });
 
@@ -93,20 +99,14 @@ public class EndFragment extends FragmentBase implements View.OnClickListener{
 
     private void setListener(){
         page_refresh.setOnClickListener(this);
+        sousuo_btn.setOnClickListener(this);
     }
 
-    private void loadNewData(boolean isRefresh){
-        if (isRefresh){
-            mAdapter.clear();
-            mAdapter.notifyDataSetChanged();
-            mPage = 1;
-        }else{
-            mPage += 1;
-        }
-
+    public void loadNewData(){
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_ACTIVITY_LIST);
         requestParams.addParameter("type","end");
         requestParams.addParameter("p", mPage);
+        requestParams.addParameter("keywords",keywords);
 
         MXUtils.httpGet(requestParams, new CommonCallbackImp("活动列表--已结束",requestParams){
             @Override
@@ -159,8 +159,17 @@ public class EndFragment extends FragmentBase implements View.OnClickListener{
         int id = v.getId();
         switch (id){
             case R.id.page_refresh:
-                loadNewData(true);
+//                mAdapter.clear();
+//                mPage = 1;
+//                loadNewData();
                 break;
+            case R.id.sousuo_btn:
+                keywords = query.getText().toString();
+                mPage = 1;
+                mAdapter.clear();
+                loadNewData();
+                break;
+
         }
     }
 }

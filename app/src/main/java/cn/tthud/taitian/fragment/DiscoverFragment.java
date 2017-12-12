@@ -33,18 +33,18 @@ import cn.tthud.taitian.utils.Log;
 public class DiscoverFragment extends FragmentBase {
 
     private View view;
-
     @ViewInject(R.id.nts_bottom)
     private NavigationTabStrip ntsBottom;
-
     @ViewInject(R.id.viewpager)
     private ViewPager mViewPager;
-
     DoingFragment mDoingFragment;
     UnDoFragment mUnbeginFragment;
     EndFragment mEndFragment;
-
     private int tab_index = 0;
+
+    private boolean first_tab_doing = false;
+    private boolean first_tab_end = false;
+    private boolean first_tab_undo = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,9 +56,9 @@ public class DiscoverFragment extends FragmentBase {
         if(view == null){
             view = super.onCreateView(inflater,container,savedInstanceState);
             appendMainBody(this, R.layout.discover_fragment);
-            appendTopBody(R.layout.activity_top_icon);
-            ((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
-            setTopBarTitle("活动");
+            //appendTopBody(R.layout.activity_top_icon);
+            //((ImageButton) view.findViewById(R.id.top_left)).setVisibility(View.INVISIBLE);
+            //setTopBarTitle("活动");
             initView();
         }
         return view;
@@ -69,11 +69,9 @@ public class DiscoverFragment extends FragmentBase {
         mDoingFragment = new DoingFragment();
         mUnbeginFragment = new UnDoFragment();
         mEndFragment = new EndFragment();
-
         fragmentList.add(mDoingFragment);
         fragmentList.add(mUnbeginFragment);
         fragmentList.add(mEndFragment);
-
         mViewPager.setAdapter(new FragmentAdapter(getActivity().getSupportFragmentManager(), fragmentList));
         mViewPager.setOffscreenPageLimit(fragmentList.size());
         ntsBottom.setViewPager(mViewPager, 0);
@@ -82,35 +80,48 @@ public class DiscoverFragment extends FragmentBase {
             public void onStartTabSelected(String title, int index) {
                 //Log.i("index==="+index);
             }
-
             @Override
             public void onEndTabSelected(String title, int index) {
                 Log.i("index==="+index);
                 tab_index = index;
+                // 点击时第一次加载数据
+                if (tab_index == 1 && first_tab_undo == false) {
+                    first_tab_undo = true;
+                    // 加载未开始的数据
+                    mUnbeginFragment.loadNewData();
+                } else if (tab_index == 2 && first_tab_end == false) {
+                    // 加载已经结束的数据
+                    first_tab_end = true;
+                    mEndFragment.loadNewData();
+                }
             }
         });
-
     }
 
-    @Event(value = {R.id.ll_sousuo_lay},type = View.OnClickListener.class)
+    @Event(value = {R.id.ll_sousuo_lay,R.id.sousuo_btn},type = View.OnClickListener.class)
     private void onEvenOnclick(View view) {
         int id = view.getId();
         Intent intent;
         switch (id) {
             case R.id.ll_sousuo_lay:
-                intent = new Intent(getContext(),SearchActivity.class);
-                if (tab_index == 0) {
-                    intent.putExtra("type","start");
-                } else if (tab_index == 1) {
-                    intent.putExtra("type","notstart");
-                } else if (tab_index == 2) {
-                    intent.putExtra("type","end");
-                }
-                startActivity(intent);
+//                intent = new Intent(getContext(),SearchActivity.class);
+//                if (tab_index == 0) {
+//                    intent.putExtra("type","start");
+//                } else if (tab_index == 1) {
+//                    intent.putExtra("type","notstart");
+//                } else if (tab_index == 2) {
+//                    intent.putExtra("type","end");
+//                }
+//                startActivity(intent);
                 break;
         }
     }
 
-
+    public void tab_huodong() {
+        if (first_tab_doing == false) {
+            first_tab_doing = true;
+            mDoingFragment.loadNewData();
+        }
+    }
 
 }

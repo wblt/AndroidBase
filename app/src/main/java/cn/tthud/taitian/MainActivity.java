@@ -36,6 +36,11 @@ public class MainActivity extends BaseActivity {
     private int index;
     private int currentTabIndex;
     private Subscription subscription;
+    private HomeFragment homeFragment;
+    private DiscoverFragment disFragment;
+    private MineFragment mineFragment;
+    private MessageFragment messageFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +48,11 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         DemoApplication.getInstance().addActivity(this);
         initView();
-        HomeFragment homeFragment = new HomeFragment();
-        DiscoverFragment disFragment = new DiscoverFragment();
-        MineFragment mineFragment = new MineFragment();
+        homeFragment = new HomeFragment();
+        disFragment = new DiscoverFragment();
+        mineFragment = new MineFragment();
 //        ContactListFragment contactListFragment = new ContactListFragment();
-        MessageFragment messageFragment = new MessageFragment();
+        messageFragment = new MessageFragment();
         fragments = new Fragment[] {homeFragment,disFragment, messageFragment, mineFragment};
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, homeFragment)
@@ -74,6 +79,7 @@ public class MainActivity extends BaseActivity {
         // 启动socket
         initSocket();
 
+        // 初始化消息
         initRxBus();
     }
 
@@ -104,6 +110,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.btn_discover:
                 index = 1;
+                disFragment.tab_huodong();
                 break;
             case R.id.btn_conversation:
                 if (CommonUtils.checkLogin()) {
@@ -112,6 +119,7 @@ public class MainActivity extends BaseActivity {
                         updateUnreadMsgLable(false);
                         SPUtils.putInt(SPUtils.BADGER_NUM,0);
                         ShortcutBadger.removeCount(MainActivity.this);
+                        messageFragment.tab_msg();
                     } else {
                         // 绑定手机号码
                         startActivity(new Intent(this, BindPhoneActivity.class));
