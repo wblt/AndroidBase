@@ -15,7 +15,6 @@ import cn.tthud.taitian.bean.VersionBean;
  * Created by jingbin on 2015/2/26.
  */
 public class SPUtils {
-
     private static final String CONFIG = "config";
     private static final String CONFIG_APP = "config_app";
 
