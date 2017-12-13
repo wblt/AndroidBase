@@ -16,11 +16,14 @@ import org.xutils.http.RequestParams;
 import java.util.UUID;
 
 import cn.tthud.taitian.activity.login.LoginActivity;
+import cn.tthud.taitian.db.dbmanager.MessageDaoUtils;
+import cn.tthud.taitian.db.entity.Message;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.net.rxbus.RxBus;
 import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
 import cn.tthud.taitian.net.rxbus.RxCodeConstants;
 import cn.tthud.taitian.utils.CommonUtils;
+import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
@@ -108,6 +111,10 @@ public class ChatManager {
                 bingding(client_id);
             } else if (type.equals("message")){
                 String list = jsonObject.getString("list");
+                // 解析消息，然后保存到数据库中
+                Message messagebean = GsonUtils.jsonToBean(list,Message.class);
+                MessageDaoUtils messageDaoUtils = new MessageDaoUtils(context);
+                messageDaoUtils.insertMessage(messagebean);
                 // 发送消息去主页
                 RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"socket"));
                 // 弹出通知栏

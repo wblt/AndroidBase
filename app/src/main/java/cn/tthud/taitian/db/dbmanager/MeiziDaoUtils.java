@@ -19,7 +19,6 @@ import cn.tthud.taitian.db.entity.Meizi;
 public class MeiziDaoUtils {
     private static final String TAG = MeiziDaoUtils.class.getSimpleName();
     private DaoManager mManager;
-
     public MeiziDaoUtils(Context context) {
         mManager = DaoManager.getInstance();
         mManager.init(context);
@@ -146,6 +145,7 @@ public class MeiziDaoUtils {
     }
 
     /*  使用方法用例，供参考
+    mMeiziDaoUtils = new MeiziDaoUtils(this);
     case R.id.insertsingle:
                 mMeiziDaoUtils.insertMeizi(new Meizi(null, "Google",
                         "http://7xi8d6.com1.z0.glb.clouddn.com/2017-05-05-18251898_1013302395468665_8734429858911748096_n.jpg"));

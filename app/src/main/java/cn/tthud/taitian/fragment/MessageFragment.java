@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,6 +36,8 @@ import cn.tthud.taitian.base.OnItemLongClickListener;
 import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.MessageBean;
 import cn.tthud.taitian.bean.WebViewBean;
+import cn.tthud.taitian.db.dbmanager.MessageDaoUtils;
+import cn.tthud.taitian.db.entity.Message;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.net.rxbus.RxBus;
 import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
@@ -59,12 +62,13 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
 
     @ViewInject(R.id.page_refresh)
     private LinearLayout page_refresh;
-    private int mPage = 1;
-    private int mMaxPage = -1;
+    //private int mPage = 1;
+    //private int mMaxPage = -1;
     private MessageAdapter mAdapter;
-    private MessageBean clickBean;
+    private Message clickBean;
     private int readnum = 0;
     private boolean first_tab_msg = false;
+    private MessageDaoUtils messageDaoUtils;
 
     //@ViewInject(R.id.up_tip)
     //private TextView up_tip;
@@ -82,6 +86,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
             setTopBarTitle("消息");
             initRecyclerView();
             setListener();
+            messageDaoUtils = new MessageDaoUtils(getContext());
             //loadNewData();
         }
         return view;
@@ -90,19 +95,19 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
     private void initRecyclerView(){
         // 禁止下拉刷新
         xrvCustom.setPullRefreshEnabled(true);
-        xrvCustom.setLoadingMoreEnabled(true);
+        xrvCustom.setLoadingMoreEnabled(false);
         //xrvCustom.clearHeader();
         xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
                 mAdapter.clear();
-                mPage = 1;
+                //mPage = 1;
                 loadNewData();
             }
             @Override
             public void onLoadMore() {
-                mPage += 1;
-                loadNewData();
+//                mPage += 1;
+//                loadNewData();
             }
         });
         xrvCustom.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -111,15 +116,15 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         xrvCustom.setHasFixedSize(false);
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new MessageAdapter();
-        mAdapter.setOnItemClickListener(new OnItemClickListener<MessageBean>() {
+        mAdapter.setOnItemClickListener(new OnItemClickListener<Message>() {
             @Override
-            public void onClick(MessageBean messageBean, int position) {
+            public void onClick(Message messageBean, int position) {
                 clickBean = messageBean;
                 if (messageBean.getIsread() == 2) {
                     // 操作消息
                     operationMsg("isread");
                 }
-                if (messageBean.getIshref().equals("2")) {
+                if (messageBean.getIshref() == 2) {
                     return;
                 }
                 if (TextUtils.isEmpty(messageBean.getUrl())){
@@ -144,9 +149,9 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                 }
             }
         });
-        mAdapter.setOnItemLongClickListener(new OnItemLongClickListener<MessageBean>() {
+        mAdapter.setOnItemLongClickListener(new OnItemLongClickListener<Message>() {
             @Override
-            public void onLongClick(MessageBean messageBean, int position) {
+            public void onLongClick(Message messageBean, int position) {
                 clickBean = messageBean;
                 // 长按操作
                 ActionSheet.showSheet(getActivity(),
@@ -169,7 +174,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         }
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_MESSAGE_LIST);
         requestParams.addParameter("ub_id", SPUtils.getString(SPUtils.UB_ID));
-        requestParams.addParameter("p", mPage);
+        //requestParams.addParameter("p", mPage);
         MXUtils.httpGet(requestParams, new CommonCallbackImp("消息列表",requestParams){
             @Override
             public void onSuccess(String data) {
@@ -178,39 +183,37 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                     JSONObject jsonObject = new JSONObject(data);
                     String status = jsonObject.getString("status");
                     String info = jsonObject.getString("info");
-
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         xrvCustom.refreshComplete();
                         String result = jsonObject.getString("data");
-                        JSONObject jsonObject1 = new JSONObject(result);
-
-                        String maxPage = jsonObject1.getString("maxPage");
-                        mMaxPage = Integer.parseInt(maxPage);
-
+                        //JSONObject jsonObject1 = new JSONObject(result);
+                        //String maxPage = jsonObject1.getString("maxPage");
+                        //mMaxPage = Integer.parseInt(maxPage);
                         // 未读消息总数
-                        readnum = jsonObject1.getInt("readnum");
-                        SPUtils.putInt(SPUtils.BADGER_NUM,readnum);
-                        RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"http"));
-
-                        String list = jsonObject1.getString("list");
-                        Type type=new TypeToken<List<MessageBean>>(){}.getType();
-                        List<MessageBean> beanList = GsonUtils.jsonToList(list,type);
-
-                        mAdapter.addAll(beanList);
-                        mAdapter.notifyDataSetChanged();
-
-                        if(mAdapter.getData().size() == 0){
-                            page_refresh.setVisibility(View.VISIBLE);
-                            xrvCustom.setVisibility(View.GONE);
-                        }else {
-                            page_refresh.setVisibility(View.GONE);
-                            xrvCustom.setVisibility(View.VISIBLE);
+                        //readnum = jsonObject1.getInt("readnum");
+                        //SPUtils.putInt(SPUtils.BADGER_NUM,readnum);
+                        //RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"http"));
+                        //String list = jsonObject1.getString("list");
+                        Type type = new TypeToken<List<Message>>(){}.getType();
+                        List<Message> beanList = GsonUtils.jsonToList(result,type);
+                        // 插入到数据库中
+                        if (beanList != null && beanList.size() > 0) {
+                            messageDaoUtils.insertMultMessage(beanList);
                         }
-
-                        if(mPage >= mMaxPage){
-                            xrvCustom.noMoreLoading();
-                        }
-
+                        // 延迟显示加载
+                        showMsgUI();
+//                        mAdapter.addAll(beanList);
+//                        mAdapter.notifyDataSetChanged();
+//                        if(mAdapter.getData().size() == 0){
+//                            page_refresh.setVisibility(View.VISIBLE);
+//                            xrvCustom.setVisibility(View.GONE);
+//                        }else {
+//                            page_refresh.setVisibility(View.GONE);
+//                            xrvCustom.setVisibility(View.VISIBLE);
+//                        }
+//                        if(mPage >= mMaxPage){
+//                            xrvCustom.noMoreLoading();
+//                        }
                     }else {
                         showMsg(info);
                     }
@@ -251,12 +254,8 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                     String info = jsonObject.getString("info");
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         String result = jsonObject.getString("data");
-
-                        // 重新请求接口
-                        mAdapter.clear();
-                        mAdapter.notifyDataSetChanged();
-                        mPage = 1;
-                        loadNewData();
+                        // 操作成功
+                        showMsgUI();
                     }else {
                         showMsg(info);
                     }
@@ -286,10 +285,28 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
 
     }
     public void tab_msg() {
-        if (first_tab_msg == false) {
-            first_tab_msg = true;
+        //if (first_tab_msg == false) {
+            //first_tab_msg = true;
             loadNewData();
-        }
+        //}
     }
 
+    private void showMsgUI() {
+        new Handler().postDelayed(new Runnable() {
+           @Override
+           public void run() {
+               List<Message> list = messageDaoUtils.queryAllMessage();
+               mAdapter.clear();
+               mAdapter.addAll(list);
+               mAdapter.notifyDataSetChanged();
+               if(mAdapter.getData().size() == 0){
+                   page_refresh.setVisibility(View.VISIBLE);
+                   xrvCustom.setVisibility(View.GONE);
+               }else {
+                   page_refresh.setVisibility(View.GONE);
+                   xrvCustom.setVisibility(View.VISIBLE);
+               }
+           }
+        }, 500);
+    }
 }

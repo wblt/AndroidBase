@@ -12,25 +12,26 @@ import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.MessageBean;
 import cn.tthud.taitian.bean.WebViewBean;
 import cn.tthud.taitian.databinding.ItemMessageNormalBinding;
+import cn.tthud.taitian.db.entity.Message;
 import cn.tthud.taitian.utils.ImageLoader;
 
 /**
  * Created by bopeng on 2017/11/3.
  */
 
-public class MessageAdapter extends BaseRecyclerViewAdapter<MessageBean> {
+public class MessageAdapter extends BaseRecyclerViewAdapter<Message> {
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_message_normal);
     }
 
-    private class ViewHolder extends BaseRecyclerViewHolder<MessageBean, ItemMessageNormalBinding> {
+    private class ViewHolder extends BaseRecyclerViewHolder<Message, ItemMessageNormalBinding> {
         ViewHolder(ViewGroup parent, int item_android){
             super(parent, item_android);
         }
 
         @Override
-        public void onBindViewHolder(final MessageBean object, final int position) {
+        public void onBindViewHolder(final Message object, final int position) {
             binding.executePendingBindings();
             String msgType = object.getMc_id();
             if (msgType.equals("系统消息")){
