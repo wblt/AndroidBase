@@ -131,9 +131,9 @@ public class ChatManager {
                 // 断开socket,自动退出账号，提示
                 exitSocket(context);
                 SPUtils.clearUser();
-                LoginActivity.navToLogin(context);
-                String info = jsonObject.getString("info");
-                Toast.makeText(context, info, Toast.LENGTH_LONG).show();
+//                LoginActivity.navToLogin(context);
+//                String info = jsonObject.getString("info");
+//                Toast.makeText(context, info, Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();

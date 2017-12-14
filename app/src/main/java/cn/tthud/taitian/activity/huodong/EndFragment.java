@@ -77,6 +77,7 @@ public class EndFragment extends FragmentBase implements View.OnClickListener{
             public void onRefresh() {
                 mAdapter.clear();
                 mPage = 1;
+                mAdapter.notifyDataSetChanged();
                 loadNewData();
             }
 

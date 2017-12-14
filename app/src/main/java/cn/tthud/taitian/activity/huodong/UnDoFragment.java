@@ -76,6 +76,7 @@ public class UnDoFragment extends FragmentBase implements View.OnClickListener{
             @Override
             public void onRefresh() {
                 mAdapter.clear();
+                mAdapter.notifyDataSetChanged();
                 mPage = 1;
                 loadNewData();
             }
