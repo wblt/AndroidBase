@@ -62,7 +62,7 @@ public class UnDoFragment extends FragmentBase implements View.OnClickListener{
             sousuo_btn = view.findViewById(R.id.sousuo_btn);
             initRecyclerView();
             setListener();
-//            loadNewData();
+            loadNewData();
         }
         return view;
     }

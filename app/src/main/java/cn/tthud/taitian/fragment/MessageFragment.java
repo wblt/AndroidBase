@@ -67,11 +67,8 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
     private MessageAdapter mAdapter;
     private Message clickBean;
     private int readnum = 0;
-    private boolean first_tab_msg = false;
     private MessageDaoUtils messageDaoUtils;
 
-    //@ViewInject(R.id.up_tip)
-    //private TextView up_tip;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +84,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
             initRecyclerView();
             setListener();
             messageDaoUtils = new MessageDaoUtils(getContext());
-            //loadNewData();
+            loadNewData();
         }
         return view;
     }
@@ -311,12 +308,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
     public void onCancel(DialogInterface dialogInterface) {
 
     }
-    public void tab_msg() {
-        //if (first_tab_msg == false) {
-            //first_tab_msg = true;
-            loadNewData();
-        //}
-    }
+
 
     private void showMsgUI() {
         new Handler().postDelayed(new Runnable() {

@@ -64,7 +64,7 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
             query = view.findViewById(R.id.query);
             initRecyclerView();
             setListener();
-            //loadNewData();
+            loadNewData();
         }
         return view;
     }

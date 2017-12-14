@@ -110,7 +110,6 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.btn_discover:
                 index = 1;
-                disFragment.tab_huodong();
                 break;
             case R.id.btn_conversation:
                 if (CommonUtils.checkLogin()) {
@@ -119,7 +118,6 @@ public class MainActivity extends BaseActivity {
                         updateUnreadMsgLable(false);
                         SPUtils.putInt(SPUtils.BADGER_NUM,0);
                         ShortcutBadger.removeCount(MainActivity.this);
-                        messageFragment.tab_msg();
                     } else {
                         // 绑定手机号码
                         startActivity(new Intent(this, BindPhoneActivity.class));

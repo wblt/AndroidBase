@@ -37,14 +37,6 @@ public class DiscoverFragment extends FragmentBase {
     private NavigationTabStrip ntsBottom;
     @ViewInject(R.id.viewpager)
     private ViewPager mViewPager;
-    DoingFragment mDoingFragment;
-    UnDoFragment mUnbeginFragment;
-    EndFragment mEndFragment;
-    private int tab_index = 0;
-
-    private boolean first_tab_doing = false;
-    private boolean first_tab_end = false;
-    private boolean first_tab_undo = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,9 +58,9 @@ public class DiscoverFragment extends FragmentBase {
 
     private void initView(){
         ArrayList<Fragment> fragmentList = new ArrayList<Fragment>();
-        mDoingFragment = new DoingFragment();
-        mUnbeginFragment = new UnDoFragment();
-        mEndFragment = new EndFragment();
+        DoingFragment mDoingFragment = new DoingFragment();
+        UnDoFragment mUnbeginFragment = new UnDoFragment();
+        EndFragment mEndFragment = new EndFragment();
         fragmentList.add(mDoingFragment);
         fragmentList.add(mUnbeginFragment);
         fragmentList.add(mEndFragment);
@@ -83,17 +75,6 @@ public class DiscoverFragment extends FragmentBase {
             @Override
             public void onEndTabSelected(String title, int index) {
                 Log.i("index==="+index);
-                tab_index = index;
-                // 点击时第一次加载数据
-                if (tab_index == 1 && first_tab_undo == false) {
-                    first_tab_undo = true;
-                    // 加载未开始的数据
-                    mUnbeginFragment.loadNewData();
-                } else if (tab_index == 2 && first_tab_end == false) {
-                    // 加载已经结束的数据
-                    first_tab_end = true;
-                    mEndFragment.loadNewData();
-                }
             }
         });
     }
@@ -104,24 +85,10 @@ public class DiscoverFragment extends FragmentBase {
         Intent intent;
         switch (id) {
             case R.id.ll_sousuo_lay:
-//                intent = new Intent(getContext(),SearchActivity.class);
-//                if (tab_index == 0) {
-//                    intent.putExtra("type","start");
-//                } else if (tab_index == 1) {
-//                    intent.putExtra("type","notstart");
-//                } else if (tab_index == 2) {
-//                    intent.putExtra("type","end");
-//                }
-//                startActivity(intent);
                 break;
         }
     }
 
-    public void tab_huodong() {
-        if (first_tab_doing == false) {
-            first_tab_doing = true;
-            mDoingFragment.loadNewData();
-        }
-    }
+
 
 }
