@@ -93,7 +93,7 @@ public class WebViewActivity extends ActivityBase {
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setJavaScriptEnabled(true);     
 		webSettings.setSupportZoom(true);
-		
+
 		/**
 		 * 解决webview不支持localstorage问题
 		 */
@@ -116,8 +116,7 @@ public class WebViewActivity extends ActivityBase {
 		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN); //支持内容重新布局
 		
 		webView.requestFocusFromTouch();
-		//设置本地调用对象及其接口  
-		webView.setWebViewClient(new WebPageClient());
+
 		webView.setWebChromeClient(new WebChromeClient() {
 			// For Android 3.0+
 			public void openFileChooser(ValueCallback<Uri> uploadMsg,
@@ -150,6 +149,13 @@ public class WebViewActivity extends ActivityBase {
 			public void onReceivedTitle(WebView view, String title) {
 				super.onReceivedTitle(view, title);
 			}
+		});
+
+		//设置本地调用对象及其接口
+//		webView.setWebViewClient(new WebPageClient());
+
+		webView.setWebViewClient(new WebViewClient(){
+
 		});
 
 		webView.loadUrl(url);
