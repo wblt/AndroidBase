@@ -71,6 +71,7 @@ public class EndFragment extends FragmentBase implements View.OnClickListener{
         // 禁止下拉刷新
         xrvCustom.setPullRefreshEnabled(true);
         xrvCustom.setLoadingMoreEnabled(true);
+        //xrvCustom.clearHeader();
         xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {

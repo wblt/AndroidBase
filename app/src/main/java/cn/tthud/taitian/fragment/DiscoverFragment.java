@@ -67,16 +67,16 @@ public class DiscoverFragment extends FragmentBase {
         mViewPager.setAdapter(new FragmentAdapter(getActivity().getSupportFragmentManager(), fragmentList));
         mViewPager.setOffscreenPageLimit(fragmentList.size());
         ntsBottom.setViewPager(mViewPager, 0);
-        ntsBottom.setOnTabStripSelectedIndexListener(new NavigationTabStrip.OnTabStripSelectedIndexListener() {
-            @Override
-            public void onStartTabSelected(String title, int index) {
-                //Log.i("index==="+index);
-            }
-            @Override
-            public void onEndTabSelected(String title, int index) {
-                Log.i("index==="+index);
-            }
-        });
+//        ntsBottom.setOnTabStripSelectedIndexListener(new NavigationTabStrip.OnTabStripSelectedIndexListener() {
+//            @Override
+//            public void onStartTabSelected(String title, int index) {
+//                //Log.i("index==="+index);
+//            }
+//            @Override
+//            public void onEndTabSelected(String title, int index) {
+//                Log.i("index==="+index);
+//            }
+//        });
     }
 
     @Event(value = {R.id.ll_sousuo_lay,R.id.sousuo_btn},type = View.OnClickListener.class)
