@@ -261,7 +261,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         String result = jsonObject.getString("data");
                         // 操作成功
-                        showMsg("操作成功");
+                        //showMsg("操作成功");
                         if (type.equals("isread")) {
                             // 修改为已读
                             List<Message> lists = messageDaoUtils.queryMessageByQueryBuilder(clickBean.getMsg_id());
@@ -279,6 +279,9 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                                 }
                             }
                         }
+                        // 发送消息给主页更细消息数目
+                        RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"http"));
+
                         showMsgUI();
                     }else {
                         showMsg(info);

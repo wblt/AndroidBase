@@ -8,9 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+
 import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.activity.mine.BindPhoneActivity;
 import cn.tthud.taitian.base.BaseActivity;
+import cn.tthud.taitian.db.dbmanager.MessageDaoUtils;
+import cn.tthud.taitian.db.entity.Message;
 import cn.tthud.taitian.fragment.ContactListFragment;
 import cn.tthud.taitian.fragment.DiscoverFragment;
 import cn.tthud.taitian.fragment.HomeFragment;
@@ -81,6 +85,9 @@ public class MainActivity extends BaseActivity {
 
         // 初始化消息
         initRxBus();
+
+        // 显示未读消息数字
+        updateUnreadMsgLable();
     }
 
     /**
@@ -115,9 +122,9 @@ public class MainActivity extends BaseActivity {
                 if (CommonUtils.checkLogin()) {
                     if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
                         index = 2;
-                        updateUnreadMsgLable(false);
-                        SPUtils.putInt(SPUtils.BADGER_NUM,0);
-                        ShortcutBadger.removeCount(MainActivity.this);
+//                        updateUnreadMsgLable();
+//                        SPUtils.putInt(SPUtils.BADGER_NUM,0);
+//                        ShortcutBadger.removeCount(MainActivity.this);
                     } else {
                         // 绑定手机号码
                         startActivity(new Intent(this, BindPhoneActivity.class));
@@ -174,20 +181,52 @@ public class MainActivity extends BaseActivity {
     /**
      * update the total unread count
      */
-    private void updateUnreadMsgLable(final boolean flag) {
+    private void updateUnreadMsgLable() {
+        // 开启sevice
+        if (!CommonUtils.checkLogin()) {
+            return;
+        }
+        if (SPUtils.getBoolean(SPUtils.ISVST,false)) {
+            // 游客返回
+            return;
+        }
         runOnUiThread(new Runnable() {
             public void run() {
-                if (flag) {
-                    if (SPUtils.getInt(SPUtils.BADGER_NUM,0)>99) {
+//                if (flag) {
+//                    if (SPUtils.getInt(SPUtils.BADGER_NUM,0)>99) {
+//                        unreadLabel.setText("..");
+//                    } else {
+//                        unreadLabel.setText(SPUtils.getInt(SPUtils.BADGER_NUM,0)+"");
+//                    }
+//                    unreadLabel.setVisibility(View.VISIBLE);
+//                } else {
+//                    unreadLabel.setText("");
+//                    unreadLabel.setVisibility(View.INVISIBLE);
+//                }
+                // 查找数据库数据
+                MessageDaoUtils messageDaoUtils = new MessageDaoUtils(MainActivity.this);
+                List<Message> lists = messageDaoUtils.queryAllMessage();
+                int num = 0;
+                for (Message msg:lists) {
+                    if (msg.getIsread() == 2) {
+                        num = num + 1;
+                    }
+                }
+                if (num == 0) {
+                    unreadLabel.setVisibility(View.INVISIBLE);
+                    SPUtils.putInt(SPUtils.BADGER_NUM,0);
+                    ShortcutBadger.removeCount(MainActivity.this);
+                } else {
+                    if (num > 99) {
                         unreadLabel.setText("..");
                     } else {
-                        unreadLabel.setText(SPUtils.getInt(SPUtils.BADGER_NUM,0)+"");
+                        unreadLabel.setText(num+"");
                     }
                     unreadLabel.setVisibility(View.VISIBLE);
-                } else {
-                    unreadLabel.setText("");
-                    unreadLabel.setVisibility(View.INVISIBLE);
+                    SPUtils.putInt(SPUtils.BADGER_NUM,num);
+                    ShortcutBadger.applyCount(MainActivity.this, num);
                 }
+
             }
         });
 
@@ -203,24 +242,24 @@ public class MainActivity extends BaseActivity {
                     public void call(RxBusBaseMessage integer) {
                         Log.i(integer.getObject().toString());
                         String status = integer.getObject().toString();
-                        int num = 0;
-                        if (status.equals("socket")) {
-                            num = SPUtils.getInt(SPUtils.BADGER_NUM,0);
-                            num = num + 1;
-                        } else {
-                            num = SPUtils.getInt(SPUtils.BADGER_NUM,0);
-                        }
-                        // 更新桌面图标
-                        SPUtils.putInt(SPUtils.BADGER_NUM,num);
-                        if (num == 0) {
-                            // 收到消息之后设置为true
-                            updateUnreadMsgLable(false);
-                        } else {
-                            // 收到消息之后设置为true
-                            updateUnreadMsgLable(true);
-                            ShortcutBadger.applyCount(MainActivity.this, num);
-                        }
-
+                        updateUnreadMsgLable();
+//                        int num = 0;
+//                        if (status.equals("socket")) {
+//                            num = SPUtils.getInt(SPUtils.BADGER_NUM,0);
+//                            num = num + 1;
+//                        } else {
+//                            num = SPUtils.getInt(SPUtils.BADGER_NUM,0);
+//                        }
+//                        // 更新桌面图标
+//                        SPUtils.putInt(SPUtils.BADGER_NUM,num);
+//                        if (num == 0) {
+//                            // 收到消息之后设置为true
+//                            updateUnreadMsgLable();
+//                        } else {
+//                            // 收到消息之后设置为true
+//                            updateUnreadMsgLable();
+//
+//                        }
                     }
                 });
     }
