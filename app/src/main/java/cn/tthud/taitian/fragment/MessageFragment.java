@@ -243,7 +243,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         }
     }
 
-    private void operationMsg(String type) {
+    private void operationMsg(final String type) {
         showProgressDialog();
         if (clickBean == null) {
             return;
@@ -264,6 +264,24 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         String result = jsonObject.getString("data");
                         // 操作成功
+                        showMsg("操作成功");
+                        if (type.equals("isread")) {
+                            // 修改为已读
+                            List<Message> lists = messageDaoUtils.queryMessageByQueryBuilder(clickBean.getMsg_id());
+                            if (lists != null && lists.size()>0) {
+                                for (Message msg:lists) {
+                                    msg.setIsread(1);
+                                    messageDaoUtils.updateMeizi(msg);
+                                }
+                            }
+                        } else if (type.equals("isdel")){
+                            List<Message> lists = messageDaoUtils.queryMessageByQueryBuilder(clickBean.getMsg_id());
+                            if (lists != null && lists.size()>0) {
+                                for (Message msg:lists) {
+                                    messageDaoUtils.deleteMeizi(msg);
+                                }
+                            }
+                        }
                         showMsgUI();
                     }else {
                         showMsg(info);

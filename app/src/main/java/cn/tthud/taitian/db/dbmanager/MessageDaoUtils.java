@@ -76,4 +76,37 @@ public class MessageDaoUtils {
         QueryBuilder<Message> queryBuilder = mManager.getDaoSession().queryBuilder(Message.class);
         return queryBuilder.where(MessageDao.Properties.Msg_id.eq(id)).list();
     }
+
+    /**
+     * 删除单条记录
+     * @param meizi
+     * @return
+     */
+    public boolean deleteMeizi(Message meizi){
+        boolean flag = false;
+        try {
+            //按照id删除
+            mManager.getDaoSession().delete(meizi);
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    /**
+     * 修改一条数据
+     * @param meizi
+     * @return
+     */
+    public boolean updateMeizi(Message meizi){
+        boolean flag = false;
+        try {
+            mManager.getDaoSession().update(meizi);
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
 }

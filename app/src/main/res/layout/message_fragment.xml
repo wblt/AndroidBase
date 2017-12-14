@@ -25,7 +25,7 @@
             android:visibility="gone"
             android:scrollbarThumbVertical="@color/grey_500"
             android:scrollbars="vertical" />
-        
+
         <!--加载失败-->
         <LinearLayout
             android:id="@+id/page_refresh"
