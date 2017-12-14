@@ -292,7 +292,6 @@ public class WebViewActivity extends ActivityBase {
 		}
 	}
 
-
 	@Override
 	protected void onDestroy() {
 		webView.clearCache(true);   
