@@ -155,9 +155,9 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
         int id = v.getId();
         switch (id){
             case R.id.page_refresh:
-//                mAdapter.clear();
-//                mPage = 1;
-//                loadNewData();
+                mAdapter.clear();
+                mPage = 1;
+                loadNewData();
                 break;
             case R.id.sousuo_btn:
                 keywords = query.getText().toString();
