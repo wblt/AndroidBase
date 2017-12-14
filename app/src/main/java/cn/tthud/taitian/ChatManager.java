@@ -119,6 +119,9 @@ public class ChatManager {
                 RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"socket"));
                 // 弹出通知栏
                 simpleNotify(list);
+            } else if (type.equals("onClose")){
+                // 断开socket,自动退出账号，提示
+                String info = jsonObject.getString("info");
             }
         } catch (JSONException e) {
             e.printStackTrace();

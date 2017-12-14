@@ -151,7 +151,9 @@ public class UnDoFragment extends FragmentBase implements View.OnClickListener{
         int id = v.getId();
         switch (id){
             case R.id.page_refresh:
-                //loadNewData();
+                mAdapter.clear();
+                mPage = 1;
+                loadNewData();
                 break;
             case R.id.sousuo_btn:
                 keywords = query.getText().toString();
