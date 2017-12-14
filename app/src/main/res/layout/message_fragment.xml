@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F4F4F4"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp">
 
         <com.example.xrecyclerview.XRecyclerView
             android:id="@+id/xrv_custom"
@@ -24,8 +25,7 @@
             android:visibility="gone"
             android:scrollbarThumbVertical="@color/grey_500"
             android:scrollbars="vertical" />
-
-
+        
         <!--加载失败-->
         <LinearLayout
             android:id="@+id/page_refresh"

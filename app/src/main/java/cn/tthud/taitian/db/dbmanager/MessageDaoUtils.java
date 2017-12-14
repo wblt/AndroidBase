@@ -3,8 +3,11 @@ package cn.tthud.taitian.db.dbmanager;
 import android.content.Context;
 import android.util.Log;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+
 import java.util.List;
 
+import cn.tthud.taitian.db.dao.MessageDao;
 import cn.tthud.taitian.db.entity.Message;
 
 /**
@@ -63,5 +66,14 @@ public class MessageDaoUtils {
      */
     public List<Message> queryAllMessage(){
         return mManager.getDaoSession().loadAll(Message.class);
+    }
+
+    /**
+     * 使用queryBuilder进行查询
+     * @return
+     */
+    public List<Message> queryMessageByQueryBuilder(long id){
+        QueryBuilder<Message> queryBuilder = mManager.getDaoSession().queryBuilder(Message.class);
+        return queryBuilder.where(MessageDao.Properties.Msg_id.eq(id)).list();
     }
 }

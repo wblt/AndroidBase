@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.http.RequestParams;
 
+import java.util.List;
 import java.util.UUID;
 
 import cn.tthud.taitian.activity.login.LoginActivity;
@@ -114,6 +115,12 @@ public class ChatManager {
                 // 解析消息，然后保存到数据库中
                 Message messagebean = GsonUtils.jsonToBean(list,Message.class);
                 MessageDaoUtils messageDaoUtils = new MessageDaoUtils(context);
+                List<Message> mlists = messageDaoUtils.queryMessageByQueryBuilder(messagebean.getMsg_id());
+                if (mlists != null && mlists.size()>0) {
+
+                } else {
+                    messageDaoUtils.insertMessage(messagebean);
+                }
                 messageDaoUtils.insertMessage(messagebean);
                 // 发送消息去主页
                 RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"socket"));
