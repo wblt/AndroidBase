@@ -131,7 +131,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                     if (messageBean.getModule().equals("artonce")){
                         Intent intent = new Intent(getActivity(), ArtonceActivity.class);
                         intent.putExtra("cid", messageBean.getModule_id());
-                        intent.putExtra("title", messageBean.getTitle());
+                        intent.putExtra("title", "广告详情");
                         startActivity(intent);
                     }else if (messageBean.getModule().equals("admarket")){
 
@@ -140,7 +140,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                     }
                 }else{
                     Intent intent = new Intent(getActivity(),WebViewActivity.class);
-                    intent.putExtra("title",messageBean.getTitle());
+                    intent.putExtra("title","广告详情");
                     intent.putExtra("url", messageBean.getUrl());
                     startActivity(intent);
                 }

@@ -248,7 +248,7 @@ public class HomeFragment extends FragmentBase {
                     if (adBean.getModule().equals("artonce")){
                         Intent intent = new Intent(HomeFragment.this.getActivity(), ArtonceActivity.class);
                         intent.putExtra("cid", adBean.getModule_id());
-                        intent.putExtra("title", adBean.getTitle());
+                        intent.putExtra("title", "单页详情");
                         startActivity(intent);
                     }else if (adBean.getModule().equals("admarket")){
 
@@ -257,7 +257,7 @@ public class HomeFragment extends FragmentBase {
                     }
                 }else{
                     Intent intent = new Intent(HomeFragment.this.getActivity(),WebViewActivity.class);
-                    intent.putExtra("title",adBean.getTitle());
+                    intent.putExtra("title","单页详情");
                     intent.putExtra("url", adBean.getUrl());
                     startActivity(intent);
                 }
