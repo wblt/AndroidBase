@@ -124,16 +124,13 @@ public class ChatManager {
                 }
                 messageDaoUtils.insertMessage(messagebean);
                 // 发送消息去主页
-                RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"socket"));
+                RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"updateMsg"));
                 // 弹出通知栏
                 simpleNotify(list);
             } else if (type.equals("onClose")){
-                // 断开socket,自动退出账号，提示
-                exitSocket(context);
-                SPUtils.clearUser();
-//                LoginActivity.navToLogin(context);
-//                String info = jsonObject.getString("info");
-//                Toast.makeText(context, info, Toast.LENGTH_LONG).show();
+                String info = jsonObject.getString("info");
+                // 发送消息去主页
+                RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"onClose,"+info));
             }
         } catch (JSONException e) {
             e.printStackTrace();

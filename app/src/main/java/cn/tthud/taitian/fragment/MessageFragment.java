@@ -280,7 +280,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                             }
                         }
                         // 发送消息给主页更细消息数目
-                        RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"http"));
+                        RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"updateMsg"));
 
                         showMsgUI();
                     }else {

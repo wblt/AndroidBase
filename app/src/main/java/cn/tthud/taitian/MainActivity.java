@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -242,7 +243,12 @@ public class MainActivity extends BaseActivity {
                     public void call(RxBusBaseMessage integer) {
                         Log.i(integer.getObject().toString());
                         String status = integer.getObject().toString();
-                        updateUnreadMsgLable();
+                        String split[] = status.split(",");
+                        if (split[0].equals("updateMsg")) {
+                            updateUnreadMsgLable();
+                        } else if (split[0].equals("onClose")) {
+                            handleOnCloseMsg(split[1]);
+                        }
 //                        int num = 0;
 //                        if (status.equals("socket")) {
 //                            num = SPUtils.getInt(SPUtils.BADGER_NUM,0);
@@ -264,7 +270,13 @@ public class MainActivity extends BaseActivity {
                 });
     }
 
-    
-
-
+    private void handleOnCloseMsg(String info) {
+        ChatManager.getInstance().exitSocket(getApplicationContext());
+        SPUtils.clearUser();
+        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+        intent.putExtra("onClose",info);
+        startActivity(intent);
+        DemoApplication.getInstance().closeActivitys();
+        finish();
+    }
 }

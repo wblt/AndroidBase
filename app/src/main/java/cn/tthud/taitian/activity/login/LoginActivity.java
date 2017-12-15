@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.umeng.socialize.UMAuthListener;
@@ -89,6 +90,11 @@ public class LoginActivity extends ActivityBase {
         //setTopLeftDefultListener();
         initListener();
         initRxBus();
+
+        String onCloseinfo = getIntent().getStringExtra("onClose");
+        if (onCloseinfo != null && onCloseinfo.length() > 0) {
+            Toast.makeText(LoginActivity.this,onCloseinfo, Toast.LENGTH_SHORT).show();
+        }
     }
 
     /*
@@ -380,7 +386,6 @@ public class LoginActivity extends ActivityBase {
                             login_pwd.setText(SPUtils.getString(SPUtils.PASSWORD));
                         }
                     }
-                });
+        });
     }
-
 }
