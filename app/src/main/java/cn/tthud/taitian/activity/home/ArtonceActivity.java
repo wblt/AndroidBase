@@ -66,7 +66,10 @@ public class ArtonceActivity extends ActivityBase {
                         String result = jsonObject.getString("data");
                         JSONObject jsonObject1 = new JSONObject(result);
                         String content = jsonObject1.getString("content");
-                        webView.loadData(content, "text/html; charset=UTF-8", null);
+                        String title = jsonObject1.getString("title");
+                        String h5_title = "<h1 style=\"font-size: 20px;text-align: center;margin-left: 10%;width: 80%;margin-top: 10px;\">" + title + "</h1>";
+
+                        webView.loadData(h5_title + content, "text/html; charset=UTF-8", null);
                     }else {
                         showMsg(info);
                     }
