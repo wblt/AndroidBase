@@ -89,6 +89,4 @@ public class DiscoverFragment extends FragmentBase {
         }
     }
 
-
-
 }
