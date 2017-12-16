@@ -39,11 +39,10 @@ public class Message {
     private String module = "";
     private int module_id = 0;
     private String time_switch = "";
-
-    @Generated(hash = 2132459897)
+    @Generated(hash = 281419025)
     public Message(Long _id, int msg_id, int isread, int readtime, int istop, String mc_id,
             String icon, String url, String title, int ishref, String suetime, String type,
-            String module, int module_id) {
+            String module, int module_id, String time_switch) {
         this._id = _id;
         this.msg_id = msg_id;
         this.isread = isread;
@@ -58,6 +57,7 @@ public class Message {
         this.type = type;
         this.module = module;
         this.module_id = module_id;
+        this.time_switch = time_switch;
     }
     @Generated(hash = 637306882)
     public Message() {
@@ -146,13 +146,12 @@ public class Message {
     public void setModule_id(int module_id) {
         this.module_id = module_id;
     }
-
     public String getTime_switch() {
-        return time_switch;
+        return this.time_switch;
     }
-
     public void setTime_switch(String time_switch) {
         this.time_switch = time_switch;
     }
+
 }
 
