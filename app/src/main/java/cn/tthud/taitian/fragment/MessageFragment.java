@@ -337,6 +337,11 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
 
     private List<Message> sort(List<Message> list) {
         List<Message> messageList = new ArrayList<>();
+
+
+
+
+
         return messageList;
     }
 }

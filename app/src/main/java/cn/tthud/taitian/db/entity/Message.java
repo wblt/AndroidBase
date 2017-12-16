@@ -38,6 +38,8 @@ public class Message {
     private String type = "";
     private String module = "";
     private int module_id = 0;
+    private String time_switch = "";
+
     @Generated(hash = 2132459897)
     public Message(Long _id, int msg_id, int isread, int readtime, int istop, String mc_id,
             String icon, String url, String title, int ishref, String suetime, String type,
@@ -143,6 +145,14 @@ public class Message {
     }
     public void setModule_id(int module_id) {
         this.module_id = module_id;
+    }
+
+    public String getTime_switch() {
+        return time_switch;
+    }
+
+    public void setTime_switch(String time_switch) {
+        this.time_switch = time_switch;
     }
 }
 
