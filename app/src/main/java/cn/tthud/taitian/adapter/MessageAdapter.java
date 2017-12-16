@@ -52,7 +52,7 @@ public class MessageAdapter extends BaseRecyclerViewAdapter<Message> {
                 binding.unreadMsg.setVisibility(View.VISIBLE);
             }
 
-            binding.msgTime.setText(object.getSuetime());
+            binding.msgTime.setText(object.getTime_switch());
             binding.tvMsgContent.setText(object.getTitle());
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override

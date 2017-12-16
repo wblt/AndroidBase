@@ -26,6 +26,8 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import cn.tthud.taitian.R;
@@ -322,7 +324,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                // 获取排序后的数组，然后拿这个展示即可。
                List<Message> lists = sort(list);
                mAdapter.clear();
-               mAdapter.addAll(list);
+               mAdapter.addAll(lists);
                mAdapter.notifyDataSetChanged();
                if(mAdapter.getData().size() == 0){
                    page_refresh.setVisibility(View.VISIBLE);
@@ -336,12 +338,27 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
     }
 
     private List<Message> sort(List<Message> list) {
-        List<Message> messageList = new ArrayList<>();
+        List<Message> unReadMsgList = new ArrayList<>();
+        List<Message> readMsgList = new ArrayList<>();
 
+        List<Message> tempList = list;
+        Collections.sort(tempList, new Comparator<Message>() {
+            @Override
+            public int compare(Message message, Message t1) {
+                long deal = t1.getSuetime() - message.getSuetime();
+                return (int)deal;
+            }
+        });
 
+        for (Message msg: tempList){
+            if (msg.getIsread() == 2){
+                unReadMsgList.add(msg);
+            }else if (msg.getIsread() == 1){
+                readMsgList.add(msg);
+            }
+        }
 
-
-
-        return messageList;
+        unReadMsgList.addAll(readMsgList);
+        return unReadMsgList;
     }
 }

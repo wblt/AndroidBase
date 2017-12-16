@@ -34,14 +34,14 @@ public class Message {
     private String url = "";
     private String title = "";
     private int ishref = 0;
-    private String suetime = "";
+    private long suetime = 0;
     private String type = "";
     private String module = "";
     private int module_id = 0;
     private String time_switch = "";
-    @Generated(hash = 281419025)
+    @Generated(hash = 1719953421)
     public Message(Long _id, int msg_id, int isread, int readtime, int istop, String mc_id,
-            String icon, String url, String title, int ishref, String suetime, String type,
+            String icon, String url, String title, int ishref, long suetime, String type,
             String module, int module_id, String time_switch) {
         this._id = _id;
         this.msg_id = msg_id;
@@ -122,10 +122,10 @@ public class Message {
     public void setIshref(int ishref) {
         this.ishref = ishref;
     }
-    public String getSuetime() {
+    public long getSuetime() {
         return this.suetime;
     }
-    public void setSuetime(String suetime) {
+    public void setSuetime(long suetime) {
         this.suetime = suetime;
     }
     public String getType() {
@@ -152,6 +152,5 @@ public class Message {
     public void setTime_switch(String time_switch) {
         this.time_switch = time_switch;
     }
-
 }
 

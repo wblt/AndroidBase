@@ -34,7 +34,7 @@ public class MessageDao extends AbstractDao<Message, Long> {
         public final static Property Url = new Property(7, String.class, "url", false, "URL");
         public final static Property Title = new Property(8, String.class, "title", false, "TITLE");
         public final static Property Ishref = new Property(9, int.class, "ishref", false, "ISHREF");
-        public final static Property Suetime = new Property(10, String.class, "suetime", false, "SUETIME");
+        public final static Property Suetime = new Property(10, long.class, "suetime", false, "SUETIME");
         public final static Property Type = new Property(11, String.class, "type", false, "TYPE");
         public final static Property Module = new Property(12, String.class, "module", false, "MODULE");
         public final static Property Module_id = new Property(13, int.class, "module_id", false, "MODULE_ID");
@@ -64,7 +64,7 @@ public class MessageDao extends AbstractDao<Message, Long> {
                 "\"URL\" TEXT," + // 7: url
                 "\"TITLE\" TEXT," + // 8: title
                 "\"ISHREF\" INTEGER NOT NULL ," + // 9: ishref
-                "\"SUETIME\" TEXT," + // 10: suetime
+                "\"SUETIME\" INTEGER NOT NULL ," + // 10: suetime
                 "\"TYPE\" TEXT," + // 11: type
                 "\"MODULE\" TEXT," + // 12: module
                 "\"MODULE_ID\" INTEGER NOT NULL ," + // 13: module_id
@@ -110,11 +110,7 @@ public class MessageDao extends AbstractDao<Message, Long> {
             stmt.bindString(9, title);
         }
         stmt.bindLong(10, entity.getIshref());
- 
-        String suetime = entity.getSuetime();
-        if (suetime != null) {
-            stmt.bindString(11, suetime);
-        }
+        stmt.bindLong(11, entity.getSuetime());
  
         String type = entity.getType();
         if (type != null) {
@@ -166,11 +162,7 @@ public class MessageDao extends AbstractDao<Message, Long> {
             stmt.bindString(9, title);
         }
         stmt.bindLong(10, entity.getIshref());
- 
-        String suetime = entity.getSuetime();
-        if (suetime != null) {
-            stmt.bindString(11, suetime);
-        }
+        stmt.bindLong(11, entity.getSuetime());
  
         String type = entity.getType();
         if (type != null) {
@@ -207,7 +199,7 @@ public class MessageDao extends AbstractDao<Message, Long> {
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // url
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // title
             cursor.getInt(offset + 9), // ishref
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // suetime
+            cursor.getLong(offset + 10), // suetime
             cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // type
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // module
             cursor.getInt(offset + 13), // module_id
@@ -228,7 +220,7 @@ public class MessageDao extends AbstractDao<Message, Long> {
         entity.setUrl(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setTitle(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setIshref(cursor.getInt(offset + 9));
-        entity.setSuetime(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setSuetime(cursor.getLong(offset + 10));
         entity.setType(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
         entity.setModule(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         entity.setModule_id(cursor.getInt(offset + 13));
