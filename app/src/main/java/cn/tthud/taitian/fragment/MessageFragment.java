@@ -25,6 +25,7 @@ import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.tthud.taitian.R;
@@ -318,6 +319,8 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
            @Override
            public void run() {
                List<Message> list = messageDaoUtils.queryAllMessage();
+               // 获取排序后的数组，然后拿这个展示即可。
+               List<Message> lists = sort(list);
                mAdapter.clear();
                mAdapter.addAll(list);
                mAdapter.notifyDataSetChanged();
@@ -330,5 +333,10 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                }
            }
         }, 500);
+    }
+
+    private List<Message> sort(List<Message> list) {
+        List<Message> messageList = new ArrayList<>();
+        return messageList;
     }
 }
