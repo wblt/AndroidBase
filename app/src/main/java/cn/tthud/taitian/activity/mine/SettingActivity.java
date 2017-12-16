@@ -97,13 +97,9 @@ public class SettingActivity extends ActivityBase {
     }
 
     private void updateCache() throws Exception {
-        File directory = new File(FlowAPI.YYW_FILE_PATH);
         try{
-            if (directory != null && directory.exists() && directory.isDirectory()){
-                long size = DataClearManager.getFolderSize(directory);
-                String formatSize = DataClearManager.getFormatSize(size);
-                tv_cache.setText(formatSize);
-            }
+            String formatSize = DataClearManager.getTotalCacheSize(SettingActivity.this);
+            tv_cache.setText(formatSize);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -174,8 +170,7 @@ public class SettingActivity extends ActivityBase {
                                 customAlertDialog.dismiss();
                                 showProgressDialog();
 
-                                File directory = new File(FlowAPI.YYW_FILE_PATH);
-                                DataClearManager.deleteDir(directory);
+                                DataClearManager.clearAllCache(SettingActivity.this);
                                 showMsg("清理完毕");
                                 dismissProgressDialog();
                                 try{

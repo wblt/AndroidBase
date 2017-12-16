@@ -13,6 +13,31 @@ import java.math.BigDecimal;
 public class DataClearManager {
 
     /**
+     * 获取缓存大小
+     * @param context
+     * @return
+     * @throws Exception
+     */
+    public static String getTotalCacheSize(Context context) throws Exception {
+        long cacheSize = getFolderSize(context.getCacheDir());
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            cacheSize += getFolderSize(context.getExternalCacheDir());
+        }
+        return getFormatSize(cacheSize);
+    }
+
+    /**
+     * 清除缓存
+     * @param context
+     */
+    public static void clearAllCache(Context context) {
+        deleteDir(context.getCacheDir());
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            deleteDir(context.getExternalCacheDir());
+        }
+    }
+
+    /**
      *  清除缓存
      */
     public static boolean deleteDir(File dir) {
