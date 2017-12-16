@@ -145,7 +145,6 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:inputType="textPassword"
                 android:digits="1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:textColorHint="@color/province_line_border"
                 android:hint="验证码"

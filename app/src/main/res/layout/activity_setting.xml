@@ -152,6 +152,7 @@
                 android:layout_centerVertical="true" />
 
             <ImageView
+                android:id="@+id/iv_wx_arrow"
                 android:visibility="gone"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
@@ -191,6 +192,13 @@
                 android:text="清除缓存"
                 android:textColor="@color/gray_black_text"
                 android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/tv_cache"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"

@@ -2,10 +2,9 @@ package cn.tthud.taitian.activity.mine;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.umeng.socialize.UMAuthListener;
@@ -26,11 +25,10 @@ import cn.tthud.taitian.DemoApplication;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.base.ActivityBase;
-import cn.tthud.taitian.fragment.MineFragment;
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.utils.DataClearManager;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.SPUtils;
-import cn.tthud.taitian.widget.ActionSheet;
 import cn.tthud.taitian.widget.CustomAlertDialog;
 import cn.tthud.taitian.widget.EaseSwitchButton;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
@@ -47,6 +45,12 @@ public class SettingActivity extends ActivityBase {
     @ViewInject(R.id.switch_bingding)
     private EaseSwitchButton switch_bingding;
 
+    @ViewInject(R.id.iv_wx_arrow)
+    private ImageView iv_wx_arrow;
+
+    @ViewInject(R.id.tv_cache)
+    private TextView tv_cache;
+
     private CustomAlertDialog customAlertDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,13 @@ public class SettingActivity extends ActivityBase {
         setTopLeftDefultListener();
 
         updateView();
+
+
+        try{
+            updateCache();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -66,12 +77,10 @@ public class SettingActivity extends ActivityBase {
     }
 
     private void updateView () {
-//        if (SPUtils.getString(SPUtils.SOURCE).equals("tel")) {
-//            bingding.setText("绑定微信");
-//        } else if (SPUtils.getString(SPUtils.SOURCE).equals("wx")){
-//            bingding.setText("绑定手机号");
-//        }
         if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
+            switch_bingding.setVisibility(View.VISIBLE);
+            iv_wx_arrow.setVisibility(View.GONE);
+
             if (SPUtils.getBoolean(SPUtils.IS_BINDWX,false)) {
                 //bingding_status.setText("已绑定");
                 switch_bingding.openSwitch();
@@ -81,7 +90,22 @@ public class SettingActivity extends ActivityBase {
             }
         } else {
             //bingding_status.setText("未绑定");
-            switch_bingding.closeSwitch();
+            //switch_bingding.closeSwitch();
+            switch_bingding.setVisibility(View.GONE);
+            iv_wx_arrow.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void updateCache() throws Exception {
+        File directory = new File(FlowAPI.YYW_FILE_PATH);
+        try{
+            if (directory != null && directory.exists() && directory.isDirectory()){
+                long size = DataClearManager.getFolderSize(directory);
+                String formatSize = DataClearManager.getFormatSize(size);
+                tv_cache.setText(formatSize);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -149,14 +173,16 @@ public class SettingActivity extends ActivityBase {
                             case R.id.tv_contain:
                                 customAlertDialog.dismiss();
                                 showProgressDialog();
+
                                 File directory = new File(FlowAPI.YYW_FILE_PATH);
-                                if (directory != null && directory.exists() && directory.isDirectory()) {
-                                    for (File item : directory.listFiles()) {
-                                        item.delete();
-                                    }
-                                }
+                                DataClearManager.deleteDir(directory);
                                 showMsg("清理完毕");
                                 dismissProgressDialog();
+                                try{
+                                    updateCache();
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
                                 break;
                         }
                     }
