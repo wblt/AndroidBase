@@ -79,6 +79,13 @@
         <item name="android:background">@color/rp_divider_color</item>
     </style>
 
+    <declare-styleable name="RadioButton">
+        <attr name="sc_corner_radius" format="dimension" />
+        <attr name="sc_border_width" format="dimension" />
+        <attr name="sc_tint_color" format="color" />
+        <attr name="sc_checked_text_color" format="color" />
+    </declare-styleable>
+
     <declare-styleable name="BaseBanner">
         <!-- scale of Banner height and width,height/screenWidth.(0-1)
             scale is 0.5 default for LoopViewPager -->

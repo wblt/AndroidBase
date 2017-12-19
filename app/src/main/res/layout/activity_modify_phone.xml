@@ -115,7 +115,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:inputType="numberPassword"
+            android:inputType="number"
             android:digits="1234567890"
             android:hint="6位数字"
             android:textColorHint="@color/province_line_border"

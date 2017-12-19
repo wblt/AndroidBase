@@ -1,18 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:segmentedgroup="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/content_bg">
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="80dp"
+        android:gravity="center"
+        android:background="@color/white">
+
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/segmented"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            sc_border_width="1dp"
+            sc_corner_radius="5dp"
+            app:sc_tint_color="@color/colorSendName8"
+            >
+
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="进行中"
+                style="@style/RadioButton"
+                android:checked="true"/>
+
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="未开始"
+                style="@style/RadioButton" />
+
+            <RadioButton
+                android:layout_weight="1"
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="已结束"
+                style="@style/RadioButton" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/nav_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/main_app_color"
-        android:visibility="visible">
+        android:visibility="gone">
         <com.gigamole.navigationtabstrip.NavigationTabStrip
             android:id="@+id/nts_bottom"
             android:layout_width="match_parent"
@@ -21,7 +67,7 @@
             android:layout_marginRight="30dp"
             android:layout_gravity="center"
             android:background="@color/main_app_color"
-            app:nts_active_color="@color/colorSendName6"
+            app:nts_active_color="@color/colorSendName8"
             app:nts_color="@color/white"
             app:nts_corners_radius="1dp"
             app:nts_factor="1"
@@ -32,25 +78,107 @@
 
 
     <!--搜索-->
+    <!--搜索-->
     <LinearLayout
-        android:id="@+id/ll_sousuo_lay_xx"
+        android:id="@+id/ll_sousuo_lay"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="@drawable/shape_rectangle_white"
+        android:background="#F0EFF4"
         android:layout_height="50dp"
-        android:visibility="gone">
-        <ImageView
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/sousuo" />
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_rectangle_white">
+
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/sousuo" />
+            <EditText
+                android:layout_weight="1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:id="@+id/query"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_alignParentRight="true"
+                android:includeFontPadding="false"
+                android:background="@null"
+                android:maxLength="15"
+                android:layout_centerVertical="true"
+                android:text=""
+                android:hint="搜索你想要的内容"
+                android:textColor="@color/gray_black_text"
+                android:textSize="14sp"
+                />
+
+            <ImageView
+                android:id="@+id/search_clear"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:padding="8dp"
+                android:src="@mipmap/icon_input_clear"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
         <TextView
+            android:id="@+id/sousuo_btn"
+            android:paddingLeft="5dp"
+            android:paddingRight="20dp"
+            android:gravity="center"
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="搜索"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <com.example.xrecyclerview.XRecyclerView
+            android:id="@+id/xrv_custom"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="搜索你想知道的内容"
-            android:textSize="14sp"/>
+            android:scrollbarSize="4dp"
+            android:scrollbarThumbVertical="@color/grey_500"
+            android:scrollbars="vertical"
+            android:visibility="gone" />
+
+        <!--加载失败-->
+        <LinearLayout
+            android:id="@+id/page_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/page_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="暂无数据,点击重新加载"
+                android:textSize="15sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <View
@@ -58,12 +186,11 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/gray_500" />
-
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="1px"
         android:background="@color/background"
-        />
+        android:visibility="gone"/>
 </LinearLayout>

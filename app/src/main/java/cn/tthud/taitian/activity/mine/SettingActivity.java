@@ -22,6 +22,7 @@ import java.util.Map;
 
 import cn.tthud.taitian.ChatManager;
 import cn.tthud.taitian.DemoApplication;
+import cn.tthud.taitian.MainActivity;
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.base.ActivityBase;
@@ -80,7 +81,6 @@ public class SettingActivity extends ActivityBase {
         if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
             switch_bingding.setVisibility(View.VISIBLE);
             iv_wx_arrow.setVisibility(View.GONE);
-
             if (SPUtils.getBoolean(SPUtils.IS_BINDWX,false)) {
                 //bingding_status.setText("已绑定");
                 switch_bingding.openSwitch();
@@ -91,9 +91,11 @@ public class SettingActivity extends ActivityBase {
         } else {
             //bingding_status.setText("未绑定");
             //switch_bingding.closeSwitch();
+            bingding.setText("绑定手机号码");
             switch_bingding.setVisibility(View.GONE);
             iv_wx_arrow.setVisibility(View.VISIBLE);
         }
+
     }
 
     private void updateCache() throws Exception {
@@ -195,8 +197,6 @@ public class SettingActivity extends ActivityBase {
                             case R.id.tv_contain:
                                 customAlertDialog.dismiss();
                                 logout();
-                                DemoApplication.getInstance().closeActivitys();
-                                finish();
                                 break;
                         }
                     }
@@ -262,7 +262,11 @@ public class SettingActivity extends ActivityBase {
     private void logout(){
         ChatManager.getInstance().exitSocket(getApplicationContext());
         SPUtils.clearUser();
-        LoginActivity.navToLogin(SettingActivity.this);
+        DemoApplication.getInstance().closeActivitys();
+        Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+        intent.putExtra("extra_index",0);
+        startActivity(intent);
+        finish();
     }
 
     UMAuthListener authListener = new UMAuthListener() {

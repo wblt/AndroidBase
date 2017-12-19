@@ -292,8 +292,6 @@
     <color name="colorGray7">#dcdcdc</color>
     <color name="colorGray8">#107D44</color>
 
-
-
     <color name="colorSendName">#9966cc</color>
     <color name="colorSendName1">#FF3163</color>
     <color name="colorSendName2">#973365</color>
@@ -302,6 +300,6 @@
     <color name="colorSendName5">#97BC87</color>
     <color name="colorSendName6">#FFAE1F</color>
     <color name="colorSendName7">#FF437D</color>
-    <color name="colorSendName8">#E87727</color>
+    <color name="colorSendName8">#FD9326</color>
     <color name="rp_divider_color">#c7c7c7</color>
 </resources>

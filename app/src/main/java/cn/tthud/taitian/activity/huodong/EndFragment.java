@@ -76,8 +76,8 @@ public class EndFragment extends FragmentBase implements View.OnClickListener{
             @Override
             public void onRefresh() {
                 mAdapter.clear();
-                mPage = 1;
                 mAdapter.notifyDataSetChanged();
+                mPage = 1;
                 loadNewData();
             }
 
@@ -161,6 +161,7 @@ public class EndFragment extends FragmentBase implements View.OnClickListener{
         switch (id){
             case R.id.page_refresh:
                 mAdapter.clear();
+                mAdapter.notifyDataSetChanged();
                 mPage = 1;
                 loadNewData();
                 break;
@@ -168,6 +169,7 @@ public class EndFragment extends FragmentBase implements View.OnClickListener{
                 keywords = query.getText().toString();
                 mPage = 1;
                 mAdapter.clear();
+                mAdapter.notifyDataSetChanged();
                 loadNewData();
                 break;
 

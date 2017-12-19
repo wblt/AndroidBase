@@ -51,10 +51,10 @@ public class ModifyPhoneActivity extends ActivityBase {
     @ViewInject(R.id.submit_btn)
     private Button submit_btn;
 
-    private String codeNum;     // 验证码
+    private String codeNum = "";     // 验证码
     private MyCount myCount;
-    private String phone;       // 手机号码
-    private String pwd;         // 密码
+    private String phone = "";       // 手机号码
+    private String pwd = "";         // 密码
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,6 +210,12 @@ public class ModifyPhoneActivity extends ActivityBase {
             showMsg("请输入手机验证码");
             return;
         }
+
+        if (TextUtils.isEmpty(codeNum)) {
+            showMsg("验证码输入错误");
+            return;
+        }
+
         if (!codeNum.equals(code.getText().toString())) {
             showMsg("验证码输入错误");
             return;

@@ -103,11 +103,11 @@ public class UnDoFragment extends FragmentBase implements View.OnClickListener{
     }
 
     public void loadNewData(){
+
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_ACTIVITY_LIST);
         requestParams.addParameter("type","notstart");
         requestParams.addParameter("p", mPage);
         requestParams.addParameter("keywords",keywords);
-
         MXUtils.httpGet(requestParams, new CommonCallbackImp("活动列表--未开始",requestParams){
             @Override
             public void onSuccess(String data) {
@@ -155,12 +155,14 @@ public class UnDoFragment extends FragmentBase implements View.OnClickListener{
             case R.id.page_refresh:
                 mAdapter.clear();
                 mPage = 1;
+                mAdapter.notifyDataSetChanged();
                 loadNewData();
                 break;
             case R.id.sousuo_btn:
                 keywords = query.getText().toString();
                 mPage = 1;
                 mAdapter.clear();
+                mAdapter.notifyDataSetChanged();
                 loadNewData();
                 break;
         }

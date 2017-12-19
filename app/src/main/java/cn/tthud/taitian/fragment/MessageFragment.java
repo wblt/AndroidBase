@@ -340,7 +340,6 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
     private List<Message> sort(List<Message> list) {
         List<Message> unReadMsgList = new ArrayList<>();
         List<Message> readMsgList = new ArrayList<>();
-
         List<Message> tempList = list;
         Collections.sort(tempList, new Comparator<Message>() {
             @Override
@@ -349,7 +348,6 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                 return (int)deal;
             }
         });
-
         for (Message msg: tempList){
             if (msg.getIsread() == 2){
                 unReadMsgList.add(msg);
@@ -357,7 +355,6 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                 readMsgList.add(msg);
             }
         }
-
         unReadMsgList.addAll(readMsgList);
         return unReadMsgList;
     }

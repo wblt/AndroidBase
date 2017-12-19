@@ -29,6 +29,7 @@ import cn.tthud.taitian.bean.ActivityBean;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.utils.Log;
+import cn.tthud.taitian.widget.ZProgressHUD;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
@@ -38,16 +39,15 @@ import cn.tthud.taitian.xutils.MXUtils;
 
 public class DoingFragment extends FragmentBase implements View.OnClickListener {
     private View view;
-
     private TextView sousuo_btn;
     private XRecyclerView xrvCustom;
     private LinearLayout page_refresh;
-    //private TextView up_tip;
     private int mPage = 1;
     private int mMaxPage = -1;
     private ActivityDoingAdapter mAdapter;
     private String keywords = "";
     private EditText query;
+    private ZProgressHUD progressHUD;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,8 +77,8 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
             @Override
             public void onRefresh() {
                 mAdapter.clear();
-                mPage = 1;
                 mAdapter.notifyDataSetChanged();
+                mPage = 1;
                 loadNewData();
             }
             @Override
@@ -105,6 +105,7 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
     }
 
     public void loadNewData(){
+        showLoading();
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_ACTIVITY_LIST);
         requestParams.addParameter("type","start");
         requestParams.addParameter("p", mPage);
@@ -113,6 +114,7 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
+                cancelLoading();
                 try {
                     JSONObject jsonObject = new JSONObject(data);
                     String status = jsonObject.getString("status");
@@ -157,6 +159,7 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
         switch (id){
             case R.id.page_refresh:
                 mAdapter.clear();
+                mAdapter.notifyDataSetChanged();
                 mPage = 1;
                 loadNewData();
                 break;
@@ -164,8 +167,27 @@ public class DoingFragment extends FragmentBase implements View.OnClickListener 
                 keywords = query.getText().toString();
                 mPage = 1;
                 mAdapter.clear();
+                mAdapter.notifyDataSetChanged();
                 loadNewData();
                 break;
+        }
+    }
+
+    /**
+     * 可在此处统一显示loading view
+     */
+    public void showLoading() {
+//        if (mIsShowLoading) {
+        if(progressHUD == null){
+            progressHUD = ZProgressHUD.getInstance(getContext());
+        }
+        progressHUD.show();
+//        }
+    }
+
+    public void cancelLoading() {
+        if (progressHUD != null) {
+            progressHUD.dismiss();
         }
     }
 }

@@ -90,10 +90,16 @@ public class LoginActivity extends ActivityBase {
         //setTopLeftDefultListener();
         initListener();
         initRxBus();
-
         String onCloseinfo = getIntent().getStringExtra("onClose");
         if (onCloseinfo != null && onCloseinfo.length() > 0) {
             Toast.makeText(LoginActivity.this,onCloseinfo, Toast.LENGTH_SHORT).show();
+        }
+
+        String lastNum = SPUtils.getString(SPUtils.MOBILE);
+        String lastPwd = SPUtils.getString(SPUtils.PASSWORD);
+        if (lastNum != null && TextUtils.isEmpty(lastNum) && lastPwd != null && TextUtils.isEmpty(lastPwd)) {
+            login_phone.setText(lastNum);
+            login_pwd.setText(lastPwd);
         }
     }
 
