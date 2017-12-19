@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity {
     private DiscoverFragment disFragment;
     private MineFragment mineFragment;
     private MessageFragment messageFragment;
+    private LinearLayout main_mask;
 
 
     @Override
@@ -95,6 +97,7 @@ public class MainActivity extends BaseActivity {
      * init views
      */
     private void initView() {
+        main_mask = findViewById(R.id.main_mask);
         unreadLabel = (TextView) findViewById(R.id.unread_msg_number);
         unreadAddressLable = (TextView) findViewById(R.id.unread_address_number);
         mTabs = new Button[4];
@@ -248,24 +251,9 @@ public class MainActivity extends BaseActivity {
                             updateUnreadMsgLable();
                         } else if (split[0].equals("onClose")) {
                             handleOnCloseMsg(split[1]);
+                        } else if (split[0].equals("dismiss_mask")) {
+                            main_mask.setVisibility(View.GONE);
                         }
-//                        int num = 0;
-//                        if (status.equals("socket")) {
-//                            num = SPUtils.getInt(SPUtils.BADGER_NUM,0);
-//                            num = num + 1;
-//                        } else {
-//                            num = SPUtils.getInt(SPUtils.BADGER_NUM,0);
-//                        }
-//                        // 更新桌面图标
-//                        SPUtils.putInt(SPUtils.BADGER_NUM,num);
-//                        if (num == 0) {
-//                            // 收到消息之后设置为true
-//                            updateUnreadMsgLable();
-//                        } else {
-//                            // 收到消息之后设置为true
-//                            updateUnreadMsgLable();
-//
-//                        }
                     }
                 });
     }

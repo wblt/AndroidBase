@@ -126,7 +126,6 @@ public class ActivityDoingAdapter extends BaseRecyclerViewAdapter<ActivityBean> 
         WebViewBean bean = new WebViewBean();
         bean.setUrl(object.getUrl());
         bean.setTitle(object.getTitle());
-
         WebViewActivity.navToWebView(localContext, bean);
     }
 

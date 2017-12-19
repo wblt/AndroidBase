@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <RelativeLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
@@ -203,4 +204,14 @@
         android:id="@+id/v_image_watcher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:id="@+id/main_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/qidong">
+
+    </LinearLayout>
 </FrameLayout>

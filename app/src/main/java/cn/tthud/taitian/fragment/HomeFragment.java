@@ -36,6 +36,9 @@ import cn.tthud.taitian.bean.ActivityBean;
 import cn.tthud.taitian.bean.AdmarketBean;
 import cn.tthud.taitian.bean.CompanyBean;
 import cn.tthud.taitian.bean.StarXueyuanBean;
+import cn.tthud.taitian.net.rxbus.RxBus;
+import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
+import cn.tthud.taitian.net.rxbus.RxCodeConstants;
 import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.widget.banner.BannerItem;
 import cn.tthud.taitian.widget.banner.SimpleImageBanner;
@@ -191,6 +194,8 @@ public class HomeFragment extends FragmentBase {
                         Type type_act =new TypeToken<List<ActivityBean>>(){}.getType();
                         List<ActivityBean> acttList = GsonUtils.jsonToList(activity,type_act);
 
+                        // 发送消息去主页
+                        RxBus.getDefault().post(RxCodeConstants.MainActivity_MSG, new RxBusBaseMessage(1,"dismiss_mask"));
                         adapter_ip.addAll(acttList);
                         adapter_ip.notifyDataSetChanged();
                         if (adapter_ip.getData().size() != 0) {
@@ -239,12 +244,13 @@ public class HomeFragment extends FragmentBase {
             @Override
             public void onItemClick(int position) {
                 AdmarketBean adBean = model.get(position);
-
-                if (adBean.getIshref().equals("2")) return;
-
+                if (adBean.getIshref().equals("2")) {
+                    return;
+                }
                 if (TextUtils.isEmpty(adBean.getUrl())){
-                    if (TextUtils.isEmpty(adBean.getModule())) return;
-
+                    if (TextUtils.isEmpty(adBean.getModule())) {
+                        return;
+                    }
                     if (adBean.getModule().equals("artonce")){
                         Intent intent = new Intent(HomeFragment.this.getActivity(), ArtonceActivity.class);
                         intent.putExtra("cid", adBean.getModule_id());

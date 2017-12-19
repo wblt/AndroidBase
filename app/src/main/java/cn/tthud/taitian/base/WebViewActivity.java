@@ -62,7 +62,8 @@ public class WebViewActivity extends ActivityBase {
 	ValueCallback<Uri> mUploadMessage;
 	public static final int FILECHOOSER_RESULTCODE = 3;
 
-//	private static Context mContext;
+	private static Context mContext;
+	private static  WebViewBean web_bean;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +74,6 @@ public class WebViewActivity extends ActivityBase {
 		initView();
 		initData();
 	}
-
-	 
 	// 初始化视图
 	public void initView() {
 		webView = (WebView) findViewById(R.id.webView);
@@ -166,7 +165,6 @@ public class WebViewActivity extends ActivityBase {
 		public boolean shouldOverrideUrlLoading(WebView view, String url) {
 			return true;
 		}
-
 		@Override
 		public void onPageFinished(WebView view, String url) {
 			super.onPageFinished(view, url);
@@ -195,8 +193,12 @@ public class WebViewActivity extends ActivityBase {
 			String name = data.get("name");
 			SPUtils.putString(SPUtils.NICK_NAME, name);
 
-			// 绑定
-			//bingdingwx();
+			String url = web_bean.getUrl();
+			Intent intent = new Intent(mContext,WebViewActivity.class);
+			intent.putExtra("title",web_bean.getTitle());
+			String url_str = addWXInfo(url);
+			intent.putExtra("url", url_str);
+			mContext.startActivity(intent);
 		}
 
 		@Override
@@ -239,20 +241,22 @@ public class WebViewActivity extends ActivityBase {
 //	}
 
 	public static void navToWebView(Context context, WebViewBean object){
+		String url = object.getUrl();
+		if (TextUtils.isEmpty(url)){
+			return;
+		}
+		web_bean = object;
+		mContext = context;
 		//if (CommonUtils.checkLogin()) {  // 已登录
 			//if (!SPUtils.getBoolean(SPUtils.ISVST, false)) { // 非游客
 				if (TextUtils.isEmpty(SPUtils.getString(SPUtils.WX_OPEN_ID))){  // 判断微信id是否为空
-					String url = object.getUrl();
-					if (TextUtils.isEmpty(url)){
-						return;
-					}
+					UMShareAPI.get(context).getPlatformInfo((Activity) context, SHARE_MEDIA.WEIXIN, authListener);
+				}else{
 					Intent intent = new Intent(context,WebViewActivity.class);
 					intent.putExtra("title",object.getTitle());
-					addWXInfo(url);
-					intent.putExtra("url", url);
+					String url_str = addWXInfo(url);
+					intent.putExtra("url", url_str);
 					context.startActivity(intent);
-				}else{
-					UMShareAPI.get(context).getPlatformInfo((Activity) context, SHARE_MEDIA.WEIXIN, authListener);
 				}
 			//} else {
 			//	context.startActivity(new Intent(context, BindPhoneActivity.class));
@@ -262,7 +266,7 @@ public class WebViewActivity extends ActivityBase {
 		//}
 	}
 
-	private static void addWXInfo(String url){
+	private static String addWXInfo(String url){
 		String nickname = SPUtils.getString(SPUtils.NICK_NAME);
 		String headimgurl = SPUtils.getString(SPUtils.HEAD_PIC);
 		String openid = SPUtils.getString(SPUtils.WX_OPEN_ID);
@@ -290,6 +294,7 @@ public class WebViewActivity extends ActivityBase {
 		if (ub_id != null){
 			url = url + "&ub_id=" + ub_id;
 		}
+		return url;
 	}
 
 	@Override
