@@ -357,6 +357,7 @@ public class DiscoverFragment extends FragmentBase implements RadioGroup.OnCheck
         if (ub_id != null){
             url = url + "&ub_id=" + ub_id;
         }
+        url = url + "&html=" + "index";
         return url;
     }
 

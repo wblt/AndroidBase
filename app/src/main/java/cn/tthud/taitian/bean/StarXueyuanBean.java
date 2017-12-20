@@ -6,15 +6,17 @@ package cn.tthud.taitian.bean;
 
 public class StarXueyuanBean {
     /*
-    "realname":"王乐乐",
-                "solevar":"4b06b5867630315f87bf",
-                "title":"一带一路-队员",
-                "img":"https://qiniu.hnltou.com/htb-player/fc05c47eb0f25a13b04d"
+    "realname":"毛六场",
+                "pl_id":"5995b6c49f84d7776d40",
+                "title":"春晚第六场",
+                "url":"http://new.tthud.cn/wechat.php/tcb_appDDis",
+                "img":"http://qiniu.hnltou.com/logo-shangwei.jpg"
      */
     private String realname;
-    private String solevar;
     private String title;
     private String img;
+    private String url;
+    private String pl_id;
 
     public String getRealname() {
         return realname;
@@ -22,14 +24,6 @@ public class StarXueyuanBean {
 
     public void setRealname(String realname) {
         this.realname = realname;
-    }
-
-    public String getSolevar() {
-        return solevar;
-    }
-
-    public void setSolevar(String solevar) {
-        this.solevar = solevar;
     }
 
     public String getTitle() {
@@ -46,5 +40,21 @@ public class StarXueyuanBean {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getPl_id() {
+        return pl_id;
+    }
+
+    public void setPl_id(String pl_id) {
+        this.pl_id = pl_id;
     }
 }

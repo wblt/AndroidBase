@@ -1,14 +1,19 @@
 package cn.tthud.taitian.activity.home;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.xrecyclerview.XRecyclerView;
 import com.google.gson.reflect.TypeToken;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,11 +21,16 @@ import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ViewInject;
 
 import java.lang.reflect.Type;
+import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.adapter.StarXueyuanAdapter;
 import cn.tthud.taitian.base.ActivityBase;
+import cn.tthud.taitian.base.OnItemClickListener;
+import cn.tthud.taitian.base.WebViewActivity;
 import cn.tthud.taitian.bean.ActivityBean;
 import cn.tthud.taitian.bean.StarXueyuanBean;
 import cn.tthud.taitian.net.FlowAPI;
@@ -49,7 +59,6 @@ public class MoreStarActivity extends ActivityBase {
         setTopBarTitle("更多学员");
         setTopLeftDefultListener();
         initRecyclerView();
-
         mPage = 1;
         loadData();
     }
@@ -128,7 +137,101 @@ public class MoreStarActivity extends ActivityBase {
         xrvCustom.setHasFixedSize(false);
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
         adapter = new StarXueyuanAdapter();
+        adapter.setOnItemClickListener(new OnItemClickListener<StarXueyuanBean>() {
+            @Override
+            public void onClick(final StarXueyuanBean starXueyuanBean, int position) {
+                if (TextUtils.isEmpty(starXueyuanBean.getUrl())) {
+                    return;
+                }
+                // 点击
+                showProgressDialog();
+                if (TextUtils.isEmpty(SPUtils.getString(SPUtils.WX_OPEN_ID))){  // 判断微信id是否为空
+                    UMShareAPI.get(MoreStarActivity.this).getPlatformInfo(MoreStarActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+                        @Override
+                        public void onStart(SHARE_MEDIA share_media) {
+
+                        }
+                        @Override
+                        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                            String openid = map.get("openid");
+                            SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
+                            String profile_image_url = map.get("profile_image_url");
+                            SPUtils.putString(SPUtils.HEAD_PIC, profile_image_url);
+                            String gender = map.get("gender");
+                            if (gender.equals("男")){
+                                SPUtils.putInt(SPUtils.SEX, 1);
+                            }else if(gender.equals("女")){
+                                SPUtils.putInt(SPUtils.SEX, 2);
+                            }else{
+                                SPUtils.putInt(SPUtils.SEX, 0);
+                            }
+                            String name = map.get("name");
+                            SPUtils.putString(SPUtils.NICK_NAME, name);
+
+                            // 开始跳转
+                            dismissProgressDialog();
+                            String url = starXueyuanBean.getUrl();
+                            Intent intent = new Intent(MoreStarActivity.this,WebViewActivity.class);
+                            intent.putExtra("title",starXueyuanBean.getTitle());
+                            String url_str = addWXInfo_xueyuan(starXueyuanBean.getUrl(),starXueyuanBean.getPl_id());
+                            intent.putExtra("url", url_str);
+                            MoreStarActivity.this.startActivity(intent);
+                        }
+
+                        @Override
+                        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+                        }
+
+                        @Override
+                        public void onCancel(SHARE_MEDIA share_media, int i) {
+
+                        }
+                    });
+                }else{
+                    dismissProgressDialog();
+                    Intent intent = new Intent(MoreStarActivity.this,WebViewActivity.class);
+                    intent.putExtra("title",starXueyuanBean.getTitle());
+                    String url_str = addWXInfo_xueyuan(starXueyuanBean.getUrl(),starXueyuanBean.getPl_id());
+                    intent.putExtra("url", url_str);
+                    MoreStarActivity.this.startActivity(intent);
+                }
+            }
+        });
         xrvCustom.setAdapter(adapter);
+    }
+
+    private String addWXInfo_xueyuan(String url,String pl_id){
+        String nickname = SPUtils.getString(SPUtils.NICK_NAME);
+        String headimgurl = SPUtils.getString(SPUtils.HEAD_PIC);
+        String openid = SPUtils.getString(SPUtils.WX_OPEN_ID);
+        int sex = SPUtils.getInt(SPUtils.SEX, 1);
+        String ub_id = SPUtils.getString(SPUtils.UB_ID);
+        String source = "app";
+        String deviceid = UUID.randomUUID().toString();
+        int index = url.indexOf("?");
+        if (index == -1){		// 不存在
+            url = url + "?source=" + source;
+        }else{
+            url = url + "&source=" + source;
+        }
+        url = url + "&deviceid=" + deviceid;
+        url = url + "&sex=" + sex;
+        if (nickname != null){
+            url = url + "&nickname=" + URLEncoder.encode(nickname);
+        }
+        if (headimgurl != null){
+            url = url + "&headimgurl=" + headimgurl;
+        }
+        if (openid != null){
+            url = url + "&openid=" + openid;
+        }
+        if (ub_id != null){
+            url = url + "&ub_id=" + ub_id;
+        }
+        url = url + "&html=" + "player_detail";
+        url = url + "&pl_id=" + pl_id;
+        return url;
     }
 
 

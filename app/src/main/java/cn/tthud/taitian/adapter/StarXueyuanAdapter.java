@@ -1,5 +1,6 @@
 package cn.tthud.taitian.adapter;
 
+import android.view.View;
 import android.view.ViewGroup;
 
 import cn.tthud.taitian.R;
@@ -27,7 +28,7 @@ public class StarXueyuanAdapter extends BaseRecyclerViewAdapter<StarXueyuanBean>
         }
 
         @Override
-        public void onBindViewHolder(final StarXueyuanBean object, int position) {
+        public void onBindViewHolder(final StarXueyuanBean object, final int position) {
             binding.executePendingBindings();
             if(object.getImg() != null && object.getImg().length() != 0){
                 ImageLoader.loadRect(object.getImg(),binding.ivImg);
@@ -36,6 +37,14 @@ public class StarXueyuanAdapter extends BaseRecyclerViewAdapter<StarXueyuanBean>
             }
             binding.tvTitle.setText(object.getTitle());
             binding.tvName.setText(object.getRealname());
+            binding.llAll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        listener.onClick(object,position);
+                    }
+                }
+            });
         }
     }
 

@@ -246,6 +246,7 @@ public class CompanyActivity extends ActivityBase {
         if (ub_id != null){
             url = url + "&ub_id=" + ub_id;
         }
+        url = url + "&html=" + "index";
         return url;
     }
 }

@@ -326,8 +326,68 @@ public class HomeFragment extends FragmentBase {
         xrvCustom_xueyuan.setNestedScrollingEnabled(false);
         xrvCustom_xueyuan.setHasFixedSize(false);
         xrvCustom_xueyuan.setItemAnimator(new DefaultItemAnimator());
-
         adapter_xueyuan = new StarXueyuanAdapter();
+        adapter_xueyuan.setOnItemClickListener(new OnItemClickListener<StarXueyuanBean>() {
+            @Override
+            public void onClick(final StarXueyuanBean starXueyuanBean, int position) {
+                if (TextUtils.isEmpty(starXueyuanBean.getUrl())) {
+                    return;
+                }
+                // 点击
+                showProgressDialog();
+                if (TextUtils.isEmpty(SPUtils.getString(SPUtils.WX_OPEN_ID))){  // 判断微信id是否为空
+                    UMShareAPI.get(getContext()).getPlatformInfo(getActivity(), SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+                        @Override
+                        public void onStart(SHARE_MEDIA share_media) {
+
+                        }
+                        @Override
+                        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                            String openid = map.get("openid");
+                            SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
+                            String profile_image_url = map.get("profile_image_url");
+                            SPUtils.putString(SPUtils.HEAD_PIC, profile_image_url);
+                            String gender = map.get("gender");
+                            if (gender.equals("男")){
+                                SPUtils.putInt(SPUtils.SEX, 1);
+                            }else if(gender.equals("女")){
+                                SPUtils.putInt(SPUtils.SEX, 2);
+                            }else{
+                                SPUtils.putInt(SPUtils.SEX, 0);
+                            }
+                            String name = map.get("name");
+                            SPUtils.putString(SPUtils.NICK_NAME, name);
+
+                            // 开始跳转
+                            dismissProgressDialog();
+                            String url = starXueyuanBean.getUrl();
+                            Intent intent = new Intent(getContext(),WebViewActivity.class);
+                            intent.putExtra("title",starXueyuanBean.getTitle());
+                            String url_str = addWXInfo_xueyuan(starXueyuanBean.getUrl(),starXueyuanBean.getPl_id());
+                            intent.putExtra("url", url_str);
+                            getContext().startActivity(intent);
+                        }
+
+                        @Override
+                        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+                        }
+
+                        @Override
+                        public void onCancel(SHARE_MEDIA share_media, int i) {
+
+                        }
+                    });
+                }else{
+                    dismissProgressDialog();
+                    Intent intent = new Intent(getContext(),WebViewActivity.class);
+                    intent.putExtra("title",starXueyuanBean.getTitle());
+                    String url_str = addWXInfo_xueyuan(starXueyuanBean.getUrl(),starXueyuanBean.getPl_id());
+                    intent.putExtra("url", url_str);
+                    getContext().startActivity(intent);
+                }
+            }
+        });
         xrvCustom_xueyuan.setAdapter(adapter_xueyuan);
     }
 
@@ -446,6 +506,42 @@ public class HomeFragment extends FragmentBase {
         if (ub_id != null){
             url = url + "&ub_id=" + ub_id;
         }
+        url = url + "&html=" + "index";
         return url;
     }
+
+    private String addWXInfo_xueyuan(String url,String pl_id){
+        String nickname = SPUtils.getString(SPUtils.NICK_NAME);
+        String headimgurl = SPUtils.getString(SPUtils.HEAD_PIC);
+        String openid = SPUtils.getString(SPUtils.WX_OPEN_ID);
+        int sex = SPUtils.getInt(SPUtils.SEX, 1);
+        String ub_id = SPUtils.getString(SPUtils.UB_ID);
+        String source = "app";
+        String deviceid = UUID.randomUUID().toString();
+        int index = url.indexOf("?");
+        if (index == -1){		// 不存在
+            url = url + "?source=" + source;
+        }else{
+            url = url + "&source=" + source;
+        }
+        url = url + "&deviceid=" + deviceid;
+        url = url + "&sex=" + sex;
+        if (nickname != null){
+            url = url + "&nickname=" + URLEncoder.encode(nickname);
+        }
+        if (headimgurl != null){
+            url = url + "&headimgurl=" + headimgurl;
+        }
+        if (openid != null){
+            url = url + "&openid=" + openid;
+        }
+        if (ub_id != null){
+            url = url + "&ub_id=" + ub_id;
+        }
+        url = url + "&html=" + "player_detail";
+        url = url + "&pl_id=" + pl_id;
+        return url;
+    }
+
+
 }
