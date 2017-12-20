@@ -122,7 +122,9 @@
                     android:textColor="@color/gray_black"
                     android:minHeight="45dp"
                     android:text=""
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="10dp"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@null"/>
             </LinearLayout>
 
 

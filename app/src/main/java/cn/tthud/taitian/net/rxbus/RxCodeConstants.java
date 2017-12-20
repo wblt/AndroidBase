@@ -17,4 +17,7 @@ public class RxCodeConstants {
     // 主页获取系统消息
     public static final int MainActivity_MSG = 4;
 
+    // 消息页刷新
+    public static final int MessageFragment_MSG = 5;
+
 }

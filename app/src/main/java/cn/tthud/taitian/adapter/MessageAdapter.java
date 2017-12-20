@@ -46,7 +46,7 @@ public class MessageAdapter extends BaseRecyclerViewAdapter<Message> {
             }else {
                 binding.headIcon.setImageResource(R.mipmap.logowenzi);
             }
-            if (object.getIsread() == 1) {
+            if (object.getIsread().equals("1")) {
                 binding.unreadMsg.setVisibility(View.INVISIBLE);
             } else {
                 binding.unreadMsg.setVisibility(View.VISIBLE);

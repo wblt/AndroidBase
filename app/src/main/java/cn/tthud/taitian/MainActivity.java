@@ -48,7 +48,6 @@ public class MainActivity extends BaseActivity {
     private MessageFragment messageFragment;
     private LinearLayout main_mask;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,9 +125,6 @@ public class MainActivity extends BaseActivity {
                 if (CommonUtils.checkLogin()) {
                     if (!SPUtils.getBoolean(SPUtils.ISVST,false)) {
                         index = 2;
-//                        updateUnreadMsgLable();
-//                        SPUtils.putInt(SPUtils.BADGER_NUM,0);
-//                        ShortcutBadger.removeCount(MainActivity.this);
                     } else {
                         // 绑定手机号码
                         startActivity(new Intent(this, BindPhoneActivity.class));
@@ -196,23 +192,12 @@ public class MainActivity extends BaseActivity {
         }
         runOnUiThread(new Runnable() {
             public void run() {
-//                if (flag) {
-//                    if (SPUtils.getInt(SPUtils.BADGER_NUM,0)>99) {
-//                        unreadLabel.setText("..");
-//                    } else {
-//                        unreadLabel.setText(SPUtils.getInt(SPUtils.BADGER_NUM,0)+"");
-//                    }
-//                    unreadLabel.setVisibility(View.VISIBLE);
-//                } else {
-//                    unreadLabel.setText("");
-//                    unreadLabel.setVisibility(View.INVISIBLE);
-//                }
                 // 查找数据库数据
                 MessageDaoUtils messageDaoUtils = new MessageDaoUtils(MainActivity.this);
                 List<Message> lists = messageDaoUtils.queryAllMessage();
                 int num = 0;
                 for (Message msg:lists) {
-                    if (msg.getIsread() == 2) {
+                    if (msg.getIsread().equals("2")) {
                         num = num + 1;
                     }
                 }
@@ -249,6 +234,8 @@ public class MainActivity extends BaseActivity {
                         String split[] = status.split(",");
                         if (split[0].equals("updateMsg")) {
                             updateUnreadMsgLable();
+                            // 发送消息去
+                            RxBus.getDefault().post(RxCodeConstants.MessageFragment_MSG, new RxBusBaseMessage(1,"updateMsg"));
                         } else if (split[0].equals("onClose")) {
                             handleOnCloseMsg(split[1]);
                         } else if (split[0].equals("dismiss_mask")) {

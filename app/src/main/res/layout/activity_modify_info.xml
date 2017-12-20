@@ -78,7 +78,9 @@
                     android:textColor="@color/gray_black_text"
                     android:gravity="end"
                     android:textSize="14sp"
-                    android:textColorHint="@color/grey_400"/>
+                    android:textColorHint="@color/grey_400"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@null"/>
             </RelativeLayout>
 
             <ImageView
@@ -115,7 +117,9 @@
                     android:textColor="@color/gray_black_text"
                     android:gravity="end"
                     android:textSize="14sp"
-                    android:textColorHint="@color/grey_400"/>
+                    android:textColorHint="@color/grey_400"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@null"/>
             </RelativeLayout>
 
             <ImageView
@@ -152,7 +156,9 @@
                     android:textColor="@color/gray_black_text"
                     android:gravity="end"
                     android:textSize="14sp"
-                    android:textColorHint="@color/grey_400"/>
+                    android:textColorHint="@color/grey_400"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@null"/>
             </RelativeLayout>
 
 
@@ -244,7 +250,9 @@
                     android:textColor="@color/gray_black_text"
                     android:gravity="end"
                     android:textSize="14sp"
-                    android:textColorHint="@color/grey_400"/>
+                    android:textColorHint="@color/grey_400"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@null"/>
             </RelativeLayout>
 
             <ImageView
@@ -282,7 +290,9 @@
                     android:textColor="@color/gray_black_text"
                     android:gravity="end"
                     android:textSize="14sp"
-                    android:textColorHint="@color/grey_400"/>
+                    android:textColorHint="@color/grey_400"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@null"/>
             </RelativeLayout>
 
             <ImageView
@@ -322,7 +332,9 @@
                     android:textColor="@color/gray_black_text"
                     android:gravity="start"
                     android:textSize="14sp"
-                    android:textColorHint="@color/grey_400"/>
+                    android:textColorHint="@color/grey_400"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@null"/>
             </RelativeLayout>
 
             <ImageView

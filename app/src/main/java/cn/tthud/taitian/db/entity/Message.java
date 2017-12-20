@@ -25,24 +25,24 @@ public class Message {
      */
     @Id(autoincrement = true)
     private Long _id;
-    private int msg_id = 0;
-    private int isread = 0;
-    private int readtime = 0;
-    private int istop = 0;
+    private String msg_id = "";
+    private String isread = "";
+    private String readtime = "";
+    private String istop = "";
     private String mc_id = "";
     private String icon = "";
     private String url = "";
     private String title = "";
-    private int ishref = 0;
+    private String ishref = "";
     private long suetime = 0;
     private String type = "";
     private String module = "";
-    private int module_id = 0;
+    private String module_id = "";
     private String time_switch = "";
-    @Generated(hash = 1719953421)
-    public Message(Long _id, int msg_id, int isread, int readtime, int istop, String mc_id,
-            String icon, String url, String title, int ishref, long suetime, String type,
-            String module, int module_id, String time_switch) {
+    @Generated(hash = 1878293657)
+    public Message(Long _id, String msg_id, String isread, String readtime, String istop,
+            String mc_id, String icon, String url, String title, String ishref, long suetime,
+            String type, String module, String module_id, String time_switch) {
         this._id = _id;
         this.msg_id = msg_id;
         this.isread = isread;
@@ -68,28 +68,28 @@ public class Message {
     public void set_id(Long _id) {
         this._id = _id;
     }
-    public int getMsg_id() {
+    public String getMsg_id() {
         return this.msg_id;
     }
-    public void setMsg_id(int msg_id) {
+    public void setMsg_id(String msg_id) {
         this.msg_id = msg_id;
     }
-    public int getIsread() {
+    public String getIsread() {
         return this.isread;
     }
-    public void setIsread(int isread) {
+    public void setIsread(String isread) {
         this.isread = isread;
     }
-    public int getReadtime() {
+    public String getReadtime() {
         return this.readtime;
     }
-    public void setReadtime(int readtime) {
+    public void setReadtime(String readtime) {
         this.readtime = readtime;
     }
-    public int getIstop() {
+    public String getIstop() {
         return this.istop;
     }
-    public void setIstop(int istop) {
+    public void setIstop(String istop) {
         this.istop = istop;
     }
     public String getMc_id() {
@@ -116,10 +116,10 @@ public class Message {
     public void setTitle(String title) {
         this.title = title;
     }
-    public int getIshref() {
+    public String getIshref() {
         return this.ishref;
     }
-    public void setIshref(int ishref) {
+    public void setIshref(String ishref) {
         this.ishref = ishref;
     }
     public long getSuetime() {
@@ -140,10 +140,10 @@ public class Message {
     public void setModule(String module) {
         this.module = module;
     }
-    public int getModule_id() {
+    public String getModule_id() {
         return this.module_id;
     }
-    public void setModule_id(int module_id) {
+    public void setModule_id(String module_id) {
         this.module_id = module_id;
     }
     public String getTime_switch() {
@@ -152,5 +152,6 @@ public class Message {
     public void setTime_switch(String time_switch) {
         this.time_switch = time_switch;
     }
+
 }
 

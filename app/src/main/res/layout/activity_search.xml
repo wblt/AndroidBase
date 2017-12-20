@@ -38,7 +38,8 @@
             android:hint="搜索你想要的内容"
             android:textColor="@color/gray_black_text"
             android:textSize="14sp"
-            />
+            android:cursorVisible="true"
+            android:textCursorDrawable="@null"/>
 
         <ImageView
             android:id="@+id/search_clear"

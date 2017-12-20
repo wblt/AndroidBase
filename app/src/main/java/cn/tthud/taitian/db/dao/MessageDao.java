@@ -25,19 +25,19 @@ public class MessageDao extends AbstractDao<Message, Long> {
      */
     public static class Properties {
         public final static Property _id = new Property(0, Long.class, "_id", true, "_id");
-        public final static Property Msg_id = new Property(1, int.class, "msg_id", false, "MSG_ID");
-        public final static Property Isread = new Property(2, int.class, "isread", false, "ISREAD");
-        public final static Property Readtime = new Property(3, int.class, "readtime", false, "READTIME");
-        public final static Property Istop = new Property(4, int.class, "istop", false, "ISTOP");
+        public final static Property Msg_id = new Property(1, String.class, "msg_id", false, "MSG_ID");
+        public final static Property Isread = new Property(2, String.class, "isread", false, "ISREAD");
+        public final static Property Readtime = new Property(3, String.class, "readtime", false, "READTIME");
+        public final static Property Istop = new Property(4, String.class, "istop", false, "ISTOP");
         public final static Property Mc_id = new Property(5, String.class, "mc_id", false, "MC_ID");
         public final static Property Icon = new Property(6, String.class, "icon", false, "ICON");
         public final static Property Url = new Property(7, String.class, "url", false, "URL");
         public final static Property Title = new Property(8, String.class, "title", false, "TITLE");
-        public final static Property Ishref = new Property(9, int.class, "ishref", false, "ISHREF");
+        public final static Property Ishref = new Property(9, String.class, "ishref", false, "ISHREF");
         public final static Property Suetime = new Property(10, long.class, "suetime", false, "SUETIME");
         public final static Property Type = new Property(11, String.class, "type", false, "TYPE");
         public final static Property Module = new Property(12, String.class, "module", false, "MODULE");
-        public final static Property Module_id = new Property(13, int.class, "module_id", false, "MODULE_ID");
+        public final static Property Module_id = new Property(13, String.class, "module_id", false, "MODULE_ID");
         public final static Property Time_switch = new Property(14, String.class, "time_switch", false, "TIME_SWITCH");
     }
 
@@ -55,19 +55,19 @@ public class MessageDao extends AbstractDao<Message, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"MESSAGE\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: _id
-                "\"MSG_ID\" INTEGER NOT NULL ," + // 1: msg_id
-                "\"ISREAD\" INTEGER NOT NULL ," + // 2: isread
-                "\"READTIME\" INTEGER NOT NULL ," + // 3: readtime
-                "\"ISTOP\" INTEGER NOT NULL ," + // 4: istop
+                "\"MSG_ID\" TEXT," + // 1: msg_id
+                "\"ISREAD\" TEXT," + // 2: isread
+                "\"READTIME\" TEXT," + // 3: readtime
+                "\"ISTOP\" TEXT," + // 4: istop
                 "\"MC_ID\" TEXT," + // 5: mc_id
                 "\"ICON\" TEXT," + // 6: icon
                 "\"URL\" TEXT," + // 7: url
                 "\"TITLE\" TEXT," + // 8: title
-                "\"ISHREF\" INTEGER NOT NULL ," + // 9: ishref
+                "\"ISHREF\" TEXT," + // 9: ishref
                 "\"SUETIME\" INTEGER NOT NULL ," + // 10: suetime
                 "\"TYPE\" TEXT," + // 11: type
                 "\"MODULE\" TEXT," + // 12: module
-                "\"MODULE_ID\" INTEGER NOT NULL ," + // 13: module_id
+                "\"MODULE_ID\" TEXT," + // 13: module_id
                 "\"TIME_SWITCH\" TEXT);"); // 14: time_switch
     }
 
@@ -85,10 +85,26 @@ public class MessageDao extends AbstractDao<Message, Long> {
         if (_id != null) {
             stmt.bindLong(1, _id);
         }
-        stmt.bindLong(2, entity.getMsg_id());
-        stmt.bindLong(3, entity.getIsread());
-        stmt.bindLong(4, entity.getReadtime());
-        stmt.bindLong(5, entity.getIstop());
+ 
+        String msg_id = entity.getMsg_id();
+        if (msg_id != null) {
+            stmt.bindString(2, msg_id);
+        }
+ 
+        String isread = entity.getIsread();
+        if (isread != null) {
+            stmt.bindString(3, isread);
+        }
+ 
+        String readtime = entity.getReadtime();
+        if (readtime != null) {
+            stmt.bindString(4, readtime);
+        }
+ 
+        String istop = entity.getIstop();
+        if (istop != null) {
+            stmt.bindString(5, istop);
+        }
  
         String mc_id = entity.getMc_id();
         if (mc_id != null) {
@@ -109,7 +125,11 @@ public class MessageDao extends AbstractDao<Message, Long> {
         if (title != null) {
             stmt.bindString(9, title);
         }
-        stmt.bindLong(10, entity.getIshref());
+ 
+        String ishref = entity.getIshref();
+        if (ishref != null) {
+            stmt.bindString(10, ishref);
+        }
         stmt.bindLong(11, entity.getSuetime());
  
         String type = entity.getType();
@@ -121,7 +141,11 @@ public class MessageDao extends AbstractDao<Message, Long> {
         if (module != null) {
             stmt.bindString(13, module);
         }
-        stmt.bindLong(14, entity.getModule_id());
+ 
+        String module_id = entity.getModule_id();
+        if (module_id != null) {
+            stmt.bindString(14, module_id);
+        }
  
         String time_switch = entity.getTime_switch();
         if (time_switch != null) {
@@ -137,10 +161,26 @@ public class MessageDao extends AbstractDao<Message, Long> {
         if (_id != null) {
             stmt.bindLong(1, _id);
         }
-        stmt.bindLong(2, entity.getMsg_id());
-        stmt.bindLong(3, entity.getIsread());
-        stmt.bindLong(4, entity.getReadtime());
-        stmt.bindLong(5, entity.getIstop());
+ 
+        String msg_id = entity.getMsg_id();
+        if (msg_id != null) {
+            stmt.bindString(2, msg_id);
+        }
+ 
+        String isread = entity.getIsread();
+        if (isread != null) {
+            stmt.bindString(3, isread);
+        }
+ 
+        String readtime = entity.getReadtime();
+        if (readtime != null) {
+            stmt.bindString(4, readtime);
+        }
+ 
+        String istop = entity.getIstop();
+        if (istop != null) {
+            stmt.bindString(5, istop);
+        }
  
         String mc_id = entity.getMc_id();
         if (mc_id != null) {
@@ -161,7 +201,11 @@ public class MessageDao extends AbstractDao<Message, Long> {
         if (title != null) {
             stmt.bindString(9, title);
         }
-        stmt.bindLong(10, entity.getIshref());
+ 
+        String ishref = entity.getIshref();
+        if (ishref != null) {
+            stmt.bindString(10, ishref);
+        }
         stmt.bindLong(11, entity.getSuetime());
  
         String type = entity.getType();
@@ -173,7 +217,11 @@ public class MessageDao extends AbstractDao<Message, Long> {
         if (module != null) {
             stmt.bindString(13, module);
         }
-        stmt.bindLong(14, entity.getModule_id());
+ 
+        String module_id = entity.getModule_id();
+        if (module_id != null) {
+            stmt.bindString(14, module_id);
+        }
  
         String time_switch = entity.getTime_switch();
         if (time_switch != null) {
@@ -190,19 +238,19 @@ public class MessageDao extends AbstractDao<Message, Long> {
     public Message readEntity(Cursor cursor, int offset) {
         Message entity = new Message( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // _id
-            cursor.getInt(offset + 1), // msg_id
-            cursor.getInt(offset + 2), // isread
-            cursor.getInt(offset + 3), // readtime
-            cursor.getInt(offset + 4), // istop
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // msg_id
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // isread
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // readtime
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // istop
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // mc_id
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // icon
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // url
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // title
-            cursor.getInt(offset + 9), // ishref
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // ishref
             cursor.getLong(offset + 10), // suetime
             cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // type
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // module
-            cursor.getInt(offset + 13), // module_id
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // module_id
             cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // time_switch
         );
         return entity;
@@ -211,19 +259,19 @@ public class MessageDao extends AbstractDao<Message, Long> {
     @Override
     public void readEntity(Cursor cursor, Message entity, int offset) {
         entity.set_id(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setMsg_id(cursor.getInt(offset + 1));
-        entity.setIsread(cursor.getInt(offset + 2));
-        entity.setReadtime(cursor.getInt(offset + 3));
-        entity.setIstop(cursor.getInt(offset + 4));
+        entity.setMsg_id(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setIsread(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setReadtime(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setIstop(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setMc_id(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setIcon(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setUrl(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setTitle(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setIshref(cursor.getInt(offset + 9));
+        entity.setIshref(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setSuetime(cursor.getLong(offset + 10));
         entity.setType(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
         entity.setModule(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setModule_id(cursor.getInt(offset + 13));
+        entity.setModule_id(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
         entity.setTime_switch(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
      }
     

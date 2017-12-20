@@ -72,7 +72,7 @@ public class MessageDaoUtils {
      * 使用queryBuilder进行查询
      * @return
      */
-    public List<Message> queryMessageByQueryBuilder(long id){
+    public List<Message> queryMessageByQueryBuilder(String id){
         QueryBuilder<Message> queryBuilder = mManager.getDaoSession().queryBuilder(Message.class);
         return queryBuilder.where(MessageDao.Properties.Msg_id.eq(id)).list();
     }
