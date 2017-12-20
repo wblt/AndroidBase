@@ -24,13 +24,10 @@ import cn.tthud.taitian.widget.banner.SimpleImageBanner;
  */
 
 public class ActivityDoingAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
-
     private Context mContext;
-
     public void setContext(Context context){
         this.mContext = context;
     }
-
     @Override
     public int getItemViewType(int position) {
         ActivityBean bean = getData().get(position);
@@ -57,21 +54,21 @@ public class ActivityDoingAdapter extends BaseRecyclerViewAdapter<ActivityBean> 
             super(parent, item_android);
         }
         @Override
-        public void onBindViewHolder(final ActivityBean object, int position) {
+        public void onBindViewHolder(final ActivityBean object, final int position) {
             binding.executePendingBindings();
-
             binding.tvTitle.setText(object.getTitle());
             binding.tvTime.setText(DateUtil.formatUnixTime(Long.valueOf(object.getStart())));
             binding.tvAddress.setText(object.getArea_title());
             binding.tvNumber.setText(object.getTotal());
-
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    jumpToWebViewActivity(object, view.getContext());
+                    //jumpToWebViewActivity(object, view.getContext());
+                    if (listener != null) {
+                        listener.onClick(object,position);
+                    }
                 }
             });
-
             if (object.getImg() != null && object.getImg().size() != 0){
                 binding.sibSimpleUsage.setAutoScrollEnable(true);
                 binding.sibSimpleUsage.setIndicatorShow(true);
@@ -79,7 +76,10 @@ public class ActivityDoingAdapter extends BaseRecyclerViewAdapter<ActivityBean> 
                 binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){
                     @Override
                     public void onItemClick(int position) {
-                        jumpToWebViewActivity(object, mContext);
+                        //jumpToWebViewActivity(object, mContext);
+                        if (listener != null) {
+                            listener.onClick(object,position);
+                        }
                     }
                 });
 
@@ -92,21 +92,22 @@ public class ActivityDoingAdapter extends BaseRecyclerViewAdapter<ActivityBean> 
             super(parent, item_android);
         }
         @Override
-        public void onBindViewHolder(final ActivityBean object, int position) {
+        public void onBindViewHolder(final ActivityBean object, final int position) {
             binding.executePendingBindings();
 
             binding.tvTitle.setText(object.getTitle());
             binding.tvTime.setText(DateUtil.formatUnixTime(Long.valueOf(object.getStart())));
             binding.tvAddress.setText(object.getArea_title());
             binding.tvNumber.setText(object.getTotal());
-
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    jumpToWebViewActivity(object, view.getContext());
+                    //jumpToWebViewActivity(object, view.getContext());
+                    if (listener != null) {
+                        listener.onClick(object,position);
+                    }
                 }
             });
-
             if (object.getImg() != null && object.getImg().size() != 0){
                 binding.sibSimpleUsage.setAutoScrollEnable(false);
                 binding.sibSimpleUsage.setIndicatorShow(false);
@@ -114,20 +115,21 @@ public class ActivityDoingAdapter extends BaseRecyclerViewAdapter<ActivityBean> 
                 binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){
                     @Override
                     public void onItemClick(int position) {
-                        jumpToWebViewActivity(object, mContext);
+                        //jumpToWebViewActivity(object, mContext);
+                        if (listener != null) {
+                            listener.onClick(object,position);
+                        }
                     }
                 });
-
             }
         }
     }
-
-    private void jumpToWebViewActivity(ActivityBean object, Context localContext) {
-        WebViewBean bean = new WebViewBean();
-        bean.setUrl(object.getUrl());
-        bean.setTitle(object.getTitle());
-        WebViewActivity.navToWebView(localContext, bean);
-    }
+//    private void jumpToWebViewActivity(ActivityBean object, Context localContext) {
+//        WebViewBean bean = new WebViewBean();
+//        bean.setUrl(object.getUrl());
+//        bean.setTitle(object.getTitle());
+//        WebViewActivity.navToWebView(localContext, bean);
+//    }
 
 
 

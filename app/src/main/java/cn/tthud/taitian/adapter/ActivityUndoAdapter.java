@@ -67,7 +67,7 @@ public class ActivityUndoAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    jumpToWebViewActivity(object, view.getContext());
+                    //jumpToWebViewActivity(object, view.getContext());
                 }
             });
 
@@ -75,12 +75,12 @@ public class ActivityUndoAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
                 binding.sibSimpleUsage.setAutoScrollEnable(true);
                 binding.sibSimpleUsage.setIndicatorShow(true);
                 binding.sibSimpleUsage.setSource(getBanner(object.getImg())).startScroll();
-                binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){
-                    @Override
-                    public void onItemClick(int position) {
-                        jumpToWebViewActivity(object, mContext);
-                    }
-                });
+//                binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){
+//                    @Override
+//                    public void onItemClick(int position) {
+//                        jumpToWebViewActivity(object, mContext);
+//                    }
+//                });
 
             }
         }
@@ -102,7 +102,7 @@ public class ActivityUndoAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    jumpToWebViewActivity(object, view.getContext());
+                    //jumpToWebViewActivity(object, view.getContext());
                 }
             });
 
@@ -110,26 +110,26 @@ public class ActivityUndoAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
                 binding.sibSimpleUsage.setAutoScrollEnable(false);
                 binding.sibSimpleUsage.setIndicatorShow(false);
                 binding.sibSimpleUsage.setSource(getBanner(object.getImg())).startScroll();
-                binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){
-                    @Override
-                    public void onItemClick(int position) {
-
-                        jumpToWebViewActivity(object, mContext);
-                    }
-                });
+//                binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){
+//                    @Override
+//                    public void onItemClick(int position) {
+//
+//                        jumpToWebViewActivity(object, mContext);
+//                    }
+//                });
 
             }
         }
     }
 
-    private void jumpToWebViewActivity(ActivityBean object, Context localContext){
-
-        WebViewBean bean = new WebViewBean();
-        bean.setUrl(object.getUrl());
-        bean.setTitle(object.getTitle());
-
-        WebViewActivity.navToWebView(localContext, bean);
-    }
+//    private void jumpToWebViewActivity(ActivityBean object, Context localContext){
+//
+//        WebViewBean bean = new WebViewBean();
+//        bean.setUrl(object.getUrl());
+//        bean.setTitle(object.getTitle());
+//
+//        WebViewActivity.navToWebView(localContext, bean);
+//    }
 
     public static List<BannerItem> getBanner(List<String> alist) {
         ArrayList<BannerItem> list = new ArrayList<BannerItem>();

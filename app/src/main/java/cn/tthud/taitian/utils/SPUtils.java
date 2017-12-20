@@ -58,8 +58,8 @@ public class SPUtils {
         SPUtils.putString(STYLESIG, "");
         SPUtils.putString(ADDRESS, "");
         SPUtils.putInt(TOTALJIFEN, 0);
-        SPUtils.putString(MOBILE, "");
-        SPUtils.putString(PASSWORD, "");
+        //SPUtils.putString(MOBILE, "");
+        //SPUtils.putString(PASSWORD, "");
         SPUtils.putBoolean(ISVST,false);
         SPUtils.putBoolean(IS_BINDWX,false);
         SPUtils.putString(H5_URL,"");
@@ -71,12 +71,12 @@ public class SPUtils {
      * 清空SharedPreferences实例对象
      *
      */
-    public static void clear() {
-        SharedPreferences userSettings = DemoApplication.getInstance().getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = userSettings.edit();
-        editor.clear();
-        editor.commit();
-    }
+//    public static void clear() {
+//        SharedPreferences userSettings = DemoApplication.getInstance().getSharedPreferences(CONFIG, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = userSettings.edit();
+//        editor.clear();
+//        editor.commit();
+//    }
 
     /**
      * 获取SharedPreferences实例对象

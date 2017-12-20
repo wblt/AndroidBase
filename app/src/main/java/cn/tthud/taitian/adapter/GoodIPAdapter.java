@@ -29,7 +29,6 @@ public class GoodIPAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
     public void setContext(Context context){
         this.mContext = context;
     }
-
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
@@ -58,16 +57,14 @@ public class GoodIPAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
         @Override
         public void onBindViewHolder(final ActivityBean object, int position) {
             binding.executePendingBindings();
-
             binding.tvTitle.setText(object.getTitle());
             binding.tvTime.setText(DateUtil.formatUnixTime(Long.valueOf(object.getStart())));
             binding.tvAddress.setText(object.getArea_title());
             binding.tvNumber.setText(object.getTotal());
-
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    jumpToWebViewActivity(object, view.getContext());
+                    //jumpToWebViewActivity(object, view.getContext());
                 }
             });
 
@@ -75,17 +72,16 @@ public class GoodIPAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
                 binding.sibSimpleUsage.setAutoScrollEnable(true);
                 binding.sibSimpleUsage.setIndicatorShow(true);
                 binding.sibSimpleUsage.setSource(getBanner(object.getImg())).startScroll();
-                binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){
-                    @Override
-                    public void onItemClick(int position) {
-                        jumpToWebViewActivity(object, mContext);
-                    }
-                });
+//                binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){
+//                    @Override
+//                    public void onItemClick(int position) {
+//                        jumpToWebViewActivity(object, mContext);
+//                    }
+//                });
 
             }
         }
     }
-
     private class ViewHolder2 extends BaseRecyclerViewHolder<ActivityBean, ItemActivityBinding>{
         ViewHolder2(ViewGroup parent, int item_android) {
             super(parent, item_android);
@@ -93,42 +89,37 @@ public class GoodIPAdapter extends BaseRecyclerViewAdapter<ActivityBean> {
         @Override
         public void onBindViewHolder(final ActivityBean object, int position) {
             binding.executePendingBindings();
-
             binding.tvTitle.setText(object.getTitle());
             binding.tvTime.setText(DateUtil.formatUnixTime(Long.valueOf(object.getStart())));
             binding.tvAddress.setText(object.getArea_title());
             binding.tvNumber.setText(object.getTotal());
-
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    jumpToWebViewActivity(object, view.getContext());
+                    //jumpToWebViewActivity(object, view.getContext());
                 }
             });
-
             if (object.getImg() != null && object.getImg().size() != 0){
                 binding.sibSimpleUsage.setAutoScrollEnable(false);
                 binding.sibSimpleUsage.setIndicatorShow(false);
                 binding.sibSimpleUsage.setSource(getBanner(object.getImg())).startScroll();
-                binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){
-                    @Override
-                    public void onItemClick(int position) {
-                        jumpToWebViewActivity(object, mContext);
-                    }
-                });
+//                binding.sibSimpleUsage.setOnItemClickL(new SimpleImageBanner.OnItemClickL(){
+//                    @Override
+//                    public void onItemClick(int position) {
+//                        jumpToWebViewActivity(object, mContext);
+//                    }
+//                });
 
             }
         }
     }
-
-    private void jumpToWebViewActivity(ActivityBean object, Context localContext){
-        WebViewBean bean = new WebViewBean();
-        bean.setUrl(object.getUrl());
-        bean.setTitle(object.getTitle());
-
-        WebViewActivity.navToWebView(localContext, bean);
-    }
-
+//    private void jumpToWebViewActivity(ActivityBean object, Context localContext){
+//        WebViewBean bean = new WebViewBean();
+//        bean.setUrl(object.getUrl());
+//        bean.setTitle(object.getTitle());
+//
+//        WebViewActivity.navToWebView(localContext, bean);
+//    }
     public static List<BannerItem> getBanner(List<String> alist) {
         ArrayList<BannerItem> list = new ArrayList<BannerItem>();
         for (int i = 0; i < alist.size(); i++) {

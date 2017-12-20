@@ -97,7 +97,7 @@ public class LoginActivity extends ActivityBase {
 
         String lastNum = SPUtils.getString(SPUtils.MOBILE);
         String lastPwd = SPUtils.getString(SPUtils.PASSWORD);
-        if (lastNum != null && TextUtils.isEmpty(lastNum) && lastPwd != null && TextUtils.isEmpty(lastPwd)) {
+        if (lastNum != null && !TextUtils.isEmpty(lastNum) && lastPwd != null && !TextUtils.isEmpty(lastPwd)) {
             login_phone.setText(lastNum);
             login_pwd.setText(lastPwd);
         }

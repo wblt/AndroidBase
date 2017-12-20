@@ -19,8 +19,10 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import cn.tthud.taitian.R;
+import cn.tthud.taitian.adapter.ActivityDoingAdapter;
 import cn.tthud.taitian.adapter.GoodIPAdapter;
 import cn.tthud.taitian.base.ActivityBase;
+import cn.tthud.taitian.base.OnItemClickListener;
 import cn.tthud.taitian.bean.ActivityBean;
 import cn.tthud.taitian.bean.MessageBean;
 import cn.tthud.taitian.net.FlowAPI;
@@ -36,7 +38,7 @@ public class MoreIPActivity extends ActivityBase {
 
     @ViewInject(R.id.page_refresh)
     private LinearLayout page_refresh;
-    private GoodIPAdapter adapter;
+    private ActivityDoingAdapter adapter;
 
     private int mPage;
     private int mMaxPage = -1;
@@ -51,7 +53,6 @@ public class MoreIPActivity extends ActivityBase {
         initRecyclerView();
         loadData();
     }
-
     private void loadData() {
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_ACT_MORE);
         requestParams.addParameter("p", mPage);
@@ -108,12 +109,13 @@ public class MoreIPActivity extends ActivityBase {
             public void onRefresh() {
                 mPage = 1;
                 adapter.clear();
+                adapter.notifyDataSetChanged();
                 loadData();
             }
-
             @Override
             public void onLoadMore() {
                 mPage += 1;
+                adapter.notifyDataSetChanged();
                 loadData();
             }
         });
@@ -122,7 +124,13 @@ public class MoreIPActivity extends ActivityBase {
         xrvCustom.setNestedScrollingEnabled(false);
         xrvCustom.setHasFixedSize(false);
         xrvCustom.setItemAnimator(new DefaultItemAnimator());
-        adapter = new GoodIPAdapter();
+        adapter = new ActivityDoingAdapter();
+        adapter.setOnItemClickListener(new OnItemClickListener<ActivityBean>() {
+            @Override
+            public void onClick(ActivityBean activityBean, int position) {
+
+            }
+        });
         adapter.setContext(this);
         xrvCustom.setAdapter(adapter);
     }

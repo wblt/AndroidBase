@@ -45,26 +45,19 @@ import cn.tthud.taitian.xutils.MXUtils;
 
 @SuppressLint("JavascriptInterface")
 public class WebViewActivity extends ActivityBase {
-	
 	private static final int RECHARGE_CODE = 50001;
 	private static final int ADDRESS_CODE = 50002;
-	
 	private int backType = 0;  // 0 表示由自己控制，1表示由history
-	
 	public static final int URL_TYPE_NEWURL = 3001;
-	
 	private LinearLayout top_left;
 	private TextView close;
 	private WebView webView;
 	private ProgressBar bar;
 	public static final int WEBVIEW_RELOAD_RESULTCODE = 4;
-	
 	ValueCallback<Uri> mUploadMessage;
 	public static final int FILECHOOSER_RESULTCODE = 3;
-
-	private static Context mContext;
-	private static  WebViewBean web_bean;
-
+	//private static Context mContext;
+	//private static  WebViewBean web_bean;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -92,7 +85,6 @@ public class WebViewActivity extends ActivityBase {
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setJavaScriptEnabled(true);     
 		webSettings.setSupportZoom(true);
-
 		/**
 		 * 解决webview不支持localstorage问题
 		 */
@@ -102,37 +94,30 @@ public class WebViewActivity extends ActivityBase {
 		String appCachePath = getApplicationContext().getCacheDir().getAbsolutePath();
 		webSettings.setAppCachePath(appCachePath);
 		webSettings.setAllowFileAccess(true);  
-		webSettings.setAppCacheEnabled(true); 
-		
+		webSettings.setAppCacheEnabled(true);
 		webSettings.setUseWideViewPort(true);//设置此属性，可任意比例缩放
 		webSettings.setLoadWithOverviewMode(true);
 		webSettings.setBuiltInZoomControls(true);
 		webSettings.setDisplayZoomControls(false);
 		webSettings.setAllowUniversalAccessFromFileURLs(true);
-		
 		webSettings.setDefaultTextEncodingName("UTF-8");
-//		webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+		webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
 		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN); //支持内容重新布局
-		
 		webView.requestFocusFromTouch();
-
 		webView.setWebChromeClient(new WebChromeClient() {
 			// For Android 3.0+
 			public void openFileChooser(ValueCallback<Uri> uploadMsg,
 					String acceptType) {
 			}
-
 			// For Android < 3.0
 			public void openFileChooser(ValueCallback<Uri> uploadMsg) {
 				openFileChooser(uploadMsg, "");
 			}
-
 			// For Android > 4.1.1
 			public void openFileChooser(ValueCallback<Uri> uploadMsg,
                                         String acceptType, String capture) {
 				openFileChooser(uploadMsg, acceptType);
 			}
-			
 			@Override
 			public void onGeolocationPermissionsShowPrompt(String origin,
 					Callback callback) {
@@ -149,14 +134,11 @@ public class WebViewActivity extends ActivityBase {
 				super.onReceivedTitle(view, title);
 			}
 		});
-
 		//设置本地调用对象及其接口
 //		webView.setWebViewClient(new WebPageClient());
-
 		webView.setWebViewClient(new WebViewClient(){
 
 		});
-
 		webView.loadUrl(url);
 	}
 	
@@ -171,45 +153,45 @@ public class WebViewActivity extends ActivityBase {
 		}
 	}
 
-	static UMAuthListener authListener = new UMAuthListener() {
-		@Override
-		public void onStart(SHARE_MEDIA platform) {
-
-		}
-		@Override
-		public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-			String openid = data.get("openid");
-			SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
-			String profile_image_url = data.get("profile_image_url");
-			SPUtils.putString(SPUtils.HEAD_PIC, profile_image_url);
-			String gender = data.get("gender");
-			if (gender.equals("男")){
-				SPUtils.putInt(SPUtils.SEX, 1);
-			}else if(gender.equals("女")){
-				SPUtils.putInt(SPUtils.SEX, 2);
-			}else{
-				SPUtils.putInt(SPUtils.SEX, 0);
-			}
-			String name = data.get("name");
-			SPUtils.putString(SPUtils.NICK_NAME, name);
-
-			String url = web_bean.getUrl();
-			Intent intent = new Intent(mContext,WebViewActivity.class);
-			intent.putExtra("title",web_bean.getTitle());
-			String url_str = addWXInfo(url);
-			intent.putExtra("url", url_str);
-			mContext.startActivity(intent);
-		}
-
-		@Override
-		public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-			Log.i("错误" + t.getMessage());
-		}
-		@Override
-		public void onCancel(SHARE_MEDIA platform, int action) {
-
-		}
-	};
+//	static UMAuthListener authListener = new UMAuthListener() {
+//		@Override
+//		public void onStart(SHARE_MEDIA platform) {
+//
+//		}
+//		@Override
+//		public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+//			String openid = data.get("openid");
+//			SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
+//			String profile_image_url = data.get("profile_image_url");
+//			SPUtils.putString(SPUtils.HEAD_PIC, profile_image_url);
+//			String gender = data.get("gender");
+//			if (gender.equals("男")){
+//				SPUtils.putInt(SPUtils.SEX, 1);
+//			}else if(gender.equals("女")){
+//				SPUtils.putInt(SPUtils.SEX, 2);
+//			}else{
+//				SPUtils.putInt(SPUtils.SEX, 0);
+//			}
+//			String name = data.get("name");
+//			SPUtils.putString(SPUtils.NICK_NAME, name);
+//
+//			String url = web_bean.getUrl();
+//			Intent intent = new Intent(mContext,WebViewActivity.class);
+//			intent.putExtra("title",web_bean.getTitle());
+//			String url_str = addWXInfo(url);
+//			intent.putExtra("url", url_str);
+//			mContext.startActivity(intent);
+//		}
+//
+//		@Override
+//		public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+//			Log.i("错误" + t.getMessage());
+//		}
+//		@Override
+//		public void onCancel(SHARE_MEDIA platform, int action) {
+//
+//		}
+//	};
 
 //	private static void bingdingwx(){
 //		RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_BIND_WX);
@@ -240,62 +222,62 @@ public class WebViewActivity extends ActivityBase {
 //		});
 //	}
 
-	public static void navToWebView(Context context, WebViewBean object){
-		String url = object.getUrl();
-		if (TextUtils.isEmpty(url)){
-			return;
-		}
-		web_bean = object;
-		mContext = context;
-		//if (CommonUtils.checkLogin()) {  // 已登录
-			//if (!SPUtils.getBoolean(SPUtils.ISVST, false)) { // 非游客
-				if (TextUtils.isEmpty(SPUtils.getString(SPUtils.WX_OPEN_ID))){  // 判断微信id是否为空
-					UMShareAPI.get(context).getPlatformInfo((Activity) context, SHARE_MEDIA.WEIXIN, authListener);
-				}else{
-					Intent intent = new Intent(context,WebViewActivity.class);
-					intent.putExtra("title",object.getTitle());
-					String url_str = addWXInfo(url);
-					intent.putExtra("url", url_str);
-					context.startActivity(intent);
-				}
-			//} else {
-			//	context.startActivity(new Intent(context, BindPhoneActivity.class));
-			//}
-		//} else {
-		//	LoginActivity.navToLogin(context);
-		//}
-	}
+//	public static void navToWebView(Context context, WebViewBean object){
+//		String url = object.getUrl();
+//		if (TextUtils.isEmpty(url)){
+//			return;
+//		}
+//		web_bean = object;
+//		mContext = context;
+//		//if (CommonUtils.checkLogin()) {  // 已登录
+//			//if (!SPUtils.getBoolean(SPUtils.ISVST, false)) { // 非游客
+//				if (TextUtils.isEmpty(SPUtils.getString(SPUtils.WX_OPEN_ID))){  // 判断微信id是否为空
+//					UMShareAPI.get(context).getPlatformInfo((Activity) context, SHARE_MEDIA.WEIXIN, authListener);
+//				}else{
+//					Intent intent = new Intent(context,WebViewActivity.class);
+//					intent.putExtra("title",object.getTitle());
+//					String url_str = addWXInfo(url);
+//					intent.putExtra("url", url_str);
+//					context.startActivity(intent);
+//				}
+//			//} else {
+//			//	context.startActivity(new Intent(context, BindPhoneActivity.class));
+//			//}
+//		//} else {
+//		//	LoginActivity.navToLogin(context);
+//		//}
+//	}
 
-	private static String addWXInfo(String url){
-		String nickname = SPUtils.getString(SPUtils.NICK_NAME);
-		String headimgurl = SPUtils.getString(SPUtils.HEAD_PIC);
-		String openid = SPUtils.getString(SPUtils.WX_OPEN_ID);
-		int sex = SPUtils.getInt(SPUtils.SEX, 1);
-		String ub_id = SPUtils.getString(SPUtils.UB_ID);
-		String source = "app";
-		String deviceid = UUID.randomUUID().toString();
-		int index = url.indexOf("?");
-		if (index == -1){		// 不存在
-			url = url + "?source=" + source;
-		}else{
-			url = url + "&source=" + source;
-		}
-		url = url + "&deviceid=" + deviceid;
-		url = url + "&sex=" + sex;
-		if (nickname != null){
-			url = url + "&nickname=" + URLEncoder.encode(nickname);
-		}
-		if (headimgurl != null){
-			url = url + "&headimgurl=" + headimgurl;
-		}
-		if (openid != null){
-			url = url + "&openid=" + openid;
-		}
-		if (ub_id != null){
-			url = url + "&ub_id=" + ub_id;
-		}
-		return url;
-	}
+//	private static String addWXInfo(String url){
+//		String nickname = SPUtils.getString(SPUtils.NICK_NAME);
+//		String headimgurl = SPUtils.getString(SPUtils.HEAD_PIC);
+//		String openid = SPUtils.getString(SPUtils.WX_OPEN_ID);
+//		int sex = SPUtils.getInt(SPUtils.SEX, 1);
+//		String ub_id = SPUtils.getString(SPUtils.UB_ID);
+//		String source = "app";
+//		String deviceid = UUID.randomUUID().toString();
+//		int index = url.indexOf("?");
+//		if (index == -1){		// 不存在
+//			url = url + "?source=" + source;
+//		}else{
+//			url = url + "&source=" + source;
+//		}
+//		url = url + "&deviceid=" + deviceid;
+//		url = url + "&sex=" + sex;
+//		if (nickname != null){
+//			url = url + "&nickname=" + URLEncoder.encode(nickname);
+//		}
+//		if (headimgurl != null){
+//			url = url + "&headimgurl=" + headimgurl;
+//		}
+//		if (openid != null){
+//			url = url + "&openid=" + openid;
+//		}
+//		if (ub_id != null){
+//			url = url + "&ub_id=" + ub_id;
+//		}
+//		return url;
+//	}
 
 	@Override
 	protected void onDestroy() {
