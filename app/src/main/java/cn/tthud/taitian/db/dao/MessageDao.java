@@ -38,7 +38,6 @@ public class MessageDao extends AbstractDao<Message, Long> {
         public final static Property Type = new Property(11, String.class, "type", false, "TYPE");
         public final static Property Module = new Property(12, String.class, "module", false, "MODULE");
         public final static Property Module_id = new Property(13, String.class, "module_id", false, "MODULE_ID");
-        public final static Property Time_switch = new Property(14, String.class, "time_switch", false, "TIME_SWITCH");
     }
 
 
@@ -67,8 +66,7 @@ public class MessageDao extends AbstractDao<Message, Long> {
                 "\"SUETIME\" INTEGER NOT NULL ," + // 10: suetime
                 "\"TYPE\" TEXT," + // 11: type
                 "\"MODULE\" TEXT," + // 12: module
-                "\"MODULE_ID\" TEXT," + // 13: module_id
-                "\"TIME_SWITCH\" TEXT);"); // 14: time_switch
+                "\"MODULE_ID\" TEXT);"); // 13: module_id
     }
 
     /** Drops the underlying database table. */
@@ -146,11 +144,6 @@ public class MessageDao extends AbstractDao<Message, Long> {
         if (module_id != null) {
             stmt.bindString(14, module_id);
         }
- 
-        String time_switch = entity.getTime_switch();
-        if (time_switch != null) {
-            stmt.bindString(15, time_switch);
-        }
     }
 
     @Override
@@ -222,11 +215,6 @@ public class MessageDao extends AbstractDao<Message, Long> {
         if (module_id != null) {
             stmt.bindString(14, module_id);
         }
- 
-        String time_switch = entity.getTime_switch();
-        if (time_switch != null) {
-            stmt.bindString(15, time_switch);
-        }
     }
 
     @Override
@@ -250,8 +238,7 @@ public class MessageDao extends AbstractDao<Message, Long> {
             cursor.getLong(offset + 10), // suetime
             cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // type
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // module
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // module_id
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // time_switch
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13) // module_id
         );
         return entity;
     }
@@ -272,7 +259,6 @@ public class MessageDao extends AbstractDao<Message, Long> {
         entity.setType(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
         entity.setModule(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         entity.setModule_id(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setTime_switch(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
      }
     
     @Override

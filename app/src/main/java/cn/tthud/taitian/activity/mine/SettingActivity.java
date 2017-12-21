@@ -187,7 +187,7 @@ public class SettingActivity extends ActivityBase {
                 customAlertDialog.show();
                 break;
             case R.id.logout:
-                customAlertDialog = new CustomAlertDialog(this, R.style.dialog,"你确定要退出账号？", new CustomAlertDialog.ViewClickListener() {
+                customAlertDialog = new CustomAlertDialog(this, R.style.dialog,"你确定要退出登录？", new CustomAlertDialog.ViewClickListener() {
                     @Override
                     public void onClick(View view) {
                         switch (view.getId()) {

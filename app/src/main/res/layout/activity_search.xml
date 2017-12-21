@@ -4,55 +4,121 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!--&lt;!&ndash;搜索&ndash;&gt;-->
+    <!--<LinearLayout-->
+        <!--android:id="@+id/ll_sousuo_lay"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:background="@drawable/shape_rectangle_white"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:visibility="visible">-->
+        <!--<ImageView-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@mipmap/sousuo" />-->
+        <!--<EditText-->
+            <!--android:layout_weight="1"-->
+            <!--android:paddingTop="5dp"-->
+            <!--android:paddingBottom="5dp"-->
+            <!--android:paddingLeft="5dp"-->
+            <!--android:id="@+id/query"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:includeFontPadding="false"-->
+            <!--android:background="@null"-->
+            <!--android:maxLength="15"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:text=""-->
+            <!--android:hint="搜索你想要的内容"-->
+            <!--android:textColor="@color/gray_black_text"-->
+            <!--android:textSize="14sp"-->
+            <!--android:cursorVisible="true"-->
+            <!--android:textCursorDrawable="@null"/>-->
 
+        <!--<ImageView-->
+            <!--android:id="@+id/search_clear"-->
+            <!--android:layout_width="35dp"-->
+            <!--android:layout_height="35dp"-->
+            <!--android:padding="8dp"-->
+            <!--android:src="@mipmap/icon_input_clear"-->
+            <!--android:visibility="invisible"/>-->
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="搜索你想知道的内容"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="14sp"/>&ndash;&gt;-->
+    <!--</LinearLayout>-->
     <!--搜索-->
     <LinearLayout
         android:id="@+id/ll_sousuo_lay"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="@drawable/shape_rectangle_white"
+        android:background="#F0EFF4"
         android:layout_height="50dp"
         android:visibility="visible">
-        <ImageView
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/sousuo" />
-        <EditText
-            android:layout_weight="1"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:id="@+id/query"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_alignParentRight="true"
-            android:includeFontPadding="false"
-            android:background="@null"
-            android:maxLength="15"
-            android:layout_centerVertical="true"
-            android:text=""
-            android:hint="搜索你想要的内容"
-            android:textColor="@color/gray_black_text"
-            android:textSize="14sp"
-            android:cursorVisible="true"
-            android:textCursorDrawable="@null"/>
 
-        <ImageView
-            android:id="@+id/search_clear"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:padding="8dp"
-            android:src="@mipmap/icon_input_clear"
-            android:visibility="invisible"/>
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="搜索你想知道的内容"-->
-            <!--android:textSize="14sp"/>-->
+        <LinearLayout
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_rectangle_white">
+
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/sousuo" />
+            <EditText
+                android:layout_weight="1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:id="@+id/query"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_alignParentRight="true"
+                android:includeFontPadding="false"
+                android:background="@null"
+                android:maxLength="15"
+                android:layout_centerVertical="true"
+                android:text=""
+                android:hint="搜索你想要的内容"
+                android:textColor="@color/gray_black_text"
+                android:textSize="14sp"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@null"/>
+
+            <ImageView
+                android:id="@+id/search_clear"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:padding="8dp"
+                android:src="@mipmap/icon_input_clear"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/sousuo_btn"
+            android:paddingLeft="5dp"
+            android:paddingRight="20dp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="搜索"/>
+
     </LinearLayout>
 
 

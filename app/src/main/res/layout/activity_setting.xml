@@ -232,6 +232,6 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:background="@drawable/radius_layout_orange_btn"
-        android:text="退出账号" />
+        android:text="退出登录" />
 
 </LinearLayout>

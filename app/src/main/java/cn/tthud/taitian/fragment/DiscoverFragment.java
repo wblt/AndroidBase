@@ -8,12 +8,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -83,6 +86,9 @@ public class DiscoverFragment extends FragmentBase implements RadioGroup.OnCheck
     @ViewInject(R.id.query)
     private EditText query;
 
+    @ViewInject(R.id.search_clear)
+    private ImageView search_clear;
+
     private int mPage = 1;
     private int mMaxPage = -1;
     private ActivityDoingAdapter mAdapter;
@@ -107,6 +113,7 @@ public class DiscoverFragment extends FragmentBase implements RadioGroup.OnCheck
             //initView();
             initRecyclerView();
             loadNewData();
+            setListener();
         }
         return view;
     }
@@ -132,6 +139,62 @@ public class DiscoverFragment extends FragmentBase implements RadioGroup.OnCheck
 //                Log.i("index==="+index);
 //            }
 //        });
+    }
+
+    public void setListener(){
+//        query.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if(keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN){
+//                /*隐藏软键盘*/
+//                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    if(inputMethodManager.isActive()){
+//                        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
+//                    }
+//                    // 逻辑操作
+//                    String searchName = query.getText().toString();
+//                    if (TextUtils.isEmpty(searchName)) {
+//                        showMsg("请输入搜索内容");
+//                        return true;
+//                    }
+//                    keywords = searchName;
+//                    // 先清除上次搜索的数据
+//                    mAdapter.clear();
+//                    xrvCustom.refreshComplete();
+//                    mAdapter.notifyDataSetChanged();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+
+        query.addTextChangedListener(new TextWatcher() {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // adapter.getFilter().filter(s);
+                if (s.length() > 0) {
+                    search_clear.setVisibility(View.VISIBLE);
+                } else {
+                    search_clear.setVisibility(View.INVISIBLE);
+                }
+//                keywords = s.toString();
+//                // 先清除上次搜索的数据
+//                mAdapter.clear();
+//                xrvCustom.refreshComplete();
+//                mAdapter.notifyDataSetChanged();
+//                loadData();
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        search_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                query.getText().clear();
+            }
+        });
     }
 
     private void initRecyclerView(){

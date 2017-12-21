@@ -13,6 +13,7 @@ import cn.tthud.taitian.bean.MessageBean;
 import cn.tthud.taitian.bean.WebViewBean;
 import cn.tthud.taitian.databinding.ItemMessageNormalBinding;
 import cn.tthud.taitian.db.entity.Message;
+import cn.tthud.taitian.utils.DateUtil;
 import cn.tthud.taitian.utils.ImageLoader;
 
 /**
@@ -51,8 +52,8 @@ public class MessageAdapter extends BaseRecyclerViewAdapter<Message> {
             } else {
                 binding.unreadMsg.setVisibility(View.VISIBLE);
             }
-
-            binding.msgTime.setText(object.getTime_switch());
+            String timenow = DateUtil.formatUnixTime(object.getSuetime());
+            binding.msgTime.setText(timenow);
             binding.tvMsgContent.setText(object.getTitle());
             binding.llAll.setOnClickListener(new View.OnClickListener() {
                 @Override

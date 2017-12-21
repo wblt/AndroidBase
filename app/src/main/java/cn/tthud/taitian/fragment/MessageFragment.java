@@ -87,6 +87,10 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
             initRecyclerView();
             setListener();
             messageDaoUtils = new MessageDaoUtils(getContext());
+            if (!SPUtils.getBoolean(SPUtils.FIRST_MESSAGE,false)) {
+                SPUtils.putBoolean(SPUtils.FIRST_MESSAGE,true);
+                loadNewData();
+            }
             loadNewData();
             initRxBus();
         }
@@ -101,9 +105,11 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
         xrvCustom.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                xrvCustom.refreshComplete();
                 mAdapter.clear();
                 mAdapter.notifyDataSetChanged();
-                loadNewData();
+                // 重新查询数据库
+                showMsgUI();
             }
             @Override
             public void onLoadMore() {
@@ -134,7 +140,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                     if (messageBean.getModule().equals("artonce")){
                         Intent intent = new Intent(getActivity(), ArtonceActivity.class);
                         intent.putExtra("cid", messageBean.getModule_id());
-                        intent.putExtra("title", "广告详情");
+                        intent.putExtra("title", "单页详情");
                         startActivity(intent);
                     }else if (messageBean.getModule().equals("admarket")){
 
@@ -143,7 +149,7 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                     }
                 }else{
                     Intent intent = new Intent(getActivity(),WebViewActivity.class);
-                    intent.putExtra("title","广告详情");
+                    intent.putExtra("title",messageBean.getTitle());
                     intent.putExtra("url", messageBean.getUrl());
                     startActivity(intent);
                 }

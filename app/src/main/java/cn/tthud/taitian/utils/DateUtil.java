@@ -55,8 +55,11 @@ public class DateUtil {
 
     public static String formatUnixTime(long unixTime)
     {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return dateFormat.format(unixTime);
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long msl=(long)unixTime*1000;
+        res = simpleDateFormat.format(msl);
+        return res;
 
     }
 
