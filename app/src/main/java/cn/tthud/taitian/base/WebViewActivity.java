@@ -56,8 +56,6 @@ public class WebViewActivity extends ActivityBase {
 	public static final int WEBVIEW_RELOAD_RESULTCODE = 4;
 	ValueCallback<Uri> mUploadMessage;
 	public static final int FILECHOOSER_RESULTCODE = 3;
-	//private static Context mContext;
-	//private static  WebViewBean web_bean;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -134,150 +132,30 @@ public class WebViewActivity extends ActivityBase {
 				super.onReceivedTitle(view, title);
 			}
 		});
+
+
+		//在js中调用本地java方法
+		webView.addJavascriptInterface(new JsInterface(this), "AndroidWebView");
+		
 		//设置本地调用对象及其接口
-//		webView.setWebViewClient(new WebPageClient());
 		webView.setWebViewClient(new WebViewClient(){
 
 		});
+
 		webView.loadUrl(url);
 	}
-	
-	private class WebPageClient extends WebViewClient {
-		@Override
-		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-			return true;
+
+	private class JsInterface {
+		private Context mContext;
+		public JsInterface(Context context){
+			this.mContext = context;
 		}
-		@Override
-		public void onPageFinished(WebView view, String url) {
-			super.onPageFinished(view, url);
+
+		public void sendBtnClick(String name) {
+			Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
 		}
 	}
 
-//	static UMAuthListener authListener = new UMAuthListener() {
-//		@Override
-//		public void onStart(SHARE_MEDIA platform) {
-//
-//		}
-//		@Override
-//		public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-//			String openid = data.get("openid");
-//			SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
-//			String profile_image_url = data.get("profile_image_url");
-//			SPUtils.putString(SPUtils.HEAD_PIC, profile_image_url);
-//			String gender = data.get("gender");
-//			if (gender.equals("男")){
-//				SPUtils.putInt(SPUtils.SEX, 1);
-//			}else if(gender.equals("女")){
-//				SPUtils.putInt(SPUtils.SEX, 2);
-//			}else{
-//				SPUtils.putInt(SPUtils.SEX, 0);
-//			}
-//			String name = data.get("name");
-//			SPUtils.putString(SPUtils.NICK_NAME, name);
-//
-//			String url = web_bean.getUrl();
-//			Intent intent = new Intent(mContext,WebViewActivity.class);
-//			intent.putExtra("title",web_bean.getTitle());
-//			String url_str = addWXInfo(url);
-//			intent.putExtra("url", url_str);
-//			mContext.startActivity(intent);
-//		}
-//
-//		@Override
-//		public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-//			Log.i("错误" + t.getMessage());
-//		}
-//		@Override
-//		public void onCancel(SHARE_MEDIA platform, int action) {
-//
-//		}
-//	};
-
-//	private static void bingdingwx(){
-//		RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_BIND_WX);
-//		requestParams.addParameter("isbindwx",-1);
-//		requestParams.addParameter("ub_id",SPUtils.getString(SPUtils.UB_ID));
-//		requestParams.addParameter("ua_id",SPUtils.getString(SPUtils.UA_ID));
-//		requestParams.addParameter("wx_openid",SPUtils.getString(SPUtils.WX_OPEN_ID));
-//
-//		MXUtils.httpPost(requestParams, new CommonCallbackImp("绑定微信",requestParams){
-//			@Override
-//			public void onSuccess(String data) {
-//				super.onSuccess(data);
-//				try {
-//					JSONObject jsonObject = new JSONObject(data);
-//					String status = jsonObject.getString("status");
-//					String info = jsonObject.getString("info");
-//					if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
-//						String result = jsonObject.getString("data");
-//						SPUtils.putBoolean(SPUtils.IS_BINDWX,true);
-//						//Toast.makeText(mContext, "绑定成功", Toast.LENGTH_LONG);
-//					}else {
-//						//Toast.makeText(mContext, info, Toast.LENGTH_LONG);
-//					}
-//				}catch (JSONException e){
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-//	public static void navToWebView(Context context, WebViewBean object){
-//		String url = object.getUrl();
-//		if (TextUtils.isEmpty(url)){
-//			return;
-//		}
-//		web_bean = object;
-//		mContext = context;
-//		//if (CommonUtils.checkLogin()) {  // 已登录
-//			//if (!SPUtils.getBoolean(SPUtils.ISVST, false)) { // 非游客
-//				if (TextUtils.isEmpty(SPUtils.getString(SPUtils.WX_OPEN_ID))){  // 判断微信id是否为空
-//					UMShareAPI.get(context).getPlatformInfo((Activity) context, SHARE_MEDIA.WEIXIN, authListener);
-//				}else{
-//					Intent intent = new Intent(context,WebViewActivity.class);
-//					intent.putExtra("title",object.getTitle());
-//					String url_str = addWXInfo(url);
-//					intent.putExtra("url", url_str);
-//					context.startActivity(intent);
-//				}
-//			//} else {
-//			//	context.startActivity(new Intent(context, BindPhoneActivity.class));
-//			//}
-//		//} else {
-//		//	LoginActivity.navToLogin(context);
-//		//}
-//	}
-
-//	private static String addWXInfo(String url){
-//		String nickname = SPUtils.getString(SPUtils.NICK_NAME);
-//		String headimgurl = SPUtils.getString(SPUtils.HEAD_PIC);
-//		String openid = SPUtils.getString(SPUtils.WX_OPEN_ID);
-//		int sex = SPUtils.getInt(SPUtils.SEX, 1);
-//		String ub_id = SPUtils.getString(SPUtils.UB_ID);
-//		String source = "app";
-//		String deviceid = UUID.randomUUID().toString();
-//		int index = url.indexOf("?");
-//		if (index == -1){		// 不存在
-//			url = url + "?source=" + source;
-//		}else{
-//			url = url + "&source=" + source;
-//		}
-//		url = url + "&deviceid=" + deviceid;
-//		url = url + "&sex=" + sex;
-//		if (nickname != null){
-//			url = url + "&nickname=" + URLEncoder.encode(nickname);
-//		}
-//		if (headimgurl != null){
-//			url = url + "&headimgurl=" + headimgurl;
-//		}
-//		if (openid != null){
-//			url = url + "&openid=" + openid;
-//		}
-//		if (ub_id != null){
-//			url = url + "&ub_id=" + ub_id;
-//		}
-//		return url;
-//	}
 
 	@Override
 	protected void onDestroy() {
