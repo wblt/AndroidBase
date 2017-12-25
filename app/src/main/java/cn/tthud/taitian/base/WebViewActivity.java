@@ -136,7 +136,7 @@ public class WebViewActivity extends ActivityBase {
 
 		//在js中调用本地java方法
 		webView.addJavascriptInterface(new JsInterface(this), "AndroidWebView");
-		
+
 		//设置本地调用对象及其接口
 		webView.setWebViewClient(new WebViewClient(){
 
