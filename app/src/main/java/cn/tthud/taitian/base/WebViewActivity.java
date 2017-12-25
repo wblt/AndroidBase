@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.webkit.GeolocationPermissions.Callback;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -135,22 +136,22 @@ public class WebViewActivity extends ActivityBase {
 
 
 		//在js中调用本地java方法
-		webView.addJavascriptInterface(new JsInterface(this), "AndroidWebView");
+		webView.addJavascriptInterface(new JavaScriptinterface(this), "android");
 		
 		//设置本地调用对象及其接口
 		webView.setWebViewClient(new WebViewClient(){
 
 		});
-
 		webView.loadUrl(url);
 	}
 
-	private class JsInterface {
+	private class JavaScriptinterface {
 		private Context mContext;
-		public JsInterface(Context context){
+		public JavaScriptinterface(Context context){
 			this.mContext = context;
 		}
 
+		@JavascriptInterface
 		public void sendBtnClick(String name) {
 			Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
 		}
