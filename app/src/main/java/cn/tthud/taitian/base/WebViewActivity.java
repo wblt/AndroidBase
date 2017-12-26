@@ -156,7 +156,7 @@ public class WebViewActivity extends ActivityBase {
 		}
 
 		@JavascriptInterface
-		public void sendBtnClick(String  name) {
+		public void sendBtnClick(final String  name) {
 			Log.i("++++++++++++++调起的方法"+name);
 //			Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
 			runOnUiThread(new Runnable() {
