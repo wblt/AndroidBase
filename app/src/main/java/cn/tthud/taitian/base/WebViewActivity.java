@@ -42,8 +42,10 @@ import cn.tthud.taitian.R;
 import cn.tthud.taitian.activity.login.LoginActivity;
 import cn.tthud.taitian.activity.mine.BindPhoneActivity;
 import cn.tthud.taitian.bean.WebViewBean;
+import cn.tthud.taitian.bean.WeiXinBean;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.CommonUtils;
+import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.widget.CustomAlertImgDialog;
@@ -155,15 +157,21 @@ public class WebViewActivity extends ActivityBase {
 		}
 
 		@JavascriptInterface
-		public void sendBtnClick(final String  name) {
+		public void sendBtnClick(String  name) {
 			Log.i("++++++++++++++调起的方法"+name);
-//			Toast.makeText(mContext, name, Toast.LENGTH_SHORT).show();
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					webView.loadUrl("javascript:callJS('" + name + "')");
+			try {
+				JSONObject jsonObject = new JSONObject(name);
+				String type = jsonObject.getString("type");
+				if (type.equals("user")) {
+					// 获取微信信息
+					getWeixin();
+				} else if (type.equals("pay")){
+					// 去微信支付
+
 				}
-			});
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 
 		}
 	}
@@ -173,12 +181,10 @@ public class WebViewActivity extends ActivityBase {
 		public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
 			return super.shouldOverrideUrlLoading(view, request);
 		}
-
 		@Override
 		public void onPageStarted(WebView view, String url, Bitmap favicon) {
 			super.onPageStarted(view, url, favicon);
 		}
-
 		@Override
 		public void onPageFinished(WebView view, String url) {
 			super.onPageFinished(view, url);
@@ -225,8 +231,75 @@ public class WebViewActivity extends ActivityBase {
 		}
 	}
 
+	private void getWeixin() {
+		showProgressDialog();
+		if (TextUtils.isEmpty(SPUtils.getString(SPUtils.WX_OPEN_ID))){  // 判断微信id是否为空
+			UMShareAPI.get(WebViewActivity.this).getPlatformInfo(WebViewActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+				@Override
+				public void onStart(SHARE_MEDIA share_media) {
 
+				}
+				@Override
+				public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+					String openid = map.get("openid");
+					SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
+					String profile_image_url = map.get("profile_image_url");
+					SPUtils.putString(SPUtils.HEAD_PIC, profile_image_url);
+					String gender = map.get("gender");
+					if (gender.equals("男")){
+						SPUtils.putInt(SPUtils.SEX, 1);
+					}else if(gender.equals("女")){
+						SPUtils.putInt(SPUtils.SEX, 2);
+					}else{
+						SPUtils.putInt(SPUtils.SEX, 0);
+					}
+					String name = map.get("name");
+					SPUtils.putString(SPUtils.NICK_NAME, name);
 
+					// 开始调起js
+					calluser();
+				}
+				@Override
+				public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+				}
+				@Override
+				public void onCancel(SHARE_MEDIA share_media, int i) {
+
+				}
+			});
+		}else{
+			// 调起js
+			calluser();
+		}
+	}
+
+	private void calluser() {
+		dismissProgressDialog();
+		String nickname = SPUtils.getString(SPUtils.NICK_NAME);
+		String headimgurl = SPUtils.getString(SPUtils.HEAD_PIC);
+		String openid = SPUtils.getString(SPUtils.WX_OPEN_ID);
+		int sex = SPUtils.getInt(SPUtils.SEX, 1);
+		String ub_id = SPUtils.getString(SPUtils.UB_ID);
+		String deviceid = UUID.randomUUID().toString();
+		WeiXinBean weiXinBean = new WeiXinBean();
+		weiXinBean.setDeviceid(deviceid);
+		weiXinBean.setNickname(nickname);
+		weiXinBean.setOpenid(openid);
+		weiXinBean.setSex(String.valueOf(sex));
+		weiXinBean.setUb_id(ub_id);
+		weiXinBean.setHeadimgurl(headimgurl);
+		final String jsonStr = GsonUtils.beanToJson(weiXinBean);
+		Log.i("++++++++拼接的json字符"+jsonStr);
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				String parms = "javascript:calluser('" + jsonStr + "')";
+				Log.i("=========parms"+parms);
+				webView.loadUrl(parms);
+			}
+		});
+	}
 
 	@Override
 	protected void onDestroy() {
