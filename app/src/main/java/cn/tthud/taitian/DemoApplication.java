@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.utils.Constants;
 
 /**
  * Created by wb on 2017/10/7.
@@ -54,7 +55,7 @@ public class DemoApplication extends Application {
 
     private void initUM() {
         UMShareAPI.get(this);
-        PlatformConfig.setWeixin("wx844acb9513c8cbce", "8d539fc58a18b4b9aef58474c010fd5b");
+        PlatformConfig.setWeixin(Constants.WX_APP_ID, "8d539fc58a18b4b9aef58474c010fd5b");
     }
 
     public static DemoApplication getInstance() {
