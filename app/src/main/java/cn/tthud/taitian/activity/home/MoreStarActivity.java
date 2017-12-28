@@ -144,58 +144,62 @@ public class MoreStarActivity extends ActivityBase {
                     return;
                 }
                 // 点击
-                showProgressDialog();
-                if (TextUtils.isEmpty(SPUtils.getString(SPUtils.WX_OPEN_ID))){  // 判断微信id是否为空
-                    UMShareAPI.get(MoreStarActivity.this).getPlatformInfo(MoreStarActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
-                        @Override
-                        public void onStart(SHARE_MEDIA share_media) {
-
-                        }
-                        @Override
-                        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-                            String openid = map.get("openid");
-                            SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
-                            String profile_image_url = map.get("profile_image_url");
-                            SPUtils.putString(SPUtils.HEAD_PIC, profile_image_url);
-                            String gender = map.get("gender");
-                            if (gender.equals("男")){
-                                SPUtils.putInt(SPUtils.SEX, 1);
-                            }else if(gender.equals("女")){
-                                SPUtils.putInt(SPUtils.SEX, 2);
-                            }else{
-                                SPUtils.putInt(SPUtils.SEX, 0);
-                            }
-                            String name = map.get("name");
-                            SPUtils.putString(SPUtils.NICK_NAME, name);
-
-                            // 开始跳转
-                            dismissProgressDialog();
-                            String url = starXueyuanBean.getUrl();
-                            Intent intent = new Intent(MoreStarActivity.this,WebViewActivity.class);
-                            intent.putExtra("title",starXueyuanBean.getTitle());
-                            String url_str = addWXInfo_xueyuan(starXueyuanBean.getUrl(),starXueyuanBean.getPl_id());
-                            intent.putExtra("url", url_str);
-                            MoreStarActivity.this.startActivity(intent);
-                        }
-
-                        @Override
-                        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-
-                        }
-
-                        @Override
-                        public void onCancel(SHARE_MEDIA share_media, int i) {
-
-                        }
-                    });
-                }else{
-                    dismissProgressDialog();
-                    Intent intent = new Intent(MoreStarActivity.this,WebViewActivity.class);
-                    intent.putExtra("title",starXueyuanBean.getTitle());
-                    String url_str = addWXInfo_xueyuan(starXueyuanBean.getUrl(),starXueyuanBean.getPl_id());
-                    intent.putExtra("url", url_str);
-                    MoreStarActivity.this.startActivity(intent);
-                }
+                Intent intent = new Intent(MoreStarActivity.this,WebViewActivity.class);
+                intent.putExtra("title",starXueyuanBean.getTitle());
+                intent.putExtra("url", starXueyuanBean.getUrl());
+                MoreStarActivity.this.startActivity(intent);
+//                showProgressDialog();
+//                if (TextUtils.isEmpty(SPUtils.getString(SPUtils.WX_OPEN_ID))){  // 判断微信id是否为空
+//                    UMShareAPI.get(MoreStarActivity.this).getPlatformInfo(MoreStarActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+//                        @Override
+//                        public void onStart(SHARE_MEDIA share_media) {
+//
+//                        }
+//                        @Override
+//                        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+//                            String openid = map.get("openid");
+//                            SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
+//                            String profile_image_url = map.get("profile_image_url");
+//                            SPUtils.putString(SPUtils.HEAD_PIC, profile_image_url);
+//                            String gender = map.get("gender");
+//                            if (gender.equals("男")){
+//                                SPUtils.putInt(SPUtils.SEX, 1);
+//                            }else if(gender.equals("女")){
+//                                SPUtils.putInt(SPUtils.SEX, 2);
+//                            }else{
+//                                SPUtils.putInt(SPUtils.SEX, 0);
+//                            }
+//                            String name = map.get("name");
+//                            SPUtils.putString(SPUtils.NICK_NAME, name);
+//
+//                            // 开始跳转
+//                            dismissProgressDialog();
+//                            String url = starXueyuanBean.getUrl();
+//                            Intent intent = new Intent(MoreStarActivity.this,WebViewActivity.class);
+//                            intent.putExtra("title",starXueyuanBean.getTitle());
+//                            //String url_str = addWXInfo_xueyuan(starXueyuanBean.getUrl(),starXueyuanBean.getPl_id());
+//                            intent.putExtra("url", url);
+//                            MoreStarActivity.this.startActivity(intent);
+//                        }
+//
+//                        @Override
+//                        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancel(SHARE_MEDIA share_media, int i) {
+//
+//                        }
+//                    });
+//                }else{
+//                    dismissProgressDialog();
+//                    Intent intent = new Intent(MoreStarActivity.this,WebViewActivity.class);
+//                    intent.putExtra("title",starXueyuanBean.getTitle());
+//                    String url_str = addWXInfo_xueyuan(starXueyuanBean.getUrl(),starXueyuanBean.getPl_id());
+//                    intent.putExtra("url", starXueyuanBean.getUrl());
+//                    MoreStarActivity.this.startActivity(intent);
+//                }
             }
         });
         xrvCustom.setAdapter(adapter);

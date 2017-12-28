@@ -19,12 +19,10 @@ public class TaskAdapter extends BaseRecyclerViewAdapter<TaskBean> {
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(parent, R.layout.item_task);
     }
-
     private class ViewHolder extends BaseRecyclerViewHolder<TaskBean, ItemTaskBinding>{
         ViewHolder(ViewGroup parent, int item_android) {
             super(parent, item_android);
         }
-
         @Override
         public void onBindViewHolder(final TaskBean object, final int position) {
             binding.executePendingBindings();
@@ -51,7 +49,6 @@ public class TaskAdapter extends BaseRecyclerViewAdapter<TaskBean> {
                 binding.lingqu.setBackgroundResource(R.drawable.radius_layout_dark_green_btn);
                 binding.lingqu.setText("去完成");
             }
-
             binding.lingqu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -111,58 +111,62 @@ public class CompanyActivity extends ActivityBase {
                     return;
                 }
                 // 点击
-                showProgressDialog();
-                if (TextUtils.isEmpty(SPUtils.getString(SPUtils.WX_OPEN_ID))){  // 判断微信id是否为空
-                    UMShareAPI.get(CompanyActivity.this).getPlatformInfo(CompanyActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
-                        @Override
-                        public void onStart(SHARE_MEDIA share_media) {
-
-                        }
-                        @Override
-                        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-                            String openid = map.get("openid");
-                            SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
-                            String profile_image_url = map.get("profile_image_url");
-                            SPUtils.putString(SPUtils.HEAD_PIC, profile_image_url);
-                            String gender = map.get("gender");
-                            if (gender.equals("男")){
-                                SPUtils.putInt(SPUtils.SEX, 1);
-                            }else if(gender.equals("女")){
-                                SPUtils.putInt(SPUtils.SEX, 2);
-                            }else{
-                                SPUtils.putInt(SPUtils.SEX, 0);
-                            }
-                            String name = map.get("name");
-                            SPUtils.putString(SPUtils.NICK_NAME, name);
-
-                            // 开始跳转
-                            dismissProgressDialog();
-                            String url = activityBean.getUrl();
-                            Intent intent = new Intent(CompanyActivity.this,WebViewActivity.class);
-                            intent.putExtra("title",activityBean.getTitle());
-                            String url_str = addWXInfo(url);
-                            intent.putExtra("url", url_str);
-                            CompanyActivity.this.startActivity(intent);
-                        }
-
-                        @Override
-                        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-
-                        }
-
-                        @Override
-                        public void onCancel(SHARE_MEDIA share_media, int i) {
-
-                        }
-                    });
-                }else{
-                    dismissProgressDialog();
-                    Intent intent = new Intent(CompanyActivity.this,WebViewActivity.class);
-                    intent.putExtra("title",activityBean.getTitle());
-                    String url_str = addWXInfo(activityBean.getUrl());
-                    intent.putExtra("url", url_str);
-                    CompanyActivity.this.startActivity(intent);
-                }
+                Intent intent = new Intent(CompanyActivity.this,WebViewActivity.class);
+                intent.putExtra("title",activityBean.getTitle());
+                intent.putExtra("url", activityBean.getUrl());
+                CompanyActivity.this.startActivity(intent);
+//                showProgressDialog();
+//                if (TextUtils.isEmpty(SPUtils.getString(SPUtils.WX_OPEN_ID))){  // 判断微信id是否为空
+//                    UMShareAPI.get(CompanyActivity.this).getPlatformInfo(CompanyActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+//                        @Override
+//                        public void onStart(SHARE_MEDIA share_media) {
+//
+//                        }
+//                        @Override
+//                        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+//                            String openid = map.get("openid");
+//                            SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
+//                            String profile_image_url = map.get("profile_image_url");
+//                            SPUtils.putString(SPUtils.HEAD_PIC, profile_image_url);
+//                            String gender = map.get("gender");
+//                            if (gender.equals("男")){
+//                                SPUtils.putInt(SPUtils.SEX, 1);
+//                            }else if(gender.equals("女")){
+//                                SPUtils.putInt(SPUtils.SEX, 2);
+//                            }else{
+//                                SPUtils.putInt(SPUtils.SEX, 0);
+//                            }
+//                            String name = map.get("name");
+//                            SPUtils.putString(SPUtils.NICK_NAME, name);
+//
+//                            // 开始跳转
+//                            dismissProgressDialog();
+//                            String url = activityBean.getUrl();
+//                            Intent intent = new Intent(CompanyActivity.this,WebViewActivity.class);
+//                            intent.putExtra("title",activityBean.getTitle());
+//                            //String url_str = addWXInfo(url);
+//                            intent.putExtra("url", url);
+//                            CompanyActivity.this.startActivity(intent);
+//                        }
+//
+//                        @Override
+//                        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancel(SHARE_MEDIA share_media, int i) {
+//
+//                        }
+//                    });
+//                }else{
+//                    dismissProgressDialog();
+//                    Intent intent = new Intent(CompanyActivity.this,WebViewActivity.class);
+//                    intent.putExtra("title",activityBean.getTitle());
+//                    //String url_str = addWXInfo(activityBean.getUrl());
+//                    intent.putExtra("url", activityBean.getUrl());
+//                    CompanyActivity.this.startActivity(intent);
+//                }
             }
         });
         mAdapter.setContext(this);

@@ -51,7 +51,6 @@ import cn.tthud.taitian.widget.CustomAlertMsgDialog;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 
-
 @SuppressLint("JavascriptInterface")
 public class WebViewActivity extends ActivityBase {
 	private WebView webView;
@@ -210,15 +209,6 @@ public class WebViewActivity extends ActivityBase {
 			result.confirm();//这里必须调用，否则页面会阻塞造成假死
 			return true;
 		}
-		// For Android 3.0+
-		public void openFileChooser(ValueCallback<Uri> uploadMsg,
-									String acceptType) {
-		}
-		// For Android > 4.1.1
-		public void openFileChooser(ValueCallback<Uri> uploadMsg,
-									String acceptType, String capture) {
-			openFileChooser(uploadMsg, acceptType);
-		}
 		@Override
 		public void onGeolocationPermissionsShowPrompt(String origin,
 													   Callback callback) {
@@ -234,6 +224,8 @@ public class WebViewActivity extends ActivityBase {
 			super.onReceivedTitle(view, title);
 		}
 	}
+
+
 
 
 	@Override
