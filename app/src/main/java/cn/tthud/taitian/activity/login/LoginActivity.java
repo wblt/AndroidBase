@@ -172,6 +172,7 @@ public class LoginActivity extends ActivityBase {
                 startActivity(intent);
                 break;
             case R.id.wechat_login_btn:
+                showProgressDialog();
                 UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.WEIXIN, authListener);
                 break;
         }
@@ -208,8 +209,6 @@ public class LoginActivity extends ActivityBase {
             }
             String name = data.get("name");
             SPUtils.putString(SPUtils.NICK_NAME, name);
-
-
             wxlogin();
         }
 
@@ -361,6 +360,7 @@ public class LoginActivity extends ActivityBase {
                             SPUtils.putString(SPUtils.SOURCE,"wx");
                         }
                         // 进入主页
+                        dismissProgressDialog();
                         DemoApplication.getInstance().closeActivitys();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("extra_index",3);
