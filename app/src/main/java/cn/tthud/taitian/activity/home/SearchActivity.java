@@ -38,7 +38,6 @@ import java.util.UUID;
 
 import cn.tthud.taitian.R;
 import cn.tthud.taitian.adapter.ActivityDoingAdapter;
-import cn.tthud.taitian.adapter.CompanyActivityAdapter;
 import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.base.OnItemClickListener;
 import cn.tthud.taitian.base.WebViewActivity;
@@ -80,32 +79,6 @@ public class SearchActivity extends ActivityBase {
     }
 
     public void setListener(){
-//        query.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if(keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN){
-//                /*隐藏软键盘*/
-//                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                    if(inputMethodManager.isActive()){
-//                        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
-//                    }
-//                    // 逻辑操作
-//                    String searchName = query.getText().toString();
-//                    if (TextUtils.isEmpty(searchName)) {
-//                        showMsg("请输入搜索内容");
-//                        return true;
-//                    }
-//                    keywords = searchName;
-//                    // 先清除上次搜索的数据
-//                    mAdapter.clear();
-//                    xrvCustom.refreshComplete();
-//                    mAdapter.notifyDataSetChanged();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-
         query.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // adapter.getFilter().filter(s);
@@ -114,12 +87,6 @@ public class SearchActivity extends ActivityBase {
                 } else {
                     search_clear.setVisibility(View.INVISIBLE);
                 }
-//                keywords = s.toString();
-//                // 先清除上次搜索的数据
-//                mAdapter.clear();
-//                xrvCustom.refreshComplete();
-//                mAdapter.notifyDataSetChanged();
-//                loadData();
             }
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -188,59 +155,6 @@ public class SearchActivity extends ActivityBase {
                 intent.putExtra("title",activityBean.getTitle());
                 intent.putExtra("url", activityBean.getUrl());
                 SearchActivity.this.startActivity(intent);
-//                showProgressDialog();
-//                if (TextUtils.isEmpty(SPUtils.getString(SPUtils.WX_OPEN_ID))){  // 判断微信id是否为空
-//                    UMShareAPI.get(SearchActivity.this).getPlatformInfo(SearchActivity.this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
-//                        @Override
-//                        public void onStart(SHARE_MEDIA share_media) {
-//
-//                        }
-//                        @Override
-//                        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-//                            String openid = map.get("openid");
-//                            SPUtils.putString(SPUtils.WX_OPEN_ID, openid);
-//                            String profile_image_url = map.get("profile_image_url");
-//                            SPUtils.putString(SPUtils.HEAD_PIC, profile_image_url);
-//                            String gender = map.get("gender");
-//                            if (gender.equals("男")){
-//                                SPUtils.putInt(SPUtils.SEX, 1);
-//                            }else if(gender.equals("女")){
-//                                SPUtils.putInt(SPUtils.SEX, 2);
-//                            }else{
-//                                SPUtils.putInt(SPUtils.SEX, 0);
-//                            }
-//                            String name = map.get("name");
-//                            SPUtils.putString(SPUtils.NICK_NAME, name);
-//
-//
-//                            // 开始跳转
-//                            dismissProgressDialog();
-//                            String url = activityBean.getUrl();
-//                            Intent intent = new Intent(SearchActivity.this,WebViewActivity.class);
-//                            intent.putExtra("title",activityBean.getTitle());
-//                            //String url_str = addWXInfo(url);
-//                            intent.putExtra("url", url);
-//                            SearchActivity.this.startActivity(intent);
-//                        }
-//
-//                        @Override
-//                        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onCancel(SHARE_MEDIA share_media, int i) {
-//
-//                        }
-//                    });
-//                }else{
-//                    dismissProgressDialog();
-//                    Intent intent = new Intent(SearchActivity.this,WebViewActivity.class);
-//                    intent.putExtra("title",activityBean.getTitle());
-//                    //String url_str = addWXInfo(activityBean.getUrl());
-//                    intent.putExtra("url", activityBean.getUrl());
-//                    SearchActivity.this.startActivity(intent);
-//                }
             }
         });
         xrvCustom.setAdapter(mAdapter);
@@ -301,36 +215,5 @@ public class SearchActivity extends ActivityBase {
 
     }
 
-    private String addWXInfo(String url){
-        String nickname = SPUtils.getString(SPUtils.NICK_NAME);
-        String headimgurl = SPUtils.getString(SPUtils.HEAD_PIC);
-        String openid = SPUtils.getString(SPUtils.WX_OPEN_ID);
-        int sex = SPUtils.getInt(SPUtils.SEX, 1);
-        String ub_id = SPUtils.getString(SPUtils.UB_ID);
-        String source = "app";
-        String deviceid = UUID.randomUUID().toString();
-        int index = url.indexOf("?");
-        if (index == -1){		// 不存在
-            url = url + "?source=" + source;
-        }else{
-            url = url + "&source=" + source;
-        }
-        url = url + "&deviceid=" + deviceid;
-        url = url + "&sex=" + sex;
-        if (nickname != null){
-            url = url + "&nickname=" + URLEncoder.encode(nickname);
-        }
-        if (headimgurl != null){
-            url = url + "&headimgurl=" + headimgurl;
-        }
-        if (openid != null){
-            url = url + "&openid=" + openid;
-        }
-        if (ub_id != null){
-            url = url + "&ub_id=" + ub_id;
-        }
-        url = url + "&html=" + "index";
-        return url;
-    }
 
 }

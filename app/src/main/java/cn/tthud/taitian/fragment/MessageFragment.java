@@ -37,7 +37,6 @@ import cn.tthud.taitian.base.FragmentBase;
 import cn.tthud.taitian.base.OnItemClickListener;
 import cn.tthud.taitian.base.OnItemLongClickListener;
 import cn.tthud.taitian.base.WebViewActivity;
-import cn.tthud.taitian.bean.MessageBean;
 import cn.tthud.taitian.bean.WebViewBean;
 import cn.tthud.taitian.db.dbmanager.MessageDaoUtils;
 import cn.tthud.taitian.db.entity.Message;

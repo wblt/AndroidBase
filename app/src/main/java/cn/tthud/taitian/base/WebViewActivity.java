@@ -82,40 +82,6 @@ public class WebViewActivity extends ActivityBase {
 
 	private void webViewShow(String url) {
 		WebSettings webSettings = webView.getSettings();
-//		webSettings.setJavaScriptEnabled(true);
-//		webSettings.setSupportZoom(true);
-//		/**
-//		 * 解决webview不支持localstorage问题
-//		 */
-//		webSettings.setDomStorageEnabled(true);
-//		webSettings.setDatabaseEnabled(true);
-//		webSettings.setGeolocationEnabled(true);
-//		String appCachePath = getApplicationContext().getCacheDir().getAbsolutePath();
-//		webSettings.setAppCachePath(appCachePath);
-//		webSettings.setAllowFileAccess(true);
-//		webSettings.setAppCacheEnabled(true);
-//		webSettings.setUseWideViewPort(true);//设置此属性，可任意比例缩放
-//		webSettings.setLoadWithOverviewMode(true);
-//		webSettings.setBuiltInZoomControls(true);
-//		webSettings.setDisplayZoomControls(false);
-//		webSettings.setAllowUniversalAccessFromFileURLs(true);
-//		webSettings.setJavaScriptCanOpenWindowsAutomatically(true);//允许js弹出窗口
-//		webSettings.setDefaultTextEncodingName("UTF-8");
-//		webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-//		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN); //支持内容重新布局
-//		webView.requestFocusFromTouch();
-//		webView.setWebChromeClient(new WebChromeClient() {
-//
-//		});
-//
-//
-//		//在js中调用本地java方法
-//		webView.addJavascriptInterface(new JavaScriptinterface(this), "android");
-//
-////		//设置本地调用对象及其接口
-//		webView.setWebViewClient(new WebViewClient(){
-//
-//		});
 		webView.setWebViewClient(new WebViewClient());
 		webView.setWebChromeClient(new WebChromeClient());
 		webView.addJavascriptInterface(new JavaScriptinterface(this), "android");

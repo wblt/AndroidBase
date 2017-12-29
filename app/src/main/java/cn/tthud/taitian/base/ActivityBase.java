@@ -34,8 +34,6 @@ public abstract class ActivityBase extends FragmentActivity {
     // 布局view
     protected ViewDataBinding bindingView;
 
-
-
     ZProgressHUD progressHUD;
     private boolean mIsShowLoading;//是否显示加载loading
 
@@ -46,26 +44,7 @@ public abstract class ActivityBase extends FragmentActivity {
         setContentView(R.layout.activity_base_frame);
         progressHUD = ZProgressHUD.getInstance(this);
         initBaseView();
-//        checkData();
     }
-
-//    private void checkData(){
-//        if(DataProvider.pinpai_list0.size()==0 && !TextUtils.isEmpty(SPUtils.getString("pinpai_list"))){
-//            DataProvider.setData();
-//            Type type=new TypeToken<List<ConfigBean>>(){}.getType();
-//            List<ConfigBean> diaryPojoList1= GsonUtils.jsonToList(SPUtils.getString("pinpai_list"),type);
-//            DataProvider.pinpai_list.addAll(diaryPojoList1);
-//            DataProvider.pinpai_list0.addAll(diaryPojoList1);
-//
-//            List<ConfigBean> diaryPojoList2= GsonUtils.jsonToList(SPUtils.getString("price_list"),type);
-//            DataProvider.price_list.addAll(diaryPojoList2);
-//            DataProvider.price_list0.addAll(diaryPojoList2);
-//
-//            List<ConfigBean> diaryPojoList3= GsonUtils.jsonToList(SPUtils.getString("leixing_list"),type);
-//            DataProvider.leixing_list.addAll(diaryPojoList3);
-//            DataProvider.leixing_list0.addAll(diaryPojoList3);
-//        }
-//    }
 
     protected void initBaseView(){
         base_main = (LinearLayout) findViewById(R.id.base_main);
@@ -91,31 +70,6 @@ public abstract class ActivityBase extends FragmentActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT);
         base_main.addView(view,_LayoutParams);
 
-//        bindingView = DataBindingUtil.inflate(getLayoutInflater(), pResID, null, false);
-//
-//        // content
-//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//        bindingView.getRoot().setLayoutParams(params);
-//        base_main.addView(bindingView.getRoot(),params);
-    }
-
-    /**
-     * 设置页面主体内容
-     */
-    protected void appendMainBody2(Object object, int pResID) {
-//        View view = LayoutInflater.from(this).inflate(pResID, null);
-//        x.view().inject(object,view);
-//        RelativeLayout.LayoutParams _LayoutParams = new RelativeLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT,
-//                LinearLayout.LayoutParams.MATCH_PARENT);
-//        base_main.addView(view,_LayoutParams);
-
-        bindingView = DataBindingUtil.inflate(getLayoutInflater(), pResID, null, false);
-
-        // content
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        bindingView.getRoot().setLayoutParams(params);
-        base_main.addView(bindingView.getRoot(),params);
     }
 
     /**
@@ -149,12 +103,10 @@ public abstract class ActivityBase extends FragmentActivity {
      * 可在此处统一显示loading view
      */
     public void showLoading() {
-//        if (mIsShowLoading) {
-            if(progressHUD == null){
-                progressHUD = ZProgressHUD.getInstance(this);
-            }
-            progressHUD.show();
-//        }
+        if(progressHUD == null){
+            progressHUD = ZProgressHUD.getInstance(this);
+        }
+        progressHUD.show();
     }
 
     public void cancelLoading() {

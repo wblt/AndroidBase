@@ -9,7 +9,6 @@ import cn.tthud.taitian.R;
 import cn.tthud.taitian.base.BaseRecyclerViewAdapter;
 import cn.tthud.taitian.base.BaseRecyclerViewHolder;
 import cn.tthud.taitian.base.WebViewActivity;
-import cn.tthud.taitian.bean.MessageBean;
 import cn.tthud.taitian.bean.WebViewBean;
 import cn.tthud.taitian.databinding.ItemMessageNormalBinding;
 import cn.tthud.taitian.db.entity.Message;
