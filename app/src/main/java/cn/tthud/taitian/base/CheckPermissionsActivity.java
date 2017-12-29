@@ -151,31 +151,22 @@ public class CheckPermissionsActivity extends BaseActivity
 	 *
 	 */
 	private void showMissingPermissionDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.notifyTitle);
-		builder.setMessage(R.string.notifyMsg);
+		AlertDialog dialog = new AlertDialog.Builder(this)
+		.setMessage("需要赋予通话的权限，不开启将无法正常工作！")
+		.setPositiveButton("设置", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+				intent.setData(Uri.parse("package:" + getPackageName())); // 根据包名打开对应的设置界面
+				startActivity(intent);
+			}
+		}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
 
-		// 拒绝, 退出应用
-		builder.setNegativeButton(R.string.cancel,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-//						finish();
-						RxBus.getDefault().post(RxCodeConstants.APP_GET_PERMISSION, new RxBusBaseMessage(1));
-					}
-				});
-
-		builder.setPositiveButton(R.string.setting,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						isNeedCheck = true;
-						startAppSettings();
-					}
-				});
-
-		builder.setCancelable(false);
-		builder.show();
+			}
+		}).create();
+		dialog.show();
 	}
 
 	/**
