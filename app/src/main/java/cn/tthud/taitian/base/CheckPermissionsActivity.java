@@ -14,6 +14,7 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
+import android.view.View;
 
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
 import cn.tthud.taitian.net.rxbus.RxCodeConstants;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.NetUtils;
+import cn.tthud.taitian.widget.CustomAlertTowDialog;
 
 /**
  * 继承了Activity，实现Android6.0的运行时权限检测
@@ -51,14 +53,12 @@ public class CheckPermissionsActivity extends BaseActivity
 			Manifest.permission.CALL_PHONE,
 			Manifest.permission.CAMERA
 			};
-	
 	public static final int PERMISSON_REQUESTCODE = 0;
-	
 	/**
 	 * 判断是否需要检测，防止不停的弹框
 	 */
 	private boolean isNeedCheck = true;
-	
+	private CustomAlertTowDialog add;
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -151,22 +151,26 @@ public class CheckPermissionsActivity extends BaseActivity
 	 *
 	 */
 	private void showMissingPermissionDialog() {
-		AlertDialog dialog = new AlertDialog.Builder(this)
-		.setMessage("需要赋予通话的权限，不开启将无法正常工作！")
-		.setPositiveButton("设置", new DialogInterface.OnClickListener() {
+		add = new CustomAlertTowDialog(CheckPermissionsActivity.this, R.style.dialog, "检查权限设置是否正常", new CustomAlertTowDialog.ViewClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-				intent.setData(Uri.parse("package:" + getPackageName())); // 根据包名打开对应的设置界面
-				startActivity(intent);
+			public void onClick(View view) {
+				switch (view.getId()) {
+					case R.id.tv_cancel:
+						add.dismiss();
+						android.os.Process.killProcess(android.os.Process.myPid());
+						System.exit(0);
+						break;
+					case R.id.tv_sure:
+						add.dismiss();
+						startAppSettings();
+						android.os.Process.killProcess(android.os.Process.myPid());
+						System.exit(0);
+						break;
+				}
 			}
-		}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-
-			}
-		}).create();
-		dialog.show();
+		});
+		add.setCancelable(false);
+		add.show();
 	}
 
 	/**

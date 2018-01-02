@@ -4,12 +4,15 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -38,6 +41,7 @@ import cn.tthud.taitian.net.rxbus.RxCodeConstants;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.NetUtils;
 import cn.tthud.taitian.utils.SPUtils;
+import cn.tthud.taitian.widget.CustomAlertTowDialog;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -53,10 +57,9 @@ public class SplashActivity extends CheckPermissionsActivity {
 
 	private CompositeSubscription mCompositeSubscription;
 	private static final int sleepTime = 2000;
-	private AlertDialog ad;
+	private CustomAlertTowDialog ad;
 	private boolean isStart = false;
 	private boolean isInit = false;
-	private UserBean userBean;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -69,12 +72,24 @@ public class SplashActivity extends CheckPermissionsActivity {
 		// 先检测网络，网络不通弹出提示对话框，并卡住
 		if (!NetUtils.isConnected(SplashActivity.this)) {
 			super.onResume();
-			ad = new AlertDialog.Builder(SplashActivity.this)
-					.setTitle("网络连接异常").setMessage("检查网络设置是否正常")
-					.setNeutralButton("设置网络", netListener)
-					.setPositiveButton("重试", retryListener)
-					.setNegativeButton("退出", exitListener).show();
+			ad = new CustomAlertTowDialog(SplashActivity.this, R.style.dialog, "检查网络设置是否正常", new CustomAlertTowDialog.ViewClickListener() {
+				@Override
+				public void onClick(View view) {
+					switch (view.getId()) {
+						case R.id.tv_cancel:
+							ad.dismiss();
+							android.os.Process.killProcess(android.os.Process.myPid());
+							System.exit(0);
+							break;
+						case R.id.tv_sure:
+							ad.dismiss();
+							NetUtils.openSetting(SplashActivity.this);
+							break;
+					}
+				}
+			});
 			ad.setCancelable(false);
+			ad.show();
 			return;
 		} else {
 			if (ad != null) {
