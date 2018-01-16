@@ -63,7 +63,7 @@ public class SearchActivity extends ActivityBase {
     @ViewInject(R.id.page_refresh)
     private LinearLayout page_refresh;
     private ActivityDoingAdapter mAdapter;
-    private int mPage;
+    private int mPage = 1;
     private int mMaxPage = -1;
     private String  keywords;
 
@@ -109,7 +109,6 @@ public class SearchActivity extends ActivityBase {
                 keywords = query.getText().toString();
                 // 先清除上次搜索的数据
                 mAdapter.clear();
-                xrvCustom.refreshComplete();
                 mAdapter.notifyDataSetChanged();
                 loadData();
                 break;
@@ -161,12 +160,12 @@ public class SearchActivity extends ActivityBase {
     }
 
     private void loadData() {
-        if (TextUtils.isEmpty(keywords)) {
-            xrvCustom.refreshComplete();
-            mAdapter.clear();
-            mAdapter.notifyDataSetChanged();
-            return;
-        }
+//        if (TextUtils.isEmpty(keywords)) {
+//            xrvCustom.refreshComplete();
+//            mAdapter.clear();
+//            mAdapter.notifyDataSetChanged();
+//            return;
+//        }
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_SEARCH_ACT);
         requestParams.addParameter("keywords",keywords);
         String type = getIntent().getStringExtra("type");

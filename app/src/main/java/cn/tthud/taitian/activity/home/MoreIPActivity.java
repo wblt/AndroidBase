@@ -55,7 +55,7 @@ public class MoreIPActivity extends ActivityBase {
         super.onCreate(savedInstanceState);
         appendMainBody(this,R.layout.activity_more_ip);
         appendTopBody(R.layout.activity_top_text);
-        setTopBarTitle("更多IP");
+        setTopBarTitle("经典IP");
         setTopLeftDefultListener();
         initRecyclerView();
         loadData();

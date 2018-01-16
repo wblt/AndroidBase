@@ -235,6 +235,7 @@ public class DiscoverFragment extends FragmentBase implements RadioGroup.OnCheck
 
                 break;
             case R.id.sousuo_btn:
+                keywords = query.getText().toString();
                 mAdapter.clear();
                 mAdapter.notifyDataSetChanged();
                 mPage = 1;
