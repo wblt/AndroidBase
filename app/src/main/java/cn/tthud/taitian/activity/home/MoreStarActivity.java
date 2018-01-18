@@ -48,7 +48,7 @@ public class MoreStarActivity extends ActivityBase {
     private LinearLayout page_refresh;
     private StarXueyuanAdapter adapter;
 
-    private int mPage;
+    private int mPage = 1;
     private int mMaxPage = -1;
 
     @Override

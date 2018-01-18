@@ -52,7 +52,7 @@ public class MyWalletActivity extends ActivityBase {
     @ViewInject(R.id.page_refresh)
     private LinearLayout page_refresh;
 
-    private int mPage;
+    private int mPage = 1;
     private int mMaxPage = -1;
 
     private ActivityMyWalletAdapter mAdapter;

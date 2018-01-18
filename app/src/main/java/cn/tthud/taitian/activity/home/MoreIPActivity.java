@@ -47,7 +47,7 @@ public class MoreIPActivity extends ActivityBase {
     private LinearLayout page_refresh;
     private ActivityDoingAdapter adapter;
 
-    private int mPage;
+    private int mPage = 1;
     private int mMaxPage = -1;
 
     @Override
