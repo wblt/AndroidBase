@@ -55,7 +55,7 @@ public class DemoApplication extends Application {
 
     private void initUM() {
         UMShareAPI.get(this);
-        PlatformConfig.setWeixin(Constants.WX_APP_ID, "8d539fc58a18b4b9aef58474c010fd5b");
+        PlatformConfig.setWeixin(Constants.WX_APP_ID, "17e5b3674552080fc3430d5825560bc9");
     }
 
     public static DemoApplication getInstance() {
