@@ -15,14 +15,10 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler{
-	
-
     private IWXAPI api;
-	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     	api = WXAPIFactory.createWXAPI(this, Constants.WX_APP_ID, false);
 		try{
 			api.handleIntent(getIntent(), this);
@@ -30,21 +26,17 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler{
 			e.printStackTrace();
 		}
     }
-
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
         api.handleIntent(intent, this);
 	}
-
 	@Override
 	public void onReq(BaseReq req) {
 	}
-
 	@Override
 	public void onResp(BaseResp resp) {
-
 		int result = 0;
 		//有时候支付结果还需要发送给服务器确认支付状态
 		if (resp.getType()== ConstantsAPI.COMMAND_PAY_BY_WX){

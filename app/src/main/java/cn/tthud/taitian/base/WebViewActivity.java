@@ -26,6 +26,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -133,7 +136,8 @@ public class WebViewActivity extends ActivityBase {
 					getWeixin();
 				} else if (type.equals("pay")){
 					// 去微信支付
-
+					JSONObject object = new JSONObject("");
+					wechatPay(object);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -273,5 +277,33 @@ public class WebViewActivity extends ActivityBase {
 		webView.clearHistory();
 		webView.destroy();
 		super.onDestroy();
+	}
+
+	private void wechatPay(JSONObject jsonObject) {
+		try {
+			String aPackage = jsonObject.getString("package");
+			String appid = jsonObject.getString("appid");
+			String sign = jsonObject.getString("sign");
+			String return_msg = jsonObject.getString("return_msg");
+			String partnerid = jsonObject.getString("partnerid");
+			String prepayid = jsonObject.getString("prepayid");
+			String return_code = jsonObject.getString("return_code");
+			String noncestr = jsonObject.getString("noncestr");
+			String timestamp = jsonObject.getString("timestamp");
+			IWXAPI api = WXAPIFactory.createWXAPI(this, appid);
+			api.registerApp(appid);
+			PayReq payReq = new PayReq();
+			payReq.appId = appid;
+			payReq.partnerId = partnerid;
+			payReq.prepayId = prepayid;
+			payReq.packageValue = aPackage;
+			payReq.nonceStr = noncestr;
+			payReq.timeStamp = timestamp;
+			payReq.sign = sign;
+			api.sendReq(payReq);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
 	}
 }
