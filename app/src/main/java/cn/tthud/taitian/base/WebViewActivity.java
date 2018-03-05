@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.GeolocationPermissions.Callback;
 import android.webkit.JavascriptInterface;
@@ -21,6 +22,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -61,12 +63,13 @@ public class WebViewActivity extends ActivityBase {
 	private WebView webView;
 	private ProgressBar bar;
 	private CustomAlertMsgDialog customAlertMsgDialog;
+	private View top_left;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		appendMainBody(this, R.layout.webview_activity_main);
 		appendTopBody(R.layout.activity_top_text);
-		setTopLeftDefultListener();
+		//setTopLeftDefultListener();
 		initView();
 		initData();
 	}
@@ -74,8 +77,20 @@ public class WebViewActivity extends ActivityBase {
 	public void initView() {
 		webView = (WebView) findViewById(R.id.webView);
 		bar = (ProgressBar) findViewById(R.id.bar);
+		top_left = findViewById(R.id.top_left);
+		top_left.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if(webView.canGoBack()){
+					webView.goBack();//返回上个页面
+				} else {
+					finish();
+				}
+			}
+		});
 	}
-	
+
+
 	private void initData() {
 		String url = getIntent().getExtras().getString("url");
 		String title = getIntent().getExtras().getString("title");
@@ -110,7 +125,7 @@ public class WebViewActivity extends ActivityBase {
 		//优先使用缓存:
 		webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 		//不使用缓存:
-//        getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+		//webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 		//设置默认编码:
 		webSettings.setDefaultTextEncodingName("utf-8");
 		//设置字体大小
@@ -124,9 +139,8 @@ public class WebViewActivity extends ActivityBase {
 		public JavaScriptinterface(Context context){
 			this.mContext = context;
 		}
-
 		@JavascriptInterface
-		public void sendBtnClick(String  name) {
+		public void sendBtnClick(String name) {
 			Log.i("++++++++++++++调起的方法"+name);
 			try {
 				JSONObject jsonObject = new JSONObject(name);
@@ -136,8 +150,9 @@ public class WebViewActivity extends ActivityBase {
 					getWeixin();
 				} else if (type.equals("pay")){
 					// 去微信支付
-					JSONObject object = new JSONObject("");
-					wechatPay(object);
+					//JSONObject object = new JSONObject("");
+					//wechatPay(object);
+					showMsg("我已经千辛万苦的走入支付了");
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -305,5 +320,14 @@ public class WebViewActivity extends ActivityBase {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK&&webView.canGoBack()){
+			webView.goBack();//返回上个页面
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);//退出整个应用程序
 	}
 }

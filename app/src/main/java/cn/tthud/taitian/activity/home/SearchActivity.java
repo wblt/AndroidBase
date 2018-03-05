@@ -160,12 +160,7 @@ public class SearchActivity extends ActivityBase {
     }
 
     private void loadData() {
-//        if (TextUtils.isEmpty(keywords)) {
-//            xrvCustom.refreshComplete();
-//            mAdapter.clear();
-//            mAdapter.notifyDataSetChanged();
-//            return;
-//        }
+        showLoading();
         RequestParams requestParams = FlowAPI.getRequestParams(FlowAPI.APP_SEARCH_ACT);
         requestParams.addParameter("keywords",keywords);
         String type = getIntent().getStringExtra("type");
@@ -177,6 +172,7 @@ public class SearchActivity extends ActivityBase {
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);
+                cancelLoading();
                 try {
                     JSONObject jsonObject = new JSONObject(data);
                     String status = jsonObject.getString("status");
