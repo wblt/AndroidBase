@@ -150,14 +150,29 @@ public class WebViewActivity extends ActivityBase {
 					getWeixin();
 				} else if (type.equals("pay")){
 					// 去微信支付
-					//JSONObject object = new JSONObject("");
-					//wechatPay(object);
+
+
 					showMsg("我已经千辛万苦的走入支付了");
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 
+		}
+		@JavascriptInterface
+		public void wechatPay(String type,String data) {
+			showMsg("我已经千辛万苦的走入支付了");
+			Log.i("+++++wechatPay+++++++++调起的方法"+type+ " " + data);
+			try {
+				JSONObject object = new JSONObject(data);
+				String dataJoson = object.getString("data");
+				JSONObject payjosnObjec = new JSONObject(dataJoson);
+				String paydata = payjosnObjec.getString("paydata");
+				JSONObject pay = new JSONObject(paydata);
+				pay(pay);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -294,16 +309,14 @@ public class WebViewActivity extends ActivityBase {
 		super.onDestroy();
 	}
 
-	private void wechatPay(JSONObject jsonObject) {
+	private void pay(JSONObject jsonObject) {
 		try {
-			String aPackage = jsonObject.getString("package");
+			String aPackage = "Sign=WXPay";
 			String appid = jsonObject.getString("appid");
 			String sign = jsonObject.getString("sign");
-			String return_msg = jsonObject.getString("return_msg");
-			String partnerid = jsonObject.getString("partnerid");
-			String prepayid = jsonObject.getString("prepayid");
-			String return_code = jsonObject.getString("return_code");
-			String noncestr = jsonObject.getString("noncestr");
+			String partnerid = jsonObject.getString("partnerId");
+			String prepayid = jsonObject.getString("prepay_id");
+			String noncestr = jsonObject.getString("nonce_str");
 			String timestamp = jsonObject.getString("timestamp");
 			IWXAPI api = WXAPIFactory.createWXAPI(this, appid);
 			api.registerApp(appid);
