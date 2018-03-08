@@ -324,7 +324,7 @@ public class WebViewActivity extends ActivityBase {
 			payReq.appId = appid;
 			payReq.partnerId = partnerid;
 			payReq.prepayId = prepayid;
-			payReq.packageValue = aPackage;
+			payReq.packageValue = "Sign=WXPay";
 			payReq.nonceStr = noncestr;
 			payReq.timeStamp = timestamp;
 			payReq.sign = sign;
