@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -29,6 +33,7 @@ import cn.tthud.taitian.base.ActivityBase;
 import cn.tthud.taitian.net.FlowAPI;
 import cn.tthud.taitian.utils.DataClearManager;
 import cn.tthud.taitian.utils.Log;
+import cn.tthud.taitian.utils.NetUtils;
 import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.widget.CustomAlertDialog;
 import cn.tthud.taitian.widget.EaseSwitchButton;
@@ -69,6 +74,7 @@ public class SettingActivity extends ActivityBase {
         }catch (Exception e){
             e.printStackTrace();
         }
+
     }
 
     @Override
@@ -397,4 +403,6 @@ public class SettingActivity extends ActivityBase {
             }
         });
     }
+
+
 }
