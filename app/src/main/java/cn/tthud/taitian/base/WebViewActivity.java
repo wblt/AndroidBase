@@ -165,11 +165,18 @@ public class WebViewActivity extends ActivityBase {
 			Log.i("+++++wechatPay+++++++++调起的方法"+type+ " " + data);
 			try {
 				JSONObject object = new JSONObject(data);
+				String status = object.getString("status");
 				String dataJoson = object.getString("data");
 				JSONObject payjosnObjec = new JSONObject(dataJoson);
 				String paydata = payjosnObjec.getString("paydata");
 				JSONObject pay = new JSONObject(paydata);
-				pay(pay);
+				if (status.equals("1")) {
+					String info = pay.getString("info");
+					showMsg(info);
+				} else {
+					pay(pay);
+				}
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -324,13 +331,14 @@ public class WebViewActivity extends ActivityBase {
 			payReq.appId = appid;
 			payReq.partnerId = partnerid;
 			payReq.prepayId = prepayid;
-			payReq.packageValue = "Sign=WXPay";
+			payReq.packageValue = aPackage;
 			payReq.nonceStr = noncestr;
 			payReq.timeStamp = timestamp;
 			payReq.sign = sign;
 			api.sendReq(payReq);
 		} catch (JSONException e) {
 			e.printStackTrace();
+
 		}
 
 	}
