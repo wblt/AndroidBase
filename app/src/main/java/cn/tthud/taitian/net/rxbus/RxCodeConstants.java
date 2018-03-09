@@ -20,4 +20,6 @@ public class RxCodeConstants {
     // 消息页刷新
     public static final int MessageFragment_MSG = 5;
 
+
+    public static final int MessageFragment_PAY = 6;
 }

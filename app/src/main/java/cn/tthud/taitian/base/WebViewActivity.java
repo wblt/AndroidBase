@@ -49,6 +49,9 @@ import cn.tthud.taitian.activity.mine.BindPhoneActivity;
 import cn.tthud.taitian.bean.WebViewBean;
 import cn.tthud.taitian.bean.WeiXinBean;
 import cn.tthud.taitian.net.FlowAPI;
+import cn.tthud.taitian.net.rxbus.RxBus;
+import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
+import cn.tthud.taitian.net.rxbus.RxCodeConstants;
 import cn.tthud.taitian.utils.CommonUtils;
 import cn.tthud.taitian.utils.GsonUtils;
 import cn.tthud.taitian.utils.Log;
@@ -57,6 +60,8 @@ import cn.tthud.taitian.widget.CustomAlertImgDialog;
 import cn.tthud.taitian.widget.CustomAlertMsgDialog;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
+import rx.Subscription;
+import rx.functions.Action1;
 
 @SuppressLint("JavascriptInterface")
 public class WebViewActivity extends ActivityBase {
@@ -64,6 +69,7 @@ public class WebViewActivity extends ActivityBase {
 	private ProgressBar bar;
 	private CustomAlertMsgDialog customAlertMsgDialog;
 	private View top_left;
+	private Subscription subscription;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,6 +78,8 @@ public class WebViewActivity extends ActivityBase {
 		//setTopLeftDefultListener();
 		initView();
 		initData();
+		// 初始化消息
+		initRxBus();
 	}
 	// 初始化视图
 	public void initView() {
@@ -309,6 +317,9 @@ public class WebViewActivity extends ActivityBase {
 		webView.clearCache(true);   
 		webView.clearHistory();
 		webView.destroy();
+		if(!subscription .isUnsubscribed()) {
+			subscription .unsubscribe();
+		}
 		super.onDestroy();
 	}
 
@@ -346,5 +357,29 @@ public class WebViewActivity extends ActivityBase {
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);//退出整个应用程序
+	}
+
+	private void initRxBus() {
+		subscription = RxBus.getDefault().toObservable(RxCodeConstants.MessageFragment_PAY, RxBusBaseMessage.class)
+				.subscribe(new Action1<RxBusBaseMessage>() {
+					@Override
+					public void call(RxBusBaseMessage integer) {
+						Log.i(integer.getObject().toString());
+						String result = integer.getObject().toString();
+						String msg = "fail";
+						if (result.equals("支付成功")) {
+							msg = "cuccess";
+						}
+						final String finalMsg = msg;
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								String parms = "javascript:callpay('" + finalMsg + "')";
+								Log.i("=========parms"+parms);
+								webView.loadUrl(parms);
+							}
+						});
+					}
+				});
 	}
 }
