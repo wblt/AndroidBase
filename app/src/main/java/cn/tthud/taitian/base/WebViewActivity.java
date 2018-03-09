@@ -161,7 +161,7 @@ public class WebViewActivity extends ActivityBase {
 		}
 		@JavascriptInterface
 		public void wechatPay(String type,String data) {
-			showMsg("我已经千辛万苦的走入支付了");
+			//showMsg("我已经千辛万苦的走入支付了");
 			Log.i("+++++wechatPay+++++++++调起的方法"+type+ " " + data);
 			try {
 				JSONObject object = new JSONObject(data);
@@ -170,13 +170,7 @@ public class WebViewActivity extends ActivityBase {
 				JSONObject payjosnObjec = new JSONObject(dataJoson);
 				String paydata = payjosnObjec.getString("paydata");
 				JSONObject pay = new JSONObject(paydata);
-				if (status.equals("1")) {
-					String info = pay.getString("info");
-					showMsg(info);
-				} else {
-					pay(pay);
-				}
-
+				pay(pay);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -318,12 +312,12 @@ public class WebViewActivity extends ActivityBase {
 
 	private void pay(JSONObject jsonObject) {
 		try {
-			String aPackage = "Sign=WXPay";
+			String aPackage = jsonObject.getString("package");
 			String appid = jsonObject.getString("appid");
 			String sign = jsonObject.getString("sign");
-			String partnerid = jsonObject.getString("partnerId");
-			String prepayid = jsonObject.getString("prepay_id");
-			String noncestr = jsonObject.getString("nonce_str");
+			String partnerid = jsonObject.getString("partnerid");
+			String prepayid = jsonObject.getString("prepayid");
+			String noncestr = jsonObject.getString("noncestr");
 			String timestamp = jsonObject.getString("timestamp");
 			IWXAPI api = WXAPIFactory.createWXAPI(this, appid);
 			api.registerApp(appid);
