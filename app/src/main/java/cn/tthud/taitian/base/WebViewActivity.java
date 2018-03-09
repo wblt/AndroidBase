@@ -170,7 +170,9 @@ public class WebViewActivity extends ActivityBase {
 				JSONObject payjosnObjec = new JSONObject(dataJoson);
 				String paydata = payjosnObjec.getString("paydata");
 				JSONObject pay = new JSONObject(paydata);
-				pay(pay);
+				if (status.equals("0")) {
+					pay(pay);
+				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
