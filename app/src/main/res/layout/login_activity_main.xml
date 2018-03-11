@@ -58,7 +58,7 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginRight="15dp"
-                    android:text="注册账号"
+                    android:text="用户注册"
                     android:textSize="15sp"
                     android:textColor="@color/white"
                     android:textAlignment="center"/>
@@ -182,11 +182,10 @@
                     android:id="@+id/forget_pwd"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
-                    android:layout_marginTop="10dp"
                     android:textSize="14sp"
                     android:layout_alignParentRight="true"
                     android:textColor="@color/gray_text_light"
-                    android:text="忘记密码?"
+                    android:text="忘记密码 "
                     android:textAlignment="center"/>
             </LinearLayout>
 

@@ -43,7 +43,7 @@
                     android:layout_toRightOf="@id/headpic"
                     android:includeFontPadding="false"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/gray_text_light"
+                    android:textColor="@color/black"
                     android:text=""
                     android:textSize="14sp"
                     android:layout_marginBottom="20dp"/>
