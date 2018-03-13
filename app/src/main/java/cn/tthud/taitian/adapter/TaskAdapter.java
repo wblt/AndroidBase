@@ -31,7 +31,7 @@ public class TaskAdapter extends BaseRecyclerViewAdapter<TaskBean> {
             if (TextUtils.isEmpty(tl_plan)) {
                 tl_plan = "0";
             }
-            binding.tvJingdu.setText(tl_plan+"/"+object.getPlan());
+            binding.tvJingdu.setText("进度" + tl_plan+"/"+object.getPlan());
             //   [1进行中|2任务完成|3已领取]
             if (object.getStatus().equals("1")) {
                 binding.lingqu.setBackgroundResource(R.drawable.radius_layout_gray_btn);
