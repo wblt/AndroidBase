@@ -67,9 +67,6 @@ public class ForgetPwdActivity extends ActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         appendMainBody(this,R.layout.forget_pwd_activity_main);
-//        appendTopBody(R.layout.activity_top_text);
-//        setTopBarTitle("找回密码");
-//        setTopLeftListener(this);
         initView();
         initListener();
         initRxBus();
