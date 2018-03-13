@@ -90,9 +90,7 @@ public class LoginActivity extends ActivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         appendMainBody(this,R.layout.login_activity_main);
-        //appendTopBody(R.layout.activity_top_text);
-        //setTopBarTitle("登录");
-        //setTopLeftDefultListener();
+
         initListener();
         initRxBus();
         String onCloseinfo = getIntent().getStringExtra("onClose");
@@ -399,63 +397,4 @@ public class LoginActivity extends ActivityBase {
                     }
         });
     }
-
-//    private void unifiedorder() {
-//        String urlss = "http://wx.maishenke.com//app/v2/pay/unifiedorder";
-//        RequestParams requestParams= FlowAPI.getRequestParams(urlss);
-//        requestParams.addParameter("userId", "4e82958be9244a18af41d55e118a339c");
-//        requestParams.addParameter("ip", NetUtils.getIPAddress(LoginActivity.this));
-//        requestParams.addParameter("totalFee",100);
-//
-//        MXUtils.httpPost(requestParams, new CommonCallbackImp("红包管理 - 领取单个红包",requestParams) {
-//            @Override
-//            public void onSuccess(String data) {
-//                super.onSuccess(data);
-//                cancelLoading();
-////               ResultSuperJsonPojoArr resultPojo= GsonUtils.jsonToBean(data, ResultSuperJsonPojoArr.class);
-//                try {
-//                    JSONObject jsonObject = new JSONObject(data);
-//                    String result = jsonObject.getString("result");
-//                    String message = jsonObject.getString("message");
-//                    if(result.equals("01")){
-//                        String profile = jsonObject.getString("pd");
-//                        JSONObject jsonObject1 = new JSONObject(profile);
-//                        wechatPay(jsonObject1);
-//                    }else {
-//                        Toast.makeText(LoginActivity.this,message, Toast.LENGTH_SHORT).show();
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
-//
-//    private void wechatPay(JSONObject jsonObject) {
-//        try {
-//            String aPackage = jsonObject.getString("package");
-//            String appid = jsonObject.getString("appid");
-//            String sign = jsonObject.getString("sign");
-//            String return_msg = jsonObject.getString("return_msg");
-//            String partnerid = jsonObject.getString("partnerid");
-//            String prepayid = jsonObject.getString("prepayid");
-//            String return_code = jsonObject.getString("return_code");
-//            String noncestr = jsonObject.getString("noncestr");
-//            String timestamp = jsonObject.getString("timestamp");
-//            IWXAPI api = WXAPIFactory.createWXAPI(this, appid);
-//            api.registerApp(appid);
-//            PayReq payReq = new PayReq();
-//            payReq.appId = appid;
-//            payReq.partnerId = partnerid;
-//            payReq.prepayId = prepayid;
-//            payReq.packageValue = aPackage;
-//            payReq.nonceStr = noncestr;
-//            payReq.timeStamp = timestamp;
-//            payReq.sign = sign;
-//            api.sendReq(payReq);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 }

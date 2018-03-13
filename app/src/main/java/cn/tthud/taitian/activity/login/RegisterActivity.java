@@ -29,6 +29,7 @@ import cn.tthud.taitian.net.rxbus.RxBusBaseMessage;
 import cn.tthud.taitian.net.rxbus.RxCodeConstants;
 import cn.tthud.taitian.utils.Log;
 import cn.tthud.taitian.utils.RegExpValidator;
+import cn.tthud.taitian.utils.SPUtils;
 import cn.tthud.taitian.xutils.CommonCallbackImp;
 import cn.tthud.taitian.xutils.MXUtils;
 import rx.Subscription;
@@ -58,21 +59,21 @@ public class RegisterActivity extends ActivityBase {
     private Button next_btn;
 
     boolean btn_select = true;
+    private String phone = "";
+    private String codeNum = "";
     private String pwd = "";
     private String pwd2 = "";
 
-    private Subscription subscription;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         appendMainBody(this,R.layout.register_activity_main);
-//        appendTopBody(R.layout.activity_top_text);
-//        setTopBarTitle("注册");
-//        setTopLeftListener(this);
+        phone = getIntent().getStringExtra("tel");
+        codeNum = getIntent().getStringExtra("code");
         initView();
         initListener();
-        initRxBus();
     }
 
     // 初始化视图
@@ -101,20 +102,7 @@ public class RegisterActivity extends ActivityBase {
                 login_pwd2.setText("");
                 break;
             case R.id.next_btn: // 注册
-                pwd = login_pwd.getText().toString();
-                pwd2 = login_pwd2.getText().toString();
-                if (TextUtils.isEmpty(pwd)) {
-                    showMsg("密码输入为空");
-                    return;
-                }
-                if (!pwd.equals(pwd2)) {
-                    showMsg("密码输入不一致");
-                    return;
-                }
-                Intent intent = new Intent(this,RegisterActivity2.class);
-                intent.putExtra("pwd",pwd);
-                intent.putExtra("pwd2",pwd2);
-                startActivity(intent);
+                registerBtnClick();
                 break;
             case R.id.top_left:
                 finish();
@@ -171,27 +159,48 @@ public class RegisterActivity extends ActivityBase {
 
     @Override
     protected void onDestroy() {
-        if(!subscription .isUnsubscribed()) {
-            subscription .unsubscribe();
-        }
         super.onDestroy();
     }
 
-    /**
-     * 收到通知后，获取用户信息，存在内存
-     */
-    private void initRxBus() {
-        subscription = RxBus.getDefault().toObservable(RxCodeConstants.RegisterActivity2_finsh, RxBusBaseMessage.class)
-                .subscribe(new Action1<RxBusBaseMessage>() {
-                    @Override
-                    public void call(RxBusBaseMessage integer) {
-                        Log.i(integer.getObject().toString());
-                        String status = integer.getObject().toString();
-                        if (status.equals("finsh")) {
-                            RxBus.getDefault().post(RxCodeConstants.RegisterActivity1_finsh, new RxBusBaseMessage(1,"logininfo"));
-                            finish();
-                        }
+
+
+    private void registerBtnClick(){
+        pwd = login_pwd.getText().toString();
+        pwd2 = login_pwd2.getText().toString();
+        if (TextUtils.isEmpty(pwd)) {
+            showMsg("请输入密码");
+            return;
+        }
+        if (!pwd.equals(pwd2)) {
+            showMsg("两次密码不一致");
+            return;
+        }
+        RequestParams requestParams= FlowAPI.getRequestParams(FlowAPI.PERSONAL_REGISTER);
+        requestParams.addParameter("mobile",phone);
+        requestParams.addParameter("password",pwd);
+        requestParams.addParameter("msg",codeNum);
+        MXUtils.httpPost(requestParams, new CommonCallbackImp("注册",requestParams) {
+            @Override
+            public void onSuccess(String data) {
+                super.onSuccess(data);
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    String status = jsonObject.getString("status");
+                    String info = jsonObject.getString("info");
+                    if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
+                        showMsg("注册成功");
+                        SPUtils.putString(SPUtils.MOBILE,phone);
+                        SPUtils.putString(SPUtils.PASSWORD,pwd);
+                        RxBus.getDefault().post(RxCodeConstants.RegisterActivity2_finsh, new RxBusBaseMessage(1,"finsh"));
+                        finish();
+                    }else {
+                        showMsg(info);
                     }
-                });
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 }
