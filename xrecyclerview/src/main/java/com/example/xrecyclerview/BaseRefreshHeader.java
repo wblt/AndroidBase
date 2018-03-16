@@ -15,5 +15,6 @@ interface BaseRefreshHeader {
 
     void refreshComplate();
 
+
     int getVisiableHeight();
 }
