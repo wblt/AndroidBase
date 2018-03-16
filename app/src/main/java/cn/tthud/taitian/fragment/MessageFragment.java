@@ -190,24 +190,20 @@ public class MessageFragment extends FragmentBase implements View.OnClickListene
                     if(FlowAPI.HttpResultCode.SUCCEED.equals(status)){
                         xrvCustom.refreshComplete();
                         String result = jsonObject.getString("data");
-                        JSONObject jsonObject1 = new JSONObject(result);
-                        int count = jsonObject1.getInt("count");
-                        if (count != 0) {
-                            Type type = new TypeToken<List<Message>>(){}.getType();
-                            List<Message> beanList = GsonUtils.jsonToList(result,type);
-                            // 插入到数据库中
-                            if (beanList != null && beanList.size() > 0) {
-                                // 先判断是否有这个数据
-                                for (Message msg : beanList) {
-                                    List<Message> mlists = messageDaoUtils.queryMessageByQueryBuilder(msg.getMsg_id());
-                                    if (mlists != null && mlists.size()>0) {
+                        Type type = new TypeToken<List<Message>>(){}.getType();
+                        List<Message> beanList = GsonUtils.jsonToList(result,type);
+                        // 插入到数据库中
+                        if (beanList != null && beanList.size() > 0) {
+                            // 先判断是否有这个数据
+                            for (Message msg : beanList) {
+                                List<Message> mlists = messageDaoUtils.queryMessageByQueryBuilder(msg.getMsg_id());
+                                if (mlists != null && mlists.size()>0) {
 
-                                    } else {
-                                        messageDaoUtils.insertMessage(msg);
-                                    }
+                                } else {
+                                    messageDaoUtils.insertMessage(msg);
                                 }
-
                             }
+
                         }
                         // 延迟显示加载
                         showMsgUI();

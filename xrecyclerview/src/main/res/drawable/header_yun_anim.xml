@@ -4,15 +4,39 @@
 
     <item
         android:drawable="@drawable/header_loading0"
-        android:duration="250" />
+        android:duration="100" />
     <item
         android:drawable="@drawable/header_loading1"
-        android:duration="250" />
+        android:duration="100" />
     <item
         android:drawable="@drawable/header_loading2"
-        android:duration="250" />
+        android:duration="100" />
     <item
         android:drawable="@drawable/header_loading3"
-        android:duration="250" />
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/header_loading4"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/header_loading5"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/header_loading6"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/header_loading7"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/header_loading8"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/header_loading9"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/header_loading10"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/header_loading11"
+        android:duration="100" />
 
 </animation-list>  
