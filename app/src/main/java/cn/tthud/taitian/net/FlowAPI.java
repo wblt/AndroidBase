@@ -13,7 +13,7 @@ public class FlowAPI {
             + "/cn.tthud.taitian/";
     //public static String SERVER_IP = "https://res.hnltou.com/api.php";
 //    public static String SERVER_IP = "https://api.tthud.cn/api.php";
-    public static String SERVER_IP = "http://api.tthud.cn:8090";
+    public static String SERVER_IP = "http://api.tthud.cn:8090/api.php";
 
     /** 最大图片数 */
     public static final int DIARY_IMGS_MAX = 9;
